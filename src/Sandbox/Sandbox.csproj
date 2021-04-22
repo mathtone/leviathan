@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="TestResources\TestResource.txt" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="TestResources\TestResource.txt" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Iot.Device.Bindings" Version="1.4.0" />
+		<PackageReference Include="npgsql" Version="5.0.4" />
+		<PackageReference Include="NUnit" Version="3.12.0" />
+		<PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+		<PackageReference Include="System.Device.Gpio" Version="1.4.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Leviathan.DB.Npgsql\Leviathan.DB.Npgsql.csproj" />
+	</ItemGroup>
+
+</Project>

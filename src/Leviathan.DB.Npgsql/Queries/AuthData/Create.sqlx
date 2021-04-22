@@ -1,0 +1,1 @@
+﻿INSERT into core.auth_data (account_id,auth_data_type_id,auth_string) VALUES(@account_id,@type,@authdata) RETURNING id

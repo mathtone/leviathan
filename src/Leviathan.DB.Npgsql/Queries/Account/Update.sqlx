@@ -1,0 +1,1 @@
+﻿UPDATE core.account SET name=@name, login=@login WHERE id=@id;

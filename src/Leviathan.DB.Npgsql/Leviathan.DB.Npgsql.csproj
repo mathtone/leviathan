@@ -1,0 +1,76 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Queries\Account_Create.sqlx" />
+    <None Remove="Queries\Account_Delete.sqlx" />
+    <None Remove="Queries\Account_List.sqlx" />
+    <None Remove="Queries\Account_Read.sqlx" />
+    <None Remove="Queries\Account_Update.sqlx" />
+    <None Remove="Queries\Admin\CreateDatabase.sqlx" />
+    <None Remove="Queries\Admin\CreateDatabaseObjects.sqlx" />
+    <None Remove="Queries\Admin\DropDatabase.sqlx" />
+    <None Remove="Queries\Admin\LocateDatabase.sqlx" />
+    <None Remove="Queries\AuthData\Create.sqlx" />
+    <None Remove="Queries\AuthData\Delete.sqlx" />
+    <None Remove="Queries\AuthData\List.sqlx" />
+    <None Remove="Queries\AuthData\Read.sqlx" />
+    <None Remove="Queries\AuthData\Update.sqlx" />
+    <None Remove="Queries\Connector\Create.sqlx" />
+    <None Remove="Queries\Connector\Delete.sqlx" />
+    <None Remove="Queries\Connector\List.sqlx" />
+    <None Remove="Queries\Connector\Read.sqlx" />
+    <None Remove="Queries\Connector\Update.sqlx" />
+    <None Remove="Queries\Controller\Create.sqlx" />
+    <None Remove="Queries\Controller\Delete.sqlx" />
+    <None Remove="Queries\Controller\List.sqlx" />
+    <None Remove="Queries\Controller\Read.sqlx" />
+    <None Remove="Queries\Controller\Update.sqlx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Queries\Account\Delete.sqlx" />
+    <EmbeddedResource Include="Queries\Account\Update.sqlx" />
+    <EmbeddedResource Include="Queries\Account\Create.sqlx" />
+    <EmbeddedResource Include="Queries\Account\Read.sqlx" />
+    <EmbeddedResource Include="Queries\Account\List.sqlx" />
+    <EmbeddedResource Include="Queries\Admin\CreateDatabaseObjects.sqlx" />
+    <EmbeddedResource Include="Queries\Admin\LocateDatabase.sqlx" />
+    <EmbeddedResource Include="Queries\Admin\DropDatabase.sqlx" />
+    <EmbeddedResource Include="Queries\Admin\CreateDatabase.sqlx" />
+    <EmbeddedResource Include="Queries\AuthData\Create.sqlx" />
+    <EmbeddedResource Include="Queries\AuthData\Delete.sqlx" />
+    <EmbeddedResource Include="Queries\AuthData\List.sqlx" />
+    <EmbeddedResource Include="Queries\AuthData\Read.sqlx" />
+    <EmbeddedResource Include="Queries\AuthData\Update.sqlx" />
+    <EmbeddedResource Include="Queries\Connector\Create.sqlx" />
+    <EmbeddedResource Include="Queries\Connector\Delete.sqlx" />
+    <EmbeddedResource Include="Queries\Connector\List.sqlx" />
+    <EmbeddedResource Include="Queries\Connector\Read.sqlx" />
+    <EmbeddedResource Include="Queries\Connector\Update.sqlx" />
+    <EmbeddedResource Include="Queries\Controller\Create.sqlx" />
+    <EmbeddedResource Include="Queries\Controller\Delete.sqlx" />
+    <EmbeddedResource Include="Queries\Controller\List.sqlx" />
+    <EmbeddedResource Include="Queries\Controller\Read.sqlx" />
+    <EmbeddedResource Include="Queries\Controller\Update.sqlx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="5.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Leviathan.DataAccess\Leviathan.DataAccess.csproj" />
+    <ProjectReference Include="..\Leviathan.DB\Leviathan.DB.csproj" />
+    <ProjectReference Include="..\Leviathan.Model\Leviathan.Model.csproj" />
+    <ProjectReference Include="..\Leviathan.Utilities\Leviathan.Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Scripts\" />
+  </ItemGroup>
+
+</Project>

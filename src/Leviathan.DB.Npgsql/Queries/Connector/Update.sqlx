@@ -1,0 +1,1 @@
+﻿UPDATE core.auth_data SET account_id= @accountId,auth_data_type_id = @authDataTypeId,auth_string@auth_string) WHERE id=@id
