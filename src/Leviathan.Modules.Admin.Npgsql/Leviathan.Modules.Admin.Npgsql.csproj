@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Queries\CreateDatabase.sqlx" />
+    <None Remove="Queries\CreateDatabaseObjects.sqlx" />
+    <None Remove="Queries\DropDatabase.sqlx" />
+    <None Remove="Queries\LocateDatabase.sqlx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Queries\CreateDatabase.sqlx" />
+    <EmbeddedResource Include="Queries\CreateDatabaseObjects.sqlx" />
+    <EmbeddedResource Include="Queries\DropDatabase.sqlx" />
+    <EmbeddedResource Include="Queries\LocateDatabase.sqlx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Leviathan.DataAccess\Leviathan.DataAccess.csproj" />
+    <ProjectReference Include="..\Leviathan.Modules.Admin\Leviathan.Modules.DBInit.csproj" />
+    <ProjectReference Include="..\Leviathan.Utilities\Leviathan.Utilities.csproj" />
+  </ItemGroup>
+
+</Project>

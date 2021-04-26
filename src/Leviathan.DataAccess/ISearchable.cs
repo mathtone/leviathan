@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Leviathan.DataAccess {
 	public interface ISearchable<T, S> {

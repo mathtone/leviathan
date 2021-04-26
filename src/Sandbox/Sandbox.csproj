@@ -25,6 +25,8 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Leviathan.DB.Npgsql\Leviathan.DB.Npgsql.csproj" />
+	  <ProjectReference Include="..\Leviathan.Modules.Admin.Npgsql\Leviathan.Modules.Admin.Npgsql.csproj" />
+	  <ProjectReference Include="..\Leviathan.Modules.Admin\Leviathan.Modules.DBInit.csproj" />
 	</ItemGroup>
 
 </Project>

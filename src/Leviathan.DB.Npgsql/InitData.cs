@@ -18,6 +18,18 @@ namespace Leviathan.DB.Npgsql {
 		public string HostName { get; set; }
 	}
 
+	public class NpgSqlDataService {
+		protected NpgsqlConnection Connection { get; set; }
+
+		public NpgSqlDataService(NpgsqlConnection connection) {
+
+		}
+
+		protected NpgsqlCommand CreateCommand(string commandText) => new(commandText) {
+			Connection = this.Connection
+		};
+	}
+
 	public class InitData : NpgSqlDataService {
 
 		public InitData(NpgsqlConnection connection) : base(connection) { }

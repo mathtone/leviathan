@@ -64,8 +64,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Leviathan.DataAccess\Leviathan.DataAccess.csproj" />
-    <ProjectReference Include="..\Leviathan.DB\Leviathan.DB.csproj" />
-    <ProjectReference Include="..\Leviathan.Model\Leviathan.Model.csproj" />
     <ProjectReference Include="..\Leviathan.Utilities\Leviathan.Utilities.csproj" />
   </ItemGroup>
 

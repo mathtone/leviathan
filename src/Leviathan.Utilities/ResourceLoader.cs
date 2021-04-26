@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Reflection;
 
 namespace Leviathan.Utilities {
@@ -8,6 +7,7 @@ namespace Leviathan.Utilities {
 			var assembly = Assembly.GetCallingAssembly();
 			return LoadResource(assembly, assembly.GetName().Name + "." + resourceName);
 		}
+
 		public static string LoadResource(string resourceName) =>
 			LoadResource(Assembly.GetCallingAssembly(), resourceName);
 

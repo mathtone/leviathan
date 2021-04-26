@@ -1,0 +1,112 @@
+﻿-- Table: public.hardware_module
+
+DROP TABLE IF EXISTS hardware.channel;
+DROP TABLE IF EXISTS hardware.module;
+DROP TABLE IF EXISTS hardware.channel_type;
+DROP TABLE IF EXISTS hardware.module_type;
+DROP SCHEMA IF EXISTS hardware;
+
+CREATE SCHEMA hardware;
+CREATE TABLE hardware.module_type
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    name character varying(50) NOT NULL,
+    type character varying(150) NOT NULL,
+
+    CONSTRAINT module_type_pkey PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+);
+
+CREATE TABLE hardware.module
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    module_type_id integer NOT NULL,
+    name character varying(50) NOT NULL,
+
+    CONSTRAINT module_pkey PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+);
+
+
+CREATE TABLE hardware.channel_type
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    name character varying(50) NOT NULL,
+    type character varying(150) NOT NULL,
+
+    CONSTRAINT channel_type_pkey PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+);
+
+CREATE TABLE hardware.channel
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    module_id integer NOT NULL,
+    channel_type_id integer,
+    name character varying(50) NOT NULL,
+    channel_data json,
+    
+    CONSTRAINT channel_pkey PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+);
+
+INSERT INTO hardware.module_type (name,type) VALUES('GPIO','Leviathan.Hardware.Gpio.GpioModule, Leviathan.Hardware.Gpio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null');
+INSERT INTO hardware.module_type (name,type) VALUES('PWM','Leviathan.Hardware.PCA9685.PwmIOModule, Leviathan.Hardware.Pca9685, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null');
+
+INSERT INTO hardware.channel_type (name,type) VALUES('GPIO','Leviathan.Hardware.Gpio.GpioChannel, Leviathan.Hardware.Gpio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null');
+INSERT INTO hardware.channel_type (name,type) VALUES('PWM','Leviathan.Hardware.PCA9685.PwmIOChannel, Leviathan.Hardware.Pca9685, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null');
+
+INSERT INTO hardware.module (name,module_type_id) VALUES('GPIO',1);
+INSERT INTO hardware.module (name,module_type_id) VALUES('PWM',2);
+
+--AC Ports
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 1',1,'{"Pin":9,"Mode":1}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 2',1,'{"Pin":10,"Mode":1}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 3',1,'{"Pin":22,"Mode":1}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 4',1,'{"Pin":15,"Mode":1}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 5',1,'{"Pin":14,"Mode":1}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 6',1,'{"Pin":23,"Mode":1}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 7',1,'{"Pin":24,"Mode":1}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 8',1,'{"Pin":25,"Mode":1}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 9',1,'{"Pin":16,"Mode":1}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 10',1,'{"Pin":6,"Mode":1}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 11',1,'{"Pin":5,"Mode":1}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 12',1,'{"Pin":7,"Mode":1}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 13',1,'{"Pin":11,"Mode":1}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 14',1,'{"Pin":8,"Mode":1}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 15',1,'{"Pin":12,"Mode":1}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 16',1,'{"Pin":13,"Mode":1}');
+
+--Sensor Ports
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 17',1,'{"Pin":17,"Mode":0}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 18',1,'{"Pin":27,"Mode":0}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 19',1,'{"Pin":19,"Mode":0}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 20',1,'{"Pin":20,"Mode":0}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 21',1,'{"Pin":26,"Mode":0}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'GPIO 22',1,'{"Pin":21,"Mode":0}');
+
+--PWM Channels
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'PWM 1',2,'{"PwmChannelId":15}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'PWM 2',2,'{"PwmChannelId":14}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'PWM 3',2,'{"PwmChannelId":13}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'PWM 4',2,'{"PwmChannelId":12}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'PWM 5',2,'{"PwmChannelId":11}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'PWM 6',2,'{"PwmChannelId":10}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'PWM 7',2,'{"PwmChannelId":9}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'PWM 8',2,'{"PwmChannelId":8}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'PWM 9',2,'{"PwmChannelId":0}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'PWM 10',2,'{"PwmChannelId":1}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'PWM 11',2,'{"PwmChannelId":2}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'PWM 12',2,'{"PwmChannelId":3}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'PWM 13',2,'{"PwmChannelId":4}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'PWM 14',2,'{"PwmChannelId":5}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'PWM 15',2,'{"PwmChannelId":6}');
+INSERT INTO hardware.channel (module_id,name,channel_type_id,channel_data) VALUES(1,'PWM 16',2,'{"PwmChannelId":7}');

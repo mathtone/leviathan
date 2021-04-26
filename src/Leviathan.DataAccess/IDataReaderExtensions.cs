@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 
 namespace Leviathan.DataAccess {
+
 	public static class IDataReaderExtensions {
 
 		//public static IEnumerable<RTN> Consume<RTN>(this IDataReader reader, Func<IDataRecord, RTN> selector) =>

@@ -1,6 +1,9 @@
 using System.IO;
 using System.Reflection;
+using Leviathan.DataAccess;
 using Leviathan.DB.Npgsql;
+using Leviathan.Modules.Admin;
+using Leviathan.Modules.Admin.Npgsql;
 using Npgsql;
 using NUnit.Framework;
 
@@ -12,12 +15,12 @@ namespace Sandbox {
 
 		[Test]
 		public void Test1() {
-			using var cn = new NpgsqlConnection("Host=poseidonalpha.local;Database=Leviathan0x01;Username=pi;Password=Digital!2021;Persist Security Info=True");
-			cn.Open();
-			var repo = new AccountRepo(cn);
-			var l = repo.List();
-			var r = repo.Read(6);
-			var u = repo.Update(r);
+			//using var cn = new NpgsqlConnection("Host=poseidonalpha.local;Database=Leviathan0x01;Username=pi;Password=Digital!2021;Persist Security Info=True");
+			//cn.Open();
+			//var repo = new AccountRepo(cn);
+			//var l = repo.List();
+			//var r = repo.Read(6);
+			//var u = repo.Update(r);
 		}
 
 		[Test]
@@ -49,12 +52,21 @@ namespace Sandbox {
 			//var exists = data.LocateDatabase(settings.DbName);
 			data.InitDb(settings);
 		}
+
+
+		[Test]
+		public void Test4() {
+			//var postgresDbConnectionString = 
+			var settings = new {
+				HostName = "poseidonalpha.local",
+				DbName = "Leviathan0x00",
+			};
+
+			var connectionProvider = new DbConnectionProvider<NpgsqlConnection>($"Host={settings.HostName};Database=postgres;Username=pi;Password=Digital!2021;");
+			using var cn = connectionProvider.CreateConnection();
+			cn.Open();
+			var svc = new DBInitService(new DBInitData(cn), settings.DbName);
+			svc.Initialize(settings.DbName, true).Wait();
+		}
 	}
-	//public abstract class HardwareController {	}
-
-	////public class GpioController : HardwareController {
-	////}
-
-	//public class PCA9865Controller : HardwareController {
-	//}
 }

@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Leviathan.DataAccess\Leviathan.DataAccess.csproj" />
-    <ProjectReference Include="..\Leviathan.Model\Leviathan.Model.csproj" />
   </ItemGroup>
 
 </Project>
