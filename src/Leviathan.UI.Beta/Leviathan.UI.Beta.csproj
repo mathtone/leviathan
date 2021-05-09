@@ -5,7 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="NewFolder\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
-
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+		<!--<Exec Command="npm install" WorkingDirectory="ClientApp" />-->
+		<Exec Command="npm run build" WorkingDirectory="ClientApp" />
+	</Target>
 </Project>

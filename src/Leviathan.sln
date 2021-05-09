@@ -43,9 +43,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.DataAccess.Npgsql
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "E. UI", "E. UI", "{04B46A29-C9BA-489D-80B2-4D4E5D2D3555}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.UI.Alpha", "Leviathan.UI.Alpha\Leviathan.UI.Alpha.csproj", "{3146166E-4A31-457C-B311-4039ACB04CC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.UI.Alpha", "Leviathan.UI.Alpha\Leviathan.UI.Alpha.csproj", "{3146166E-4A31-457C-B311-4039ACB04CC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.UI.Beta", "Leviathan.UI.Beta\Leviathan.UI.Beta.csproj", "{DF9B4C53-B1C2-4551-86D8-6CC6B4FAFD6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.UI.Beta", "Leviathan.UI.Beta\Leviathan.UI.Beta.csproj", "{DF9B4C53-B1C2-4551-86D8-6CC6B4FAFD6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
