@@ -5,10 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.extensions.logging" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Leviathan.Services.Core.Npgsql\Leviathan.Services.DbInit.Npgsql.csproj" />
     <ProjectReference Include="..\Leviathan.Services.Core\Leviathan.Services.Core.csproj" />
   </ItemGroup>
 
