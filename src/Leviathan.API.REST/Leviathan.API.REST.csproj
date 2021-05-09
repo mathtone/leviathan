@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Leviathan.Core\Leviathan.Core.csproj" />
+    <ProjectReference Include="..\Leviathan.Services.Core\Leviathan.Services.Core.csproj" />
   </ItemGroup>
 
 </Project>

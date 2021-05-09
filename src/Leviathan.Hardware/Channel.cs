@@ -5,6 +5,7 @@ namespace Leviathan.Hardware {
 		int Id { get; }
 		string Name { get; }
 	}
+
 	public class ChannelConfig {
 		public int ChannelId { get; set; }
 		public int ModuleId { get; set; }

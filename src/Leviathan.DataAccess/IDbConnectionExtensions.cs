@@ -11,15 +11,16 @@ namespace Leviathan.DataAccess {
 			return rtn;
 		}
 
-		public static void Using(this IDbConnection connection, Action<IDbConnection> action) {
+		public static void Used<CN>(this CN connection, Action<CN> action) where CN : IDbConnection {
 			try {
+				connection.Open();
 				action(connection);
 			}
 			finally {
 				connection.Dispose();
 			}
 		}
-		public static T Using<T>(this IDbConnection connection, Func<IDbConnection, T> resultSelector) {
+		public static T Used<T, CN>(this CN connection, Func<CN, T> resultSelector) where CN : IDbConnection {
 			try {
 				connection.Open();
 				return resultSelector(connection);

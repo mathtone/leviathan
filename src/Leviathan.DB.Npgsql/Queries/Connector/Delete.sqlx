@@ -1,1 +1,0 @@
-﻿DELETE core.auth_data WHERE id=@id

@@ -20,5 +20,4 @@ namespace Leviathan.Hardware {
 			GC.SuppressFinalize(this);
 		}
 	}
-
 }

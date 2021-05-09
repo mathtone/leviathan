@@ -1,1 +1,0 @@
-﻿INSERT INTO core.account (name,login) VALUES (@name,@login) RETURNING id
