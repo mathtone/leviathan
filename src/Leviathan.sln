@@ -45,6 +45,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "E. UI", "E. UI", "{04B46A29
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.UI.Alpha", "Leviathan.UI.Alpha\Leviathan.UI.Alpha.csproj", "{3146166E-4A31-457C-B311-4039ACB04CC9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.UI.Beta", "Leviathan.UI.Beta\Leviathan.UI.Beta.csproj", "{DF9B4C53-B1C2-4551-86D8-6CC6B4FAFD6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +109,10 @@ Global
 		{3146166E-4A31-457C-B311-4039ACB04CC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3146166E-4A31-457C-B311-4039ACB04CC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3146166E-4A31-457C-B311-4039ACB04CC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF9B4C53-B1C2-4551-86D8-6CC6B4FAFD6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF9B4C53-B1C2-4551-86D8-6CC6B4FAFD6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF9B4C53-B1C2-4551-86D8-6CC6B4FAFD6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF9B4C53-B1C2-4551-86D8-6CC6B4FAFD6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,6 +132,7 @@ Global
 		{14BFDD48-CF3C-410C-AC20-455A43A42B00} = {89C5078B-35FC-4D4E-9B4F-369043B24A1D}
 		{62C634A0-0F77-411E-8813-0D6EAC0E04A8} = {D508BF79-5BF7-4127-ACFA-AA0CAA06AE4E}
 		{3146166E-4A31-457C-B311-4039ACB04CC9} = {04B46A29-C9BA-489D-80B2-4D4E5D2D3555}
+		{DF9B4C53-B1C2-4551-86D8-6CC6B4FAFD6C} = {04B46A29-C9BA-489D-80B2-4D4E5D2D3555}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C39CA66-6C4B-42EB-8797-4ADCFED239DD}
