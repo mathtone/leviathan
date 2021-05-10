@@ -1,8 +1,8 @@
-﻿<nav class="menu">
-	<NavLink href="" Match="NavLinkMatch.All">
-		<div class="menu-item oi oi-home" aria-hidden="true"></div>
-	</NavLink>
-	<NavLink href="Admin">
-		<div class="menu-item oi oi-wrench" aria-hidden="true"></div>
-	</NavLink>
-</nav>
+﻿
+<div class="top-nav">
+	@foreach (var item in Items) {
+		<a href="@item.NavTarget" class="@item.IconClass"></a>
+	}
+</div>
+	
+

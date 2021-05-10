@@ -1,12 +1,7 @@
 ﻿@inherits LayoutComponentBase
-
-	<header>
-		<div style="vertical-align:middle;float:right;font-family:'Courier New';font-size:30px;">LEVIATHAN</div>
-		<NavMenu />
-	</header>
-
 	<div>
-		<main role="main" class="pb-3">
-			@Body
-		</main>
+		<NavMenu />
+	</div>
+	<div class="content">
+		@Body
 	</div>

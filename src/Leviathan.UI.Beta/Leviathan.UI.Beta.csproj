@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="ViewModel\" />
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">

@@ -1,9 +1,23 @@
-.menu {
-	text-decoration: none;
+.top-nav {
+	overflow: hidden;
+	width: max-content;
+	margin: auto;
 }
 
-.menu-item {
-	font-size: 50px;
-	color:white;
-}
+	.top-nav a {
+		float: left;
+		color: #02FFCE;
+		text-align: center;
+		text-decoration: none;
+		font-size: 50px;
+		margin: 10px;
+	}
 
+		.top-nav a:hover {
+			color: mediumpurple;
+		}
+
+		.top-nav a.active {
+			background-color: #04AA6D;
+			color: white;
+		}
