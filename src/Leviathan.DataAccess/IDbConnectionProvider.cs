@@ -5,6 +5,7 @@ namespace Leviathan.DataAccess {
 		IDbConnection CreateConnection();
 		IDbConnection CreateConnection(string dbName);
 	}
+
 	public interface IDbConnectionProvider<CONN> : IDbConnectionProvider where CONN : IDbConnection {
 		new CONN CreateConnection();
 	}
@@ -21,8 +22,8 @@ namespace Leviathan.DataAccess {
 		};
 		public CONN CreateConnection(string dbName) => CreateConnection($"{connectionString}Database={dbName};");
 
-
 		IDbConnection IDbConnectionProvider.CreateConnection() => this.CreateConnection();
+
 		IDbConnection IDbConnectionProvider.CreateConnection(string dbName) => this.CreateConnection(dbName);
 	}
 }
