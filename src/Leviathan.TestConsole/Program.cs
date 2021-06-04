@@ -99,7 +99,9 @@ namespace Leviathan.TestConsole {
 					}
 				},
 
-				Channels = acPins.Select(i => new GpioChannelConfig { ModuleId = 1, ChannelId = cid++, Mode = PinMode.Output, Pin = i, ChannelType = typeof(GpioChannel) }).Cast<ChannelConfig>()
+				Channels = acPins
+					.Select(i => new GpioChannelConfig { ModuleId = 1, ChannelId = cid++, Mode = PinMode.Output, Pin = i, ChannelType = typeof(GpioChannel) })
+					.Cast<ChannelConfig>()
 					.Concat(sensorPins.Select(i => new GpioChannelConfig { ModuleId = 1, ChannelId = cid++, Mode = PinMode.Input, Pin = i, ChannelType = typeof(GpioChannel) }))
 					.Concat(pwmIds.Select(i => new PwmIOChannelConfig { ModuleId = 2, ChannelId = cid++, PwmChannelId = i, ChannelType = typeof(PwmIOChannel) }))
 					.ToArray(),

@@ -25,7 +25,8 @@ namespace Leviathan.Services.DbInit.Npgsql {
 		});
 
 		public void VerifyDatabase(string name) {
-			if (!LocateDatabase(name)) CreateDatabase(name);
+			if (!LocateDatabase(name))
+				CreateDatabase(name);
 		}
 
 		private static class Queries {
