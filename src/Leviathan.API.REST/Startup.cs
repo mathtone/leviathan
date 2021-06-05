@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Leviathan.Services.Core;
 using Leviathan.Services.DbInit.Npgsql;
@@ -18,7 +19,7 @@ namespace Leviathan.API.REST {
 	public class Startup {
 
 		readonly LeviathanCore core;
-		
+
 		public Startup(IConfiguration configuration) {
 			Configuration = configuration;
 			var config = new CoreConfig { DbName = "Leviathan0x00" };
@@ -31,7 +32,13 @@ namespace Leviathan.API.REST {
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services) {
 			services.AddSingleton<ILeviathanCore>(core);
-			services.AddControllers();
+			services
+				.AddControllers()
+				.AddJsonOptions(options => {
+					options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+					options.JsonSerializerOptions.IgnoreNullValues = true;
+				});
+
 			services.AddSwaggerGen(c => {
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Leviathan.API.REST", Version = "v1" });
 			});
@@ -57,9 +64,6 @@ namespace Leviathan.API.REST {
 
 		protected void OnStart() => core.Start();
 		protected void OnStop() => core.Stop();
-		//protected void OnStop() {
-		//	;
-		//}
 	}
 
 	public abstract class Logger<T> : ILogger<T> {

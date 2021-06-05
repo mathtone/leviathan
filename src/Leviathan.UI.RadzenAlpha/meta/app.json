@@ -1,0 +1,22 @@
+{
+  "dataSources": [],
+  "generator": "@radzen/blazor-server",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "LeviathanRadzen",
+  "navigation": [
+    "Home"
+  ],
+  "pages": [
+    "Home"
+  ],
+  "serverLang": "cs",
+  "serverProject": true,
+  "serverVersion": "5",
+  "startPage": "Home",
+  "theme": "material-dark"
+}

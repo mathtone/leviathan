@@ -22,12 +22,20 @@ namespace Leviathan.Services.Core {
 		Closing
 	}
 
+	public enum DbStatus {
+		Missing,
+		Offline,
+		Online
+	}
+
 	public class LeviathanCore : ILeviathanCore {
 
 		bool running;
 		protected CoreConfig config;
 		protected ILogger<LeviathanCore> Logger { get; }
+		
 		protected IDbInitService DbInit { get; }
+		
 		public CoreStatus Status { get; private set; }
 
 		public LeviathanCore(CoreConfig config, IDbInitService dbInitService, ILogger<LeviathanCore> logger) {

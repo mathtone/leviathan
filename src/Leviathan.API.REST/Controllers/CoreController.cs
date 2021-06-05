@@ -8,6 +8,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Leviathan.API.REST.Controllers {
 
+	public class CoreStatusReport {
+		public CoreStatus Status { get; init; }
+
+		public IEnumerable<string> Messages { get; init; }
+	}
+
 	[ApiController]
 	[Route("[controller]")]
 	public class CoreController : ControllerBase {
@@ -20,7 +26,9 @@ namespace Leviathan.API.REST.Controllers {
 			_core = core;
 		}
 
-		[HttpGet]
-		public CoreStatus Get() => _core.Status;
+		[HttpGet("GetStatus")]
+		public CoreStatusReport GetStatus() => new() {
+			Status = _core.Status
+		};
 	}
 }
