@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Leviathan.DataAccess\Leviathan.DataAccess.csproj" />
+    <ProjectReference Include="..\Leviathan.QuickStart.RoboTank\Leviathan.QuickStart.RoboTank.csproj" />
     <ProjectReference Include="..\Leviathan.Services.Core.Npgsql\Leviathan.Services.DbInit.Npgsql.csproj" />
     <ProjectReference Include="..\Leviathan.Services.Core\Leviathan.Services.Core.csproj" />
     <ProjectReference Include="..\Leviathan.Services.Hardware.Npgsql\Leviathan.Services.Hardware.Npgsql.csproj" />

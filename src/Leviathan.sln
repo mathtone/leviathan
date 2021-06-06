@@ -61,6 +61,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.API.REST.Client",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Services.Hardware.Npgsql", "Leviathan.Services.Hardware.Npgsql\Leviathan.Services.Hardware.Npgsql.csproj", "{BAAF3516-791E-4FF0-BBD5-2C36151C38D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.QuickStart.RoboTank", "Leviathan.QuickStart.RoboTank\Leviathan.QuickStart.RoboTank.csproj", "{08221372-AF31-4ABE-B388-AF0783774146}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -147,6 +149,10 @@ Global
 		{BAAF3516-791E-4FF0-BBD5-2C36151C38D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAAF3516-791E-4FF0-BBD5-2C36151C38D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAAF3516-791E-4FF0-BBD5-2C36151C38D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08221372-AF31-4ABE-B388-AF0783774146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08221372-AF31-4ABE-B388-AF0783774146}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08221372-AF31-4ABE-B388-AF0783774146}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08221372-AF31-4ABE-B388-AF0783774146}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -173,6 +179,7 @@ Global
 		{29A2BE88-8D75-4214-9577-EBC5C7B4D696} = {04B46A29-C9BA-489D-80B2-4D4E5D2D3555}
 		{9EFE060D-50E7-4EDD-AA93-490D9AD11A06} = {9DD29A1E-E734-42B9-80E9-B2BB806FF875}
 		{BAAF3516-791E-4FF0-BBD5-2C36151C38D6} = {89C5078B-35FC-4D4E-9B4F-369043B24A1D}
+		{08221372-AF31-4ABE-B388-AF0783774146} = {89C5078B-35FC-4D4E-9B4F-369043B24A1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C39CA66-6C4B-42EB-8797-4ADCFED239DD}

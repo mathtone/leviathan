@@ -18,9 +18,9 @@ namespace Leviathan.Alpha {
 			var conn = new NpgsqlConnectionProvider($"Host=poseidonalpha.local;Database={config.DbName};Username=pi;Password=Digital!2021;");
 			var hardware = new HardwareService(
 				new ModuleTypeRepo(conn),
-				new ModuleRepo(conn),
+				new ModuleData(conn),
 				new ChannelTypeRepo(conn),
-				new ChannelRepo(conn),
+				new ChannelData(conn),
 				new ChannelControllerTypeRepo(conn),
 				new ChannelControllerRepo(conn)
 			);

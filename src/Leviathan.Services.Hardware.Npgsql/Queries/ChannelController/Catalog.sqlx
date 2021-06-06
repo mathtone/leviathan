@@ -1,0 +1,9 @@
+﻿SELECT
+	ctrl.id,
+	ctrl.name controller_name,
+	ctrl_type.name type_name,
+	chnl.name channel_name
+FROM hardware.channel_controller ctrl
+JOIN hardware.channel_controller_type ctrl_type ON ctrl.controller_type_id = ctrl_type.id
+JOIN hardware.channel chnl ON ctrl.channel_id = chnl.id
+JOIN hardware.channel_type chnl_type ON chnl.channel_type_id = chnl_type.id

@@ -8,9 +8,9 @@
 		<thead>
 			<tr>
 				<th>Id</th>
-				<th>Type Id</th>
-				<th>Channel Id</th>
 				<th>Name</th>
+				<th>Type</th>
+				<th>Channel</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -18,9 +18,9 @@
 			@foreach (var i in this.CurrentChannelControllers) {
 			<tr>
 				<td>@i.Id</td>
-				<td>@i.ControllerTypeId</td>
-				<td>@i.ChannelId</td>
 				<td>@i.Name</td>
+				<td>@i.TypeName</td>
+				<td>@i.ChannelName</td>
 			</tr>
 			}
 

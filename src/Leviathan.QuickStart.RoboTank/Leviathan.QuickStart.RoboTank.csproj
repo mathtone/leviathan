@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Leviathan.Hardware.Gpio\Leviathan.Hardware.Gpio.csproj" />
+    <ProjectReference Include="..\Leviathan.Hardware.Pca9865\Leviathan.Hardware.Pca9685.csproj" />
+    <ProjectReference Include="..\Leviathan.Services.Core\Leviathan.Services.Core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -8,11 +8,13 @@
     <None Remove="Queries\Init\CreateDatabase.sqlx" />
     <None Remove="Queries\Init\CreateDatabaseObjects.sqlx" />
     <None Remove="Queries\Init\DropDatabase.sqlx" />
+    <None Remove="Queries\Init\InitForRoboTank.sqlx" />
     <None Remove="Queries\Init\LocateDatabase.sqlx" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Queries\Init\CreateDatabase.sqlx" />
+    <EmbeddedResource Include="Queries\Init\InitForRoboTank.sqlx" />
     <EmbeddedResource Include="Queries\Init\CreateDatabaseObjects.sqlx" />
     <EmbeddedResource Include="Queries\Init\DropDatabase.sqlx" />
     <EmbeddedResource Include="Queries\Init\LocateDatabase.sqlx" />

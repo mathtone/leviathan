@@ -18,13 +18,29 @@ namespace Leviathan.Hardware {
 		public int ModuleId { get; set; }
 		public int ChannelTypeId { get; set; }
 		public string Name { get; set; }
+		//public string ChannelData { get; set; }
 		public string ChannelData { get; set; }
+		public ChannelInfo() { }
+		public ChannelInfo(int moduleId,int channelTypeId,string name, string channelData=default,int id=default) {
+			this.Id = id;
+			this.ModuleId = moduleId;
+			this.ChannelTypeId = channelTypeId;
+			this.Name = name;
+			this.ChannelData = channelData;
+		}
 	}
 
 	public class ChannelTypeInfo {
 		public int Id { get; set; }
 		public string Name { get; set; }
 		public string TypeInfo { get; set; }
+
+		public ChannelTypeInfo() { }
+		public ChannelTypeInfo(string typeInfo, string name, int id = default) {
+			this.Id = id;
+			this.TypeInfo = typeInfo;
+			this.Name = name;
+		}
 	}
 
 	public class Channel<DEVICE, CONFIG> : IChannel, IDisposable where CONFIG : ChannelConfig {

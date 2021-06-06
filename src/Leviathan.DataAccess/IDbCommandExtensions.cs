@@ -37,7 +37,13 @@ namespace Leviathan.DataAccess {
 			p.Value = value;
 			p.Direction = direction;
 			p.Size = size;
-			command.Parameters.Add(p);
+			return command.WithParameter(p);
+		}
+
+		public static CMD WithParameter<CMD, P>(this CMD command, P parameter)
+			where CMD : IDbCommand
+			where P : IDbDataParameter {
+			command.Parameters.Add(parameter);
 			return command;
 		}
 

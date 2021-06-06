@@ -6,27 +6,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Leviathan.DataAccess;
+using Leviathan.Services.Core.Hardware;
 
 namespace Leviathan.API.REST.Controllers {
 
 	[ApiController]
 	[Route("[controller]")]
-	public class HardwareModuleTypeController : ControllerBase {
+	public class HardwareModuleTypeController : LeviathanDataController<IHardwareModuleTypeData> {
 
 		readonly ILogger<HardwareModuleTypeController> logger;
-		readonly IListRepository<HardwareModuleTypeInfo, int> moduleTypes;
 
-		public HardwareModuleTypeController(ILogger<HardwareModuleTypeController> logger, IListRepository<HardwareModuleTypeInfo, int> moduleTypes) {
-
+		public HardwareModuleTypeController(ILogger<HardwareModuleTypeController> logger, IHardwareModuleTypeData data) : base(data) {
 			this.logger = logger;
-			this.moduleTypes = moduleTypes;
 		}
 
 		[HttpGet("List")]
-		public IEnumerable<HardwareModuleTypeInfo> List() => moduleTypes.List();
+		public IEnumerable<HardwareModuleTypeInfo> List() => Data.List();
 
 		[HttpGet("Read")]
-		public HardwareModuleTypeInfo Read(int id) => moduleTypes.Read(id);
+		public HardwareModuleTypeInfo Read(int id) => Data.Read(id);
 
 	}
 }

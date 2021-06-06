@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using Leviathan.DataAccess;
 using Leviathan.DataAccess.Npgsql;
 using Leviathan.Hardware;
+using Leviathan.QuickStart.RoboTank;
 using Leviathan.Services.Core;
 using Leviathan.Services.Core.Hardware;
+using Leviathan.Services.Core.QuickStart;
 using Leviathan.Services.DbInit.Npgsql;
 using Leviathan.Services.Hardware.Npgsql.Modules;
 using Microsoft.AspNetCore.Builder;
@@ -25,6 +27,8 @@ namespace Leviathan.API.REST {
 	public class Startup {
 
 		protected ILeviathanCore Core;
+		protected IHardwareService hardware;
+		protected IEnumerable<IQuickStartProfile> quickStarts;
 
 		public Startup(IConfiguration configuration) {
 			Configuration = configuration;
@@ -37,19 +41,22 @@ namespace Leviathan.API.REST {
 
 			var pgConnectionString = "Host=poseidonalpha.local;Database=postgres;Username=pi;Password=Digital!2021;";
 			var dbConnectionString = "Host=poseidonalpha.local;Database=Leviathan0x00;Username=pi;Password=Digital!2021;";
-			
+
 			services.AddSingleton(new CoreConfig { DbName = "Leviathan0x00" });
 			services.AddSingleton<IDbInitService>(new DbInitService(pgConnectionString));
 			services.AddSingleton<IDbConnectionProvider<NpgsqlConnection>>(new NpgsqlConnectionProvider(dbConnectionString));
-			
-			services.AddSingleton<IListRepository<HardwareModuleTypeInfo, int>,ModuleTypeRepo>();
-			services.AddSingleton<IListRepository<HardwareModuleInfo, int>, ModuleRepo>();
-			services.AddSingleton<IListRepository<ChannelTypeInfo, int>, ChannelTypeRepo>();
-			services.AddSingleton<IListRepository<ChannelInfo, int>, ChannelRepo>();
-			services.AddSingleton<IListRepository<ChannelControllerTypeInfo, int>, ChannelControllerTypeRepo>();
-			services.AddSingleton<IListRepository<ChannelControllerInfo, int>, ChannelControllerRepo>();
 
-			services.AddSingleton<IHardwareService,HardwareService>();
+			//services.AddSingleton<IEnumerable<IQuickStartProfile>>(});
+			services.AddSingleton<IQuickStartService>(a => new QuickStartService(new[] {
+				new RoboTankQuickStart(this.hardware)
+			}));
+			services.AddSingleton<IHardwareModuleTypeData, ModuleTypeRepo>();
+			services.AddSingleton<IHardwareModuleData, ModuleData>();
+			services.AddSingleton<IChannelTypeData, ChannelTypeRepo>();
+			services.AddSingleton<IChannelData, ChannelData>();
+			services.AddSingleton<IChannelControllerTypeData, ChannelControllerTypeRepo>();
+			services.AddSingleton<IChannelControllerData, ChannelControllerRepo>();
+			services.AddSingleton<IHardwareService, HardwareService>();
 
 			services.AddSingleton<ILogger<LeviathanCore>>(new ConsoleLogger<LeviathanCore>());
 			services.AddSingleton<ILeviathanCore, LeviathanCore>();
@@ -63,7 +70,7 @@ namespace Leviathan.API.REST {
 
 			services.AddSwaggerGen(c => {
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Leviathan.API.REST", Version = "v1" });
-			});			
+			});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +79,7 @@ namespace Leviathan.API.REST {
 			lifetime.ApplicationStopping.Register(OnStop);
 
 			//assign the core.
+			this.hardware = app.ApplicationServices.GetService<IHardwareService>();
 			this.Core = app.ApplicationServices.GetService<ILeviathanCore>();
 
 			if (env.IsDevelopment()) {

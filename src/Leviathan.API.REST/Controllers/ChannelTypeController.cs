@@ -3,26 +3,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using Leviathan.DataAccess;
+using Leviathan.Services.Core.Hardware;
 
 namespace Leviathan.API.REST.Controllers {
 	[ApiController]
 	[Route("[controller]")]
-	public class ChannelTypeController : ControllerBase {
+	public class ChannelTypeController : LeviathanDataController<IChannelTypeData> {
 
 		ILogger<ChannelTypeController> logger;
 		IListRepository<ChannelTypeInfo, int> channelTypes;
 
-		public ChannelTypeController(ILogger<ChannelTypeController> logger, IListRepository<ChannelTypeInfo, int> channelTypes) {
+		public ChannelTypeController(ILogger<ChannelTypeController> logger, IChannelTypeData data) : base(data) {
 
 			this.logger = logger;
-			this.channelTypes = channelTypes;
 		}
 
 		[HttpGet("List")]
-		public IEnumerable<ChannelTypeInfo> List() => channelTypes.List();
+		public IEnumerable<ChannelTypeInfo> List() => Data.List();
 
 		[HttpGet("Read")]
-		public ChannelTypeInfo Read(int id) => channelTypes.Read(id);
-
+		public ChannelTypeInfo Read(int id) => Data.Read(id);
 	}
 }

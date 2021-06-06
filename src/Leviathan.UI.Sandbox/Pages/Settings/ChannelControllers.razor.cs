@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 namespace Leviathan.UI.Sandbox.Pages.Settings {
 	public partial class ChannelControllers {
 		protected ICollection<ChannelControllerTypeInfo> ChannelControllerTypes { get; set; }
-		protected ICollection<ChannelControllerInfo> CurrentChannelControllers { get; set; }
+		protected ICollection<ChannelControllerCatalogItem> CurrentChannelControllers { get; set; }
 
 		protected override async Task OnInitializedAsync() {
 			var svcUrl = "https://localhost:44313/";
 			using var http = new HttpClient();
 
 			this.ChannelControllerTypes = await new ChannelControllerTypeServiceClient(svcUrl, http).ListAsync();
-			this.CurrentChannelControllers = await new ChannelControllerServiceClient(svcUrl, http).ListAsync();
+			this.CurrentChannelControllers = await new ChannelControllerServiceClient(svcUrl, http).CatalogAsync();
 		}
 	}
 }

@@ -13,7 +13,7 @@ namespace Leviathan.Services.DbInit.Npgsql {
 		public DbInitService(string connectionString) :
 			base(connectionString) { }
 
-		public bool LocateDatabase(string name) => Immediate(Queries.LocateDatabase, cmd => 
+		public bool LocateDatabase(string name) => Immediate(Queries.LocateDatabase, cmd =>
 			cmd.WithInput("p0", name).ExecuteReadSingle(r => r.Field<bool>(0))
 		);
 
@@ -29,7 +29,7 @@ namespace Leviathan.Services.DbInit.Npgsql {
 				CreateDatabase(name);
 		}
 
-		protected NpgsqlConnection Connect() => new NpgsqlConnection(connectionString);
+		protected NpgsqlConnection Connect() => new(connectionString);
 
 		private static class Queries {
 			public static readonly string DropDatabase = LoadLocalResource("Queries.Init.DropDatabase.sqlx");
@@ -38,4 +38,4 @@ namespace Leviathan.Services.DbInit.Npgsql {
 			public static readonly string LocateDatabase = LoadLocalResource("Queries.Init.LocateDatabase.sqlx");
 		}
 	}
-} 
+}

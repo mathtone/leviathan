@@ -1,5 +1,6 @@
 ﻿using Leviathan.DataAccess;
 using Leviathan.Hardware;
+using Leviathan.Services.Core.Hardware;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Data;
 using System.Linq;
 using static Leviathan.Utilities.ResourceLoader;
 namespace Leviathan.Services.Hardware.Npgsql.Modules {
-	public class ChannelTypeRepo : IListRepository<ChannelTypeInfo, int> {
+	public class ChannelTypeRepo : IChannelTypeData {
 
 		protected IDbConnectionProvider<NpgsqlConnection> Provider { get; }
 
@@ -15,9 +16,14 @@ namespace Leviathan.Services.Hardware.Npgsql.Modules {
 			this.Provider = provider;
 		}
 
-		public ChannelTypeInfo Create(ChannelTypeInfo item) {
-			throw new NotImplementedException();
-		}
+		public ChannelTypeInfo Create(ChannelTypeInfo item) => Provider.CreateConnection()
+			.Used(c => {
+				item.Id = c.CreateCommand(Queries.Create)
+					.WithInput("@name", item.Name)
+					.WithInput("@type", item.TypeInfo)
+					.ExecuteReadSingle(r => r.Field<int>(0));
+				return item;
+			});
 
 		public void Delete(int itemId) => Provider.CreateConnection()
 			.Used(c => c.CreateCommand(Queries.Delete)

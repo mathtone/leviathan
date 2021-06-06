@@ -1,3 +1,3 @@
 ﻿INSERT
-	into hardware.channel_controller (name,type) VALUES(@name,@type)
+	into hardware.channel_controller (name,controller_type_id,channel_id) VALUES(@name,@controller_type_id,@channel_id)
 RETURNING id

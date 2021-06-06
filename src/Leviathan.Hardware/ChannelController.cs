@@ -17,12 +17,27 @@ namespace Leviathan.Hardware {
 		public int ControllerTypeId { get; set; }
 		public int ChannelId { get; set; }
 		public string Name { get; set; }
+
+		public ChannelControllerInfo() { }
+		public ChannelControllerInfo(string name, int controllerTypeId,int channelId, int id = default) {
+			this.Id = id;
+			this.ControllerTypeId = controllerTypeId;
+			this.ChannelId = channelId;
+			this.Name = name;
+		}
 	}
 
 	public class ChannelControllerTypeInfo {
 		public int Id { get; set; }
 		public string Name { get; set; }
 		public string TypeInfo { get; set; }
+
+		public ChannelControllerTypeInfo() { }
+		public ChannelControllerTypeInfo(string typeInfo, string name, int id = default) {
+			this.Id = id;
+			this.Name = name;
+			this.TypeInfo= typeInfo;
+		}
 	}
 
 	public abstract class ChannelController<CH, CFG> : IChannel, IChannelController where CFG : ChannelControllerConfig {

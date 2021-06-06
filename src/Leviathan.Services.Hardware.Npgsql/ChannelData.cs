@@ -1,23 +1,33 @@
 ﻿using Leviathan.DataAccess;
+using Leviathan.DataAccess.Npgsql;
 using Leviathan.Hardware;
+using Leviathan.Services.Core.Hardware;
 using Npgsql;
+using NpgsqlTypes;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using static Leviathan.Utilities.ResourceLoader;
 namespace Leviathan.Services.Hardware.Npgsql.Modules {
-	public class ChannelRepo : IListRepository<ChannelInfo, int> {
+	public class ChannelData : IChannelData {
 
 		protected IDbConnectionProvider<NpgsqlConnection> Provider { get; }
 
-		public ChannelRepo(IDbConnectionProvider<NpgsqlConnection> provider) {
+		public ChannelData(IDbConnectionProvider<NpgsqlConnection> provider) {
 			this.Provider = provider;
 		}
 
-		public ChannelInfo Create(ChannelInfo item) {
-			throw new NotImplementedException();
-		}
+		public ChannelInfo Create(ChannelInfo item) => Provider.CreateConnection()
+			.Used(c => {
+				item.Id = c.CreateCommand(Queries.Create)
+					.WithInput("@module_id", item.ModuleId)
+					.WithInput("@channel_type_id", item.ChannelTypeId)
+					.WithInput("@name", item.Name)
+					.WithInput("@channel_data", item.ChannelData,NpgsqlDbType.Json)
+					.ExecuteReadSingle(r => r.Field<int>(0));
+				return item;
+			});
 
 		public void Delete(int itemId) => Provider.CreateConnection()
 			.Used(c => c.CreateCommand(Queries.Delete)
