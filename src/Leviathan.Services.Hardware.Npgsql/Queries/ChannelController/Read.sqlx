@@ -1,1 +1,1 @@
-﻿SELECT * FROM hardware.channel_controller_type where id = @id
+﻿SELECT * FROM hardware.channel_controller where id = @id

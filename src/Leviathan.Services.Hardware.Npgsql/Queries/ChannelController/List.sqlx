@@ -1,1 +1,1 @@
-﻿SELECT * FROM hardware.channel_controller_type
+﻿SELECT * FROM hardware.channel_controller
