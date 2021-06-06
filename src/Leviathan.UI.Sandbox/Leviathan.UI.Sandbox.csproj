@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Leviathan.API.REST.Client\Leviathan.API.REST.Client.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Equipment\" />
+  </ItemGroup>
+
 </Project>

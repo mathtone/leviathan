@@ -1,5 +1,59 @@
-﻿<h3>Modules</h3>
+﻿@page "/Settings/Modules"
+
+<div style="float:left" @onclick="(() => SelectTab(MODULES))">MODULES</div>
+<div style="float:left" @onclick="(() => SelectTab(TYPES))">TYPES</div>
+
+@if (CurrentModules != null && currentTab == MODULES) {
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Type id</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var i in CurrentModules) {
+			<tr>
+				<td>@i.ModuleId</td>
+				<td>@i.Name</td>
+				<td>@i.TypeId</td>
+			</tr>
+			}
+
+		</tbody>
+	</table>
+}
+@if (ModuleTypes != null && currentTab == TYPES) {
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Type</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			@foreach (var i in ModuleTypes) {
+			<tr>
+				<td>@i.ModuleTypeId</td>
+				<td>@i.Name</td>
+				<td>@i.TypeInfo</td>
+			</tr>
+			}
+
+		</tbody>
+	</table>
+}
 
 @code {
+	const string MODULES = "MODULES";
+	const string TYPES = "TYPES";
+	private string currentTab = "MODULES";
 
+	private void SelectTab(string tab) {
+		currentTab = tab;
+	}
 }
+

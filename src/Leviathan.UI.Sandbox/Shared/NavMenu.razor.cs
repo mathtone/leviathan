@@ -15,7 +15,7 @@ namespace Leviathan.UI.Sandbox.Shared {
 		public IEnumerable<NavModule> Modules => new[] {
 			new NavModule { Name="Home",Target=""},
 			new NavModule { Name="System",Target="Settings"},
-			//new NavModule { Name="Drivers",Target="Drivers"}
+			new NavModule { Name="Equipment",Target="Equipment"},			
 		};
 
 		protected override async Task OnInitializedAsync() {
