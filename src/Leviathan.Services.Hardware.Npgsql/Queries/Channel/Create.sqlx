@@ -1,0 +1,3 @@
+﻿INSERT
+	into hardware.channel (module_id,channel_type_id,name,channel_data) VALUES(@module_id,@channel_type_id,@name,@channel_data)
+RETURNING id

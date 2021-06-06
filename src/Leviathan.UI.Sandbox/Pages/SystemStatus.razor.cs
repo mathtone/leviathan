@@ -12,7 +12,7 @@ namespace Leviathan.UI.Sandbox.Pages {
 
 		protected override async Task OnInitializedAsync() {
 			using var http = new HttpClient();
-			status = await new Client("https://localhost:44313/", http).GetStatusAsync();
+			status = await new CoreServiceClient("https://localhost:44313/", http).GetStatusAsync();
 		}
 	}
 }

@@ -13,21 +13,23 @@ namespace Leviathan.Services.DbInit.Npgsql {
 		public DbInitService(string connectionString) :
 			base(connectionString) { }
 
-		public bool LocateDatabase(string name) => Immediate(Queries.LocateDatabase, cmd => cmd
-			.WithInput("p0", name)
-			.ExecuteReadSingle(r => r.Field<bool>(0))
+		public bool LocateDatabase(string name) => Immediate(Queries.LocateDatabase, cmd => 
+			cmd.WithInput("p0", name).ExecuteReadSingle(r => r.Field<bool>(0))
 		);
 
-		public void CreateDatabase(string name) => new NpgsqlConnection(connectionString).Used(cn => {
-			cn.CreateCommand(Queries.CreateDatabase).WithTemplate("@p0", name).ExecuteNonQuery();
-			cn.ChangeDatabase(name);
-			cn.CreateCommand(Queries.CreateDatabaseObjects).ExecuteNonQuery();
-		});
+		public void CreateDatabase(string name) => Connect()
+			.Used(cn => {
+				cn.CreateCommand(Queries.CreateDatabase).WithTemplate("@p0", name).ExecuteNonQuery();
+				cn.ChangeDatabase(name);
+				cn.CreateCommand(Queries.CreateDatabaseObjects).ExecuteNonQuery();
+			});
 
 		public void VerifyDatabase(string name) {
 			if (!LocateDatabase(name))
 				CreateDatabase(name);
 		}
+
+		protected NpgsqlConnection Connect() => new NpgsqlConnection(connectionString);
 
 		private static class Queries {
 			public static readonly string DropDatabase = LoadLocalResource("Queries.Init.DropDatabase.sqlx");
@@ -36,4 +38,4 @@ namespace Leviathan.Services.DbInit.Npgsql {
 			public static readonly string LocateDatabase = LoadLocalResource("Queries.Init.LocateDatabase.sqlx");
 		}
 	}
-}
+} 

@@ -13,6 +13,20 @@ namespace Leviathan.Hardware {
 		public Type ChannelType { get; set; }
 	}
 
+	public class ChannelInfo {
+		public int Id { get; set; }
+		public int ModuleId { get; set; }
+		public int ChannelTypeId { get; set; }
+		public string Name { get; set; }
+		public string ChannelData { get; set; }
+	}
+
+	public class ChannelTypeInfo {
+		public int Id { get; set; }
+		public string Name { get; set; }
+		public string TypeInfo { get; set; }
+	}
+
 	public class Channel<DEVICE, CONFIG> : IChannel, IDisposable where CONFIG : ChannelConfig {
 		private bool disposedValue;
 

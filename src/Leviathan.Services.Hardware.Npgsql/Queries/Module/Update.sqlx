@@ -1,0 +1,2 @@
+﻿UPDATE hardware.module
+SET name=@name,module_type_id=@type_id WHERE id=@id

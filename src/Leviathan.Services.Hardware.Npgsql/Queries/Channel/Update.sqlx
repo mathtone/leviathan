@@ -1,0 +1,2 @@
+﻿UPDATE hardware.channel
+SET module_id=@module_id,channel_type_id=@channel_type_id,name=@name,channel_data=@channel_date WHERE id=@id

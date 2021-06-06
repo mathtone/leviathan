@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Leviathan.DataAccess;
+using Leviathan.Hardware;
+using Leviathan.Services.Core.Hardware;
 using Microsoft.Extensions.Logging;
 
 namespace Leviathan.Services.Core {
@@ -11,6 +14,8 @@ namespace Leviathan.Services.Core {
 
 	public interface ILeviathanCore {
 		CoreStatus Status { get; }
+		void Start();
+		void Stop();
 	}
 
 	public enum CoreStatus {
@@ -30,17 +35,18 @@ namespace Leviathan.Services.Core {
 
 	public class LeviathanCore : ILeviathanCore {
 
-		bool running;
+		protected bool running;
 		protected CoreConfig config;
 		protected ILogger<LeviathanCore> Logger { get; }
-		
 		protected IDbInitService DbInit { get; }
-		
+		protected IHardwareService Hardware { get; }
+
 		public CoreStatus Status { get; private set; }
 
-		public LeviathanCore(CoreConfig config, IDbInitService dbInitService, ILogger<LeviathanCore> logger) {
+		public LeviathanCore(CoreConfig config, IDbInitService dbInitService, IHardwareService hardware, ILogger<LeviathanCore> logger) {
 			this.config = config;
 			this.DbInit = dbInitService;
+			this.Hardware = hardware;
 			this.Logger = logger;
 			this.Status = CoreStatus.Created;
 		}

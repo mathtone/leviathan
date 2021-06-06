@@ -10,7 +10,6 @@ namespace Leviathan.API.REST.Controllers {
 
 	public class CoreStatusReport {
 		public CoreStatus Status { get; init; }
-
 		public IEnumerable<string> Messages { get; init; }
 	}
 

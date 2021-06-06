@@ -14,12 +14,13 @@ namespace Leviathan.UI.Sandbox.Shared {
 
 		public IEnumerable<NavModule> Modules => new[] {
 			new NavModule { Name="Home",Target=""},
-			new NavModule { Name="System",Target="SystemStatus"}
+			new NavModule { Name="System",Target="Settings"},
+			//new NavModule { Name="Drivers",Target="Drivers"}
 		};
 
 		protected override async Task OnInitializedAsync() {
 			await base.OnInitializedAsync();
-			
+
 		}
 	}
-} 
+}

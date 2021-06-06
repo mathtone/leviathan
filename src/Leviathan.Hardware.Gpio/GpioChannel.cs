@@ -9,7 +9,6 @@ namespace Leviathan.Hardware.Gpio {
 	public class GpioChannelConfig : ChannelConfig {
 		public int Pin { get; set; }
 		public PinMode Mode { get; set; }
-		//public string Name { get; set; }
 	}
 
 	public class GpioChannel : InputOutputChannel<PinValue, GpioModule, GpioChannelConfig> {

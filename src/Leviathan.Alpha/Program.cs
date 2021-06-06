@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Leviathan.DataAccess.Npgsql;
 using Leviathan.Services.Core;
+using Leviathan.Services.Core.Hardware;
 using Leviathan.Services.DbInit.Npgsql;
+using Leviathan.Services.Hardware.Npgsql.Modules;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 
@@ -9,9 +12,15 @@ namespace Leviathan.Alpha {
 	class Program {
 		static void Main(string[] args) {
 
+			
 			var config = new CoreConfig { DbName = "Leviathan0x00" };
 			var dbInit = new DbInitService("Host=poseidonalpha.local;Database=postgres;Username=pi;Password=Digital!2021;");
-			var core = new LeviathanCore(config, dbInit, new ConsoleLogger<LeviathanCore>());
+			var conn = new NpgsqlConnectionProvider($"Host=poseidonalpha.local;Database={config.DbName};Username=pi;Password=Digital!2021;");
+			var moduleTypes = new ModuleTypeRepo(conn);
+			var channelTypes = new ChannelTypeRepo(conn);
+
+			var hardware = new HardwareService(moduleTypes,channelTypes);
+			var core = new LeviathanCore(config, dbInit, hardware, new ConsoleLogger<LeviathanCore>());
 
 			core.Start();
 		}

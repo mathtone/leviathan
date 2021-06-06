@@ -8,6 +8,7 @@ namespace Leviathan.DataAccess {
 
 	public interface IDbConnectionProvider<CONN> : IDbConnectionProvider where CONN : IDbConnection {
 		new CONN CreateConnection();
+		new CONN CreateConnection(string dbName);
 	}
 
 	public class DbConnectionProvider<CONN> : IDbConnectionProvider<CONN> where CONN : IDbConnection, new() {

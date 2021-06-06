@@ -1,0 +1,3 @@
+﻿INSERT
+	into hardware.module_type (name,type) VALUES(@name,@type)
+RETURNING id

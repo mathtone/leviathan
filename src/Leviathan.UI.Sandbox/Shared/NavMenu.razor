@@ -1,9 +1,10 @@
 ﻿<div>
 	<div>
 		@foreach (var module in Modules) {
-			<NavLink class="nav-link" href="@module.Target">
+			<NavLink href="@module.Target" >@module.Name</NavLink>
+			@*<NavLink class="nav-link" href="@module.Target">
 				<span class="oi oi-plus" aria-hidden="true"></span> @module.Name
-			</NavLink>
+			</NavLink>*@
 		}
 	</div>
 </div>

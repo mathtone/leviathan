@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Leviathan.DataAccess;
+using Leviathan.DataAccess.Npgsql;
+using Leviathan.Hardware;
 using Leviathan.Services.Core;
+using Leviathan.Services.Core.Hardware;
 using Leviathan.Services.DbInit.Npgsql;
+using Leviathan.Services.Hardware.Npgsql.Modules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,24 +19,39 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Npgsql;
 
 namespace Leviathan.API.REST {
 	public class Startup {
 
-		readonly LeviathanCore core;
+		protected ILeviathanCore Core;
 
 		public Startup(IConfiguration configuration) {
 			Configuration = configuration;
-			var config = new CoreConfig { DbName = "Leviathan0x00" };
-			var dbInit = new DbInitService("Host=poseidonalpha.local;Database=postgres;Username=pi;Password=Digital!2021;");
-			core = new LeviathanCore(config, dbInit, new ConsoleLogger<LeviathanCore>());
 		}
 
 		public IConfiguration Configuration { get; }
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services) {
-			services.AddSingleton<ILeviathanCore>(core);
+
+			var pgConnectionString = "Host=poseidonalpha.local;Database=postgres;Username=pi;Password=Digital!2021;";
+			var dbConnectionString = "Host=poseidonalpha.local;Database=Leviathan0x00;Username=pi;Password=Digital!2021;";
+			
+			services.AddSingleton(new CoreConfig { DbName = "Leviathan0x00" });
+			services.AddSingleton<IDbInitService>(new DbInitService(pgConnectionString));
+			services.AddSingleton<IDbConnectionProvider<NpgsqlConnection>>(new NpgsqlConnectionProvider(dbConnectionString));
+			
+			services.AddSingleton<IListRepository<HardwareModuleTypeInfo, int>,ModuleTypeRepo>();
+			services.AddSingleton<IListRepository<HardwareModuleInfo, int>, ModuleRepo>();
+			services.AddSingleton<IListRepository<ChannelTypeInfo, int>, ChannelTypeRepo>();
+			services.AddSingleton<IListRepository<ChannelInfo, int>, ChannelRepo>();
+
+			services.AddSingleton<IHardwareService,HardwareService>();
+
+			services.AddSingleton<ILogger<LeviathanCore>>(new ConsoleLogger<LeviathanCore>());
+			services.AddSingleton<ILeviathanCore, LeviathanCore>();
+
 			services
 				.AddControllers()
 				.AddJsonOptions(options => {
@@ -41,13 +61,16 @@ namespace Leviathan.API.REST {
 
 			services.AddSwaggerGen(c => {
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Leviathan.API.REST", Version = "v1" });
-			});
+			});			
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime) {
 			lifetime.ApplicationStarted.Register(OnStart);
 			lifetime.ApplicationStopping.Register(OnStop);
+
+			//assign the core.
+			this.Core = app.ApplicationServices.GetService<ILeviathanCore>();
 
 			if (env.IsDevelopment()) {
 				app.UseDeveloperExceptionPage();
@@ -62,8 +85,8 @@ namespace Leviathan.API.REST {
 			});
 		}
 
-		protected void OnStart() => core.Start();
-		protected void OnStop() => core.Stop();
+		protected void OnStart() => Core.Start();
+		protected void OnStop() => Core.Stop();
 	}
 
 	public abstract class Logger<T> : ILogger<T> {

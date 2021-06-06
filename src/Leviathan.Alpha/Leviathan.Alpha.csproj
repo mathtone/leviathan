@@ -13,6 +13,7 @@
     <ProjectReference Include="..\Leviathan.Hardware\Leviathan.Hardware.csproj" />
     <ProjectReference Include="..\Leviathan.Services.Core.Npgsql\Leviathan.Services.DbInit.Npgsql.csproj" />
     <ProjectReference Include="..\Leviathan.Services.Core\Leviathan.Services.Core.csproj" />
+    <ProjectReference Include="..\Leviathan.Services.Hardware.Npgsql\Leviathan.Services.Hardware.Npgsql.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,4 +8,9 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Leviathan.DataAccess\Leviathan.DataAccess.csproj" />
+    <ProjectReference Include="..\Leviathan.Hardware\Leviathan.Hardware.csproj" />
+  </ItemGroup>
+
 </Project>

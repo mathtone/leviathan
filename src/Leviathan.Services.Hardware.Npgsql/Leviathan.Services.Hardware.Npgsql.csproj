@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Queries\ChannelType\Create.sqlx" />
+    <None Remove="Queries\ChannelType\Delete.sqlx" />
+    <None Remove="Queries\ChannelType\List.sqlx" />
+    <None Remove="Queries\ChannelType\Read.sqlx" />
+    <None Remove="Queries\ChannelType\Update.sqlx" />
+    <None Remove="Queries\Channel\Create.sqlx" />
+    <None Remove="Queries\Channel\Delete.sqlx" />
+    <None Remove="Queries\Channel\List.sqlx" />
+    <None Remove="Queries\Channel\Read.sqlx" />
+    <None Remove="Queries\Channel\Update.sqlx" />
+    <None Remove="Queries\ModuleType\Create.sqlx" />
+    <None Remove="Queries\ModuleType\Delete.sqlx" />
+    <None Remove="Queries\ModuleType\List.sqlx" />
+    <None Remove="Queries\ModuleType\Read.sqlx" />
+    <None Remove="Queries\ModuleType\Update.sqlx" />
+    <None Remove="Queries\Module\Create.sqlx" />
+    <None Remove="Queries\Module\Delete.sqlx" />
+    <None Remove="Queries\Module\List.sqlx" />
+    <None Remove="Queries\Module\Read.sqlx" />
+    <None Remove="Queries\Module\Update.sqlx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Queries\ChannelType\Create.sqlx" />
+    <EmbeddedResource Include="Queries\ChannelType\Delete.sqlx" />
+    <EmbeddedResource Include="Queries\ChannelType\List.sqlx" />
+    <EmbeddedResource Include="Queries\ChannelType\Read.sqlx" />
+    <EmbeddedResource Include="Queries\ChannelType\Update.sqlx" />
+    <EmbeddedResource Include="Queries\Channel\Create.sqlx" />
+    <EmbeddedResource Include="Queries\Channel\Delete.sqlx" />
+    <EmbeddedResource Include="Queries\Channel\List.sqlx" />
+    <EmbeddedResource Include="Queries\Channel\Read.sqlx" />
+    <EmbeddedResource Include="Queries\Channel\Update.sqlx" />
+    <EmbeddedResource Include="Queries\ModuleType\Create.sqlx" />
+    <EmbeddedResource Include="Queries\ModuleType\Delete.sqlx" />
+    <EmbeddedResource Include="Queries\ModuleType\List.sqlx" />
+    <EmbeddedResource Include="Queries\ModuleType\Read.sqlx" />
+    <EmbeddedResource Include="Queries\ModuleType\Update.sqlx" />
+    <EmbeddedResource Include="Queries\Module\Create.sqlx" />
+    <EmbeddedResource Include="Queries\Module\Delete.sqlx" />
+    <EmbeddedResource Include="Queries\Module\List.sqlx" />
+    <EmbeddedResource Include="Queries\Module\Read.sqlx" />
+    <EmbeddedResource Include="Queries\Module\Update.sqlx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="5.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Leviathan.DataAccess\Leviathan.DataAccess.csproj" />
+    <ProjectReference Include="..\Leviathan.Hardware\Leviathan.Hardware.csproj" />
+    <ProjectReference Include="..\Leviathan.Utilities\Leviathan.Utilities.csproj" />
+  </ItemGroup>
+
+</Project>
