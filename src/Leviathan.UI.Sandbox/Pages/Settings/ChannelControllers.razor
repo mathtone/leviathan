@@ -1,0 +1,60 @@
+﻿@page "/Settings/ChannelControllers"
+
+<h3>Hardware Channels &amp; Channel Types</h3>
+<div style="float:left" @onclick="(() => SelectTab(CONTROLLERS))">CONTROLLERS</div>
+<div style="float:left" @onclick="(() => SelectTab(TYPES))">TYPES</div>
+@if (CurrentChannelControllers != null && currentTab == CONTROLLERS) {
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Type Id</th>
+				<th>Channel Id</th>
+				<th>Name</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			@foreach (var i in this.CurrentChannelControllers) {
+			<tr>
+				<td>@i.Id</td>
+				<td>@i.ControllerTypeId</td>
+				<td>@i.ChannelId</td>
+				<td>@i.Name</td>
+			</tr>
+			}
+
+		</tbody>
+	</table>
+}
+@if (ChannelControllerTypes != null && currentTab == TYPES) {
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Type</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			@foreach (var i in this.ChannelControllerTypes) {
+				<tr>
+					<td>@i.Id</td>
+					<td>@i.Name</td>
+					<td>@i.TypeInfo</td>
+				</tr>
+			}
+
+		</tbody>
+	</table>
+}
+@code {
+	const string CONTROLLERS = "CONTROLLERS";
+	const string TYPES = "TYPES";
+	private string currentTab = CONTROLLERS;
+
+	private void SelectTab(string tab) {
+		currentTab = tab;
+	}
+}

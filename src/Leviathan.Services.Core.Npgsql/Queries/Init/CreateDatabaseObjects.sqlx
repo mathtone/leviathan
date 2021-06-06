@@ -1,9 +1,13 @@
 ﻿-- Table: public.hardware_module
 
+DROP TABLE IF EXISTS hardware.controller;
 DROP TABLE IF EXISTS hardware.channel;
 DROP TABLE IF EXISTS hardware.module;
+
 DROP TABLE IF EXISTS hardware.channel_type;
 DROP TABLE IF EXISTS hardware.module_type;
+DROP TABLE IF EXISTS hardware.controller_type;
+
 DROP SCHEMA IF EXISTS hardware;
 
 CREATE SCHEMA hardware;
@@ -52,6 +56,30 @@ CREATE TABLE hardware.channel
     channel_data json,
     
     CONSTRAINT channel_pkey PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+);
+
+CREATE TABLE hardware.channel_controller_type
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    name character varying(50) NOT NULL,
+    type character varying(150) NOT NULL,
+
+    CONSTRAINT controller_type_pkey PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+);
+
+CREATE TABLE hardware.channel_controller
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    controller_type_id integer NOT NULL,
+    channel_id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    CONSTRAINT channel_controller_pkey PRIMARY KEY (id)
 )
 WITH (
     OIDS = FALSE

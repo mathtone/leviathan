@@ -12,6 +12,19 @@ namespace Leviathan.Hardware {
 		public Type ControllerType { get; set; }
 	}
 
+	public class ChannelControllerInfo {
+		public int Id { get; set; }
+		public int ControllerTypeId { get; set; }
+		public int ChannelId { get; set; }
+		public string Name { get; set; }
+	}
+
+	public class ChannelControllerTypeInfo {
+		public int Id { get; set; }
+		public string Name { get; set; }
+		public string TypeInfo { get; set; }
+	}
+
 	public abstract class ChannelController<CH, CFG> : IChannel, IChannelController where CFG : ChannelControllerConfig {
 		protected CH Channel { get; }
 		protected CFG Config { get; }

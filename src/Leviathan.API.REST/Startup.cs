@@ -46,6 +46,8 @@ namespace Leviathan.API.REST {
 			services.AddSingleton<IListRepository<HardwareModuleInfo, int>, ModuleRepo>();
 			services.AddSingleton<IListRepository<ChannelTypeInfo, int>, ChannelTypeRepo>();
 			services.AddSingleton<IListRepository<ChannelInfo, int>, ChannelRepo>();
+			services.AddSingleton<IListRepository<ChannelControllerTypeInfo, int>, ChannelControllerTypeRepo>();
+			services.AddSingleton<IListRepository<ChannelControllerInfo, int>, ChannelControllerRepo>();
 
 			services.AddSingleton<IHardwareService,HardwareService>();
 

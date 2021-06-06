@@ -1,0 +1,3 @@
+﻿INSERT
+	into hardware.channel_controller_type (name,type) VALUES(@name,@type)
+RETURNING id

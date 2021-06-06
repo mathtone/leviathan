@@ -1,5 +1,5 @@
 ﻿@page "/Settings/Modules"
-
+<h3>Hardware Modules &amp; Module Types</h3>
 <div style="float:left" @onclick="(() => SelectTab(MODULES))">MODULES</div>
 <div style="float:left" @onclick="(() => SelectTab(TYPES))">TYPES</div>
 
@@ -15,7 +15,7 @@
 		<tbody>
 			@foreach (var i in CurrentModules) {
 			<tr>
-				<td>@i.ModuleId</td>
+				<td>@i.Id</td>
 				<td>@i.Name</td>
 				<td>@i.TypeId</td>
 			</tr>

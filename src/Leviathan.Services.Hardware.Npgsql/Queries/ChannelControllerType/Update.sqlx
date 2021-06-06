@@ -1,0 +1,2 @@
+﻿UPDATE hardware.channel_controller_type
+SET name=@name,type@type WHERE id=@id

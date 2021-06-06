@@ -1,50 +1,62 @@
 ﻿@page "/Settings/Channels"
 
-<h3>Channels</h3>
-<table class="table">
-	<thead>
-		<tr>
-			<th>Id</th>
-			<th>Name</th>
-			<th>Module Id</th>
-			<th>Type Id</th>
-			<th>Data</th>
-		</tr>
-	</thead>
-	<tbody>
-		@if (CurrentChannels != null) {
-			foreach (var i in this.CurrentChannels) {
-				<tr>
-					<td>@i.Id</td>
-					<td>@i.Name</td>
-					<td>@i.ModuleId</td>
-					<td>@i.ChannelTypeId</td>
-					<td>@i.ChannelData</td>
-				</tr>
-			}
-		}
-	</tbody>
-</table>
+<h3>Hardware Channels &amp; Channel Types</h3>
+<div style="float:left" @onclick="(() => SelectTab(CHANNELS))">CHANNELS</div>
+<div style="float:left" @onclick="(() => SelectTab(TYPES))">TYPES</div>
+@if (CurrentChannels != null && currentTab == CHANNELS) {
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Module Id</th>
+				<th>Type Id</th>
+				<th>Data</th>
+			</tr>
+		</thead>
+		<tbody>
 
-
-<h3>Channel Types</h3>
-<table class="table">
-	<thead>
-		<tr>
-			<th>Id</th>
-			<th>Name</th>
-			<th>Type</th>
-		</tr>
-	</thead>
-	<tbody>
-		@if (ChannelTypes != null) {
-			foreach (var i in this.ChannelTypes) {
-				<tr>
-					<td>@i.Id</td>
-					<td>@i.Name</td>
-					<td>@i.TypeInfo</td>
-				</tr>
+			@foreach (var i in this.CurrentChannels) {
+			<tr>
+				<td>@i.Id</td>
+				<td>@i.Name</td>
+				<td>@i.ModuleId</td>
+				<td>@i.ChannelTypeId</td>
+				<td>@i.ChannelData</td>
+			</tr>
 			}
-		}
-	</tbody>
-</table>
+
+		</tbody>
+	</table>
+}
+@if (ChannelTypes != null && currentTab == TYPES) {	
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Type</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			@foreach (var i in this.ChannelTypes) {
+			<tr>
+				<td>@i.Id</td>
+				<td>@i.Name</td>
+				<td>@i.TypeInfo</td>
+			</tr>
+			}
+
+		</tbody>
+	</table>
+}
+@code {
+	const string CHANNELS = "CHANNELS";
+	const string TYPES = "TYPES";
+	private string currentTab = "CHANNELS";
+
+	private void SelectTab(string tab) {
+		currentTab = tab;
+	}
+}

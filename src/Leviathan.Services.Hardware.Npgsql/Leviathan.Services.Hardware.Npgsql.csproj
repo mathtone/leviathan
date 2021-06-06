@@ -5,6 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Queries\ChannelControllerType\Create.sqlx" />
+    <None Remove="Queries\ChannelControllerType\Delete.sqlx" />
+    <None Remove="Queries\ChannelControllerType\List.sqlx" />
+    <None Remove="Queries\ChannelControllerType\Read.sqlx" />
+    <None Remove="Queries\ChannelControllerType\Update.sqlx" />
+    <None Remove="Queries\ChannelController\Create.sqlx" />
+    <None Remove="Queries\ChannelController\Delete.sqlx" />
+    <None Remove="Queries\ChannelController\List.sqlx" />
+    <None Remove="Queries\ChannelController\Read.sqlx" />
+    <None Remove="Queries\ChannelController\Update.sqlx" />
     <None Remove="Queries\ChannelType\Create.sqlx" />
     <None Remove="Queries\ChannelType\Delete.sqlx" />
     <None Remove="Queries\ChannelType\List.sqlx" />
@@ -28,6 +38,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Queries\ChannelControllerType\Create.sqlx" />
+    <EmbeddedResource Include="Queries\ChannelControllerType\Delete.sqlx" />
+    <EmbeddedResource Include="Queries\ChannelControllerType\List.sqlx" />
+    <EmbeddedResource Include="Queries\ChannelControllerType\Read.sqlx" />
+    <EmbeddedResource Include="Queries\ChannelControllerType\Update.sqlx" />
+    <EmbeddedResource Include="Queries\ChannelController\Create.sqlx" />
+    <EmbeddedResource Include="Queries\ChannelController\Delete.sqlx" />
+    <EmbeddedResource Include="Queries\ChannelController\List.sqlx" />
+    <EmbeddedResource Include="Queries\ChannelController\Read.sqlx" />
+    <EmbeddedResource Include="Queries\ChannelController\Update.sqlx" />
     <EmbeddedResource Include="Queries\ChannelType\Create.sqlx" />
     <EmbeddedResource Include="Queries\ChannelType\Delete.sqlx" />
     <EmbeddedResource Include="Queries\ChannelType\List.sqlx" />

@@ -16,10 +16,14 @@ namespace Leviathan.Alpha {
 			var config = new CoreConfig { DbName = "Leviathan0x00" };
 			var dbInit = new DbInitService("Host=poseidonalpha.local;Database=postgres;Username=pi;Password=Digital!2021;");
 			var conn = new NpgsqlConnectionProvider($"Host=poseidonalpha.local;Database={config.DbName};Username=pi;Password=Digital!2021;");
-			var moduleTypes = new ModuleTypeRepo(conn);
-			var channelTypes = new ChannelTypeRepo(conn);
-
-			var hardware = new HardwareService(moduleTypes,channelTypes);
+			var hardware = new HardwareService(
+				new ModuleTypeRepo(conn),
+				new ModuleRepo(conn),
+				new ChannelTypeRepo(conn),
+				new ChannelRepo(conn),
+				new ChannelControllerTypeRepo(conn),
+				new ChannelControllerRepo(conn)
+			);
 			var core = new LeviathanCore(config, dbInit, hardware, new ConsoleLogger<LeviathanCore>());
 
 			core.Start();
