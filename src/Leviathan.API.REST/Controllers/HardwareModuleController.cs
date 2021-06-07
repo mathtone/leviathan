@@ -17,6 +17,9 @@ namespace Leviathan.API.REST.Controllers {
 		}
 
 		[HttpGet("List")]
+		public IEnumerable<HardwareModuleCatalogItem> Catalog() => Data.List();
+
+		[HttpGet("List")]
 		public IEnumerable<HardwareModuleInfo> List() => Data.List();
 
 		[HttpGet("Read")]

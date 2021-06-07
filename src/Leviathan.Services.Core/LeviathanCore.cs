@@ -14,6 +14,8 @@ namespace Leviathan.Services.Core {
 
 	public interface ILeviathanCore {
 		CoreStatus Status { get; }
+		bool FactoryReset(string destructCode);
+		string DestructCode();
 		void Start();
 		void Stop();
 	}
@@ -36,6 +38,7 @@ namespace Leviathan.Services.Core {
 	public class LeviathanCore : ILeviathanCore {
 
 		protected bool running;
+		protected string destructCode;
 		protected CoreConfig config;
 		protected ILogger<LeviathanCore> Logger { get; }
 		protected IDbInitService DbInit { get; }
@@ -51,6 +54,17 @@ namespace Leviathan.Services.Core {
 			this.Status = CoreStatus.Created;
 		}
 
+		public bool FactoryReset(string destructCode) {
+			if (VerifyDestructCode(destructCode)) {
+				this.DbInit.ResetDatabase(this.config.DbName);
+				return true;
+			}
+			else {
+
+				return false;
+			}
+		}
+
 		public void Start() {
 			if (running) {
 				throw new Exception("Core is already running");
@@ -64,8 +78,20 @@ namespace Leviathan.Services.Core {
 			}
 		}
 
+		bool VerifyDestructCode(string code) {
+			if (destructCode != null && code == destructCode) {
+				destructCode = null;
+				return true;
+			}
+			else {
+				destructCode = null;
+				return false;
+			}
+		}
 		public void Stop() {
 			;
 		}
+
+		public string DestructCode() => this.destructCode = Guid.NewGuid().ToString();
 	}
 }

@@ -13,6 +13,10 @@ namespace Leviathan.API.REST.Controllers {
 		public IEnumerable<string> Messages { get; init; }
 	}
 
+	public class DestructCode {
+		public string Code { get; set; }
+	}
+
 	[ApiController]
 	[Route("[controller]")]
 	public class CoreController : ControllerBase {
@@ -29,5 +33,11 @@ namespace Leviathan.API.REST.Controllers {
 		public CoreStatusReport GetStatus() => new() {
 			Status = _core.Status
 		};
+
+		[HttpGet("DestructCode")]
+		public DestructCode GetDestructCode() => new DestructCode { Code = _core.DestructCode() };
+
+		[HttpPost("FactoryReset")]
+		public bool FactoryReset(string destructCode) => _core.FactoryReset(destructCode);
 	}
 }

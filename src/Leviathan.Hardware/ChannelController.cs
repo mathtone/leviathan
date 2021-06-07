@@ -5,6 +5,13 @@ namespace Leviathan.Hardware {
 
 	}
 
+	public class ChannelControllerCatalogItem {
+		public int Id { get; set; }
+		public string Name { get; set; }
+		public string TypeName { get; set; }
+		public string ChannelName { get; set; }
+	}
+
 	public class ChannelControllerConfig {
 		public int Id { get; set; }
 		public string Name { get; set; }

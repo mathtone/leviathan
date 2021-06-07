@@ -14,5 +14,11 @@ namespace Leviathan.UI.Sandbox.Pages.Settings {
 			using var http = new HttpClient();
 			this.Profiles = await new QuickStartServiceClient(svcUrl, http).ProfilesAsync();
 		}
+
+		static async Task ApplyProfile(string name) {
+			var svcUrl = "https://localhost:44313/";
+			using var http = new HttpClient();
+			await new QuickStartServiceClient(svcUrl, http).ApplyProfileAsync(name);
+		}
 	}
 }

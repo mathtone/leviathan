@@ -5,13 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Leviathan.Hardware.Gpio\Leviathan.Hardware.Gpio.csproj" />
     <ProjectReference Include="..\Leviathan.Hardware.Pca9865\Leviathan.Hardware.Pca9685.csproj" />
-    <ProjectReference Include="..\Leviathan.QuickStart.Basic\Leviathan.QuickStart.Basic.csproj" />
     <ProjectReference Include="..\Leviathan.Services.Core\Leviathan.Services.Core.csproj" />
   </ItemGroup>
 

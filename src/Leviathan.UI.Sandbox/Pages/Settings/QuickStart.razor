@@ -5,9 +5,9 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Id</th>
 				<th>Name</th>
 				<th>Type id</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -15,6 +15,7 @@
 				<tr>
 					<td>@i.Name</td>
 					<td>@i.Description</td>
+					<td><button @onclick="(() => ApplyProfile(i.Id))">APPLY PROFILE</button></td>
 				</tr>
 			}
 		</tbody>

@@ -16,11 +16,15 @@ namespace Leviathan.Services.Core.Hardware {
 		IChannelControllerData ChannelControllers { get; }
 	}
 
-	public interface IHardwareModuleData : IListRepository<HardwareModuleInfo, int> { }
+	public interface IHardwareModuleData : IListRepository<HardwareModuleInfo, int> {
+		IEnumerable<HardwareModuleCatalogItem> Catalog();
+	}
+
 	public interface IHardwareModuleTypeData : IListRepository<HardwareModuleTypeInfo, int> { }
 	public interface IChannelTypeData : IListRepository<ChannelTypeInfo, int> { }
 	public interface IChannelData : IListRepository<ChannelInfo, int> { }
 	public interface IChannelControllerTypeData : IListRepository<ChannelControllerTypeInfo, int> { }
+	
 	public interface IChannelControllerData : IListRepository<ChannelControllerInfo, int> {
 		IEnumerable<ChannelControllerCatalogItem> Catalog();
 	}

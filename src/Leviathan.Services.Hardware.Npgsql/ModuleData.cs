@@ -16,7 +16,7 @@ namespace Leviathan.Services.Hardware.Npgsql.Modules {
 			this.Provider = provider;
 		}
 
-		public HardwareModuleInfo Create(HardwareModuleInfo item)=> Provider.CreateConnection()
+		public HardwareModuleInfo Create(HardwareModuleInfo item) => Provider.CreateConnection()
 			.Used(c => {
 				item.Id = c.CreateCommand(Queries.Create)
 					.WithInput("@name", item.Name)
@@ -48,6 +48,15 @@ namespace Leviathan.Services.Hardware.Npgsql.Modules {
 			throw new NotImplementedException();
 		}
 
+		public IEnumerable<HardwareModuleCatalogItem> Catalog() => Provider.CreateConnection()
+			.Used(c => c.CreateCommand(Queries.Catalog)
+				.ExecuteReader()
+				.Consume(r => new HardwareModuleCatalogItem {
+					
+				})
+				.ToArray()
+			);
+
 		public static HardwareModuleInfo FromRecord(IDataRecord reader) => new() {
 			Id = reader.Field<int>("id"),
 			Name = reader.Field<string>("name"),
@@ -60,6 +69,7 @@ namespace Leviathan.Services.Hardware.Npgsql.Modules {
 			public static readonly string Update = LoadLocalResource("Queries.Module.Update.sqlx");
 			public static readonly string Delete = LoadLocalResource("Queries.Module.Delete.sqlx");
 			public static readonly string List = LoadLocalResource("Queries.Module.List.sqlx");
+			public static readonly string Catalog = LoadLocalResource("Queries.Module.Catalog.sqlx");
 		}
 	}
 }

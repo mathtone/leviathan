@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Leviathan.DataAccess;
 using Leviathan.DataAccess.Npgsql;
 using Leviathan.Hardware;
+using Leviathan.QuickStart.Basic;
+using Leviathan.QuickStart.HardcoreMode;
 using Leviathan.QuickStart.RoboTank;
 using Leviathan.Services.Core;
 using Leviathan.Services.Core.Hardware;
@@ -47,8 +49,10 @@ namespace Leviathan.API.REST {
 			services.AddSingleton<IDbConnectionProvider<NpgsqlConnection>>(new NpgsqlConnectionProvider(dbConnectionString));
 
 			//services.AddSingleton<IEnumerable<IQuickStartProfile>>(});
-			services.AddSingleton<IQuickStartService>(a => new QuickStartService(new[] {
-				new RoboTankQuickStart(this.hardware)
+			services.AddSingleton<IQuickStartService>(a => new QuickStartService(new IQuickStartProfile[] {
+				new BasicQuickStart(this.hardware),
+				new RoboTankQuickStart(this.hardware),
+				new HardcoreQuickStart(this.hardware),
 			}));
 			services.AddSingleton<IHardwareModuleTypeData, ModuleTypeRepo>();
 			services.AddSingleton<IHardwareModuleData, ModuleData>();

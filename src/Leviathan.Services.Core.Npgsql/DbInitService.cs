@@ -24,6 +24,13 @@ namespace Leviathan.Services.DbInit.Npgsql {
 				cn.CreateCommand(Queries.CreateDatabaseObjects).ExecuteNonQuery();
 			});
 
+		public void ResetDatabase(string name) => Connect()
+			.Used(cn => {
+				cn.ChangeDatabase(name);
+				cn.CreateCommand(Queries.ResetDatabase).WithTemplate("@p0", name).ExecuteNonQuery();
+				cn.CreateCommand(Queries.CreateDatabaseObjects).ExecuteNonQuery();
+			});
+
 		public void VerifyDatabase(string name) {
 			if (!LocateDatabase(name))
 				CreateDatabase(name);
@@ -34,6 +41,7 @@ namespace Leviathan.Services.DbInit.Npgsql {
 		private static class Queries {
 			public static readonly string DropDatabase = LoadLocalResource("Queries.Init.DropDatabase.sqlx");
 			public static readonly string CreateDatabase = LoadLocalResource("Queries.Init.CreateDatabase.sqlx");
+			public static readonly string ResetDatabase = LoadLocalResource("Queries.Init.ResetDatabase.sqlx");
 			public static readonly string CreateDatabaseObjects = LoadLocalResource("Queries.Init.CreateDatabaseObjects.sqlx");
 			public static readonly string LocateDatabase = LoadLocalResource("Queries.Init.LocateDatabase.sqlx");
 		}

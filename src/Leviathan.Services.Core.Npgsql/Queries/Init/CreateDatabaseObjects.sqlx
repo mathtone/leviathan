@@ -1,5 +1,5 @@
 ﻿-- Table: public.hardware_module
-
+/*
 DROP TABLE IF EXISTS hardware.controller;
 DROP TABLE IF EXISTS hardware.channel;
 DROP TABLE IF EXISTS hardware.module;
@@ -9,8 +9,10 @@ DROP TABLE IF EXISTS hardware.module_type;
 DROP TABLE IF EXISTS hardware.controller_type;
 
 DROP SCHEMA IF EXISTS hardware;
+*/
 
 CREATE SCHEMA hardware;
+
 CREATE TABLE hardware.module_type
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),

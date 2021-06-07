@@ -1,0 +1,14 @@
+﻿@page "/Settings/SystemSettings"
+<h3>System Settings</h3>
+<div>
+	<div>ACTIVATE FACTORY RESET</div>
+	@if (destructCode != null) {
+		<div>DESTRUCT CODE ACTIVE</div>
+		<div>@destructCode.Code</div>
+		<div><button @onclick="@this.SendDestructCode">RESET</button></div>
+	}
+	else {
+		<div><button @onclick="@this.GetDestructCode">RESET</button></div>
+	}
+	<div>This is irreversible.  Once done, it is done.</div>
+</div>

@@ -1,4 +1,5 @@
 ﻿using Leviathan.DataAccess;
+using Leviathan.DataAccess.Npgsql;
 using Leviathan.Hardware;
 using Leviathan.Services.Core.Hardware;
 using Npgsql;
