@@ -1,0 +1,44 @@
+﻿@page "/Admin/Setup"
+
+<h3>Setup</h3>
+<div>
+	<div>
+		<h4>Setup Database</h4>
+		<table>
+			<tr>
+				<td>Host:</td>
+				<td>@CurrentConfig?.DbServerName</td>
+			</tr>
+			<tr>
+				<td>Database:</td>
+				<td>@CurrentConfig?.DbName</td>
+			</tr>
+			<tr>
+				<td>Login:</td>
+				<td>@CurrentConfig?.DbLogin</td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td>@CurrentConfig?.DbPassword</td>
+			</tr>
+		</table>
+		<button @onclick="ApplyConfig">APPLY</button>
+	</div>
+	<div>
+		<h4>Quick Config</h4>
+		<table>
+			@foreach (var i in Profiles) {
+
+				<tr>
+					<td>@i.Name</td>
+					<td>@i.Description</td>
+					<td><button @onclick="(() => ApplyProfile(i.Name))">APPLY PROFILE</button></td>
+				</tr>
+			}
+		</table>
+	</div>
+	<div>
+		<h4>Factory Reset</h4>
+		<button @onclick="FactoryReset">RESET</button>
+	</div>
+</div>

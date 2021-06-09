@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Queries\HardwareModuleType\Catalog.sqlx" />
+    <None Remove="Queries\HardwareModuleType\Create.sqlx" />
+    <None Remove="Queries\HardwareModuleType\Delete.sqlx" />
+    <None Remove="Queries\HardwareModuleType\Read.sqlx" />
+    <None Remove="Queries\HardwareModuleType\Update.sqlx" />
+    <None Remove="Queries\ChannelType\Catalog.sqlx" />
+    <None Remove="Queries\ChannelType\Create.sqlx" />
+    <None Remove="Queries\ChannelType\Delete.sqlx" />
+    <None Remove="Queries\ChannelType\Read.sqlx" />
+    <None Remove="Queries\ChannelType\Update.sqlx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Queries\HardwareModuleType\Catalog.sqlx" />
+    <EmbeddedResource Include="Queries\HardwareModuleType\Create.sqlx" />
+    <EmbeddedResource Include="Queries\HardwareModuleType\Delete.sqlx" />
+    <EmbeddedResource Include="Queries\HardwareModuleType\Read.sqlx" />
+    <EmbeddedResource Include="Queries\HardwareModuleType\Update.sqlx" />
+    <EmbeddedResource Include="Queries\ChannelType\Read.sqlx" />
+    <EmbeddedResource Include="Queries\ChannelType\Catalog.sqlx" />
+    <EmbeddedResource Include="Queries\ChannelType\Delete.sqlx" />
+    <EmbeddedResource Include="Queries\ChannelType\Update.sqlx" />
+    <EmbeddedResource Include="Queries\ChannelType\Create.sqlx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Leviathan.DataAccess.NpgSql\Leviathan.DataAccess.Npgsql.csproj" />
+    <ProjectReference Include="..\Leviathan.DataAccess\Leviathan.DataAccess.csproj" />
+    <ProjectReference Include="..\Leviathan.Hardware\Leviathan.Hardware.csproj" />
+    <ProjectReference Include="..\Leviathan.Utilities\Leviathan.Utilities.csproj" />
+  </ItemGroup>
+
+</Project>

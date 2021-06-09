@@ -1,0 +1,14 @@
+﻿<div>
+	<div>
+		@foreach (dynamic module in Modules) {
+			<NavLink href="@module.Target">
+				@module.Name
+			</NavLink>
+		}
+	</div>
+
+	@code{
+		
+	}
+
+</div>
