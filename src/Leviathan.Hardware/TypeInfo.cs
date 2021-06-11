@@ -3,8 +3,7 @@ using System;
 
 namespace Leviathan.Hardware {
 
-	public class TypeInfo {
-		//public long Id { get; set; }
+	public class TypeRecord {
 		public string TypeName { get; set; }
 		public string AssemblyName { get; set; }
 		public string AssemblyPath { get; set; }

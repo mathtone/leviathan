@@ -1,4 +1,5 @@
 //using Leviathan.Initialization;
+using Leviathan.SDK;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,63 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Leviathan.Sandbox {
-
+	public class ComponentDescriptor {
+		public LeviathanComponentAttribute Attribute { get; set; }
+		public Type Type { get; set; }
+	}
 	public class UnitTest1 {
+
+		private ITestOutputHelper Output { get; }
+
+		public UnitTest1(ITestOutputHelper output) {
+			this.Output = output;
+		}
+
+		[Fact]
+		public void LocateComponents() {
+			foreach(var item in GetAllComponentTypes()) {
+				Output.WriteLine($"{item.Attribute.Name}: {item.Type.Name}");
+			}
+		}
+
+		static IEnumerable<ComponentDescriptor> GetAllComponentTypes() {
+			var currentAssembly = Assembly.GetExecutingAssembly().Location;
+			var path = Path.GetDirectoryName(currentAssembly);
+			var loaded = new Dictionary<string, Assembly>();
+
+			foreach (var assembly in GetLoadedAssemblies(path)) {
+				if (!loaded.TryAdd(assembly.Location, assembly)) {
+					loaded[assembly.Location] = assembly;
+				}
+			}
+
+			foreach (var dll in Directory.GetFiles(path, "*.dll")) {
+				if (!loaded.ContainsKey(dll) && dll != currentAssembly) {
+					loaded.Add(dll, Assembly.LoadFile(dll));
+				}
+			}
+
+			foreach (var assembly in loaded.Values) {
+				foreach (var type in assembly.DefinedTypes) {
+					if (type.IsPublic) {
+						var attr = type.GetCustomAttribute<LeviathanComponentAttribute>();
+						if (attr != null) {
+							yield return new ComponentDescriptor {
+								Attribute = attr,
+								Type = type
+							};
+						}
+					}
+				}
+			}
+		}
+
+		static IEnumerable<Assembly> GetLoadedAssemblies(string path) => AppDomain.CurrentDomain
+			.GetAssemblies()
+			.Where(a => !a.IsDynamic && Path.GetDirectoryName(a.Location) == path);
 
 		[Fact]
 		public void Test1() {
@@ -22,6 +76,7 @@ namespace Leviathan.Sandbox {
 			var name = attrs.Name;
 
 			Assert.Equal("TEST", name);
+
 			//Console.WriteLine(TestValues.TestNestedValues.BEAK);
 			//var q = new Queries();
 			//var c = q.Value1;

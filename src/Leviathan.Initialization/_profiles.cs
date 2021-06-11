@@ -1,5 +1,6 @@
 ﻿using Leviathan.Core;
 using Leviathan.Hardware;
+using Leviathan.Plugins;
 using Leviathan.System;
 using System;
 using System.Collections.Generic;
@@ -27,8 +28,9 @@ namespace Leviathan.Initialization {
 	}
 
 	[ConfigProfile("Robo Tank", "Configure the Leviathan for the Robo-Tank controller")]
-	public class RoboTankProfile : ConfigurationProfile {
+	public class RoboTankProfile : BasicProfile {
 		public override void Apply(ILeviathanCore core) {
+			base.Apply(core);
 			//core.Hardware.HardwareModuleTypes.Create(new TypeInfo)
 			//var modules = new HardwareModule[] {
 			//	//new(moduleTypes[0].ModuleTypeId,"GPIO"),
@@ -41,7 +43,11 @@ namespace Leviathan.Initialization {
 	[ConfigProfile("Basic", "Add types for included hardware modules, connectors & channels but does not configure them.")]
 	public class BasicProfile : ConfigurationProfile {
 		public override void Apply(ILeviathanCore core) {
+			core.PluginCategoryData.Create(new Category { Name = "Hardware Module", Description = "Hardware components & drivers" });
+			core.PluginCategoryData.Create(new Category { Name = "Connector", Description = "Component connectors (ie: 'GPIO')" });
+			core.PluginCategoryData.Create(new Category { Name = "Controller", Description = "Control channels (ie: 'PWM Variable')" });
 
+			//locate all plugin components
 		}
 	}
 

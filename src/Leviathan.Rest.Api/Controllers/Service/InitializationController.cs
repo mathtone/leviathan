@@ -8,17 +8,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Leviathan.Rest.Api.Controllers {
+namespace Leviathan.Rest.Api.Controllers.Core {
 
 	[ApiController]
-	[Route("[controller]/[action]")]
-	public class InitializationController : ControllerBase {
+	[Route("Service/[controller]/[action]")]
+	public class InitializationController : ServiceController<IInitializationService> {
 
-		IInitializationService Service { get; }
-
-		public InitializationController(IInitializationService service) {
-			this.Service = service;
-		}
+		public InitializationController(IInitializationService service) : base(service) { }
 
 		[HttpPost]
 		public void FactoryReset() => Service.FactoryReset();

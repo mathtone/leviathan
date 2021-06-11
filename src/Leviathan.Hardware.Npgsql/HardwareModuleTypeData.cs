@@ -17,16 +17,16 @@ namespace Leviathan.Hardware.Npgsql {
 			this.ConnectionProvider = connectionProvider;
 		}
 
-		public IEnumerable<TypeInfo> Catalog() => ConnectionProvider.Connect().Used(c => c
+		public IEnumerable<TypeRecord> List() => ConnectionProvider.Connect().Used(c => c
 			.CreateCommand(LIST)
 			.ExecuteReader()
-			.ToArray(r => new TypeInfo {
+			.ToArray(r => new TypeRecord {
 				//Id = r.Field<long>("id"),
 				//Name = r.Field<string>("name")
 			})
 		);
 
-		public long Create(TypeInfo item) {
+		public long Create(TypeRecord item) {
 			throw new NotImplementedException();
 		}
 
@@ -34,11 +34,11 @@ namespace Leviathan.Hardware.Npgsql {
 			throw new NotImplementedException();
 		}
 
-		public TypeInfo Read(long id) {
+		public TypeRecord Read(long id) {
 			throw new NotImplementedException();
 		}
 
-		public TypeInfo Update(TypeInfo item) {
+		public TypeRecord Update(TypeRecord item) {
 			throw new NotImplementedException();
 		}
 

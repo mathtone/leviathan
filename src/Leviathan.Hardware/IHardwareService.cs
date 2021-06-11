@@ -2,17 +2,14 @@
 
 namespace Leviathan.Hardware {
 
-	public interface IRepositoryCatalog<T> : IRepositoryCatalog<long, T> { }
-	public interface IRepositoryCatalog<ID, T> : IRepositoryCatalog<ID, T, T> { }
-	public interface IRepositoryCatalog<ID, T, C> : IRepository<T,ID>, ICatalog<C> {}
 
-	public interface IConnectorData : IRepositoryCatalog<Connector> { }
 
-	public interface IConnectorTypeData : IRepositoryCatalog<Connector> { }
-	public interface IChannelData : IRepositoryCatalog<Channel> { }
-	public interface IChannelTypeData : IRepositoryCatalog<TypeInfo> { }
-	public interface IHardwareModuleData : IRepositoryCatalog<HardwareModule> { }
-	public interface IHardwareModuleTypeData : IRepositoryCatalog<TypeInfo> { }
+	public interface IConnectorData : IListRepository<Connector> { }
+	public interface IConnectorTypeData : IListRepository<Connector> { }
+	public interface IChannelData : IListRepository<Channel> { }
+	public interface IChannelTypeData : IListRepository<TypeRecord> { }
+	public interface IHardwareModuleData : IListRepository<HardwareModule> { }
+	public interface IHardwareModuleTypeData : IListRepository<TypeRecord> { }
 
 	public interface IHardwareService {
 		IHardwareModuleData HardwareModules { get; }

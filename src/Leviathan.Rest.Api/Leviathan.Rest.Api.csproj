@@ -18,6 +18,7 @@
     <ProjectReference Include="..\Leviathan.Hardware.Npgsql\Leviathan.Hardware.Npgsql.csproj" />
     <ProjectReference Include="..\Leviathan.Hardware\Leviathan.Hardware.csproj" />
     <ProjectReference Include="..\Leviathan.Initialization\Leviathan.Initialization.csproj" />
+    <ProjectReference Include="..\Leviathan.Plugins.Npgsql\Leviathan.Plugins.Npgsql.csproj" />
     <ProjectReference Include="..\Leviathan.System.Npgsql\Leviathan.System.Npgsql.csproj" />
     <ProjectReference Include="..\Leviathan.System\Leviathan.System.csproj" />
   </ItemGroup>

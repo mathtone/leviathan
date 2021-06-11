@@ -1,4 +1,5 @@
 ﻿using Leviathan.Hardware;
+using Leviathan.Plugins;
 using Leviathan.System;
 using System;
 
@@ -14,7 +15,9 @@ namespace Leviathan.Core {
 	public interface ILeviathanCorePartners {
 		SystemConfiguration Config { get; }
 		ISystemDbData SystemDbData { get; }
-		IHardwareService Hardware { get; }
+		IComponentData PluginData { get; }
+		IComponentCategoryData PluginCategoryData { get; }
+		//IHardwareService Hardware { get; }
 	}
 
 	public record CoreStatus {
@@ -26,14 +29,23 @@ namespace Leviathan.Core {
 	public class LeviathanCore : ILeviathanCore {
 
 		CoreStatus Status { get; } = new CoreStatus();
+
 		public SystemConfiguration Config { get; }
 		public ISystemDbData SystemDbData { get; }
-		public IHardwareService Hardware{ get; }
+		public IComponentData PluginData { get; }
+		public IComponentCategoryData PluginCategoryData { get; }
 
-		public LeviathanCore(SystemConfiguration config, ISystemDbData systemDb, IHardwareService hardware) {
+		public LeviathanCore(
+			SystemConfiguration config,
+			ISystemDbData systemDb,
+			IComponentData pluginData,
+			IComponentCategoryData pluginCategoryData
+			) {
+
 			this.Config = config;
 			this.SystemDbData = systemDb;
-			this.Hardware = hardware;
+			this.PluginData = pluginData;
+			this.PluginCategoryData = pluginCategoryData;
 		}
 
 		public void Start() {

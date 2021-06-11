@@ -4,6 +4,8 @@ using Leviathan.DataAccess.Npgsql;
 using Leviathan.Hardware;
 using Leviathan.Hardware.Npgsql;
 using Leviathan.Initialization;
+using Leviathan.Plugins;
+using Leviathan.Plugins.Npgsql;
 using Leviathan.System;
 using Leviathan.System.Npgsql;
 using Microsoft.AspNetCore.Builder;
@@ -36,7 +38,6 @@ namespace Leviathan.Rest.Api {
 		public void ConfigureServices(IServiceCollection services) {
 
 			var dbProvider = new NpgsqlConnectionProvider("Host=poseidonalpha.local;Username=pi;Database=Leviathan0x00;Password=Digital!2021;");
-
 			var cfg = new SystemConfiguration {
 				DbLogin = "pi",
 				DbName = "Leviathan0x00",
@@ -47,15 +48,20 @@ namespace Leviathan.Rest.Api {
 			var db = new NpgsqlConnectionProvider($"Host={cfg.DbServerName};Username={cfg.DbLogin};Database={cfg.DbName};Password={cfg.DbPassword};");
 
 			services.AddSingleton(cfg);
-			services.AddSingleton<ILeviathanCore, LeviathanCore>();
-			services.AddSingleton<ISystemDbData>(new SystemDBData(server));
-			services.AddSingleton<IInitializationService,InitializationService>();
-			//services.AddSingleton<ISystemDbService, SystemService>();
-
 			services.AddSingleton<IDbConnectionProvider<NpgsqlConnection>>(dbProvider);
-			services.AddSingleton<IChannelTypeData, ChannelTypeData>();
-			services.AddSingleton<IHardwareService, HardwareService>();
-			services.AddSingleton<IHardwareModuleTypeData, HardwareModuleTypeData>();
+			
+			services.AddSingleton<ISystemDbData>(new SystemDBData(server));
+			services.AddSingleton<IComponentData, ComponentData>();
+			services.AddSingleton<IComponentCategoryData, ComponentCategoryData>();
+
+			services.AddSingleton<IComponentService, ComponentService>();
+			services.AddSingleton<IInitializationService, InitializationService>();
+			services.AddSingleton<ILeviathanCore, LeviathanCore>();
+
+			//services.AddSingleton<ISystemDbService, SystemService>();
+			//services.AddSingleton<IChannelTypeData, ChannelTypeData>();
+			//services.AddSingleton<IHardwareService, HardwareService>();
+			//services.AddSingleton<IHardwareModuleTypeData, HardwareModuleTypeData>();
 
 			services.AddControllers();
 			services.AddSwaggerGen(c => {
