@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Leviathan.SDK\Leviathan.SDK.csproj" />
+    <ProjectReference Include="..\Leviathan.Core\Leviathan.Core.csproj" />
   </ItemGroup>
 
 </Project>

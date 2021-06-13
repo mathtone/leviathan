@@ -3,26 +3,22 @@ using Leviathan.DataAccess.Npgsql;
 using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using static Leviathan.Utilities.ResourceLoader;
 
 namespace Leviathan.Plugins.Npgsql {
-	public class ComponentCategoryData : IComponentCategoryData {
+	public class ComponentCategoryData : NpgsqlDataProvider, IComponentCategoryData {
 
-		protected IDbConnectionProvider<NpgsqlConnection> ConnectionProvider { get; }
+		public ComponentCategoryData(IDbConnectionProvider<NpgsqlConnection> connectionProvider) :
+			base(connectionProvider) { }
 
-		public ComponentCategoryData(IDbConnectionProvider<NpgsqlConnection> connectionProvider) {
-			this.ConnectionProvider = connectionProvider;
-		}
-
-		public long Create(Category item) => ConnectionProvider.Connect().Used(c => c
-			.CreateCommand(CREATE)
-			.WithInput("@name", item.Name)
-			.WithInput("@description", item.Description)
-			.ExecuteReadSingle(r => r.Field<long>(0))
+		public long Create(Category item) => TextCommand(CREATE, c => c
+			 .WithInput("@name", item.Name)
+			 .WithInput("@description", item.Description)
+			 .ExecuteReadSingle(r => r.Field<long>(0))
 		);
 
-		public Category Read(long id) => ConnectionProvider.Connect().Used(c => c
-			.CreateCommand(READ)
+		public Category Read(long id) => TextCommand(READ, c => c
 			.WithInput("@id", id)
 			.ExecuteReadSingle(r => new Category {
 				Id = r.Field<long>("id"),
@@ -31,27 +27,24 @@ namespace Leviathan.Plugins.Npgsql {
 			})
 		);
 
-		public Category Update(Category item) => ConnectionProvider.Connect().Used(c => c
-			.CreateCommand(READ)
-			.WithInput("@id", item.Id)
-			.WithInput("@name", item.Name)
-			.WithInput("@description", item.Description)
-			.ExecuteResult(r => r.ExecuteNonQuery(), r => item)
+		public Category Update(Category item) => TextCommand(READ, c => c
+			 .WithInput("@id", item.Id)
+			 .WithInput("@name", item.Name)
+			 .WithInput("@description", item.Description)
+			 .ExecuteResult(r => r.ExecuteNonQuery(), r => item)
 		);
 
-		public void Delete(long id) => ConnectionProvider.Connect().Used(c => c
-			.CreateCommand(DELETE)
-			.ExecuteNonQuery()
+		public void Delete(long id) => TextCommand(
+			DELETE, c => c.ExecuteNonQuery()
 		);
 
-		public IEnumerable<Category> List() => ConnectionProvider.Connect().Used(c => c
-			.CreateCommand(LIST)
-			.ExecuteReader()
-			.ToArray(r => new Category {
-				Id = r.Field<long>("id"),
-				Name = r.Field<string>("name"),
-				Description = r.Field<string>("description")
-			})
+		public IEnumerable<Category> List() => TextCommand(LIST, c => c
+			 .ExecuteReader()
+			 .ToArray(r => new Category {
+				 Id = r.Field<long>("id"),
+				 Name = r.Field<string>("name"),
+				 Description = r.Field<string>("description")
+			 })
 		);
 
 		static readonly string LIST = LoadLocal("Queries.Categories.List.sqlx");

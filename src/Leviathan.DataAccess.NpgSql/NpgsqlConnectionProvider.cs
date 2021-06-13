@@ -2,11 +2,13 @@
 
 namespace Leviathan.DataAccess.Npgsql {
 	public class NpgsqlConnectionProvider : IDbConnectionProvider<NpgsqlConnection> {
-		string connectionString;
+
+		readonly string connectionString;
+
 		public NpgsqlConnectionProvider(string connectionString) {
 			this.connectionString = connectionString;
 		}
 
-		public NpgsqlConnection Connect() => new(connectionString);
+		public NpgsqlConnection Connect(string ) => new(connectionString);
 	}
 }

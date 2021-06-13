@@ -31,7 +31,7 @@ namespace Leviathan.Initialization {
 			if (Core.SystemDbData.LocateDB(Core.Config.DbName)) {
 				Core.SystemDbData.DropDB(Core.Config.DbName);
 			}
-			//Core.SystemDbData.CreateDB(Core.Config.DbName);
+			Core.SystemDbData.CreateDB(Core.Config.DbName);
 		}
 
 		public void ApplyProfile(string configName) {

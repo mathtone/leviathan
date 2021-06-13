@@ -1,6 +1,5 @@
 ﻿using Leviathan.DataAccess;
 using Leviathan.Hardware;
-using Leviathan.Sandbox;
 using Leviathan.SDK;
 using System;
 using System.Collections.Generic;
@@ -93,5 +92,10 @@ namespace Leviathan.Plugins {
 		static IEnumerable<Assembly> GetLoadedAssemblies(string path) => AppDomain.CurrentDomain
 			.GetAssemblies()
 			.Where(a => !a.IsDynamic && Path.GetDirectoryName(a.Location) == path);
+	}
+
+	public class ComponentDescriptor {
+		public LeviathanComponentAttribute Attribute { get; set; }
+		public Type Type { get; set; }
 	}
 }

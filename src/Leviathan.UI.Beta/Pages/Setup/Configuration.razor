@@ -1,5 +1,40 @@
-﻿<h3>Configuration</h3>
+﻿@page "/Setup/Configuration"
+<!--<h3>Factory Reset</h3>
+<table class="table">
+	<thead>-->
+		@*<tr>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>*@
+	<!--</thead>
+	<tbody>
 
-@code {
+		<tr>
+			<td>Reset the leviathan.</td>
+			<td><button @onclick="FactoryReset">RESET</button></td>
+		</tr>
+	</tbody>
+</table>-->
 
+@if (Profiles != null) {
+	<h3>Factory Reset</h3>
+	<table class="table">
+		<thead>
+			@*<tr>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>*@
+		</thead>
+		<tbody>
+			@foreach (var i in Profiles) {
+				<tr>
+					<td>@i.Name</td>
+					<td>@i.Description</td>
+					<td><button @onclick="(() => ApplyProfile(i.Name))">APPLY PROFILE</button></td>
+				</tr>
+			}
+		</tbody>
+	</table>
 }
