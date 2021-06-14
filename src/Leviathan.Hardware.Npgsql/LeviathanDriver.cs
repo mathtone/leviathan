@@ -7,13 +7,14 @@ using static Leviathan.Utilities.ResourceLoader;
 using System.Collections.Generic;
 using Leviathan.DataAccess;
 using System.Linq;
+using Leviathan.SDK;
 
 namespace Leviathan.Hardware.Npgsql {
-	public class HardwareModuleTypeData : IHardwareModuleTypeData {
+	public class LeviathanDriver : ILeviathanDriverData {
 
 		protected IDbConnectionProvider<NpgsqlConnection> ConnectionProvider { get; }
 
-		public HardwareModuleTypeData(IDbConnectionProvider<NpgsqlConnection> connectionProvider) {
+		public LeviathanDriver(IDbConnectionProvider<NpgsqlConnection> connectionProvider) {
 			this.ConnectionProvider = connectionProvider;
 		}
 
@@ -42,10 +43,10 @@ namespace Leviathan.Hardware.Npgsql {
 			throw new NotImplementedException();
 		}
 
-		static readonly string LIST = LoadLocal("Queries.HardwareModuleType.Catalog.sqlx");
-		static readonly string CREATE = LoadLocal("Queries.HardwareModuleType.Create.sqlx");
-		static readonly string READ = LoadLocal("Queries.HardwareModuleType.Read.sqlx");
-		static readonly string UPDATE = LoadLocal("Queries.HardwareModuleType.Update.sqlx");
-		static readonly string DELETE = LoadLocal("Queries.HardwareModuleType.Delete.sqlx");
+		static readonly string LIST = LoadLocal("Queries.Driver.Catalog.sqlx");
+		static readonly string CREATE = LoadLocal("Queries.Driver.Create.sqlx");
+		static readonly string READ = LoadLocal("Queries.Driver .Read.sqlx");
+		static readonly string UPDATE = LoadLocal("Queries.Driver.Update.sqlx");
+		static readonly string DELETE = LoadLocal("Queries.Driver.Delete.sqlx");
 	}
 }

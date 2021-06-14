@@ -1,9 +1,11 @@
 ﻿using Leviathan.Core;
 using Leviathan.Hardware;
 using Leviathan.Plugins;
+using Leviathan.SDK;
 using Leviathan.System;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Leviathan.Initialization {
 
@@ -31,12 +33,15 @@ namespace Leviathan.Initialization {
 	public class RoboTankProfile : BasicProfile {
 		public override void Apply(ILeviathanCore core) {
 			base.Apply(core);
+
+
+
 			//core.Hardware.HardwareModuleTypes.Create(new TypeInfo)
 			//var modules = new HardwareModule[] {
 			//	//new(moduleTypes[0].ModuleTypeId,"GPIO"),
 			//	//new(moduleTypes[1].ModuleTypeId,"PCA9685"),
-			//}.Select(core..Modules.Create).ToArray();
-			//;
+			//}.Select(core.Create).ToArray();
+			;
 		}
 	}
 

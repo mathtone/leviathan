@@ -1,5 +1,6 @@
 ﻿using Leviathan.Core;
 using Leviathan.Hardware;
+using Leviathan.SDK;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,6 +21,18 @@ namespace Leviathan.Rest.Api.Controllers.Core {
 		}
 
 		[HttpPost]
+		public void FactoryReset() => Core.FactoryReset();
+
+		[HttpPost]
+		public void Configure(SystemConfiguration config) => Core.Configure(config);
+
+		[HttpGet]
+		public IEnumerable<ConfigurationProfileListing> ListProfiles() => Core.ListProfiles();
+
+		[HttpPost]
+		public void ApplyProfile(string profileId) => Core.ApplyProfile(profileId);
+
+		[HttpPost]
 		public void Start() => Core.Start();
 
 		[HttpPost]
@@ -29,6 +42,6 @@ namespace Leviathan.Rest.Api.Controllers.Core {
 		public void Restart() => Core.Restart();
 
 		[HttpGet]
-		public CoreStatus GetStatus() => Core.GetStatus();
+		public CoreStatus GetStatus() => Core.CurrentStatus();
 	}
 }

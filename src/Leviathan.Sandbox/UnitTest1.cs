@@ -21,11 +21,9 @@ namespace Leviathan.Sandbox {
 		public void FactoryReset() {
 
 			//var cfg = new SystemConfiguration {
-
 			//};
 			//var sysDb = new SystemDBData
 			//var cn = new LeviathanCore(config,);
-
 			//;
 		}
 	}

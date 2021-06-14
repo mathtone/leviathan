@@ -1,5 +1,6 @@
 ﻿using Leviathan.DataAccess;
 using Leviathan.DataAccess.Npgsql;
+using Leviathan.SDK;
 using Leviathan.Utilities;
 using Npgsql;
 using System;
@@ -10,25 +11,32 @@ namespace Leviathan.System.Npgsql {
 
 	public class SystemDBData : ISystemDbData {
 
-		protected IDbConnectionProvider<NpgsqlConnection> Connections { get; }
+		protected ISystemConfiguration Config { get; }
+		IDbConnectionProvider<NpgsqlConnection> InstanceDataProvider;
+		protected string SystemConnectionString => $"Host={Config.HostName};Username={Config.DbLogin};Database=postgres;Password={Config.DbPassword};Pooling=False";
+		protected string InstanceConnectionString => $"Host={Config.HostName};Username={Config.DbLogin};Database={Config.InstanceName};Password={Config.DbPassword};";
 
-		public SystemDBData(IDbConnectionProvider<NpgsqlConnection> ServerConnectionProvider) {
-			this.Connections = ServerConnectionProvider;
+		public SystemDBData(ISystemConfiguration config, IDbConnectionProvider<NpgsqlConnection> instanceDataProvider) {
+			this.Config = config;
+			this.InstanceDataProvider = instanceDataProvider;
 		}
 
-		public void DropDB(string dbName) => Connections.Connect().Used(c =>
+		public void DropDB(string dbName) => new NpgsqlConnection(SystemConnectionString).Used(c =>
 			c.CreateCommand(DROP).WithTemplate("@p0", dbName).ExecuteNonQuery()
 		);
 
 		public void CreateDB(string dbName) {
-			Connections.Connect().Used(c => {
+			new NpgsqlConnection(SystemConnectionString).Used(c => {
 				c.CreateCommand(CREATE).WithTemplate("@p0", dbName).ExecuteNonQuery();
-				//c.ChangeDatabase(dbName);
-				//c.CreateCommand(INIT).ExecuteNonQuery();
+			});
+			InstanceDataProvider.SetConnectionInfo(InstanceConnectionString);
+			//Init
+			new NpgsqlConnection(InstanceConnectionString).Used(c => {
+				c.CreateCommand(INIT).WithTemplate("@p0", dbName).ExecuteNonQuery();
 			});
 		}
 
-		public bool LocateDB(string dbName) => Connections.Connect().Used(c =>
+		public bool LocateDB(string dbName) => new NpgsqlConnection(SystemConnectionString).Used(c =>
 			c.CreateCommand(LOCATE)
 				.WithInput("@p0", dbName)
 				.ExecuteReadSingle(r => r.GetBoolean(0))

@@ -1,31 +1,31 @@
 ﻿using Leviathan.DataAccess;
+using Leviathan.SDK;
 
 namespace Leviathan.Hardware {
 
-
-
 	public interface IConnectorData : IListRepository<Connector> { }
 	public interface IConnectorTypeData : IListRepository<Connector> { }
-	public interface IChannelData : IListRepository<Channel> { }
-	public interface IChannelTypeData : IListRepository<TypeRecord> { }
 	public interface IHardwareModuleData : IListRepository<HardwareModule> { }
-	public interface IHardwareModuleTypeData : IListRepository<TypeRecord> { }
+	public interface ILeviathanDriverData : IListRepository<TypeRecord> { }
 
 	public interface IHardwareService {
 		IHardwareModuleData HardwareModules { get; }
-		IHardwareModuleTypeData HardwareModuleTypes { get; }
-
-		//IChannelData Channels { get; }
-		//IChannelTypeData ChannelTypes { get; }
-
-		IChannelData Channels { get; }
-		IChannelTypeData ChannelTypes { get; }
+		ILeviathanDriverData DriverTypes { get; }
+		IConnectorData Connectors { get; }
+		IConnectorTypeData ConnectorTypes { get; }
 	}
 
 	public class HardwareService : IHardwareService {
 		public IHardwareModuleData HardwareModules { get; }
-		public IHardwareModuleTypeData HardwareModuleTypes { get; }
-		public IChannelData Channels { get; }
-		public IChannelTypeData ChannelTypes { get; }
+		public ILeviathanDriverData DriverTypes { get; }
+		public IConnectorData Connectors { get; }
+		public IConnectorTypeData ConnectorTypes { get; }
+
+		public HardwareService(IHardwareModuleData modules, ILeviathanDriverData driverTypes, IConnectorData connectors, IConnectorTypeData connectorTypes) {
+			this.HardwareModules = modules;
+			this.DriverTypes = driverTypes;
+			this.Connectors = connectors;
+			this.ConnectorTypes = connectorTypes;
+		}
 	}
 }

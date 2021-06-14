@@ -9,37 +9,7 @@ using System.Reflection;
 
 namespace Leviathan.Plugins {
 
-	public class Category {
-		public long Id { get; set; }
-		public string Name { get; set; }
-		public string Description { get; set; }
-	}
-
-	public interface IComponentData : IListRepository<ComponentRecord> {
-
-	}
-	public interface IComponentCategoryData : IListRepository<Category> { }
-
-	public interface IComponentService {
-		IComponentData Plugins { get; }
-		IComponentCategoryData Categories { get; }
-		ComponentCatalog Catalog();
-	}
-
-	public class ComponentCatalog {
-		public IEnumerable<Category> Categories { get; set; }
-		public IEnumerable<ComponentRecord> Registered { get; set; }
-		public IEnumerable<ComponentDescriptor> Found { get; set; }
-	}
-
-	public class ComponentRecord {
-		public long? Id { get; set; }
-		public string Name { get; set; }
-		public string Description { get; set; }
-		public TypeRecord Type { get; set; }
-		public bool IsRegistered => Id.HasValue;
-	}
-
+	
 	public class ComponentService : IComponentService {
 
 		public IComponentData Plugins { get; }
@@ -94,8 +64,5 @@ namespace Leviathan.Plugins {
 			.Where(a => !a.IsDynamic && Path.GetDirectoryName(a.Location) == path);
 	}
 
-	public class ComponentDescriptor {
-		public LeviathanComponentAttribute Attribute { get; set; }
-		public Type Type { get; set; }
-	}
+	
 }

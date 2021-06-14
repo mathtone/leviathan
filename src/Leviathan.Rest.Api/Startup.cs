@@ -6,6 +6,7 @@ using Leviathan.Hardware.Npgsql;
 using Leviathan.Initialization;
 using Leviathan.Plugins;
 using Leviathan.Plugins.Npgsql;
+using Leviathan.SDK;
 using Leviathan.System;
 using Leviathan.System.Npgsql;
 using Microsoft.AspNetCore.Builder;
@@ -20,6 +21,7 @@ using Microsoft.OpenApi.Models;
 using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -37,26 +39,31 @@ namespace Leviathan.Rest.Api {
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services) {
 
-			var dbProvider = new NpgsqlConnectionProvider("Host=poseidonalpha.local;Username=pi;Database=Leviathan0x00;Password=Digital!2021;");
+			var dbProvider = new NpgsqlConnectionProvider(null);
 			var cfg = new SystemConfiguration {
 				DbLogin = "pi",
-				DbName = "Leviathan0x00",
-				DbServerName = "poseidonalpha.local",
+				InstanceName = "Leviathan0x00",
+				HostName = "poseidonalpha.local",
 				DbPassword = "Digital!2021"
 			};
-			var server = new NpgsqlConnectionProvider($"Host={cfg.DbServerName};Username={cfg.DbLogin};Database=postgres;Password={cfg.DbPassword};");
-			var db = new NpgsqlConnectionProvider($"Host={cfg.DbServerName};Username={cfg.DbLogin};Database={cfg.DbName};Password={cfg.DbPassword};");
-
-			services.AddSingleton(cfg);
-			services.AddSingleton<IDbConnectionProvider<NpgsqlConnection>>(dbProvider);
+			//var server = new NpgsqlConnectionProvider($"Host={cfg.HostName};Username={cfg.DbLogin};Database=postgres;Password={cfg.DbPassword};");
+			//var db = new NpgsqlConnectionProvider(dbProvider);
+			//Core = new LeviathanCore(cfg,new SystemDBData(
 			
-			services.AddSingleton<ISystemDbData>(new SystemDBData(server));
+			//)
+
+			services.AddSingleton<ISystemConfiguration>(cfg);
+			services.AddSingleton<IDbConnectionProvider>(dbProvider);
+			services.AddSingleton<IDbConnectionProvider<NpgsqlConnection>>(dbProvider);
+			services.AddSingleton<ISystemDbData, SystemDBData>();
+			
 			services.AddSingleton<IComponentData, ComponentData>();
 			services.AddSingleton<IComponentCategoryData, ComponentCategoryData>();
-
 			services.AddSingleton<IComponentService, ComponentService>();
-			services.AddSingleton<IInitializationService, InitializationService>();
+			//services.AddSingleton<IInitializationService, InitializationService>();
+			//services.AddSingleton<ILeviathanCore, InitializationService>();
 			services.AddSingleton<ILeviathanCore, LeviathanCore>();
+
 
 			//services.AddSingleton<ISystemDbService, SystemService>();
 			//services.AddSingleton<IChannelTypeData, ChannelTypeData>();

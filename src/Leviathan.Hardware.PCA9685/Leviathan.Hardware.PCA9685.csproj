@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Leviathan.DataAccess\Leviathan.DataAccess.csproj" />
+    <ProjectReference Include="..\Leviathan.SDK\Leviathan.SDK.csproj" />
   </ItemGroup>
 
 </Project>

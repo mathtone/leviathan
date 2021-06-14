@@ -1,6 +1,7 @@
 ﻿using Leviathan.DataAccess;
 using Leviathan.DataAccess.Npgsql;
 using Leviathan.Hardware;
+using Leviathan.SDK;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace Leviathan.Plugins.Npgsql {
 				})
 			);
 
-		public long Create(Plugins.ComponentRecord item) {
+		public long Create(ComponentRecord item) {
 			throw new NotImplementedException();
 		}
 
@@ -42,11 +43,11 @@ namespace Leviathan.Plugins.Npgsql {
 			throw new NotImplementedException();
 		}
 
-		public Plugins.ComponentRecord Read(long id) {
+		public ComponentRecord Read(long id) {
 			throw new NotImplementedException();
 		}
 
-		public Plugins.ComponentRecord Update(Plugins.ComponentRecord item) {
+		public ComponentRecord Update(ComponentRecord item) {
 			throw new NotImplementedException();
 		}
 

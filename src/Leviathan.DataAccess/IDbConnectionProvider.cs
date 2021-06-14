@@ -3,11 +3,20 @@ using System.Data;
 
 namespace Leviathan.DataAccess {
 
-	public interface IDbConnectionProvider<CN> where CN : IDbConnection {
+	public interface IDbConnectionProvider : IDbConnectionProvider<IDbConnection> {
+		
+	}
+	//public interface IDbConnectionProvider<I> {
+
+	//}
+
+
+	public interface IDbConnectionProvider<out CN> where CN : IDbConnection {
 		CN Connect();
+		void SetConnectionInfo(string connectionInfo);
 	}
 
-	public interface IDbConnectionProvider<CN,I> where CN : IDbConnection {
+	public interface IDbConnectionProvider<out CN, I> : IDbConnectionProvider where CN : IDbConnection {
 		CN Connect(I connectionData);
 	}
 
