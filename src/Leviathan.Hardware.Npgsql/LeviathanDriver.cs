@@ -22,8 +22,8 @@ namespace Leviathan.Hardware.Npgsql {
 			.CreateCommand(LIST)
 			.ExecuteReader()
 			.ToArray(r => new TypeRecord {
-				//Id = r.Field<long>("id"),
-				//Name = r.Field<string>("name")
+				Id = r.Field<long>("id"),
+				TypeName = r.Field<string>("name")
 			})
 		);
 

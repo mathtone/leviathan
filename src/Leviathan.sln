@@ -51,9 +51,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.SDK", "Leviathan.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.UI.Beta", "Leviathan.UI.Beta\Leviathan.UI.Beta.csproj", "{A209316E-F566-4480-A4E9-F18144A33706}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Hardware.RPIGPIO", "Leviathan.Hardware.RPIGPIO\Leviathan.Hardware.RPIGPIO.csproj", "{929E64D4-8094-4D2F-8030-33932EEAC7EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Hardware.RPIGPIO", "Leviathan.Hardware.RPIGPIO\Leviathan.Hardware.RPIGPIO.csproj", "{929E64D4-8094-4D2F-8030-33932EEAC7EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Hardware.PCA9685", "Leviathan.Hardware.PCA9685\Leviathan.Hardware.PCA9685.csproj", "{DCA4F755-6828-4667-BAE3-B1A5B1CBE91B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Hardware.PCA9685", "Leviathan.Hardware.PCA9685\Leviathan.Hardware.PCA9685.csproj", "{DCA4F755-6828-4667-BAE3-B1A5B1CBE91B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Drivers", "Leviathan.Drivers\Leviathan.Drivers.csproj", "{59770916-5667-42A2-8867-97945A8E0762}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Drivers.Npgsql", "Leviathan.Drivers.Npgsql\Leviathan.Drivers.Npgsql.csproj", "{F25ED7CC-0D35-4DC7-A75D-6565F994CF41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -137,6 +141,14 @@ Global
 		{DCA4F755-6828-4667-BAE3-B1A5B1CBE91B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCA4F755-6828-4667-BAE3-B1A5B1CBE91B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCA4F755-6828-4667-BAE3-B1A5B1CBE91B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59770916-5667-42A2-8867-97945A8E0762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59770916-5667-42A2-8867-97945A8E0762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59770916-5667-42A2-8867-97945A8E0762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59770916-5667-42A2-8867-97945A8E0762}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F25ED7CC-0D35-4DC7-A75D-6565F994CF41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F25ED7CC-0D35-4DC7-A75D-6565F994CF41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F25ED7CC-0D35-4DC7-A75D-6565F994CF41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F25ED7CC-0D35-4DC7-A75D-6565F994CF41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -161,6 +173,8 @@ Global
 		{A209316E-F566-4480-A4E9-F18144A33706} = {32F120B4-6C06-49DF-A3FE-DB4D3D18325A}
 		{929E64D4-8094-4D2F-8030-33932EEAC7EA} = {3895C3F0-0DDB-48EC-8D1B-8394E452178B}
 		{DCA4F755-6828-4667-BAE3-B1A5B1CBE91B} = {3895C3F0-0DDB-48EC-8D1B-8394E452178B}
+		{59770916-5667-42A2-8867-97945A8E0762} = {36378F98-CD2D-4C1B-ADFD-149150BDE578}
+		{F25ED7CC-0D35-4DC7-A75D-6565F994CF41} = {36378F98-CD2D-4C1B-ADFD-149150BDE578}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C39CA66-6C4B-42EB-8797-4ADCFED239DD}

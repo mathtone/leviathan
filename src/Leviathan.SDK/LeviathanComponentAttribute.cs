@@ -61,6 +61,7 @@ namespace Leviathan.SDK {
 	}
 
 	public class TypeRecord {
+		public long Id { get; set; }
 		public string TypeName { get; set; }
 		public string AssemblyName { get; set; }
 		public string AssemblyPath { get; set; }
