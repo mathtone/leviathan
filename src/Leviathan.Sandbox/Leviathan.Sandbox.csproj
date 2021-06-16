@@ -20,8 +20,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Leviathan.Core\Leviathan.Core.csproj" />
-  </ItemGroup>
-
 </Project>

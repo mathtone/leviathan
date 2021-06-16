@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace Leviathan.DataAccess {
 
-	public interface IDbConnectionProvider : IDbConnectionProvider<IDbConnection> {
+	//public interface IDbConnectionProvider : IDbConnectionProvider<IDbConnection> {
 		
-	}
-	//public interface IDbConnectionProvider<I> {
-
 	//}
-
 
 	public interface IDbConnectionProvider<out CN> where CN : IDbConnection {
 		CN Connect();
-		void SetConnectionInfo(string connectionInfo);
+		//void SetConnectionInfo(string connectionInfo);
+		Task Initialization { get; }
 	}
 
-	public interface IDbConnectionProvider<out CN, I> : IDbConnectionProvider where CN : IDbConnection {
+	public interface IDbConnectionProvider<out CN, I>
+		//: IDbConnectionProvider
+		where CN : IDbConnection {
 		CN Connect(I connectionData);
 	}
 

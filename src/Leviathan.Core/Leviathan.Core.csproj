@@ -1,13 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Leviathan.Hardware\Leviathan.Hardware.csproj" />
-    <ProjectReference Include="..\Leviathan.Plugins\Leviathan.Plugins.csproj" />
-    <ProjectReference Include="..\Leviathan.System\Leviathan.System.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Leviathan.Services\Leviathan.Services.csproj" />
+	</ItemGroup>
 
 </Project>

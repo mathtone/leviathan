@@ -1,1 +1,0 @@
-﻿DELETE sys.component_category WHERE id=@id

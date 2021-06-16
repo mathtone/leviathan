@@ -1,7 +1,0 @@
-﻿
-CREATE DATABASE "@p0"
-    WITH 
-    OWNER = pi
-    ENCODING = 'UTF8'
-    CONNECTION LIMIT = -1;
-

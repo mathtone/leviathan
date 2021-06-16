@@ -1,7 +1,0 @@
-﻿ALTER DATABASE "@p0" allow_connections = off;
-
-SELECT pg_terminate_backend(pid)
-FROM pg_stat_activity
-WHERE datname = '@p0';
-
-DROP DATABASE IF EXISTS "@p0";

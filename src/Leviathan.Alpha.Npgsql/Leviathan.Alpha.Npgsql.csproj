@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Leviathan.DataAccess.NpgSql\Leviathan.DataAccess.Npgsql.csproj" />
+    <ProjectReference Include="..\Leviathan.DataAccess\Leviathan.DataAccess.csproj" />
+    <ProjectReference Include="..\Leviathan.Services\Leviathan.Services.csproj" />
+    <ProjectReference Include="..\Leviathan.System\Leviathan.System.csproj" />
+  </ItemGroup>
+
+</Project>

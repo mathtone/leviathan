@@ -1,3 +1,0 @@
-﻿INSERT
-	into hardware.channel_type (name,type) VALUES(@name,@type)
-RETURNING id

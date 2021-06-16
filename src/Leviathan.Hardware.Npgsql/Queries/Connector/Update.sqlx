@@ -1,2 +1,0 @@
-﻿UPDATE hardware.channel_type
-SET name=@name,type@type WHERE id=@id

@@ -1,3 +1,0 @@
-﻿INSERT
-	into sys.component_category (name,description) VALUES(@name,@description)
-RETURNING id

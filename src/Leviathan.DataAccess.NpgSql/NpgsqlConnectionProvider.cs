@@ -1,22 +1,31 @@
 ﻿using Npgsql;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace Leviathan.DataAccess.Npgsql {
-	public class NpgsqlConnectionProvider : IDbConnectionProvider<NpgsqlConnection>,IDbConnectionProvider {
 
-		string ConnectionString { get; set; }
+	public class DbServerInfo {
+		public string HostName { get; set; }
+		public string Login { get; set; }
+		public string Password { get; set; }
+	}
 
-		public NpgsqlConnectionProvider(string connectionString) {
-			this.ConnectionString = connectionString;
+	public class NpgsqlConnectionProvider : IDbConnectionProvider<NpgsqlConnection,string> {
+
+		//DbServerInfo serverInfo;
+		public Task Initialization => throw new System.NotImplementedException();
+
+		public NpgsqlConnectionProvider() {
+			//.this.serverInfo = serverInfo;
 		}
 
-		public NpgsqlConnection Connect() =>
-			new(ConnectionString);
+		public NpgsqlConnection Connect(string connectionString) =>
+			new NpgsqlConnection(connectionString);
 
-		public void SetConnectionInfo(string connectionInfo) {
-			this.ConnectionString = connectionInfo;
-		}
+		//public void SetConnectionInfo(string connectionInfo) {
+		//	this.ConnectionString = connectionInfo;
+		//}
 
-		IDbConnection IDbConnectionProvider<IDbConnection>.Connect() => Connect();
+		//IDbConnection IDbConnectionProvider<IDbConnection>.Connect() => Connect();
 	}
 }

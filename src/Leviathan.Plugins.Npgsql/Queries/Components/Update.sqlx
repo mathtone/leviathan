@@ -1,2 +1,0 @@
-﻿UPDATE sys.component_category
-SET name=@name,description=@description WHERE id=@id

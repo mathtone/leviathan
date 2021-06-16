@@ -1,19 +1,27 @@
-﻿namespace Leviathan.System {
-	//public interface ISystemConfiguration {
-	//	string DbLogin { get;  }
-	//	string DbPassword { get; }
-	//	string InstanceName { get; }
-	//	//string DbName { get; set; }
-	//	string HostName { get;  }
-	//}
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-	//public class SystemConfiguration : ISystemConfiguration {
-	//	public string InstanceName { get; set; }
+namespace Leviathan.System {
 
-	//	public string DbLogin { get; set; }
-	//	public string DbPassword { get; set; }
-	//	//public string DbName { get; set; }
-	//	public string HostName { get; set; }
+	public class SystemConfiguration {
+		public string InstanceName { get; set; }
+		//public string DbName { get; aet; }
+		public bool Activated { get; set; }
+		//public Dictionary<>
+	}
 
-	//}
+	public interface ISystemConfigProvider {
+		SystemConfiguration Config { get; }
+		Task Initialization { get; }
+	}
+
+	public interface ISystemConfigService : ISystemConfigProvider {
+		Task SaveAsync(SystemConfiguration config);
+		Task<SystemConfiguration> ReloadAsync();
+	}
+
+	public class ConfigurationEventArgs : EventArgs {
+
+	}
 }
