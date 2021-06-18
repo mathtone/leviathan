@@ -1,3 +1,21 @@
+//{
+//	"InstanceName": "Leviathan0xAA"
+//}
 {
-	"InstanceName": "Leviathan0x00"
+	"StartupInfo": {
+		"AdminCredentials": {
+			"Login": "pi",
+			"Password": "Digital!2021"
+		},
+		"DatabaseInfo": {
+			"HostName": "poseidonalpha.local",
+			"InstanceDbName": "leviathan_alpha_0x00",
+			"DbServerCredentials": {
+				"Login": "pi",
+				"Password": "Digital!2021"
+			}
+		}
+	},
+	"InstanceName": "Leviathan Alpha",
+	"Activated": false
 }

@@ -1,38 +1,41 @@
-﻿using Leviathan.Alpha.Npgsql;
-using Leviathan.Alpha.Secrets;
+﻿using Leviathan.Alpha.FactoryReset;
 using Leviathan.Core;
-using Leviathan.Services;
 using Leviathan.System;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Leviathan.Alpha {
 
-	public class TheLeviathan : LeviathanServiceBase, ILeviathan {
+	public class TheLeviathan : ILeviathan {
 
-		//public Task Initialization { get; }
-		protected ISystemConfigService Config { get; }
-		protected ILogger Log { get; }
-		protected ISecrets Secrets { get; }
-		protected ILeviathanDBService DataSystem { get; }
+		IFactoryResetService factoryReset;
+		IHostApplicationLifetime AppLifetime;
 
-		public TheLeviathan(ISystemConfigService config, ILogger<TheLeviathan> logger) : base() {
-			this.Config = config;
-			this.Log = logger;
-			Initialization = InitializeAsync();
+		public TheLeviathan(IFactoryResetService factoryReset, IHostApplicationLifetime AppLifetime) : base() {
+			this.factoryReset = factoryReset;
+			this.factoryReset.SelfDestructBegun += FactoryReset_SelfDestructBegun;
+			this.factoryReset.SelfDestructComplete += FactoryReset_SelfDestructComplete;
 		}
 
-		private async Task InitializeAsync() => await Task.CompletedTask;
+		private void FactoryReset_SelfDestructBegun(object sender, EventArgs e) {
+			//throw new NotImplementedException();
+		}
+
+		private void FactoryReset_SelfDestructComplete(object sender, EventArgs e) {
+			//throw new NotImplementedException();
+			
+		}
+
 
 		public void Start() {
-			//throw new NotImplementedException();
+
 		}
 
 		public void Stop() {
-			//throw new NotImplementedException();
-		}
 
-		//protected override Task InitializeAsync() => Task.CompletedTask;
+		}
 	}
 }

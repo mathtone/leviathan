@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data;
+using System.Data.Common;
+using System.Threading.Tasks;
 
 namespace Leviathan.DataAccess {
 
@@ -34,6 +36,29 @@ namespace Leviathan.DataAccess {
 			finally {
 				connection.Close();
 				connection.Dispose();
+			}
+		}
+	}
+
+	public static class DbConnectionExtensions {
+		public static async Task<T> UsedAsync<CN, T>(this CN connection, Func<CN, Task<T>> selectorTask) where CN : DbConnection {
+			try {
+				//can that be right?
+				return await await connection
+					.OpenAsync()
+					.ContinueWith(t => selectorTask(connection));
+			}
+			finally {
+				await connection.CloseAsync().ContinueWith(t => connection.DisposeAsync());
+			}
+		}
+
+		public static async Task UsedAsync<CN>(this CN connection, Func<CN, Task> actionTask) where CN : DbConnection {
+			try {
+				await connection.OpenAsync().ContinueWith(t => actionTask(connection));
+			}
+			finally {
+				await connection.CloseAsync().ContinueWith(t => connection.DisposeAsync());
 			}
 		}
 	}

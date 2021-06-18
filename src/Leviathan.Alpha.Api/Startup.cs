@@ -13,35 +13,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Leviathan.System;
+using Leviathan.Alpha.Npgsql;
+using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+using Leviathan.Alpha.Configuration;
+using Leviathan.DataAccess;
+using Npgsql;
+using Leviathan.DataAccess.Npgsql;
+using Leviathan.RNG;
+using Leviathan.Alpha.FactoryReset;
+//using Leviathan.RNG;
 
 namespace Leviathan.Alpha.Api {
 	public class Startup {
 
 		public IConfiguration Configuration { get; }
-		protected ILeviathan TheLeviathan { get; set; }
+		private ILeviathan TheLeviathan { get; set; }
 
 		public Startup(IConfiguration configuration) {
 			Configuration = configuration;
-			//var lev = configurationGetValue<SystemConfiguration>("Leviathan");
+			IRandom r;
 		}
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services) {
-			//var config = new SystemConfiguration();
-			//Configuration.GetSection("TheLeviathan").Bind(config);
-			//services.AddSingleton(config);
-			//services.Configure<SystemConfiguration>(x => Configuration.GetSection("TheLeviathan").Bind(x));
-			//services.Configure<SystemConfiguration>(Configuration.GetSection("TheLeviathan"));
+			services.AddControllers()
+				.AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
-			services.LeviathanWakes();
-			services.AddControllers();
 			services.AddSwaggerGen(c => {
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Leviathan.Alpha.Api", Version = "v1" });
 			});
+
+			services.LeviathanWakes();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime) {
+
 
 			this.TheLeviathan = app.ApplicationServices.GetService<ILeviathan>();
 			lifetime.ApplicationStarted.Register(OnStart);
@@ -63,5 +71,19 @@ namespace Leviathan.Alpha.Api {
 
 		protected void OnStart() => TheLeviathan.Start();
 		protected void OnStop() => TheLeviathan.Stop();
+	}
+
+	public static class LeviathanServices {
+		public static IServiceCollection LeviathanWakes(this IServiceCollection services) => services
+			.AddSingleton<ISystemConfigService<AlphaSystemConfiguration>, AlphaSystemConfigurationService>()
+			.AddSingleton<ISystemConfigProvider<AlphaSystemConfiguration>>(svc => svc.GetRequiredService<ISystemConfigService<AlphaSystemConfiguration>>())
+			.AddSingleton<IDbConnectionProvider<NpgsqlConnection, string>, NpgsqlConnectionProvider>()
+			.AddSingleton<IStartupService, StartupService>()
+			.AddSingleton<IDataSystemService<NpgsqlConnection>, DataSystemService>()
+			.AddSingleton<IDataSystemService>(svc => svc.GetRequiredService<IDataSystemService<NpgsqlConnection>>())
+			.AddSingleton<ILeviathan, TheLeviathan>()
+			.AddSingleton<IRandom, CryptoRNG>()
+			.AddSingleton<IFactoryResetService, FactoryResetService>();
+
 	}
 }

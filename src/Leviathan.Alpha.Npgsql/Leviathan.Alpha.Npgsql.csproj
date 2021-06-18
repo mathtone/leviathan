@@ -5,10 +5,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Queries\CreateDB.sqlx" />
+    <None Remove="Queries\InitDB.sqlx" />
+    <None Remove="Queries\LocateDB.sqlx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Queries\CreateDB.sqlx" />
+    <EmbeddedResource Include="Queries\InitDB.sqlx" />
+    <EmbeddedResource Include="Queries\LocateDB.sqlx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="system.linq.async" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Leviathan.Alpha.Configuration\Leviathan.Alpha.Configuration.csproj" />
     <ProjectReference Include="..\Leviathan.DataAccess.NpgSql\Leviathan.DataAccess.Npgsql.csproj" />
     <ProjectReference Include="..\Leviathan.DataAccess\Leviathan.DataAccess.csproj" />
     <ProjectReference Include="..\Leviathan.Services\Leviathan.Services.csproj" />
     <ProjectReference Include="..\Leviathan.System\Leviathan.System.csproj" />
+    <ProjectReference Include="..\Leviathan.Utilities\Leviathan.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

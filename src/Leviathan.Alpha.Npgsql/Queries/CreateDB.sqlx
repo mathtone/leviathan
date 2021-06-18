@@ -1,0 +1,7 @@
+﻿
+CREATE DATABASE "@:db_name"
+    WITH 
+    OWNER = pi
+    ENCODING = 'UTF8'
+    CONNECTION LIMIT = -1;
+

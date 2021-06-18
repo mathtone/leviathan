@@ -20,13 +20,16 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
     <PackageReference Include="newtonsoft.json" Version="13.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="system.linq.async" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Leviathan.Alpha.FactoryReset\Leviathan.Alpha.FactoryReset.csproj" />
     <ProjectReference Include="..\Leviathan.Alpha.Npgsql\Leviathan.Alpha.Npgsql.csproj" />
     <ProjectReference Include="..\Leviathan.Alpha.Secrets\Leviathan.Alpha.Secrets.csproj" />
     <ProjectReference Include="..\Leviathan.Alpha\Leviathan.Alpha.csproj" />
     <ProjectReference Include="..\Leviathan.Core\Leviathan.Core.csproj" />
+    <ProjectReference Include="..\Leviathan.RNG\Leviathan.RNG.csproj" />
     <ProjectReference Include="..\Leviathan.System\Leviathan.System.csproj" />
   </ItemGroup>
 

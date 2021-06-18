@@ -19,8 +19,4 @@
 		<Folder Include="wwwroot\images\" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\Leviathan.Rest.Api.Client\Leviathan.Rest.Api.Client.csproj" />
-	</ItemGroup>
-
 </Project>

@@ -17,7 +17,7 @@ namespace Leviathan.DataAccess {
 	public interface IDbConnectionProvider<out CN, I>
 		//: IDbConnectionProvider
 		where CN : IDbConnection {
-		CN Connect(I connectionData);
+		CN Get(I connectionData);
 	}
 
 	public class DbDataProvider<CN, CMD> : DbDataProvider<CN, CMD, IDbConnectionProvider<CN>>

@@ -1,0 +1,126 @@
+﻿@page "/Admin/Startup"
+
+<h3>Startup</h3>
+
+<table>
+	<tr>
+		<td>
+			<h4>System Configuration</h4>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table>
+				<tr>
+					<td>Instance Name:</td>
+					<td><input @bind="InstanceName" /></td>
+				</tr>
+				<tr>
+					<td>Admin Login:</td>
+					<td><input @bind="AdminLogin" /></td>
+				</tr>
+				<tr>
+					<td>Admin password:</td>
+					<td><input @bind="AdminPassword" /></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<h4>Database</h4>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table>
+				<tr>
+					<td>Host Server:</td>
+					<td><input @bind="HostName" /></td>
+				</tr>
+				<tr>
+					<td>Instance Database:</td>
+					<td><input @bind="InstanceDbName" /></td>
+				</tr>
+				<tr>
+					<td>Db Login:</td>
+					<td><input @bind="DbLogin" /></td>
+				</tr>
+				<tr>
+					<td>Db password:</td>
+					<td><input @bind="DbPassword" /></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<button @onclick="Save">Save</button><button @onclick="Apply">Apply</button>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<h4>Factory Reset</h4>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table>
+				<tr><td>Code:</td></tr>
+				<tr><td>@this.DestructCodeValue</td></tr>
+				<tr><td>Confirm:</td></tr>
+				<tr><td><input @bind="ConfirmCode" /></td></tr>
+				<tr><td><button @onclick="BeginSelfSestruct">Get Destruct Code</button></td></tr>
+				<tr><td><button @onclick="FactoryReset">Confirm</button></td></tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<h4>Quick Config</h4>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table>
+			</table>
+		</td>
+	</tr>
+</table>
+@code {
+
+	string InstanceName {
+		get => Catalog?.CurrentConfig.InstanceName;
+		set => Catalog.CurrentConfig.InstanceName = value;
+	}
+
+	string AdminLogin {
+		get => Catalog?.CurrentConfig.StartupInfo.AdminCredentials.Login;
+		set => Catalog.CurrentConfig.StartupInfo.AdminCredentials.Login = value;
+	}
+	string AdminPassword {
+		get => Catalog?.CurrentConfig.StartupInfo.AdminCredentials.Password;
+		set => Catalog.CurrentConfig.StartupInfo.AdminCredentials.Password = value;
+	}
+
+	string HostName {
+		get => Catalog?.CurrentConfig.StartupInfo.DatabaseInfo.HostName;
+		set => Catalog.CurrentConfig.StartupInfo.DatabaseInfo.HostName = value;
+	}
+
+	string InstanceDbName {
+		get => Catalog?.CurrentConfig.StartupInfo.DatabaseInfo.InstanceDbName;
+		set => Catalog.CurrentConfig.StartupInfo.DatabaseInfo.InstanceDbName = value;
+	}
+
+	string DbLogin {
+		get => Catalog?.CurrentConfig.StartupInfo.DatabaseInfo.DbServerCredentials.Login;
+		set => Catalog.CurrentConfig.StartupInfo.DatabaseInfo.DbServerCredentials.Login = value;
+	}
+
+	string DbPassword {
+		get => Catalog?.CurrentConfig.StartupInfo.DatabaseInfo.DbServerCredentials.Password;
+		set => Catalog.CurrentConfig.StartupInfo.DatabaseInfo.DbServerCredentials.Password = value;
+	}
+}

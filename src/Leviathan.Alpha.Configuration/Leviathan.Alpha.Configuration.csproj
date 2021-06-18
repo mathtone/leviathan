@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="newtonsoft.json" Version="13.0.1" />
+    <ProjectReference Include="..\Leviathan.System\Leviathan.System.csproj" />
   </ItemGroup>
 
 </Project>

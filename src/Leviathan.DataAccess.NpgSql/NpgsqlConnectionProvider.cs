@@ -19,7 +19,7 @@ namespace Leviathan.DataAccess.Npgsql {
 			//.this.serverInfo = serverInfo;
 		}
 
-		public NpgsqlConnection Connect(string connectionString) =>
+		public NpgsqlConnection Get(string connectionString) =>
 			new NpgsqlConnection(connectionString);
 
 		//public void SetConnectionInfo(string connectionInfo) {
