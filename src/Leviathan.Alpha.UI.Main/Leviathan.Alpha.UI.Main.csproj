@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
+    <PackageReference Include="system.linq.async" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

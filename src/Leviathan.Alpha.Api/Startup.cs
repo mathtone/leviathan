@@ -22,6 +22,8 @@ using Npgsql;
 using Leviathan.DataAccess.Npgsql;
 using Leviathan.RNG;
 using Leviathan.Alpha.FactoryReset;
+using Leviathan.Alpha.Components;
+using Leviathan.Alpha.Services;
 //using Leviathan.RNG;
 
 namespace Leviathan.Alpha.Api {
@@ -32,7 +34,6 @@ namespace Leviathan.Alpha.Api {
 
 		public Startup(IConfiguration configuration) {
 			Configuration = configuration;
-			IRandom r;
 		}
 
 		// This method gets called by the runtime. Use this method to add services to the container.
@@ -49,7 +50,6 @@ namespace Leviathan.Alpha.Api {
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime) {
-
 
 			this.TheLeviathan = app.ApplicationServices.GetService<ILeviathan>();
 			lifetime.ApplicationStarted.Register(OnStart);
@@ -83,7 +83,8 @@ namespace Leviathan.Alpha.Api {
 			.AddSingleton<IDataSystemService>(svc => svc.GetRequiredService<IDataSystemService<NpgsqlConnection>>())
 			.AddSingleton<ILeviathan, TheLeviathan>()
 			.AddSingleton<IRandom, CryptoRNG>()
-			.AddSingleton<IFactoryResetService, FactoryResetService>();
-
+			.AddSingleton<IFactoryResetService, FactoryResetService>()
+			.AddSingleton<ILeviathanComponentsService, LeviathanComponentsService>()
+			.AddSingleton<IQuickStartService, QuickStartService>();
 	}
 }

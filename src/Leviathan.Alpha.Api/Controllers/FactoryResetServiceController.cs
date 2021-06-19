@@ -1,21 +1,21 @@
-﻿using Leviathan.Alpha.FactoryReset;
+﻿using Leviathan.Alpha.Api.Controllers.Support;
+using Leviathan.Alpha.FactoryReset;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace Leviathan.Alpha.Api.Controllers {
+
 	[ApiController, Route("api/[controller]/[action]")]
-	public class FactoryResetServiceController : ControllerBase {
+	public class FactoryResetServiceController : ServiceControllerBase<IFactoryResetService> {
 
-		IFactoryResetService service;
-
-		public FactoryResetServiceController(IFactoryResetService service) {
-			this.service = service;
+		public FactoryResetServiceController(IFactoryResetService service) :
+			base(service) {
 		}
 
 		[HttpGet]
-		public async Task<DestructCode> BeginSelfDestruct() => await service.BeginSelfDestruct();
+		public async Task<DestructCode> BeginSelfDestruct() => await Service.BeginSelfDestruct();
 
 		[HttpPost]
-		public async Task FactoryReset(string destructCode) => await service.FactoryReset(destructCode);
+		public async Task FactoryReset(string destructCode) => await Service.FactoryReset(destructCode);
 	}
 }

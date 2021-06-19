@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Leviathan.Alpha {
+namespace Leviathan.Alpha.Services {
 
 
 	public class AlphaSystemConfigurationService : ISystemConfigService<AlphaSystemConfiguration> {
@@ -36,18 +36,4 @@ namespace Leviathan.Alpha {
 			);
 	}
 
-	public enum StartupServiceStatus {
-		FirstTime, ApplyPending, StartupComplete
-	}
-
-	public record StartupServiceCatalog {
-		public StartupServiceStatus Status { get; init; }
-		public AlphaSystemConfiguration CurrentConfig { get; init; }
-	}
-
-	public interface IStartupService {
-		StartupServiceCatalog Catalog();
-		void SetStartupInfo(StartupInfo startupInfo);
-		Task ApplyStartupConfig();
-	}
 }

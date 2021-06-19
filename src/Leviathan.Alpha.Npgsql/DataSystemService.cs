@@ -1,6 +1,7 @@
 ﻿using Leviathan.Alpha.Configuration;
 using Leviathan.DataAccess;
 using Leviathan.DataAccess.Npgsql;
+using Leviathan.Services;
 using Leviathan.System;
 using Npgsql;
 using System;
@@ -17,7 +18,7 @@ namespace Leviathan.Alpha.Npgsql {
 		CN InstanceConnection();
 	}
 
-	public interface IDataSystemService {
+	public interface IDataSystemService : IAsyncInitialize {
 		Task ReInitialize();
 		Task<DataSystemServiceCatalog> Catalog();
 		event EventHandler InitializeComplete;
@@ -71,7 +72,7 @@ namespace Leviathan.Alpha.Npgsql {
 		public async Task ReInitialize() {
 			Initialize = InitializeAsync();
 			await Initialize;
-			
+
 			if (CurrentCatalog.InstanceDatabaseFound) {
 				//drop & re-create
 				throw new Exception("Database exists, must perform factory reset");
@@ -81,6 +82,11 @@ namespace Leviathan.Alpha.Npgsql {
 			await SystemConnection().UsedAsync(async c => await c
 				.CreateCommand(CREATE)
 				.WithTemplate("@:db_name", DbInfo.InstanceDbName)
+				.ExecuteNonQueryAsync()
+			);
+
+			await InstanceConnection().UsedAsync(async c => await c
+				.CreateCommand(INIT)
 				.ExecuteNonQueryAsync()
 			);
 

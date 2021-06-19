@@ -9,6 +9,7 @@ namespace Leviathan.Alpha.UI.Main.Pages.Admin {
 	public partial class Startup {
 		DestructCode DestructCode { get; set; }
 		StartupServiceCatalog Catalog { get; set; }
+		ICollection<ComponentListing> Components { get; set; }
 
 		string DestructCodeValue { get; set; }
 		string ConfirmCode { get; set; }
@@ -17,6 +18,7 @@ namespace Leviathan.Alpha.UI.Main.Pages.Admin {
 			await base.OnInitializedAsync();
 			using var http = new HttpClient();
 			Catalog = await new StartupServiceClient("https://localhost:44368/", http).CatalogAsync();
+			Components = await new LeviathanComponentsClient("https://localhost:44368/", http).ComponentTypesAsync();
 		}
 
 		protected async void Save() {

@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Alpha.FactoryRese
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.RNG", "Leviathan.RNG\Leviathan.RNG.csproj", "{829C2298-4252-4877-9751-334271305B9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Alpha.Components", "Leviathan.Alpha.Components\Leviathan.Alpha.Components.csproj", "{774646F1-1842-4156-8E2C-562E52F03CB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{829C2298-4252-4877-9751-334271305B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{829C2298-4252-4877-9751-334271305B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{829C2298-4252-4877-9751-334271305B9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{774646F1-1842-4156-8E2C-562E52F03CB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{774646F1-1842-4156-8E2C-562E52F03CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{774646F1-1842-4156-8E2C-562E52F03CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{774646F1-1842-4156-8E2C-562E52F03CB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,6 +163,7 @@ Global
 		{AA3A0438-B7AC-46D9-BCDB-FA7084D8E4B0} = {64F5C9B9-E777-4054-8CCD-50E3FC235D25}
 		{D3E490A3-D562-4748-9F9F-02ACB3FCE94F} = {64F5C9B9-E777-4054-8CCD-50E3FC235D25}
 		{829C2298-4252-4877-9751-334271305B9C} = {64F5C9B9-E777-4054-8CCD-50E3FC235D25}
+		{774646F1-1842-4156-8E2C-562E52F03CB4} = {64F5C9B9-E777-4054-8CCD-50E3FC235D25}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C39CA66-6C4B-42EB-8797-4ADCFED239DD}

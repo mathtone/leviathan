@@ -87,6 +87,43 @@
 			</table>
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<h4>Plugins</h4>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<table>
+
+				@if (Components != null) {
+					@foreach (var i in Components) {
+						<tr>
+							<td>Name:</td>
+							<td>@i.Name</td>
+						</tr>
+						<tr>
+							<td>Category</td>
+							<td>@i.Category</td>
+						</tr>
+						<tr>
+							<td>Description</td>
+							<td>@i.Description</td>
+						</tr>
+						<tr>
+							<td>Assembly</td>
+							<td>@i.AssemblyName</td>
+						</tr>
+						<tr>
+							<td>Location</td>
+							<td>@i.AssemblyPath</td>
+						</tr>
+					}
+				}
+			</table>
+		</td>
+	</tr>
 </table>
 @code {
 

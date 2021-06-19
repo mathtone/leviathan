@@ -11,6 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Leviathan.Alpha.Components\Leviathan.Alpha.Components.csproj" />
 		<ProjectReference Include="..\Leviathan.Alpha.Configuration\Leviathan.Alpha.Configuration.csproj" />
 		<ProjectReference Include="..\Leviathan.Alpha.FactoryReset\Leviathan.Alpha.FactoryReset.csproj" />
 		<ProjectReference Include="..\Leviathan.Alpha.Npgsql\Leviathan.Alpha.Npgsql.csproj" />
