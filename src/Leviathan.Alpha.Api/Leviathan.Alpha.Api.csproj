@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Leviathan.Alpha.Core\Leviathan.Alpha.Core.csproj" />
+    <ProjectReference Include="..\Leviathan.Alpha.Data.Npgsql\Leviathan.Alpha.Data.Npgsql.csproj" />
     <ProjectReference Include="..\Leviathan.Alpha.Database\Leviathan.Alpha.Database.csproj" />
     <ProjectReference Include="..\Leviathan.Alpha.Startup\Leviathan.Alpha.Startup.csproj" />
     <ProjectReference Include="..\Leviathan.REST\Leviathan.REST.csproj" />

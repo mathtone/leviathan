@@ -5,8 +5,8 @@ using Leviathan.SDK;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace Leviathan.Alpha.Api.Controllers {
-	[ApiController, Route("api/[controller]/[action]")]
+namespace Leviathan.Alpha.Api.Controllers.Services {
+	[ApiController, Route("api/services/[controller]/[action]")]
 	public class ComponentsController : ServiceControllerBase<IComponentsService> {
 
 		public ComponentsController(IComponentsService service) : base(service) { }

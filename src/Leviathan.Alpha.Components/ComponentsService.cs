@@ -10,7 +10,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Leviathan.Alpha.Components {
-	
+
 	public class ComponentsService : ServiceComponent, IComponentsService {
 
 		ILeviathanSystem System { get; }
@@ -19,7 +19,7 @@ namespace Leviathan.Alpha.Components {
 		Dictionary<string, Assembly> plugins;
 		public IReadOnlyDictionary<string, ComponentInfo> Components { get; protected set; }
 
-		public ComponentsService(ILeviathanSystem system,IServiceProvider services) {
+		public ComponentsService(ILeviathanSystem system, IServiceProvider services) {
 			this.System = system;
 			this.Services = services;
 			this.Initialize = InitializeAsync();
@@ -47,8 +47,6 @@ namespace Leviathan.Alpha.Components {
 				})
 			};
 		}
-
-		
 
 		static IEnumerable<Assembly> GetPluginAssemblies() {
 

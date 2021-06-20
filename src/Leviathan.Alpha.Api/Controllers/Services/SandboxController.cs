@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 
-namespace Leviathan.Alpha.Api.Controllers {
+namespace Leviathan.Alpha.Api.Controllers.Services {
 
-	[ApiController, Route("api/[controller]/[action]")]
+	[ApiController, Route("api/services/[controller]/[action]")]
 	public class SandboxController : ControllerBase {
 
 		[HttpPost]

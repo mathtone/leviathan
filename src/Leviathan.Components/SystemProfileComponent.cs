@@ -28,6 +28,15 @@ namespace Leviathan.Components {
 		public abstract Task Apply();
 	}
 
+	public class Label {
+		public string Name { get; set; }
+		public string Description { get; set; }
+		public Label(string name, string description=default) {
+			this.Name = name;
+			this.Description = description;
+		}
+	}
+
 
 	[AttributeUsage(AttributeTargets.Assembly)]
 	public class LeviathanPluginAttribute : Attribute { }

@@ -5,6 +5,7 @@ using Leviathan.DbDataAccess.Npgsql;
 using Leviathan.SDK;
 using Npgsql;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 [assembly: LeviathanPlugin]
@@ -35,30 +36,30 @@ namespace Leviathan.SystemProfiles.Postgres {
 					.WithTemplate("@:db_name", cat.DatabaseInfo.InstanceDbName)
 					.WithTemplate("@:owner", cat.DbOwner)
 					.ExecuteNonQueryAsync();
-
 			});
 
 			await Data.ConnectInstance().UsedAsync(async c => {
 				await c.CreateCommand(SQL.DB.Init).ExecuteNonQueryAsync();
-				
+				var componentCategories = new Label[] {
+					new ("System Profile","System configuration profiles"),
+					new ("Device Driver","Hardware device driver/module"),
+					new ("Service","Injectible service component"),
+				};
+
+				//Component Categories
 				var cmd = c.CreateCommand(@"
 					INSERT INTO sys.component_category(name,description)
 					VALUES(@name,@description)
 					RETURNING id;"
 				);
 
-				await cmd.WithInput("@name", "System Profile")
-					.WithInput("@description", "System configuration profiles")
-					.ExecuteNonQueryAsync();
-
-				await cmd.WithInput("@name", "Device Driver")
-					.WithInput("@description", "Hardware device driver/module")
-					.ExecuteNonQueryAsync();
-
-				await cmd.WithInput("@name", "Service")
-					.WithInput("@description", "Injectible service component.")
-					.ExecuteNonQueryAsync();
-
+				var categoryIds = componentCategories.Select(cat => cmd
+				   .WithInput("@name", cat.Name)
+				   .WithInput("@description", cat.Description)
+				   .ExecuteReadSingle(r => r.GetInt64(0))
+				).ToArray();
+				
+				
 			});
 		}
 	}

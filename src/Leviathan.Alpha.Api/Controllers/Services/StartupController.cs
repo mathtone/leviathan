@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Leviathan.Alpha.Api.Controllers {
-	[ApiController, Route("api/[controller]/[action]")]
+namespace Leviathan.Alpha.Api.Controllers.Services {
+	[ApiController, Route("api/services/[controller]/[action]")]
 	public class StartupController : ServiceControllerBase<IStartupService> {
 
 		public StartupController(IStartupService service) : base(service) { }

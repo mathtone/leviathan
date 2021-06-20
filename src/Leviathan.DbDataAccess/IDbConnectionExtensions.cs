@@ -4,7 +4,6 @@ using System.Data.Common;
 using System.Threading.Tasks;
 
 namespace Leviathan.DbDataAccess {
-
 	public static class IDbConnectionExtensions {
 
 		public static CMD CreateCommand<CN, CMD>(this CN connection, string commandText, CommandType type = CommandType.Text)

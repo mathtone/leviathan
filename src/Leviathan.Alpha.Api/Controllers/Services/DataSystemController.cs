@@ -3,8 +3,8 @@ using Leviathan.REST;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace Leviathan.Alpha.Api.Controllers {
-	[ApiController, Route("api/[controller]/[action]")]
+namespace Leviathan.Alpha.Api.Controllers.Services {
+	[ApiController, Route("api/services/[controller]/[action]")]
 	public class DataSystemController : ServiceControllerBase<IDataSystemService> {
 
 		public DataSystemController(IDataSystemService service) : base(service) { }
