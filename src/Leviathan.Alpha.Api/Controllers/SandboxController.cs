@@ -1,4 +1,5 @@
 ﻿using Leviathan.Alpha.Components;
+using Leviathan.Alpha.Database;
 using Leviathan.Alpha.Startup;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -45,5 +46,14 @@ namespace Leviathan.Alpha.Api.Controllers {
 
 		[HttpPost]
 		public async Task<ComponentsCatalog> Catalog() => await Service.CatalogAsync();
+	}
+
+	[ApiController, Route("api/[controller]/[action]")]
+	public class DataSystemController : ServiceController<IDataSystemService> {
+
+		public DataSystemController(IDataSystemService service) : base(service) { }
+
+		[HttpPost]
+		public async Task<DataSystemCatalog> Catalog() => await Service.CatalogAsync();
 	}
 }

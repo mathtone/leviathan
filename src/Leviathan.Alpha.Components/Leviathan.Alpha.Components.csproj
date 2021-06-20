@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Leviathan.Alpha.Database\Leviathan.Alpha.Database.csproj" />
     <ProjectReference Include="..\Leviathan.Components\Leviathan.Components.csproj" />
     <ProjectReference Include="..\Leviathan.Services\Leviathan.Services.csproj" />
   </ItemGroup>

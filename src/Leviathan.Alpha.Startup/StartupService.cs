@@ -28,19 +28,16 @@ namespace Leviathan.Alpha.Startup {
 
 		ILeviathanSystem System { get; }
 		IComponentsService Components { get; }
-		//IServiceProvider Services { get; }
 
 		protected Dictionary<string, ComponentInfo> Profiles { get; set; }
 		public StartupService(ILeviathanSystem system, IComponentsService components) {
 			this.System = system;
 			this.Components = components;
 			this.Initialize = InitializeAsync();
-			//this.Services = services;
 		}
 
 		protected async override Task InitializeAsync() {
 			await base.InitializeAsync();
-
 			Profiles = Components.Components.Values.Where(p => p.Category == ComponentCategory.SystemProfile).ToDictionary(p => p.SystemType.FullName);
 		}
 
@@ -64,12 +61,7 @@ namespace Leviathan.Alpha.Startup {
 
 		public async Task ActivateProfile(string profileTypeName) {
 			await Initialize;
-			var profileInfo = Profiles[profileTypeName];
-			var profile = Components.Activate<ISystemProfileComponent>(profileInfo.SystemType);
-			await profile.Apply();
-			//var profile = (ISystemProfileComponent)Activator.CreateInstance(p.SystemType);
-			//var svc = Services.GetService(p.SystemType);
-			;
+			await Components.Activate<ISystemProfileComponent>(Profiles[profileTypeName].SystemType).Apply();
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using Leviathan.Components;
+﻿using Leviathan.Alpha.Database;
+using Leviathan.Components;
 using Leviathan.SDK;
 using System;
 using System.Collections.Generic;
@@ -19,13 +20,15 @@ namespace Leviathan.Alpha.Components.Profiles {
 	public class RoboTankProfile : SystemProfileComponent {
 
 		ILeviathanSystem System { get; }
+		Database.IDataSystemService Data { get; }
 
-		public RoboTankProfile(ILeviathanSystem system) {
+		public RoboTankProfile(ILeviathanSystem system, Database.IDataSystemService data) {
 			this.System = system;
+			this.Data = data;
 		}
 		public override async Task Apply() {
-			await Task.CompletedTask;
-
+			await System.Initialize;
+			await Data.Initialize;
 			;
 		}
 	}

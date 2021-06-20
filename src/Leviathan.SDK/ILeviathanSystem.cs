@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace Leviathan.SDK {
-	public interface ILeviathanSystem {
+	public interface ILeviathanSystem : IAsyncInitialize {
 		ILeviathanHostEnvironment HostEnvironment { get; }
 		void ConfigureHost(ILeviathanHostEnvironment environment);
 		event EventHandler SystemOnline;
