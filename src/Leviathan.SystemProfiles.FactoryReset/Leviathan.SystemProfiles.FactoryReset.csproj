@@ -8,7 +8,7 @@
     <ProjectReference Include="..\Leviathan.Alpha.Database\Leviathan.Alpha.Database.csproj" />
     <ProjectReference Include="..\Leviathan.Components\Leviathan.Components.csproj" />
     <ProjectReference Include="..\Leviathan.SDK\Leviathan.SDK.csproj" />
-    <ProjectReference Include="..\Leviathan.Services\Leviathan.Services.csproj" />
+    <ProjectReference Include="..\Leviathan.SystemProfiles.Postgres\Leviathan.SystemProfiles.Postgres.csproj" />
   </ItemGroup>
 
 </Project>

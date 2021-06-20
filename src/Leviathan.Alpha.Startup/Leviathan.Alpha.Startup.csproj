@@ -13,6 +13,11 @@
     <ProjectReference Include="..\Leviathan.Components\Leviathan.Components.csproj" />
     <ProjectReference Include="..\Leviathan.SDK\Leviathan.SDK.csproj" />
     <ProjectReference Include="..\Leviathan.Services\Leviathan.Services.csproj" />
+    <ProjectReference Include="..\Leviathan.SystemProfiles.Basic\Leviathan.SystemProfiles.Basic.csproj" />
+    <ProjectReference Include="..\Leviathan.SystemProfiles.FactoryReset\Leviathan.SystemProfiles.FactoryReset.csproj" />
+    <ProjectReference Include="..\Leviathan.SystemProfiles.Hardcore\Leviathan.SystemProfiles.Hardcore.csproj" />
+    <ProjectReference Include="..\Leviathan.SystemProfiles.Postgres\Leviathan.SystemProfiles.Postgres.csproj" />
+    <ProjectReference Include="..\Leviathan.SystemProfiles.RoboTank\Leviathan.SystemProfiles.RoboTank.csproj" />
   </ItemGroup>
 
 </Project>

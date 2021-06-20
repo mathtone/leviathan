@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "B. Alpha", "B. Alpha", "{6AF322AD-E9F1-4019-825A-393B3580F773}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "C. Alpha", "C. Alpha", "{6AF322AD-E9F1-4019-825A-393B3580F773}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Alpha.Api", "Leviathan.Alpha.Api\Leviathan.Alpha.Api.csproj", "{AE4C81A3-13B6-46D0-8413-93E8EF563435}"
 EndProject
@@ -29,9 +29,29 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Alpha.Database", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Alpha.Configuration", "Leviathan.Alpha.Configuration\Leviathan.Alpha.Configuration.csproj", "{92C55AA8-5749-4342-AC8C-D28B65C31D72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.DbDataAccess", "Leviathan.DbDataAccess\Leviathan.DbDataAccess.csproj", "{BBAA1970-9B03-4846-9BCF-925C3A61B40E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.DbDataAccess", "Leviathan.DbDataAccess\Leviathan.DbDataAccess.csproj", "{BBAA1970-9B03-4846-9BCF-925C3A61B40E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.DbDataAccess.Npgsql", "Leviathan.DbDataAccess.Npgsql\Leviathan.DbDataAccess.Npgsql.csproj", "{A908ACB9-0521-47CD-8657-7BD0EDCE2CAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.DbDataAccess.Npgsql", "Leviathan.DbDataAccess.Npgsql\Leviathan.DbDataAccess.Npgsql.csproj", "{A908ACB9-0521-47CD-8657-7BD0EDCE2CAB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.REST", "Leviathan.REST\Leviathan.REST.csproj", "{423B3C57-A7F2-457C-87F2-E9066C088EE8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Hardware.RPIGPIO", "Leviathan.Hardware.RPIGPIO\Leviathan.Hardware.RPIGPIO.csproj", "{CE121E67-78B9-41F1-BA5A-09AFDB7E925F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Hardware.PCA9685", "Leviathan.Hardware.PCA9685\Leviathan.Hardware.PCA9685.csproj", "{33E7C182-7ABD-4513-AE08-68F85F6E904E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "B. Drivers", "B. Drivers", "{96008193-1E4C-4EA6-BE22-451669ED583E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.SystemProfiles.RoboTank", "Leviathan.SystemProfiles.RoboTank\Leviathan.SystemProfiles.RoboTank.csproj", "{179FC87F-C092-4F5B-85AB-DC2EDE048C11}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Profiles", "Profiles", "{0859B237-164D-47B0-8F8A-6CF7BD4EA6C0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.SystemProfiles.Basic", "Leviathan.SystemProfiles.Basic\Leviathan.SystemProfiles.Basic.csproj", "{5EF63CAB-ABB8-4272-A0AD-CFD75EE84109}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.SystemProfiles.Hardcore", "Leviathan.SystemProfiles.Hardcore\Leviathan.SystemProfiles.Hardcore.csproj", "{02973751-70BE-45C6-B5DB-29F76515DBC4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.SystemProfiles.Postgres", "Leviathan.SystemProfiles.Postgres\Leviathan.SystemProfiles.Postgres.csproj", "{40D5E4F2-BDD7-495B-B9BE-F93044F767C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.SystemProfiles.FactoryReset", "Leviathan.SystemProfiles.FactoryReset\Leviathan.SystemProfiles.FactoryReset.csproj", "{61E93DC2-A849-431B-BDFD-F79CB482BCC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +107,38 @@ Global
 		{A908ACB9-0521-47CD-8657-7BD0EDCE2CAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A908ACB9-0521-47CD-8657-7BD0EDCE2CAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A908ACB9-0521-47CD-8657-7BD0EDCE2CAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{423B3C57-A7F2-457C-87F2-E9066C088EE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{423B3C57-A7F2-457C-87F2-E9066C088EE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{423B3C57-A7F2-457C-87F2-E9066C088EE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{423B3C57-A7F2-457C-87F2-E9066C088EE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE121E67-78B9-41F1-BA5A-09AFDB7E925F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE121E67-78B9-41F1-BA5A-09AFDB7E925F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE121E67-78B9-41F1-BA5A-09AFDB7E925F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE121E67-78B9-41F1-BA5A-09AFDB7E925F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33E7C182-7ABD-4513-AE08-68F85F6E904E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33E7C182-7ABD-4513-AE08-68F85F6E904E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33E7C182-7ABD-4513-AE08-68F85F6E904E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33E7C182-7ABD-4513-AE08-68F85F6E904E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{179FC87F-C092-4F5B-85AB-DC2EDE048C11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{179FC87F-C092-4F5B-85AB-DC2EDE048C11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{179FC87F-C092-4F5B-85AB-DC2EDE048C11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{179FC87F-C092-4F5B-85AB-DC2EDE048C11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EF63CAB-ABB8-4272-A0AD-CFD75EE84109}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EF63CAB-ABB8-4272-A0AD-CFD75EE84109}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EF63CAB-ABB8-4272-A0AD-CFD75EE84109}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EF63CAB-ABB8-4272-A0AD-CFD75EE84109}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02973751-70BE-45C6-B5DB-29F76515DBC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02973751-70BE-45C6-B5DB-29F76515DBC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02973751-70BE-45C6-B5DB-29F76515DBC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02973751-70BE-45C6-B5DB-29F76515DBC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40D5E4F2-BDD7-495B-B9BE-F93044F767C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40D5E4F2-BDD7-495B-B9BE-F93044F767C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40D5E4F2-BDD7-495B-B9BE-F93044F767C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40D5E4F2-BDD7-495B-B9BE-F93044F767C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61E93DC2-A849-431B-BDFD-F79CB482BCC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61E93DC2-A849-431B-BDFD-F79CB482BCC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61E93DC2-A849-431B-BDFD-F79CB482BCC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61E93DC2-A849-431B-BDFD-F79CB482BCC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +157,15 @@ Global
 		{92C55AA8-5749-4342-AC8C-D28B65C31D72} = {D38A12D3-CC82-45DF-9CE2-990ECCB69B74}
 		{BBAA1970-9B03-4846-9BCF-925C3A61B40E} = {D95599FB-62BE-4521-A830-0C4BE6390A5A}
 		{A908ACB9-0521-47CD-8657-7BD0EDCE2CAB} = {D95599FB-62BE-4521-A830-0C4BE6390A5A}
+		{423B3C57-A7F2-457C-87F2-E9066C088EE8} = {D95599FB-62BE-4521-A830-0C4BE6390A5A}
+		{CE121E67-78B9-41F1-BA5A-09AFDB7E925F} = {96008193-1E4C-4EA6-BE22-451669ED583E}
+		{33E7C182-7ABD-4513-AE08-68F85F6E904E} = {96008193-1E4C-4EA6-BE22-451669ED583E}
+		{179FC87F-C092-4F5B-85AB-DC2EDE048C11} = {0859B237-164D-47B0-8F8A-6CF7BD4EA6C0}
+		{0859B237-164D-47B0-8F8A-6CF7BD4EA6C0} = {6AF322AD-E9F1-4019-825A-393B3580F773}
+		{5EF63CAB-ABB8-4272-A0AD-CFD75EE84109} = {0859B237-164D-47B0-8F8A-6CF7BD4EA6C0}
+		{02973751-70BE-45C6-B5DB-29F76515DBC4} = {0859B237-164D-47B0-8F8A-6CF7BD4EA6C0}
+		{40D5E4F2-BDD7-495B-B9BE-F93044F767C0} = {0859B237-164D-47B0-8F8A-6CF7BD4EA6C0}
+		{61E93DC2-A849-431B-BDFD-F79CB482BCC8} = {0859B237-164D-47B0-8F8A-6CF7BD4EA6C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C39CA66-6C4B-42EB-8797-4ADCFED239DD}

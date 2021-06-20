@@ -3,12 +3,15 @@ using Leviathan.Alpha.Configuration;
 using Leviathan.Alpha.Core;
 using Leviathan.Alpha.Database;
 using Leviathan.Alpha.Startup;
+using Leviathan.Components;
 using Leviathan.SDK;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Npgsql;
+using System.Data;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -34,7 +37,9 @@ namespace Leviathan.Alpha.Api {
 			.AddSingleton<ILeviathanSystem, LeviathanSystem>()
 			.AddSingleton<IStartupService, StartupService>()
 			.AddSingleton<IComponentsService, ComponentsService>()
-			.AddSingleton<IDataSystemService, NpgsqlDataSystemService>()
+			.AddSingleton<IDataSystemService<NpgsqlConnection>, NpgsqlDataSystemService>()
+			.AddSingleton<IDataSystemService<IDbConnection>>(svc => svc.GetRequiredService<IDataSystemService<NpgsqlConnection>>())
+			.AddSingleton<IDataSystemService>(svc => svc.GetRequiredService<IDataSystemService<IDbConnection>>())
 			.AddSingleton<IConfigManager<DatabaseConfig>, LeviathanConfigManager<DatabaseConfig>>();
 
 		public static IApplicationBuilder AwakenTheLeviathan(this IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime) {

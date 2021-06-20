@@ -1,5 +1,4 @@
 ﻿using Leviathan.Alpha.Components;
-using Leviathan.Alpha.Components.Profiles;
 using Leviathan.Components;
 using Leviathan.SDK;
 using Leviathan.Services;
@@ -10,30 +9,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using Leviathan.Alpha.Database;
+using Npgsql;
 
 namespace Leviathan.Alpha.Startup {
-	public interface IStartupService {
-		Task<StartupCatalog> CatalogAsync();
-		Task<IEnumerable<ComponentListing>> SystemProfiles();
-		Task ActivateProfile(string profileTypeName);
-		//void SetAdminCredentials(CredentialsConfig credentials);
-	}
-
-	public class StartupCatalog {
-
-		public IHostEnvironment Environment { get; init; }
-	}
+	
 
 	public class StartupService : ServiceComponent, IStartupService {
 
 		ILeviathanSystem System { get; }
 		IComponentsService Components { get; }
+		IDataSystemService<NpgsqlConnection> DataSystem { get; }
 
 		protected Dictionary<string, ComponentInfo> Profiles { get; set; }
-		public StartupService(ILeviathanSystem system, IComponentsService components) {
+
+		public StartupService(ILeviathanSystem system, IComponentsService components, IDataSystemService<NpgsqlConnection> dataSystem) {
 			this.System = system;
 			this.Components = components;
 			this.Initialize = InitializeAsync();
+			this.DataSystem = dataSystem;
 		}
 
 		protected async override Task InitializeAsync() {
@@ -63,5 +57,12 @@ namespace Leviathan.Alpha.Startup {
 			await Initialize;
 			await Components.Activate<ISystemProfileComponent>(Profiles[profileTypeName].SystemType).Apply();
 		}
+
+		//public async Task FactoryReset() {
+		//	using var cn = DataSystem.ConnectSystem();
+		//	await cn.OpenAsync();
+
+		//	;
+		//}
 	}
 }

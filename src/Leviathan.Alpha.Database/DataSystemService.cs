@@ -6,10 +6,17 @@ using Leviathan.SDK;
 using Leviathan.Services;
 using Npgsql;
 using System;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Leviathan.Alpha.Database {
+	public interface IDataSystemService<out CN> : IDataSystemService
+		where CN : IDbConnection {
+		CN ConnectSystem();
+		CN ConnectInstance();
+	}
+
 	public interface IDataSystemService : IAsyncInitialize {
 		Task<DataSystemCatalog> CatalogAsync();
 	}
@@ -21,6 +28,7 @@ namespace Leviathan.Alpha.Database {
 		public bool HostLocated { get; init; }
 		public bool? DatabaseLocated { get; init; }
 		public bool CredentialsConfigured { get; init; }
+		public string DbOwner { get; init; }
 		public bool? CredentialsValid { get; init; }
 		public string[] ServerDbs { get; init; }
 	}
@@ -42,7 +50,7 @@ namespace Leviathan.Alpha.Database {
 		public string Password { get; init; }
 	}
 
-	public class NpgsqlDataSystemService : ServiceComponent, IDataSystemService {
+	public class NpgsqlDataSystemService : ServiceComponent, IDataSystemService<NpgsqlConnection> {
 
 		ILeviathanSystem System { get; }
 		IConfigManager<DatabaseConfig> ConfigService { get; }
@@ -68,13 +76,13 @@ namespace Leviathan.Alpha.Database {
 				CredentialsValid = true,
 				HostLocated = true,
 				MustInitialize = true,
+				DbOwner = CurrentConfig.DbCredentials?.Login,
 				CredentialsConfigured = CurrentConfig.DbCredentials != null,
 				DatabaseLocated = dbs.Contains(CurrentConfig.InstanceDbName),
 				ServerDbs = dbs,
 				DatabaseInfo = new() {
 					HostName = CurrentConfig.HostName,
 					InstanceDbName = CurrentConfig.InstanceDbName,
-
 				}
 			};
 		}
@@ -84,10 +92,14 @@ namespace Leviathan.Alpha.Database {
 			 .ExecuteReaderAsync()
 			 .ToArrayAsync(r => r.GetString(0))
 		);
-		NpgsqlConnection ConnectSystem() => Connect("postgres");
-		NpgsqlConnection ConnectInstance() => Connect(CurrentConfig.InstanceDbName);
-		NpgsqlConnection Connect(string dbName) =>
-			new(DbConnectionString(CurrentConfig.HostName, CurrentConfig.DbCredentials.Login, CurrentConfig.DbCredentials.Password, dbName));
+		public NpgsqlConnection ConnectSystem() => Connect("postgres");
+		public NpgsqlConnection ConnectInstance() => Connect(CurrentConfig.InstanceDbName);
+		NpgsqlConnection Connect(string dbName) => new(DbConnectionString(
+			CurrentConfig.HostName,
+			CurrentConfig.DbCredentials.Login,
+			CurrentConfig.DbCredentials.Password,
+			dbName
+		));
 
 		static string DbConnectionString(string hostName, string login, string password, string database) =>
 			$"Host={hostName};Username={login};Database={database};Password={password};";

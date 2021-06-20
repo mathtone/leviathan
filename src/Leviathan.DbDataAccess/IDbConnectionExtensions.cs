@@ -55,7 +55,8 @@ namespace Leviathan.DbDataAccess {
 
 		public static async Task UsedAsync<CN>(this CN connection, Func<CN, Task> actionTask) where CN : DbConnection {
 			try {
-				await connection.OpenAsync().ContinueWith(t => actionTask(connection));
+				await connection.OpenAsync();
+				await actionTask(connection);
 			}
 			finally {
 				await connection.CloseAsync().ContinueWith(t => connection.DisposeAsync());

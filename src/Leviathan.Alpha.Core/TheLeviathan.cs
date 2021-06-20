@@ -40,9 +40,9 @@ namespace Leviathan.Alpha.Core {
 			;
 		}
 
-		private void System_SystemOnline(object sender, EventArgs e) {
-			Startup.ActivateProfile("Leviathan.Alpha.Components.Profiles.RoboTankProfile");
-			;
-		}
+		private void System_SystemOnline(object sender, EventArgs e) => Task.Run(async () => {
+			await Startup.ActivateProfile("Leviathan.SystemProfiles.FactoryReset.FactoryResetProfile"); ;
+			await Startup.ActivateProfile("Leviathan.SystemProfiles.RoboTank.RoboTankProfile");
+		});
 	}
 }
