@@ -13,6 +13,7 @@ namespace Leviathan.SystemProfiles.Postgres {
 			public static readonly string Drop = ResourceLoader.LoadLocal("SQL.DB.Drop.sqlx");
 			public static readonly string Locate = ResourceLoader.LoadLocal("SQL.DB.Locate.sqlx");
 			public static readonly string Init = ResourceLoader.LoadLocal("SQL.DB.Init.sqlx");
+			public static readonly string InitData = ResourceLoader.LoadLocal("SQL.DB.InitData.sqlx");
 		}
 	}
 }

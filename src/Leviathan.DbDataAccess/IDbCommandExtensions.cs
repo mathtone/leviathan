@@ -34,12 +34,22 @@ namespace Leviathan.DbDataAccess {
 		public static CMD WithParameter<CMD, T>(this CMD command, string name, T value, ParameterDirection direction, int size = default)
 			where CMD : IDbCommand {
 
-			var p = command.CreateParameter();
-			p.ParameterName = name;
-			p.Value = value;
-			p.Direction = direction;
-			p.Size = size;
-			return command.WithParameter(p);
+			if (command.Parameters.Contains(name)) {
+				var p = command.Parameters[name] as IDbDataParameter;
+				p.ParameterName = name;
+				p.Value = value;
+				p.Direction = direction;
+				p.Size = size;
+				return command;
+			}
+			else {
+				var p = command.CreateParameter();
+				p.ParameterName = name;
+				p.Value = value;
+				p.Direction = direction;
+				p.Size = size;
+				return command.WithParameter(p);
+			}
 		}
 
 		public static CMD WithParameter<CMD, P>(this CMD command, P parameter)

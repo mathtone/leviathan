@@ -20,6 +20,7 @@ namespace Leviathan.SystemProfiles.RoboTank {
 
 		public override async Task Apply() {
 			await base.ApplyRequired();
+			;
 		}
 	}
 }

@@ -3,8 +3,11 @@
 namespace Leviathan.Components {
 
 	public enum ComponentCategory {
-		SystemProfile,
+		SystemProfile = 1,
+		Driver = 2,
+		Service = 3
 	}
+
 	[AttributeUsage(AttributeTargets.Class)]
 	public abstract class LeviathanComponentAttribute : Attribute {
 
