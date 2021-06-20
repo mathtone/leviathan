@@ -1,16 +1,26 @@
-﻿using System.Threading.Tasks;
+﻿using Leviathan.SDK;
+using System;
+using System.Threading.Tasks;
 
 namespace Leviathan.Services {
-	public interface IAsyncInitialize {
-		Task Initialize { get; }
-	}
 
-	public interface IServiceComponent {
-
-	}
-
+	public interface IServiceComponent {}
 	public abstract class ServiceComponent : IServiceComponent, IAsyncInitialize {
-		public Task Initialize { get; protected set; }
+		public Task Initialize { get; protected set; } = Task.CompletedTask;
 		protected virtual async Task InitializeAsync() => await Task.CompletedTask;
+		
+		public ServiceComponent() {
+
+		}
+
+		protected async Task WhenInitialized(Action action) {
+			await Initialize;
+			action();
+		}
+
+		protected async Task<T> WhenInitialized<T>(Func<T> function) {
+			await Initialize;
+			return function();
+		}
 	}
 }

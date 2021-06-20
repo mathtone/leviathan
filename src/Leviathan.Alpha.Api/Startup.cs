@@ -10,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Leviathan.Alpha.Api {
@@ -22,8 +23,10 @@ namespace Leviathan.Alpha.Api {
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services) {
-			services.AddTheLeviathan();
-			services.AddControllers();
+			services.AddTheLeviathan()
+				.AddControllers()
+				.AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
 			services.AddSwaggerGen(c => {
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Leviathan.Alpha.Api", Version = "v1" });
 			});
