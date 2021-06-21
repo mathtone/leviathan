@@ -22,7 +22,7 @@ namespace Leviathan.SystemProfiles.Postgres {
 			await base.ApplyRequired();
 
 			var cat = await Data.CatalogAsync();
-			await Data.ConnectSystem().UsedAsync(async c => {
+			await Data.SystemDB.Connect().UsedAsync(async c => {
 
 				var located = (bool)await c.CreateCommand(SQL.DB.Locate)
 					.WithInput("@db_name", cat.DatabaseInfo.InstanceDbName)
@@ -38,7 +38,7 @@ namespace Leviathan.SystemProfiles.Postgres {
 					.ExecuteNonQueryAsync();
 			});
 
-			await Data.ConnectInstance().UsedAsync(async c => {
+			await Data.InstanceDB.Connect().UsedAsync(async c => {
 				await c.CreateCommand(SQL.DB.Init).ExecuteNonQueryAsync();
 				var componentCategories = new Label[] {
 					new ("System Profile","System configuration profiles"),

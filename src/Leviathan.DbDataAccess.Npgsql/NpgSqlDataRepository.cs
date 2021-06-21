@@ -1,24 +1,44 @@
-﻿namespace Leviathan.DbDataAccess.Npgsql {
+﻿using Npgsql;
 
-	public class NpgSqlDataRepository<T> : NpgSqlDataRepository<long, T> {
+namespace Leviathan.DbDataAccess.Npgsql {
 
+	public abstract class NpgSqlDataRepository<T> : NpgSqlDataRepository<long, T> {
+		protected NpgSqlDataRepository(IRepoCommands commands, NpgsqlConnection connection) :
+			base(commands,connection) { }
 	}
 
-	public class NpgSqlDataRepository<ID, T> : DataRepository<ID, T> {
-		public override ID Create(T item) {
-			throw new System.NotImplementedException();
-		}
+	public abstract class NpgSqlDataRepository<ID, T> : DataRepository<ID, T> {
 
-		public override void Delete(ID id) {
-			throw new System.NotImplementedException();
-		}
+		protected IRepoCommands SQL { get; init; }
+		protected NpgsqlConnection Connection { get; init; }
 
-		public override T Read(ID id) {
-			throw new System.NotImplementedException();
+		public NpgSqlDataRepository(IRepoCommands commands, NpgsqlConnection connection) {
+			this.SQL = commands;
+			this.Connection = connection;
 		}
+	}
 
-		public override void Update(T item) {
-			throw new System.NotImplementedException();
-		}
+	public interface IRepoCommands {
+		string CREATE { get; }
+		string READ { get; }
+		string UPDATE { get; }
+		string DELETE { get; }
+	}
+
+	public interface IListCommands {
+		string LIST { get; }
+	}
+	public interface IListRepoCommands :IListCommands,IRepoCommands{
+
+	}
+	public class RepoCommands : IRepoCommands {
+		public string CREATE { get; init; }
+		public string READ { get; init; }
+		public string UPDATE { get; init; }
+		public string DELETE { get; init; }
+	}
+
+	public class ListRepoCommands : RepoCommands, IListRepoCommands {
+		public string LIST { get; init; }
 	}
 }

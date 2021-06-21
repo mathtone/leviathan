@@ -8,4 +8,9 @@
     <ProjectReference Include="..\Leviathan.Alpha.Data\Leviathan.Alpha.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SQL\Component\" />
+    <Folder Include="SQL\Hardware\" />
+  </ItemGroup>
+
 </Project>

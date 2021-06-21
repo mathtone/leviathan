@@ -13,10 +13,12 @@ using System.Threading.Tasks;
 namespace Leviathan.Alpha.Database {
 	public interface IDataSystemService<out CN> : IDataSystemService
 		where CN : IDbConnection {
-		CN ConnectSystem();
-		CN ConnectInstance();
+		ISystemConnectionService<CN> SystemDB { get; }
+		IInstanceConnectionService<CN> InstanceDB { get; }
 	}
 
+	public interface ISystemConnectionService<out CN> : IDbConnectionService<CN> where CN : IDbConnection { }
+	public interface IInstanceConnectionService<out CN> : IDbConnectionService<CN> where CN : IDbConnection { }
 	public interface IDataSystemService : IAsyncInitialize {
 		Task<DataSystemCatalog> CatalogAsync();
 	}
@@ -55,6 +57,9 @@ namespace Leviathan.Alpha.Database {
 		ILeviathanSystem System { get; }
 		IConfigManager<DatabaseConfig> ConfigService { get; }
 
+		public ISystemConnectionService<NpgsqlConnection> SystemDB { get; private set; }
+		public IInstanceConnectionService<NpgsqlConnection> InstanceDB { get; private set; }
+
 		protected DatabaseConfig CurrentConfig => ConfigService.Config;
 
 		public NpgsqlDataSystemService(ILeviathanSystem system, IConfigManager<DatabaseConfig> config) {
@@ -65,6 +70,8 @@ namespace Leviathan.Alpha.Database {
 
 		protected override async Task InitializeAsync() {
 			await base.InitializeAsync();
+			SystemDB = new SystemConnectService(ConnectSysytem);
+			InstanceDB = new InstanceConnectService(ConnectInstance);
 		}
 
 		public async Task<DataSystemCatalog> CatalogAsync() {
@@ -87,13 +94,14 @@ namespace Leviathan.Alpha.Database {
 			};
 		}
 
-		async Task<string[]> ListServerDatabases() => await ConnectSystem().UsedAsync(c => c
+		async Task<string[]> ListServerDatabases() => await SystemDB.Connect().UsedAsync(c => c
 			 .CreateCommand("SELECT datname FROM pg_database")
 			 .ExecuteReaderAsync()
 			 .ToArrayAsync(r => r.GetString(0))
 		);
-		public NpgsqlConnection ConnectSystem() => Connect("postgres");
-		public NpgsqlConnection ConnectInstance() => Connect(CurrentConfig.InstanceDbName);
+
+		NpgsqlConnection ConnectSysytem() => Connect("postgres");
+		NpgsqlConnection ConnectInstance() => Connect(CurrentConfig.InstanceDbName);
 		NpgsqlConnection Connect(string dbName) => new(DbConnectionString(
 			CurrentConfig.HostName,
 			CurrentConfig.DbCredentials.Login,
@@ -103,5 +111,6 @@ namespace Leviathan.Alpha.Database {
 
 		static string DbConnectionString(string hostName, string login, string password, string database) =>
 			$"Host={hostName};Username={login};Database={database};Password={password};";
+
 	}
 }

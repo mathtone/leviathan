@@ -23,7 +23,7 @@ namespace Leviathan.SystemProfiles.FactoryReset {
 		}
 		public override async Task Apply() {
 			var cat = await Data.CatalogAsync();
-			using var cn = Data.ConnectSystem();
+			using var cn = Data.SystemDB.Connect();
 			cn.Open();
 			var located = (bool)await cn.CreateCommand(SQL.DB.Locate)
 				.WithInput("@db_name", cat.DatabaseInfo.InstanceDbName)

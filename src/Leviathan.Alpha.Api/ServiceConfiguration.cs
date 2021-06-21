@@ -1,6 +1,7 @@
 ﻿using Leviathan.Alpha.Components;
 using Leviathan.Alpha.Configuration;
 using Leviathan.Alpha.Core;
+using Leviathan.Alpha.Data.Npgsql;
 using Leviathan.Alpha.Database;
 using Leviathan.Alpha.Startup;
 using Leviathan.Components;
@@ -41,6 +42,9 @@ namespace Leviathan.Alpha.Api {
 			.AddSingleton<IDataSystemService<IDbConnection>>(svc => svc.GetRequiredService<IDataSystemService<NpgsqlConnection>>())
 			.AddSingleton<IDataSystemService>(svc => svc.GetRequiredService<IDataSystemService<IDbConnection>>())
 			.AddSingleton<IConfigManager<DatabaseConfig>, LeviathanConfigManager<DatabaseConfig>>();
+
+			//.AddSingleton<IListRepository<long, ComponentCategoryRecord>>(svc => new ComponentCategoryRepo(null, null));
+			
 
 		public static IApplicationBuilder AwakenTheLeviathan(this IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime) {
 			var leviathan = app.ApplicationServices.GetService<IAmLeviathan>();
