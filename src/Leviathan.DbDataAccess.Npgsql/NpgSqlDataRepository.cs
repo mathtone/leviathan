@@ -1,20 +1,31 @@
 ﻿using Npgsql;
+using System.Threading.Tasks;
 
 namespace Leviathan.DbDataAccess.Npgsql {
 
 	public abstract class NpgSqlDataRepository<T> : NpgSqlDataRepository<long, T> {
-		protected NpgSqlDataRepository(IRepoCommands commands, NpgsqlConnection connection) :
-			base(commands,connection) { }
+		protected NpgSqlDataRepository(NpgsqlConnection connection) :
+			base(connection) { }
 	}
 
 	public abstract class NpgSqlDataRepository<ID, T> : DataRepository<ID, T> {
 
-		protected IRepoCommands SQL { get; init; }
+		//protected IRepoCommands SQL { get; init; }
 		protected NpgsqlConnection Connection { get; init; }
 
-		public NpgSqlDataRepository(IRepoCommands commands, NpgsqlConnection connection) {
-			this.SQL = commands;
+		public NpgSqlDataRepository(NpgsqlConnection connection) {
+			//this.SQL = commands;
 			this.Connection = connection;
+		}
+
+		protected NpgsqlConnection Connect() {
+			this.Connection.Open();
+			return this.Connection;
+		}
+
+		protected async Task<NpgsqlConnection> ConnectAsync() {
+			await this.Connection.OpenAsync();
+			return this.Connection;
 		}
 	}
 

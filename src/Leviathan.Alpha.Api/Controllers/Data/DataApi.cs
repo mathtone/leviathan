@@ -8,28 +8,33 @@ using System.Threading.Tasks;
 
 namespace Leviathan.Alpha.Api.Controllers.Data {
 
-	[ApiController,Route("api/data/[controller]")]
-	public class ComponentAssemblyController : ListRepoController<long,ComponentAssemblyRecord> {
-		public ComponentAssemblyController(IListRepository<long, ComponentAssemblyRecord> repository) : base(repository) { }
+	[ApiController, Route("api/data/[controller]")]
+	public class ComponentAssemblyController : ListRepoController<long, ComponentAssemblyRecord> {
+		public ComponentAssemblyController(ILeviathanAlphaDataContextProvider context) :
+			base(context, r => r.ComponentAssembly) { }
 	}
 
 	[ApiController, Route("api/data/[controller]")]
 	public class ComponentCategoryController : ListRepoController<long, ComponentCategoryRecord> {
-		public ComponentCategoryController(IListRepository<long, ComponentCategoryRecord> repository) : base(repository) {}
+		public ComponentCategoryController(ILeviathanAlphaDataContextProvider context) :
+			base(context, r => r.ComponentCategory) { }
 	}
 
 	[ApiController, Route("api/data/[controller]")]
 	public class ComponentTypeController : ListRepoController<long, ComponentTypeRecord> {
-		public ComponentTypeController(IListRepository<long, ComponentTypeRecord> repository) : base(repository) { }
+		public ComponentTypeController(ILeviathanAlphaDataContextProvider context) :
+			base(context, r => r.ComponentType) { }
 	}
 
 	[ApiController, Route("api/data/[controller]")]
 	public class HardwareConnectorController : ListRepoController<long, HardwareConnectorRecord> {
-		public HardwareConnectorController(IListRepository<long, HardwareConnectorRecord> repository) : base(repository) { }
+		public HardwareConnectorController(ILeviathanAlphaDataContextProvider context) :
+			base(context, r => r.HardwareConnector) { }
 	}
 
 	[ApiController, Route("api/data/[controller]")]
 	public class HardwareModuleController : ListRepoController<long, HardwareModuleRecord> {
-		public HardwareModuleController(IListRepository<long, HardwareModuleRecord> repository) : base(repository) { }
+		public HardwareModuleController(ILeviathanAlphaDataContextProvider context) :
+			base(context,r=>r.HardwareModule) { }
 	}
 }

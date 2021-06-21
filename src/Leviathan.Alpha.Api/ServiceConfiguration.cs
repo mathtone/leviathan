@@ -41,10 +41,12 @@ namespace Leviathan.Alpha.Api {
 			.AddSingleton<IDataSystemService<NpgsqlConnection>, NpgsqlDataSystemService>()
 			.AddSingleton<IDataSystemService<IDbConnection>>(svc => svc.GetRequiredService<IDataSystemService<NpgsqlConnection>>())
 			.AddSingleton<IDataSystemService>(svc => svc.GetRequiredService<IDataSystemService<IDbConnection>>())
-			.AddSingleton<IConfigManager<DatabaseConfig>, LeviathanConfigManager<DatabaseConfig>>();
+			.AddSingleton<IConfigManager<DatabaseConfig>, LeviathanConfigManager<DatabaseConfig>>()
+			.AddSingleton<ILeviathanAlphaDataContextProvider, LeviathanAlphaDataContextProvider>()
+			.AddTransient(svc => svc.GetRequiredService<IDataSystemService<NpgsqlConnection>>().InstanceDB);
 
-			//.AddSingleton<IListRepository<long, ComponentCategoryRecord>>(svc => new ComponentCategoryRepo(null, null));
-			
+		//.AddSingleton<IListRepository<long, ComponentCategoryRecord>>(svc => new ComponentCategoryRepo(null, null));
+
 
 		public static IApplicationBuilder AwakenTheLeviathan(this IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime) {
 			var leviathan = app.ApplicationServices.GetService<IAmLeviathan>();

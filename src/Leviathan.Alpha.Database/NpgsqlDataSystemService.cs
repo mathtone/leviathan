@@ -70,7 +70,7 @@ namespace Leviathan.Alpha.Database {
 
 		protected override async Task InitializeAsync() {
 			await base.InitializeAsync();
-			SystemDB = new SystemConnectService(ConnectSysytem);
+			SystemDB = new SystemConnectService(ConnectSystem);
 			InstanceDB = new InstanceConnectService(ConnectInstance);
 		}
 
@@ -100,7 +100,7 @@ namespace Leviathan.Alpha.Database {
 			 .ToArrayAsync(r => r.GetString(0))
 		);
 
-		NpgsqlConnection ConnectSysytem() => Connect("postgres");
+		NpgsqlConnection ConnectSystem() => Connect("postgres");
 		NpgsqlConnection ConnectInstance() => Connect(CurrentConfig.InstanceDbName);
 		NpgsqlConnection Connect(string dbName) => new(DbConnectionString(
 			CurrentConfig.HostName,

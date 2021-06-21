@@ -1,37 +1,95 @@
-﻿using Leviathan.DbDataAccess.Npgsql;
+﻿using Leviathan.DbDataAccess;
+using Leviathan.DbDataAccess.Npgsql;
+using Leviathan.SDK;
 using Npgsql;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Leviathan.Alpha.Data.Npgsql {
+
 	public record ComponentTypeRecord : StandardEntity<long> {
 		public long CategoryId { get; init; }
 		public long AssemblyId { get; init; }
 		public string TypeName { get; init; }
 	}
 
-	public class ComponentTypeRepo : AlphaDbListRepo<ComponentTypeRecord> {
-		public ComponentTypeRepo(IListRepoCommands commands, NpgsqlConnection connection) :
-			base(commands, connection) {
+	public interface IComponentTypeRepo : IListRepository<long, ComponentTypeRecord> { }
+	public class ComponentTypeRepo : AlphaDbListRepo<ComponentTypeRecord>, IComponentTypeRepo {
+		public ComponentTypeRepo(NpgsqlConnection connection) :
+			base(connection) {
 		}
 
-		public override long Create(ComponentTypeRecord item) {
-			throw new System.NotImplementedException();
-		}
+		public override long Create(ComponentTypeRecord item) => Connect()
+			.CreateCommand(SQL.CREATE)
+			.WithInput("@name", item.Name)
+			.WithInput("@description", item.Description)
+			.WithInput("@component_assembly_id", item.AssemblyId)
+			.WithInput("@component_category_id", item.CategoryId)
+			.WithInput("@type_name", item.TypeName)
+			.ExecuteNonQuery();
 
-		public override void Delete(long id) {
-			throw new System.NotImplementedException();
-		}
+		public override void Delete(long id) => Connect()
+			.CreateCommand(SQL.DELETE)
+			.ExecuteNonQuery();
 
-		public override IEnumerable<ComponentTypeRecord> List() {
-			throw new System.NotImplementedException();
-		}
+		public override IEnumerable<ComponentTypeRecord> List() => Connect()
+			.CreateCommand(SQL.LIST)
+			.ExecuteReader()
+			.ToArray(FromData);
 
-		public override ComponentTypeRecord Read(long id) {
-			throw new System.NotImplementedException();
-		}
+		public override ComponentTypeRecord Read(long id) => Connect()
+			.CreateCommand(SQL.READ)
+			.WithInput("@id", id)
+			.ExecuteReadSingle(FromData);
 
-		public override void Update(ComponentTypeRecord item) {
-			throw new System.NotImplementedException();
-		}
+		public override void Update(ComponentTypeRecord item) => Connect()
+			.CreateCommand(SQL.UPDATE)
+			.WithInput("@id", item.Id)
+			.WithInput("@name", item.Name)
+			.WithInput("@description", item.Description)
+			.WithInput("@component_assembly_id", item.AssemblyId)
+			.WithInput("@component_category_id", item.CategoryId)
+			.WithInput("@type_name", item.TypeName)
+			.ExecuteNonQuery();
+
+		private static ComponentTypeRecord FromData(IDataRecord record) => new() {
+			Id = record.Field<long>("id"),
+			Name = record.Field<string>("name"),
+			Description = record.Field<string>("description"),
+			AssemblyId = record.Field<long>("component_assembly_id"),
+			CategoryId = record.Field<long>("component_category_id"),
+			TypeName = record.Field<string>("type_name"),
+		};
+
+		private static readonly IListRepoCommands SQL = new ListRepoCommands {
+			CREATE = @"
+				INSERT INTO sys.component_type (
+					name,
+					description,
+					component_category_id,
+					component_assembly_id,
+					type_name
+				)
+				VALUES(
+					@name,
+					@description,
+					@component_category_id,
+					@component_assembly_id,
+					@type_name
+				)
+				RETURNING id",
+
+			UPDATE = @"
+				UPDATE sys.component_type SET 
+					name=@name,
+					description=@description,
+					component_category_id=@component_category_id,
+					component_assembly_id=@component_assembly_id,
+	`				type_name=@type_name
+				WHERE id=@id",
+			LIST = @"SELECT * FROM sys.component_type",
+			READ = @"SELECT * FROM sys.component_type WHERE id=@id",
+			DELETE = @"DELETE sys.component_type WHERE id=@id",
+		};
 	}
 }
