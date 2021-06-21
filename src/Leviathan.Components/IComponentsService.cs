@@ -8,7 +8,7 @@ namespace Leviathan.Components {
 		IReadOnlyDictionary<string, ComponentInfo> Components { get; }
 		Task<ComponentsCatalog> CatalogAsync();
 		T Activate<T>(Type type);
-		Task<long> RegisterComponent(Type type);
+		long RegisterComponent(Type type);
 	}
 
 	public class ComponentListing {

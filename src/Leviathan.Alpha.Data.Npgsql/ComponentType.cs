@@ -26,7 +26,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			.WithInput("@component_assembly_id", item.AssemblyId)
 			.WithInput("@component_category_id", item.CategoryId)
 			.WithInput("@type_name", item.TypeName)
-			.ExecuteNonQuery();
+			.ExecuteReadSingle(r=>r.Field<long>("id"));
 
 		public override void Delete(long id) => Connect()
 			.CreateCommand(SQL.DELETE)

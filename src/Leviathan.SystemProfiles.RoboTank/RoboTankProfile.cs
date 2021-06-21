@@ -39,7 +39,6 @@ namespace Leviathan.SystemProfiles.RoboTank {
 		public override async Task Apply() {
 			await base.ApplyRequired();
 
-
 			var driverTypes = new[] {
 				typeof(GpioDriver),
 				typeof(I2CDriver),
@@ -49,8 +48,13 @@ namespace Leviathan.SystemProfiles.RoboTank {
 				typeof(BasicProfile),
 				typeof(HardcoreProfile)
 			};
-			var ids = driverTypes.Select(t=>Components.RegisterComponent(t)).ToArray();
+
+			var ids = driverTypes
+				.Select(t => new {
+					Id = Components.RegisterComponent(t),
+					Type = t
+				})
+				.ToDictionary(t => t.Type, t => t.Id);
 		}
 	}
-
 }

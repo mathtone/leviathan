@@ -65,7 +65,7 @@ namespace Leviathan.Alpha.Components {
 			};
 		}
 
-		public async Task<long> RegisterComponent(Type type) {
+		public long RegisterComponent(Type type) {
 			
 			var cmd = Connect().CreateCommand(@"SELECT * FROM sys.component_assembly where assembly_path = @path");
 			var id = cmd.WithInput("@path", type.Assembly.Location)
