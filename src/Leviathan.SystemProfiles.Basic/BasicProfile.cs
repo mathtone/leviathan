@@ -8,7 +8,7 @@ using Npgsql;
 using System;
 using System.Threading.Tasks;
 
-[assembly: LeviathanPlugin]
+[assembly: LeviathanPlugin("Basic Profile")]
 namespace Leviathan.SystemProfiles.Basic {
 
 	[SystemProfile("Basic", "Creates a Postgres SQL database & configures support data for a basic installation, does not configure drivers or connectors.")]

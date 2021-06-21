@@ -8,7 +8,7 @@ using Npgsql;
 using System;
 using System.Threading.Tasks;
 
-[assembly: LeviathanPlugin]
+[assembly: LeviathanPlugin("Factory Reset")]
 namespace Leviathan.SystemProfiles.FactoryReset {
 
 	[SystemProfile("Factory Reset", "Reset to factory new condition.")]

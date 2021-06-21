@@ -55,11 +55,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.SystemProfiles.Fa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "X. Test", "X. Test", "{59C1EF80-5E37-441F-BA51-631944765760}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Alpha.Data", "Leviathan.Alpha.Data\Leviathan.Alpha.Data.csproj", "{69AA3A57-8AEB-4632-9ED9-0837454435FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Alpha.Data", "Leviathan.Alpha.Data\Leviathan.Alpha.Data.csproj", "{69AA3A57-8AEB-4632-9ED9-0837454435FE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data Services", "Data Services", "{DDDCEE52-8E92-46D3-8306-75E9FCEF8591}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Alpha.Data.Npgsql", "Leviathan.Alpha.Data.Npgsql\Leviathan.Alpha.Data.Npgsql.csproj", "{33A70864-A09C-44A9-BB5F-34FDCAADEDAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Alpha.Data.Npgsql", "Leviathan.Alpha.Data.Npgsql\Leviathan.Alpha.Data.Npgsql.csproj", "{33A70864-A09C-44A9-BB5F-34FDCAADEDAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Hardware.I2C", "Leviathan.Hardware.I2C\Leviathan.Hardware.I2C.csproj", "{98BA87EF-F2CB-4438-9B42-E8A9CE23A60E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Common", "Leviathan.Common\Leviathan.Common.csproj", "{1343579C-6B32-4CA5-8241-CF5DCA3DEFDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -155,6 +159,14 @@ Global
 		{33A70864-A09C-44A9-BB5F-34FDCAADEDAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33A70864-A09C-44A9-BB5F-34FDCAADEDAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33A70864-A09C-44A9-BB5F-34FDCAADEDAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98BA87EF-F2CB-4438-9B42-E8A9CE23A60E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98BA87EF-F2CB-4438-9B42-E8A9CE23A60E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98BA87EF-F2CB-4438-9B42-E8A9CE23A60E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98BA87EF-F2CB-4438-9B42-E8A9CE23A60E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1343579C-6B32-4CA5-8241-CF5DCA3DEFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1343579C-6B32-4CA5-8241-CF5DCA3DEFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1343579C-6B32-4CA5-8241-CF5DCA3DEFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1343579C-6B32-4CA5-8241-CF5DCA3DEFDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -185,6 +197,8 @@ Global
 		{69AA3A57-8AEB-4632-9ED9-0837454435FE} = {DDDCEE52-8E92-46D3-8306-75E9FCEF8591}
 		{DDDCEE52-8E92-46D3-8306-75E9FCEF8591} = {D38A12D3-CC82-45DF-9CE2-990ECCB69B74}
 		{33A70864-A09C-44A9-BB5F-34FDCAADEDAD} = {DDDCEE52-8E92-46D3-8306-75E9FCEF8591}
+		{98BA87EF-F2CB-4438-9B42-E8A9CE23A60E} = {96008193-1E4C-4EA6-BE22-451669ED583E}
+		{1343579C-6B32-4CA5-8241-CF5DCA3DEFDF} = {D95599FB-62BE-4521-A830-0C4BE6390A5A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C39CA66-6C4B-42EB-8797-4ADCFED239DD}

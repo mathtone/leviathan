@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-[assembly: LeviathanPlugin]
+[assembly: LeviathanPlugin("Hardcore Mode Profile")]
 namespace Leviathan.SystemProfiles.Hardcore {
 	[SystemProfile("Hardcore Mode", "Do nothing, I will awaken my own Leviathan.  Leave us alone.")]
 	public class HardcoreProfile : SystemProfileComponent {

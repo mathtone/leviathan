@@ -5,8 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Leviathan.Alpha.Data.Npgsql\Leviathan.Alpha.Data.Npgsql.csproj" />
+    <ProjectReference Include="..\Leviathan.Common\Leviathan.Common.csproj" />
     <ProjectReference Include="..\Leviathan.Components\Leviathan.Components.csproj" />
+    <ProjectReference Include="..\Leviathan.Hardware.PCA9685\Leviathan.Hardware.PCA9685.csproj" />
+    <ProjectReference Include="..\Leviathan.Hardware.RPIGPIO\Leviathan.Hardware.RPIGPIO.csproj" />
     <ProjectReference Include="..\Leviathan.SystemProfiles.Basic\Leviathan.SystemProfiles.Basic.csproj" />
+    <ProjectReference Include="..\Leviathan.SystemProfiles.FactoryReset\Leviathan.SystemProfiles.FactoryReset.csproj" />
+    <ProjectReference Include="..\Leviathan.SystemProfiles.Hardcore\Leviathan.SystemProfiles.Hardcore.csproj" />
   </ItemGroup>
 
 </Project>

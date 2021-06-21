@@ -9,16 +9,16 @@ namespace Leviathan.Components {
 	}
 
 	public abstract class SystemProfileComponent : ISystemProfileComponent {
-		
-		IComponentsService Components { get; }
-		
+
+		protected IComponentsService Components { get; }
+
 		public SystemProfileComponent(IComponentsService components) {
 			this.Components = components;
 		}
 
 		protected async virtual Task ApplyRequired() {
 			var required = this.GetType().GetCustomAttribute<RequireProfileAttribute>();
-			if(required != null) {
+			if (required != null) {
 				foreach (var type in required.Types) {
 					await this.Components.Activate<ISystemProfileComponent>(type).Apply();
 				};
@@ -31,7 +31,7 @@ namespace Leviathan.Components {
 	public class Label {
 		public string Name { get; set; }
 		public string Description { get; set; }
-		public Label(string name, string description=default) {
+		public Label(string name, string description = default) {
 			this.Name = name;
 			this.Description = description;
 		}
@@ -39,7 +39,14 @@ namespace Leviathan.Components {
 
 
 	[AttributeUsage(AttributeTargets.Assembly)]
-	public class LeviathanPluginAttribute : Attribute { }
+	public class LeviathanPluginAttribute : Attribute {
+		
+		public string Name { get; }
+
+		public LeviathanPluginAttribute(string pluginName) {
+			this.Name = pluginName;
+		}
+	}
 
 	[AttributeUsage(AttributeTargets.Class)]
 	public class RequireProfileAttribute : Attribute {
@@ -55,4 +62,20 @@ namespace Leviathan.Components {
 		}
 	}
 
+	[AttributeUsage(AttributeTargets.Class)]
+	public class DriverAttribute : LeviathanComponentAttribute {
+		public object DriverData { get; }
+
+		public DriverAttribute(string name, string description, object driverData = null) : base(name, description, ComponentCategory.Driver) {
+			this.DriverData = driverData;
+		}
+	}
+
+	public interface IDeviceDriver<DEVICE> {
+		DEVICE CreateDevice();
+	}
+
+	public interface IDeviceDriver<DEVICE, DATA> {
+		DEVICE CreateDevice(DATA data);
+	}
 }

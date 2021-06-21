@@ -1,3 +1,3 @@
 ﻿using Leviathan.Components;
 
-[assembly: LeviathanPlugin]
+//[assembly: LeviathanPlugin]
