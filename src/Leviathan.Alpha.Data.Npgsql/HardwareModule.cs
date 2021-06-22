@@ -2,6 +2,7 @@
 using Leviathan.DbDataAccess.Npgsql;
 using Leviathan.SDK;
 using Npgsql;
+using NpgsqlTypes;
 using System.Collections.Generic;
 using System.Data;
 
@@ -10,18 +11,20 @@ namespace Leviathan.Alpha.Data.Npgsql {
 	}
 	public record HardwareModuleRecord : StandardEntity<long> {
 		public long ComponentTypeId { get; init; }
+		public object ModuleData { get; init; }
 	}
 
-	public class HardwareModuleRepo : AlphaDbListRepo<HardwareModuleRecord>, IHardwareModuleRepo{
-		
-		public HardwareModuleRepo(NpgsqlConnection connection) : base( connection) {}
+	public class HardwareModuleRepo : AlphaDbListRepo<HardwareModuleRecord>, IHardwareModuleRepo {
+
+		public HardwareModuleRepo(NpgsqlConnection connection) : base(connection) { }
 
 		public override long Create(HardwareModuleRecord item) => Connect()
 			.CreateCommand(SQL.CREATE)
 			.WithInput("@name", item.Name)
 			.WithInput("@description", item.Description)
 			.WithInput("@component_type_id", item.ComponentTypeId)
-			.ExecuteNonQuery();
+			.WithInput("@module_data", item.ModuleData??new object(), NpgsqlDbType.Json)
+			.ExecuteReadSingle(r => r.Field<long>("id"));
 
 		public override void Delete(long id) => Connect()
 			.CreateCommand(SQL.DELETE)
@@ -43,6 +46,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			.WithInput("@name", item.Name)
 			.WithInput("@description", item.Description)
 			.WithInput("@component_type_id", item.ComponentTypeId)
+			.WithInput("@module_data", item.ModuleData, NpgsqlDbType.Json)
 			.ExecuteNonQuery();
 
 		private static HardwareModuleRecord FromData(IDataRecord record) => new() {
@@ -50,6 +54,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			Name = record.Field<string>("name"),
 			Description = record.Field<string>("description"),
 			ComponentTypeId = record.Field<long>("component_type_id"),
+			ModuleData = record.Field<object>("module_data"),
 		};
 
 		private static readonly IListRepoCommands SQL = new ListRepoCommands {
@@ -57,12 +62,14 @@ namespace Leviathan.Alpha.Data.Npgsql {
 				INSERT INTO sys.hardware_module (
 					name,
 					description,
-					component_type_id
+					component_type_id,
+					module_data
 				)
 				VALUES(
 					@name,
 					@description,
-					@component_type_id
+					@component_type_id,
+					@module_data
 				)
 				RETURNING id",
 
@@ -70,13 +77,13 @@ namespace Leviathan.Alpha.Data.Npgsql {
 				UPDATE sys.hardware_module SET
 					name=@name,
 					description=@description,
-					component_type_id=@component_type_id
+					component_type_id=@component_type_id,
+					module_data=@module_data,
 				WHERE id=@id",
 
 			LIST = "SELECT * FROM sys.hardware_module",
 			READ = "SELECT * FROM sys.hardware_module WHERE id=@id",
 			DELETE = "DELETE sys.hardware_module WHERE id=@id",
-			
 		};
 	}
 }

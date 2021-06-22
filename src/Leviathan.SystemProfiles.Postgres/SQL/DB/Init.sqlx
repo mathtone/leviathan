@@ -45,6 +45,7 @@ CREATE TABLE sys.hardware_module
     component_type_id bigint NOT NULL,
     name character varying(50) NOT NULL,
     description text,
+    module_data json,
     CONSTRAINT hardware_module_pkey PRIMARY KEY (id),
     CONSTRAINT hardware_module_fk_component_type_id FOREIGN KEY(component_type_id) REFERENCES sys.component_type(id)
 )
@@ -60,8 +61,9 @@ CREATE TABLE sys.hardware_connector
     name character varying(50) NOT NULL,
     description text,
     connector_data json,
-    CONSTRAINT channel_pkey PRIMARY KEY (id),
-    CONSTRAINT module_fk_cpnnector_component_type_id FOREIGN KEY(component_type_id) REFERENCES sys.component_type(id)
+    CONSTRAINT hardware_connector_pkey PRIMARY KEY (id),
+    CONSTRAINT module_fk_connector_component_type_id FOREIGN KEY(component_type_id) REFERENCES sys.component_type(id),
+    CONSTRAINT module_fk_connector_module_id FOREIGN KEY(module_id) REFERENCES sys.hardware_module(id)
 )
 WITH (
     OIDS = FALSE

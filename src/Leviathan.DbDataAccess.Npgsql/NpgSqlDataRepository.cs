@@ -1,4 +1,5 @@
 ﻿using Npgsql;
+using System;
 using System.Data;
 using System.Threading.Tasks;
 
@@ -20,8 +21,14 @@ namespace Leviathan.DbDataAccess.Npgsql {
 		}
 
 		protected NpgsqlConnection Connect() {
-			if(this.Connection.State != ConnectionState.Open)
-				this.Connection.Open();
+			if (this.Connection.State != ConnectionState.Open) {
+				try {
+					this.Connection.Open();
+				}
+				catch(Exception ex) {
+					throw ex;
+				}
+			}
 			return this.Connection;
 		}
 

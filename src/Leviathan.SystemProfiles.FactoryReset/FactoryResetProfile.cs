@@ -33,7 +33,9 @@ namespace Leviathan.SystemProfiles.FactoryReset {
 				   .WithTemplate("@:db-name", cat.DatabaseInfo.InstanceDbName)
 				   .ExecuteNonQueryAsync();
 			}
-			cn.Close();
+			//Take a moment, we just blasted the database
+			await Task.Delay(1000);
+			await cn.CloseAsync();
 
 		}
 		//static readonly string DROP = ResourceLoader.LoadLocal("Profiles.Queries.Drop_DB.sqlx");

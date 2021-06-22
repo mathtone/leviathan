@@ -5,7 +5,8 @@ namespace Leviathan.Components {
 	public enum ComponentCategory {
 		SystemProfile = 1,
 		Driver = 2,
-		Service = 3
+		Connector = 3,
+		Service = 4
 	}
 
 	[AttributeUsage(AttributeTargets.Class)]

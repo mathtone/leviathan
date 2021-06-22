@@ -2,6 +2,7 @@
 using Leviathan.DbDataAccess.Npgsql;
 using Leviathan.SDK;
 using Npgsql;
+using NpgsqlTypes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,6 +12,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 	}
 	public record HardwareConnectorRecord : StandardEntity<long> {
 		public long ComponentTypeId { get; init; }
+		public long ModuleId { get; init; }
 		public object ConnectorData { get; init; }
 	}
 
@@ -22,7 +24,10 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			.CreateCommand(SQL.CREATE)
 			.WithInput("@name", item.Name)
 			.WithInput("@description", item.Description)
-			.ExecuteNonQuery();
+			.WithInput("@component_type_id", item.ComponentTypeId)
+			.WithInput("@module_id", item.ModuleId)
+			.WithInput("@connector_data", item.ConnectorData, NpgsqlDbType.Json)
+			.ExecuteReadSingle(r=>r.GetInt64(0));
 
 		public override void Delete(long id) => Connect()
 			.CreateCommand(SQL.DELETE)
@@ -43,6 +48,9 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			.WithInput("@id", item.Name)
 			.WithInput("@name", item.Name)
 			.WithInput("@description", item.Description)
+			.WithInput("@component_type_id", item.ComponentTypeId)
+			.WithInput("@module_id", item.ModuleId)
+			.WithInput("@connector_data", item.ConnectorData, NpgsqlDbType.Json)
 			.ExecuteNonQuery();
 
 		private static HardwareConnectorRecord FromData(IDataRecord record) => new() {
@@ -78,9 +86,9 @@ namespace Leviathan.Alpha.Data.Npgsql {
 					connetor_data=@connector_data
 				WHERE id=@id",
 
-			LIST = "SELECT * FROM sys.hardware_connector",
-			READ = "SELECT * FROM sys.hardware_connector WHERE id=@id",
-			DELETE = "DELETE sys.hardware_connector WHERE id=@id",
+			LIST = @"SELECT * FROM sys.hardware_connector",
+			READ = @"SELECT * FROM sys.hardware_connector WHERE id=@id",
+			DELETE = @"DELETE sys.hardware_connector WHERE id=@id",
 		};
 	}
 }

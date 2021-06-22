@@ -11,7 +11,7 @@ namespace Leviathan.Alpha.Api.Controllers.Data {
 
 	public abstract class RepoController<REPO, ID, T> : ControllerBase where REPO : IRepository<ID, T> {
 		private ILeviathanAlphaDataContext _context;
-		private Func<ILeviathanAlphaDataContext, REPO> _selector;
+		private readonly Func<ILeviathanAlphaDataContext, REPO> _selector;
 		private REPO _repo;
 
 		protected ILeviathanAlphaDataContextProvider Provider { get; }
@@ -39,20 +39,20 @@ namespace Leviathan.Alpha.Api.Controllers.Data {
 
 	public class RepoController<ID, T> : RepoController<IRepository<ID, T>, ID, T> {
 		public RepoController(ILeviathanAlphaDataContextProvider provider, Func<ILeviathanAlphaDataContext, IRepository<ID, T>> selector) :
-			base(provider,selector) {
+			base(provider, selector) {
 		}
 	}
 
 	public class ListRepoController<ID, T> : ListRepoController<IListRepository<ID, T>, ID, T> {
 		public ListRepoController(ILeviathanAlphaDataContextProvider provider, Func<ILeviathanAlphaDataContext, IListRepository<ID, T>> selector) :
-			base(provider,selector) { }
+			base(provider, selector) { }
 	}
 
 	public class ListRepoController<REPO, ID, T> : RepoController<REPO, ID, T>
 		where REPO : IRepository<ID, T>, IListing<T> {
 
 		public ListRepoController(ILeviathanAlphaDataContextProvider provider, Func<ILeviathanAlphaDataContext, REPO> selector) :
-			base(provider,selector) { }
+			base(provider, selector) { }
 
 		[HttpGet, Route("[action]")]
 		public IEnumerable<T> List() => Repo.List();

@@ -26,7 +26,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 	public class LeviathanAlphaDataContext : ILeviathanAlphaDataContext<NpgsqlConnection> {
 
 		//IDbConnectionService<NpgsqlConnection> _connectionProvider;
-		NpgsqlConnection _connection;
+		readonly NpgsqlConnection _connection;
 
 		IComponentAssemblyRepo _componentAssembly;
 		IComponentCategoryRepo _componentCategory;
@@ -50,7 +50,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 
 
 	public class LeviathanAlphaDataContextProvider : ILeviathanAlphaDataContextProvider {
-		IInstanceConnectionService<NpgsqlConnection> _provider;
+		readonly IInstanceConnectionService<NpgsqlConnection> _provider;
 
 		public ILeviathanAlphaDataContext CreateContext() => CreateContext<IDbConnection>();
 		public ILeviathanAlphaDataContext<CN> CreateContext<CN>() where CN : IDbConnection =>

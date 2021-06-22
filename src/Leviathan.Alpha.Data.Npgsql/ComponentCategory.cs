@@ -23,7 +23,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			.CreateCommand(SQL.CREATE)
 			.WithInput("@name", item.Name)
 			.WithInput("@description", item.Description)
-			.ExecuteNonQuery();
+			.ExecuteReadSingle(r=>r.GetInt64(0));
 
 		public override void Delete(long id) => Connect()
 			.CreateCommand(SQL.DELETE)

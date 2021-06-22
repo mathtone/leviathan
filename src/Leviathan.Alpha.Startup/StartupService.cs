@@ -19,15 +19,15 @@ namespace Leviathan.Alpha.Startup {
 
 		ILeviathanSystem System { get; }
 		IComponentsService Components { get; }
-		IDataSystemService<NpgsqlConnection> DataSystem { get; }
+		//IDataSystemService<NpgsqlConnection> DataSystem { get; }
 
 		protected Dictionary<string, ComponentInfo> Profiles { get; set; }
 
-		public StartupService(ILeviathanSystem system, IComponentsService components, IDataSystemService<NpgsqlConnection> dataSystem) {
+		public StartupService(ILeviathanSystem system, IComponentsService components) {
 			this.System = system;
 			this.Components = components;
 			this.Initialize = InitializeAsync();
-			this.DataSystem = dataSystem;
+			//this.DataSystem = dataSystem;
 		}
 
 		protected async override Task InitializeAsync() {

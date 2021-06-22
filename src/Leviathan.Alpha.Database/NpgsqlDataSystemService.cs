@@ -54,7 +54,7 @@ namespace Leviathan.Alpha.Database {
 
 	public class NpgsqlDataSystemService : ServiceComponent, IDataSystemService<NpgsqlConnection> {
 
-		ILeviathanSystem System { get; }
+		//ILeviathanSystem System { get; }
 		IConfigManager<DatabaseConfig> ConfigService { get; }
 
 		public ISystemConnectionService<NpgsqlConnection> SystemDB { get; private set; }
@@ -62,8 +62,8 @@ namespace Leviathan.Alpha.Database {
 
 		protected DatabaseConfig CurrentConfig => ConfigService.Config;
 
-		public NpgsqlDataSystemService(ILeviathanSystem system, IConfigManager<DatabaseConfig> config) {
-			this.System = system;
+		public NpgsqlDataSystemService(IConfigManager<DatabaseConfig> config) {
+			//this.System = system;
 			this.ConfigService = config;
 			this.Initialize = InitializeAsync();
 		}

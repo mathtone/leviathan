@@ -8,7 +8,7 @@ namespace Leviathan.Alpha.Database {
 	}
 
 	public class ConnectionService<CN> : IDbConnectionService<CN> where CN : IDbConnection {
-		Func<CN> connectionFactory;
+		readonly Func<CN> connectionFactory;
 
 		public CN Connect() => connectionFactory();
 		

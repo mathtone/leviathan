@@ -9,15 +9,16 @@ using Leviathan.Hardware.I2C;
 namespace Leviathan.Hardware.PCA9685 {
 
 	[Driver("PCA9685", "PCA9685 Pwm Controller")]
-	public class Pca9685Driver : IDeviceDriver<Pca9685, I2cDeviceSettings> {
+	public class LeviathanPca9685 : IDeviceDriver<Pca9685, I2cDeviceSettings> {
 
-		readonly I2CDriver i2c;
+		readonly LeviathanI2C i2c;
 
-		public Pca9685Driver(I2CDriver i2c) {
+		public LeviathanPca9685(LeviathanI2C i2c) {
 			this.i2c = i2c;
 		}
 
-		public Pca9685 CreateDevice(I2cDeviceSettings data) => new(i2c.CreateDevice(data));
+		public Pca9685 CreateDevice(I2cDeviceSettings data) =>
+			new(i2c.CreateDevice(data));
 	}
 
 	//[Driver("PCA9685", "PCA9685 PWM Controller")]

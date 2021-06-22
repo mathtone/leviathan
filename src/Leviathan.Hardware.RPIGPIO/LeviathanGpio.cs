@@ -8,9 +8,9 @@ namespace Leviathan.Hardware.RPIGPIO {
 	}
 
 	[Driver("GPIO", "General purpose in/out")]
-	public class GpioDriver : IDeviceDriver<GpioController, GpioDeviceData>, IDeviceDriver<GpioController> {
+	public class LeviathanGpio : IDeviceDriver<GpioController, GpioDeviceData>, IDeviceDriver<GpioController> {
 
-		public GpioDriver() { }
+		public LeviathanGpio() { }
 		public GpioController CreateDevice(GpioDeviceData data = null) => new(data?.PinNumberingScheme ?? PinNumberingScheme.Logical);
 		public GpioController CreateDevice() => CreateDevice(null);
 	}

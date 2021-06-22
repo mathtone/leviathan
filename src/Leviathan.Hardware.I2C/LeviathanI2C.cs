@@ -10,7 +10,8 @@ namespace Leviathan.Hardware.I2C {
 	}
 
 	[Driver("I2C", "I2C (Inter-Integrated Circuit) Protocol driver")]
-	public class I2CDriver : IDeviceDriver<I2cDevice, I2cDeviceSettings> {
-		public I2cDevice CreateDevice(I2cDeviceSettings settings) => I2cDevice.Create(settings.Settings);
+	public class LeviathanI2C : IDeviceDriver<I2cDevice, I2cDeviceSettings> {
+		public I2cDevice CreateDevice(I2cDeviceSettings settings) =>
+			I2cDevice.Create(settings.Settings);
 	}
 }

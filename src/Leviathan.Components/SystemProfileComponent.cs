@@ -37,17 +37,6 @@ namespace Leviathan.Components {
 		}
 	}
 
-
-	[AttributeUsage(AttributeTargets.Assembly)]
-	public class LeviathanPluginAttribute : Attribute {
-		
-		public string Name { get; }
-
-		public LeviathanPluginAttribute(string pluginName) {
-			this.Name = pluginName;
-		}
-	}
-
 	[AttributeUsage(AttributeTargets.Class)]
 	public class RequireProfileAttribute : Attribute {
 		public Type[] Types { get; init; }
@@ -55,21 +44,15 @@ namespace Leviathan.Components {
 			this.Types = profileTypes;
 		}
 	}
+	//[AttributeUsage(AttributeTargets.Class)]
+	//public class RequireComponentAttribute : Attribute {
 
-	[AttributeUsage(AttributeTargets.Class)]
-	public class SystemProfileAttribute : LeviathanComponentAttribute {
-		public SystemProfileAttribute(string name, string description) : base(name, description, ComponentCategory.SystemProfile) {
-		}
-	}
+	//	public Type[] Types { get; }
 
-	[AttributeUsage(AttributeTargets.Class)]
-	public class DriverAttribute : LeviathanComponentAttribute {
-		public object DriverData { get; }
-
-		public DriverAttribute(string name, string description, object driverData = null) : base(name, description, ComponentCategory.Driver) {
-			this.DriverData = driverData;
-		}
-	}
+	//	public RequireComponentAttribute(params Type[] componentTyped) {
+	//		this.Types = componentTyped;
+	//	}
+	//}
 
 	public interface IDeviceDriver<DEVICE> {
 		DEVICE CreateDevice();

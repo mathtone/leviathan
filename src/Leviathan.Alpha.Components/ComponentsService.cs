@@ -21,7 +21,7 @@ namespace Leviathan.Alpha.Components {
 
 		ILeviathanAlphaDataContext<NpgsqlConnection> _context;
 
-		ILeviathanSystem System { get; }
+		//ILeviathanSystem System { get; }
 		IServiceProvider Services { get; }
 		ILeviathanAlphaDataContextProvider Provider { get; }
 		ILeviathanAlphaDataContext<NpgsqlConnection> Context => _context ??= Provider.CreateContext<NpgsqlConnection>();
@@ -35,8 +35,8 @@ namespace Leviathan.Alpha.Components {
 		Dictionary<string, Assembly> plugins;
 		public IReadOnlyDictionary<string, ComponentInfo> Components { get; protected set; }
 
-		public ComponentsService(ILeviathanSystem system, IServiceProvider services, ILeviathanAlphaDataContextProvider provider) {
-			this.System = system;
+		public ComponentsService(IServiceProvider services, ILeviathanAlphaDataContextProvider provider) {
+			//this.System = system;
 			this.Services = services;
 			this.Provider = provider;
 			this.Initialize = InitializeAsync();

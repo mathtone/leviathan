@@ -43,6 +43,7 @@ namespace Leviathan.SystemProfiles.Postgres {
 				var componentCategories = new Label[] {
 					new ("System Profile","System configuration profiles"),
 					new ("Device Driver","Hardware device driver/module"),
+					new ("Hardware Connector","Hardware Connection"),
 					new ("Service","Injectible service component"),
 				};
 
