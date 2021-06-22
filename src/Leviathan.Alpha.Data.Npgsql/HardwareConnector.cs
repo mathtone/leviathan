@@ -17,8 +17,8 @@ namespace Leviathan.Alpha.Data.Npgsql {
 	}
 
 	public class HardwareConnectorRepo : AlphaDbListRepo<HardwareConnectorRecord>, IHardwareConnectorRepo {
-		public HardwareConnectorRepo(NpgsqlConnection connection) : base(connection) {
-		}
+		public HardwareConnectorRepo(NpgsqlConnection connection) :
+			base(connection) { }
 
 		public override long Create(HardwareConnectorRecord item) => Connect()
 			.CreateCommand(SQL.CREATE)
@@ -27,7 +27,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			.WithInput("@component_type_id", item.ComponentTypeId)
 			.WithInput("@module_id", item.ModuleId)
 			.WithInput("@connector_data", item.ConnectorData, NpgsqlDbType.Json)
-			.ExecuteReadSingle(r=>r.GetInt64(0));
+			.ExecuteReadSingle(r => r.GetInt64(0));
 
 		public override void Delete(long id) => Connect()
 			.CreateCommand(SQL.DELETE)
@@ -62,7 +62,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 		private static readonly IListRepoCommands SQL = new ListRepoCommands {
 			CREATE = @"
 				INSERT INTO sys.hardware_connector (
-					component_type_id,	
+					component_type_id,
 					module_id,
 					name,
 					description,

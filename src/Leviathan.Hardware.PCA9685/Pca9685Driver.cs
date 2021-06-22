@@ -3,6 +3,7 @@ using System;
 using Iot.Device.Pwm;
 using System.Device.I2c;
 using Leviathan.Hardware.I2C;
+using Leviathan.Hardware;
 //using Leviathan.Hardware.I2c;
 
 [assembly: LeviathanPlugin("PCA9685 Drivers")]
@@ -21,23 +22,47 @@ namespace Leviathan.Hardware.PCA9685 {
 			new(i2c.CreateDevice(data));
 	}
 
-	//[Driver("PCA9685", "PCA9685 PWM Controller")]
-	//public class PCA9685Driver {
-	//	public Pca9685 Device { get; }
-	//}
 
-	//public class I2cDriver {
+	public class PwmIOConnectorData {
 
-	//	public I2cDevice Device { get; }
+		public int PwmChannelId { get; init; }
+	}
 
-	//	public I2cDriver() {
-	//		this.Device = I2cDevice.Create(config.Device.Settings);
-	//		//Devices = config.ToDictionary(s => s.Id, s => I2cDevice.Create(s.Settings));
-	//	}
+	[LeviathanConnector("PWM IO", "PCA9685 PWM Connector")]
+	public class PwmIOConnector {
+		public PwmIOConnector(LeviathanPca9685 device, PwmIOConnectorData connectorData) {
+			;
+		}
+	}
 
-	//	protected override void OnDispose() {
-	//		base.OnDispose();
-	//		Device.Dispose();
-	//	}
-	//}
+	[LeviathanChannel("PWM 0/1", "PCA9685 On/Off")]
+	public class PwmOnOffChannel : IInputChannel<bool>, IOutputChannel<bool> {
+		public void SetValue(bool value) {
+			throw new System.NotImplementedException();
+		}
+
+		public bool GetValue() {
+			throw new System.NotImplementedException();
+		}
+	}
+
+
+	[LeviathanChannel("PWM Sensor", "PCA9685 Input-only")]
+	public class PwmSensorChannel : IInputChannel<double> {
+		public double GetValue() {
+			throw new System.NotImplementedException();
+		}
+	}
+
+	[LeviathanChannel("PWM", "PCA9685 Input/Output")]
+	public class PwmChannel : IInputChannel<double>, IOutputChannel<double> {
+
+		public PwmChannel(PwmIOConnector connector) {
+			;
+		}
+
+		public void SetValue(double value) { }
+		public double GetValue() => 0;
+	}
+
 }

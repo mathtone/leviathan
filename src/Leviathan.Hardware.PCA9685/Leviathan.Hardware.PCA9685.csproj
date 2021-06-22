@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Leviathan.Components\Leviathan.Components.csproj" />
     <ProjectReference Include="..\Leviathan.Hardware.I2C\Leviathan.Hardware.I2C.csproj" />
+    <ProjectReference Include="..\Leviathan.hardware\Leviathan.Hardware.csproj" />
   </ItemGroup>
 
 </Project>

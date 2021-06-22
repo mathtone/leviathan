@@ -35,6 +35,12 @@ namespace Leviathan.Alpha.Api.Controllers.Data {
 	[ApiController, Route("api/data/[controller]")]
 	public class HardwareModuleController : ListRepoController<long, HardwareModuleRecord> {
 		public HardwareModuleController(ILeviathanAlphaDataContextProvider context) :
-			base(context,r=>r.HardwareModule) { }
+			base(context, r => r.HardwareModule) { }
+	}
+
+	[ApiController, Route("api/data/[controller]")]
+	public class HardwareChannelController : ListRepoController<long, HardwareChannelRecord> {
+		public HardwareChannelController(ILeviathanAlphaDataContextProvider context) :
+			base(context, r => r.HardwareChannel) { }
 	}
 }

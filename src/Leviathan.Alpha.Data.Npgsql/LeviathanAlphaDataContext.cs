@@ -15,6 +15,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 		IComponentTypeRepo ComponentType { get; }
 		IHardwareModuleRepo HardwareModule { get; }
 		IHardwareConnectorRepo HardwareConnector { get; }
+		IHardwareChannelRepo HardwareChannel { get; }
 
 	}
 
@@ -33,13 +34,14 @@ namespace Leviathan.Alpha.Data.Npgsql {
 		IComponentTypeRepo _componentType;
 		IHardwareModuleRepo _hardwareModule;
 		IHardwareConnectorRepo _hardwareConnector;
+		IHardwareChannelRepo _hardwareChannel;
 
 		public IComponentAssemblyRepo ComponentAssembly => _componentAssembly ??= new ComponentAssemblyRepo(_connection);
 		public IComponentCategoryRepo ComponentCategory => _componentCategory ??= new ComponentCategoryRepo(_connection);
 		public IComponentTypeRepo ComponentType => _componentType ??= new ComponentTypeRepo(_connection);
 		public IHardwareModuleRepo HardwareModule => _hardwareModule ??= new HardwareModuleRepo(_connection);
 		public IHardwareConnectorRepo HardwareConnector => _hardwareConnector ??= new HardwareConnectorRepo(_connection);
-
+		public IHardwareChannelRepo HardwareChannel => _hardwareChannel ??= new HardwareChannelRepo(_connection);
 		public NpgsqlConnection Connection => _connection;
 
 		public LeviathanAlphaDataContext(IDbConnectionService<NpgsqlConnection> connectionProvider) {

@@ -68,3 +68,20 @@ CREATE TABLE sys.hardware_connector
 WITH (
     OIDS = FALSE
 );
+
+CREATE TABLE sys.hardware_channel
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+    connector_id bigint,
+    component_type_id bigint,
+    name character varying(50) NOT NULL,
+    description text,
+    channel_data json,
+    CONSTRAINT hardware_channel_pkey PRIMARY KEY (id),
+    CONSTRAINT module_fk_hardware_channel_component_type_id FOREIGN KEY(component_type_id) REFERENCES sys.component_type(id),
+    CONSTRAINT module_fk_hardware_channel_connector_id FOREIGN KEY(connector_id) REFERENCES sys.hardware_connector(id)
+)
+WITH (
+    OIDS = FALSE
+);
+

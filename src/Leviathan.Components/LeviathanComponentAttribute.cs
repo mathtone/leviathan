@@ -6,7 +6,9 @@ namespace Leviathan.Components {
 		SystemProfile = 1,
 		Driver = 2,
 		Connector = 3,
-		Service = 4
+		HardwareChannel = 4,
+		Service = 4,
+		Custom
 	}
 
 	[AttributeUsage(AttributeTargets.Class)]

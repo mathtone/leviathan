@@ -10,11 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="SQL\Component\" />
-    <Folder Include="SQL\Hardware\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Npgsql" Version="5.0.7" />
   </ItemGroup>
 

@@ -19,4 +19,12 @@ namespace Leviathan.Components {
 			base(name, description, ComponentCategory.Connector) {
 		}
 	}
+
+	[AttributeUsage(AttributeTargets.Class)]
+	public class LeviathanChannelAttribute : LeviathanComponentAttribute {
+
+		public LeviathanChannelAttribute(string name, string description) :
+			base(name, description, ComponentCategory.HardwareChannel) {
+		}
+	}
 }

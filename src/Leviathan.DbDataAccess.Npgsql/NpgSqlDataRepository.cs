@@ -1,6 +1,8 @@
 ﻿using Npgsql;
 using System;
 using System.Data;
+using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Leviathan.DbDataAccess.Npgsql {
@@ -21,16 +23,26 @@ namespace Leviathan.DbDataAccess.Npgsql {
 		}
 
 		protected NpgsqlConnection Connect() {
-			if (this.Connection.State != ConnectionState.Open) {
+			if (this.Connection.State == ConnectionState.Open) {
+				return this.Connection;
+			}
+			for (var i = 0; i < 3; i++) {
 				try {
 					this.Connection.Open();
+					return this.Connection;
 				}
-				catch(Exception ex) {
-					throw ex;
+				catch(SocketException) {
+					//throw ex;
+					//HACK
+					if (i == 3) {
+						throw;
+					}
+					Thread.Sleep(1000);
 				}
 			}
-			return this.Connection;
+			throw new Exception("Connection failure");
 		}
+
 
 		protected async Task<NpgsqlConnection> ConnectAsync() {
 			if (this.Connection.State != ConnectionState.Open)
@@ -49,7 +61,7 @@ namespace Leviathan.DbDataAccess.Npgsql {
 	public interface IListCommands {
 		string LIST { get; }
 	}
-	public interface IListRepoCommands :IListCommands,IRepoCommands{
+	public interface IListRepoCommands : IListCommands, IRepoCommands {
 
 	}
 	public class RepoCommands : IRepoCommands {

@@ -27,7 +27,7 @@ namespace Leviathan.Alpha.Components {
 		ILeviathanAlphaDataContext<NpgsqlConnection> Context => _context ??= Provider.CreateContext<NpgsqlConnection>();
 		NpgsqlConnection Connection => Context.Connection;
 		NpgsqlConnection Connect() {
-			if(Connection.State != ConnectionState.Open) {
+			if (Connection.State != ConnectionState.Open) {
 				Connection.Open();
 			}
 			return Connection;
@@ -45,7 +45,7 @@ namespace Leviathan.Alpha.Components {
 		protected override async Task InitializeAsync() {
 			await base.InitializeAsync();
 			plugins = GetPluginAssemblies().ToDictionary(p => p.Location);
-			Components = plugins.Values.SelectMany(ListComponents).ToDictionary(a => a.Name);
+			Components = plugins.Values.SelectMany(ListComponents).ToDictionary(a => a.Name + " " + Enum.GetName(a.Category));
 		}
 
 		public async Task<ComponentsCatalog> CatalogAsync() {
@@ -66,7 +66,7 @@ namespace Leviathan.Alpha.Components {
 		}
 
 		public long RegisterComponent(Type type) {
-			
+
 			var cmd = Connect().CreateCommand(@"SELECT * FROM sys.component_assembly where assembly_path = @path");
 			var id = cmd.WithInput("@path", type.Assembly.Location)
 				.ExecuteReader()
