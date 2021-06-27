@@ -11,9 +11,19 @@ namespace Leviathan.Hardware.RPIGPIO {
 	[Driver("GPIO", "General purpose in/out")]
 	public class LeviathanGpio : IDeviceDriver<GpioController, GpioDeviceData>, IDeviceDriver<GpioController> {
 
-		public LeviathanGpio() { }
-		public GpioController CreateDevice(GpioDeviceData data = null) => new(data?.PinNumberingScheme ?? PinNumberingScheme.Logical);
+		//GpioDeviceData _deviceData;
+
+		public LeviathanGpio() {
+			
+		}
+
+		public GpioController CreateDevice(GpioDeviceData data = null) =>
+			new(data?.PinNumberingScheme ?? PinNumberingScheme.Logical);
+
 		public GpioController CreateDevice() => CreateDevice(null);
+
+		object IDeviceDriver.CreateDevice(object data) =>
+			CreateDevice((GpioDeviceData)data);
 	}
 
 	public class GpioConnectorData {
@@ -24,8 +34,13 @@ namespace Leviathan.Hardware.RPIGPIO {
 
 	[LeviathanConnector("GPIO PIN", "Gpio Connector")]
 	public class GpioConnector {
+		
+		public GpioConnectorData ConnectorData { get; }
+		protected GpioController Device { get; }
+
 		public GpioConnector(GpioController device, GpioConnectorData connectorData) {
-			;
+			this.Device = device;
+			this.ConnectorData = connectorData;
 		}
 	}
 
@@ -40,7 +55,6 @@ namespace Leviathan.Hardware.RPIGPIO {
 		}
 	}
 
-
 	[LeviathanChannel("GPIO Sensor", "GPIO Input-only")]
 	public class GpioSensorChannel : IInputChannel<double> {
 		public double GetValue() {
@@ -50,14 +64,16 @@ namespace Leviathan.Hardware.RPIGPIO {
 
 	[LeviathanChannel("GPIO", "GPIO Input/Output")]
 	public class GpioChannel : IInputChannel<double>, IOutputChannel<double> {
+		private readonly GpioConnector _connector;
+		private readonly PinMode _mode;
 
 		public GpioChannel(GpioConnector connector, PinMode mode) {
-			;
+			_connector = connector;
+			_mode = mode;
+			
 		}
 
 		public void SetValue(double value) { }
 		public double GetValue() => 0;
 	}
-
-	
 }

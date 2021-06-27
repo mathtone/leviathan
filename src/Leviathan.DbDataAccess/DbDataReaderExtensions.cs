@@ -15,7 +15,7 @@ namespace Leviathan.DbDataAccess {
 		public static async IAsyncEnumerable<T> ConsumeAsync<RDR, T>(this Task<RDR> readerTask, Func<IDataRecord, T> selector)
 			where RDR : DbDataReader {
 
-			await foreach (var r in (await readerTask).ConsumeAsync(selector))
+			await foreach (var r in readerTask.Result.ConsumeAsync(selector))
 				yield return r;
 
 			await (await readerTask).CloseAsync();

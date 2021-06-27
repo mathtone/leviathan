@@ -11,6 +11,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 		public long CategoryId { get; init; }
 		public long AssemblyId { get; init; }
 		public string TypeName { get; init; }
+		public string TypeLocator { get; init; }
 	}
 
 	public interface IComponentTypeRepo : IListRepository<long, ComponentTypeRecord> { }
@@ -26,6 +27,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			.WithInput("@component_assembly_id", item.AssemblyId)
 			.WithInput("@component_category_id", item.CategoryId)
 			.WithInput("@type_name", item.TypeName)
+			.WithInput("@type_locator", item.TypeLocator)
 			.ExecuteReadSingle(r=>r.Field<long>("id"));
 
 		public override void Delete(long id) => Connect()
@@ -50,6 +52,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			.WithInput("@component_assembly_id", item.AssemblyId)
 			.WithInput("@component_category_id", item.CategoryId)
 			.WithInput("@type_name", item.TypeName)
+			.WithInput("@type_locator", item.TypeLocator)
 			.ExecuteNonQuery();
 
 		private static ComponentTypeRecord FromData(IDataRecord record) => new() {
@@ -59,6 +62,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			AssemblyId = record.Field<long>("component_assembly_id"),
 			CategoryId = record.Field<long>("component_category_id"),
 			TypeName = record.Field<string>("type_name"),
+			TypeLocator = record.Field<string>("type_locator")
 		};
 
 		private static readonly IListRepoCommands SQL = new ListRepoCommands {
@@ -68,14 +72,16 @@ namespace Leviathan.Alpha.Data.Npgsql {
 					description,
 					component_category_id,
 					component_assembly_id,
-					type_name
+					type_name,
+					type_locator
 				)
 				VALUES(
 					@name,
 					@description,
 					@component_category_id,
 					@component_assembly_id,
-					@type_name
+					@type_name,
+					@type_locator
 				)
 				RETURNING id",
 
@@ -85,7 +91,9 @@ namespace Leviathan.Alpha.Data.Npgsql {
 					description=@description,
 					component_category_id=@component_category_id,
 					component_assembly_id=@component_assembly_id,
-	`				type_name=@type_name
+	`				type_name=@type_name,
+					type_locator=@type_locator
+
 				WHERE id=@id",
 			LIST = @"SELECT * FROM sys.component_type",
 			READ = @"SELECT * FROM sys.component_type WHERE id=@id",

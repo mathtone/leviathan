@@ -50,9 +50,9 @@ namespace Leviathan.SystemProfiles.RoboTank {
 			};
 
 			var modules = new {
-				GPIO = CreateModule("RPI GPIO", "RPI GPIO Module", drivers.GPIO),
-				I2C = CreateModule("I2C", "RPI I2C Module", drivers.GPIO),
-				PWM = CreateModule("PCA9685", "Robo-Tank PWM", drivers.PWM)
+				GPIO = CreateModule("RPI GPIO", "RPI GPIO Module", drivers.GPIO, null),
+				I2C = CreateModule("I2C", "RPI I2C Module", drivers.GPIO, null),
+				PWM = CreateModule("PCA9685", "Robo-Tank PWM", drivers.PWM, new { Settings = new { BusId = 1, DeviceAddress = 64 } })
 			};
 
 			var connectors = new {
@@ -92,10 +92,11 @@ namespace Leviathan.SystemProfiles.RoboTank {
 		long Register<T>() =>
 			Components.RegisterComponent(typeof(T));
 
-		long CreateModule(string name, string description, long typeId) => Context.HardwareModule.Create(new HardwareModuleRecord {
+		long CreateModule(string name, string description, long typeId, object moduleData) => Context.HardwareModule.Create(new HardwareModuleRecord {
 			Name = name,
 			ComponentTypeId = typeId,
-			Description = description
+			Description = description,
+			ModuleData = moduleData
 		});
 
 		long CreateConnector(string name, string description, long typeId, long moduleId, object connectorData = default) => Context.HardwareConnector.Create(new HardwareConnectorRecord {

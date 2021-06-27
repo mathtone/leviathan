@@ -3,6 +3,7 @@ using Leviathan.Alpha.Configuration;
 using Leviathan.Alpha.Core;
 using Leviathan.Alpha.Data.Npgsql;
 using Leviathan.Alpha.Database;
+using Leviathan.Alpha.Hardware;
 using Leviathan.Alpha.Startup;
 using Leviathan.Components;
 using Leviathan.SDK;
@@ -43,6 +44,7 @@ namespace Leviathan.Alpha.Api {
 			.AddSingleton<IDataSystemService>(svc => svc.GetRequiredService<IDataSystemService<IDbConnection>>())
 			.AddSingleton<IConfigManager<DatabaseConfig>, LeviathanConfigManager<DatabaseConfig>>()
 			.AddSingleton<ILeviathanAlphaDataContextProvider, LeviathanAlphaDataContextProvider>()
+			.AddSingleton<ILeviathanHardwareSystemService, LeviathanHardwareSystemService>()
 			.AddTransient(svc => svc.GetRequiredService<IDataSystemService<NpgsqlConnection>>().InstanceDB);
 
 		//.AddSingleton<IListRepository<long, ComponentCategoryRecord>>(svc => new ComponentCategoryRepo(null, null));

@@ -44,21 +44,16 @@ namespace Leviathan.Components {
 			this.Types = profileTypes;
 		}
 	}
-	//[AttributeUsage(AttributeTargets.Class)]
-	//public class RequireComponentAttribute : Attribute {
 
-	//	public Type[] Types { get; }
-
-	//	public RequireComponentAttribute(params Type[] componentTyped) {
-	//		this.Types = componentTyped;
-	//	}
-	//}
-
-	public interface IDeviceDriver<DEVICE> {
+	public interface IDeviceDriver<DEVICE> : IDeviceDriver {
 		DEVICE CreateDevice();
 	}
 
-	public interface IDeviceDriver<DEVICE, DATA> {
+	public interface IDeviceDriver<DEVICE, DATA> : IDeviceDriver {
 		DEVICE CreateDevice(DATA data);
+	}
+
+	public interface IDeviceDriver {
+		object CreateDevice(object data);
 	}
 }

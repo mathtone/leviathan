@@ -60,7 +60,8 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			Name = record.Field<string>("name"),
 			Description = record.Field<string>("description"),
 			ComponentTypeId = record.Field<long>("component_type_id"),
-			ConnectorId = record.Field<long>("connector_id")
+			ConnectorId = record.Field<long>("connector_id"),
+			ChannelData = record.Field<object>("channel_data")
 		};
 
 		private static readonly IListRepoCommands SQL = new ListRepoCommands {

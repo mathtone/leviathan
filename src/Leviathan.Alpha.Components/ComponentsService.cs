@@ -89,7 +89,8 @@ namespace Leviathan.Alpha.Components {
 				CategoryId = (long)a2.Category,
 				TypeName = type.FullName,
 				Name = a2.Name,
-				Description = a2.Description
+				Description = a2.Description,
+				TypeLocator = type.AssemblyQualifiedName
 			});
 
 			return componentid;

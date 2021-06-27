@@ -31,6 +31,7 @@ CREATE TABLE sys.component_type
    name character varying(50) NOT NULL,
    description text,
    type_name character varying(1000) NOT NULL,
+   type_locator character varying(1000) NOT NULL,
    CONSTRAINT component_type_pkey PRIMARY KEY (id),
    CONSTRAINT component_type_fk_component_category_id FOREIGN KEY(component_category_id) REFERENCES sys.component_category(id),
    CONSTRAINT component_type_fk_component_assembly_id FOREIGN KEY(component_assembly_id) REFERENCES sys.component_assembly(id)
