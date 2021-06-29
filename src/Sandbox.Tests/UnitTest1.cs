@@ -83,10 +83,10 @@ namespace Sandbox.Tests {
 
 			_drivers = (await Context.Connection.CreateCommand(SQL.GET_MODULES).ExecuteReaderAsync().ToArrayAsync(
 				r => new {
-					Id = r.Field<long>("module_id"),
-					Name = r.Field<string>("module_name"),
-					ModuleData = r.Field<string>("module_data"),
-					TypeLocator = r.Field<string>("type_locator"),
+					Id = r.Get<long>("module_id"),
+					Name = r.Get<string>("module_name"),
+					ModuleData = r.Get<string>("module_data"),
+					TypeLocator = r.Get<string>("type_locator"),
 				}
 			)).ToDictionary(
 				i => i.Id,

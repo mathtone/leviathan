@@ -29,7 +29,7 @@ namespace Leviathan.Hardware.PCA9685 {
 
 	[LeviathanConnector("PWM IO", "PCA9685 PWM Connector")]
 	public class PwmIOConnector {
-		
+
 		Pca9685 _device;
 		PwmIOConnectorData _connectorData;
 		System.Device.Pwm.PwmChannel _channel;
@@ -43,6 +43,13 @@ namespace Leviathan.Hardware.PCA9685 {
 
 	[LeviathanChannel("PWM 0/1", "PCA9685 On/Off")]
 	public class PwmOnOffChannel : IInputChannel<bool>, IOutputChannel<bool> {
+		PwmIOConnector _connector;
+
+		public PwmOnOffChannel(PwmIOConnector connector, object channeldata) {
+			this._connector = connector;
+		}
+
+
 		public void SetValue(bool value) {
 			throw new System.NotImplementedException();
 		}
@@ -54,6 +61,11 @@ namespace Leviathan.Hardware.PCA9685 {
 
 	[LeviathanChannel("PWM Sensor", "PCA9685 Input-only")]
 	public class PwmSensorChannel : IInputChannel<double> {
+		PwmIOConnector _connector;
+		public PwmSensorChannel(PwmIOConnector connector, object channeldata) {
+			this._connector = connector;
+		}
+
 		public double GetValue() {
 			throw new System.NotImplementedException();
 		}
@@ -62,8 +74,9 @@ namespace Leviathan.Hardware.PCA9685 {
 	[LeviathanChannel("PWM", "PCA9685 Input/Output")]
 	public class PwmChannel : IInputChannel<double>, IOutputChannel<double> {
 
-		public PwmChannel(PwmIOConnector connector) {
-			;
+		PwmIOConnector _connector;
+		public PwmChannel(PwmIOConnector connector, object channeldata) {
+			this._connector = connector;
 		}
 
 		public void SetValue(double value) { }

@@ -56,12 +56,12 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			.ExecuteNonQuery();	
 
 		private static HardwareChannelRecord FromData(IDataRecord record) => new() {
-			Id = record.Field<long>("id"),
-			Name = record.Field<string>("name"),
-			Description = record.Field<string>("description"),
-			ComponentTypeId = record.Field<long>("component_type_id"),
-			ConnectorId = record.Field<long>("connector_id"),
-			ChannelData = record.Field<object>("channel_data")
+			Id = record.Get<long>("id"),
+			Name = record.Get<string>("name"),
+			Description = record.Get<string>("description"),
+			ComponentTypeId = record.Get<long>("component_type_id"),
+			ConnectorId = record.Get<long>("connector_id"),
+			ChannelData = record.Get<object>("channel_data")
 		};
 
 		private static readonly IListRepoCommands SQL = new ListRepoCommands {

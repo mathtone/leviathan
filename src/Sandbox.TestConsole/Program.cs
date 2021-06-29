@@ -3,6 +3,7 @@ using Leviathan.Alpha.Database;
 using Leviathan.Components;
 using Leviathan.DbDataAccess;
 using Leviathan.DbDataAccess.Npgsql;
+using Leviathan.Hardware;
 using Leviathan.Services;
 using Newtonsoft.Json;
 using Npgsql;
@@ -15,9 +16,11 @@ using System.Threading.Tasks;
 namespace Sandbox.TestConsole {
 	class Program {
 		static async Task<int> Main(string[] args) {
+
 			var connections = new InstanceConnectService(() => new NpgsqlConnection(DbConnectionString("poseidonalpha.local", "pi", "Digital!2021", "leviathan_alpha_0x00")));
 			var Provider = new LeviathanAlphaDataContextProvider(connections);
 			var ctx = Provider.CreateContext<NpgsqlConnection>();
+
 			await ctx.Connection.OpenAsync();
 
 			var Drivers = new Drivers(ctx);
@@ -26,6 +29,15 @@ namespace Sandbox.TestConsole {
 			var Channels = new Channels(ctx, Connectors);
 
 			await ctx.Connection.CloseAsync();
+
+			for (var i = 1; i <= 16; i++) {
+				(Channels[i] as IOutputChannel<bool>).SetValue(true);
+			}
+			await Task.Delay(1000);
+			for (var i = 1; i <= 16; i++) {
+				(Channels[i] as IOutputChannel<bool>).SetValue(false);
+			}
+			 
 			return 0;
 		}
 
@@ -63,23 +75,8 @@ namespace Sandbox.TestConsole {
 		}
 	}
 
-	public class HardwareConnector {
-		object _device;
-
-		public long Id { get; init; }
-		public HardwareModule Module { get; init; }
-		public object ConnectorData { get; init; }
-		public Type ConnectorDataType { get; init; }
-		//public object Device => _device ??= CreateDevice();
-
-		//object CreateDevice() {
-		//	var device = Driver.CreateDevice(ModuleData);
-		//	return device;
-		//}
-	}
 
 	public class Modules : ServiceComponent {
-		//IDictionary<long, IDeviceDriver> _drivers;
 
 		protected ILeviathanAlphaDataContext<NpgsqlConnection> Context { get; }
 		Drivers Drivers { get; }
@@ -100,10 +97,10 @@ namespace Sandbox.TestConsole {
 
 			_modules = (await Context.Connection.CreateCommand(SQL.GET_MODULES).ExecuteReaderAsync().ToArrayAsync(
 				r => new {
-					Id = r.Field<long>("module_id"),
-					Name = r.Field<string>("module_name"),
-					ModuleData = r.Field<string>("module_data"),
-					TypeLocator = r.Field<string>("type_locator"),
+					Id = r.Get<long>("module_id"),
+					Name = r.Get<string>("module_name"),
+					ModuleData = r.Get<string>("module_data"),
+					TypeLocator = r.Get<string>("type_locator"),
 				}
 			)).ToDictionary(
 				i => i.Id,
@@ -136,25 +133,24 @@ namespace Sandbox.TestConsole {
 			}
 		}
 
-
 		class SQL {
-			public const string GET_MODULES =
-			@"
+			public const string GET_MODULES = @"
 			SELECT
 				modl.id module_id,
 				modl.name module_name,
 				modl.module_data module_data,
 				modltype.type_locator type_locator
 			FROM sys.hardware_module modl
-			JOIN sys.component_type modltype ON modl.component_type_id = modltype.id
-			";
+			JOIN sys.component_type modltype ON modl.component_type_id = modltype.id";
 		};
 	}
 
 	public class Connectors : ServiceComponent {
 		protected ILeviathanAlphaDataContext<NpgsqlConnection> Context { get; }
 		protected Modules Modules { get; }
-		IDictionary<long, HardwareConnector> _connectors;
+		IDictionary<long, object> _connectors;
+
+		public object this[long id] => _connectors[id];
 		public Connectors(ILeviathanAlphaDataContext<NpgsqlConnection> context, Modules modeules) {
 			this.Context = context;
 			this.Modules = modeules;
@@ -167,11 +163,11 @@ namespace Sandbox.TestConsole {
 
 			_connectors = (await Context.Connection.CreateCommand(SQL.GET_CONNECTORS).ExecuteReaderAsync().ToArrayAsync(
 				r => new {
-					Id = r.Field<long>("connector_id"),
-					ModuleId = r.Field<long>("module_id"),
-					Name = r.Field<string>("connector_name"),
-					connectorData = r.Field<string>("connector_data"),
-					TypeLocator = r.Field<string>("type_locator"),
+					Id = r.Get<long>("connector_id"),
+					ModuleId = r.Get<long>("module_id"),
+					Name = r.Get<string>("connector_name"),
+					connectorData = r.Get<string>("connector_data"),
+					TypeLocator = r.Get<string>("type_locator"),
 				}
 			)).ToDictionary(
 				i => i.Id,
@@ -179,41 +175,24 @@ namespace Sandbox.TestConsole {
 			);
 		}
 
-		HardwareConnector CreateConnector(long id, long moduleId, string typeLocator, string connectorData) {
+		object CreateConnector(long id, long moduleId, string typeLocator, string connectorData) {
 			try {
+
 				var mod = this.Modules[moduleId];
 				var type = Type.GetType(typeLocator);
+
 				foreach (var c in type.GetConstructors()) {
 					var p = c.GetParameters().ToArray();
 					if (p.Length == 2) {
 						if (p[0].ParameterType == mod.DeviceType) {
 							var dataType = p[1].ParameterType;
 							var rtn = Activator.CreateInstance(type, mod.Device, JsonConvert.DeserializeObject(connectorData, dataType));
-
-							var x = -100;
+							return rtn;
 						}
 					}
 				}
-				//type.GetConstructor(new Type[0]);
-				//var i = type.GetInterfaces()
-				//	.Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IDeviceDriver<,>))
-				//	.Single();
-				//var argTypes = i.GetGenericArguments();
-				//var deviceType = argTypes[0];
-				//var driverDataType = argTypes[1];
 
-				//var constructor = type.GetConstructors().Where(c => c.GetParameters().Count() == 2).Single();
-				//var connectorData = JsonConvert.DeserializeObject();
-				//var driver = (IDeviceDriver)Activator.CreateInstance(type);
-
-				return new HardwareConnector {
-					Id = id
-					//Module = this._modules[moduleId],
-					//Driver = driver,
-					//ModuleData = driverData,
-					//ModuleDataType = driverDataType
-				};
-
+				throw new Exception($"Could not create connector {id}");
 			}
 			catch {
 				throw;
@@ -230,15 +209,18 @@ namespace Sandbox.TestConsole {
 				cnct.connector_data connector_data,
 				cncttype.type_locator type_locator
 			FROM sys.hardware_connector cnct
-			JOIN sys.component_type cncttype ON cnct.component_type_id = cncttype.id 
+			JOIN sys.component_type cncttype ON cnct.component_type_id = cncttype.id
 			";
 		};
 	}
 
 	public class Channels : ServiceComponent {
 
+		IDictionary<long, IChannel> _channels;
+
 		protected ILeviathanAlphaDataContext<NpgsqlConnection> Context { get; }
 		protected Connectors Connectors { get; }
+		public IChannel this[long id] => _channels[id];
 
 		public Channels(ILeviathanAlphaDataContext<NpgsqlConnection> context, Connectors connectors) {
 			this.Context = context;
@@ -250,6 +232,52 @@ namespace Sandbox.TestConsole {
 			await base.InitializeAsync();
 			await Connectors.Initialize;
 
+			_channels = (await Context.Connection.CreateCommand(SQL.GET_CHANNELS).ExecuteReaderAsync().ToArrayAsync(
+				r => new {
+					Id = r.Get<long>("channel_id"),
+					ConnectorId = r.Get<long>("connector_id"),
+					Name = r.Get<string>("channel_name"),
+					ChannelData = r.Get<string>("channel_data"),
+					TypeLocator = r.Get<string>("type_locator"),
+				}
+			)).ToDictionary(
+				i => i.Id,
+				i => CreateChannel(i.Id, i.ConnectorId, i.TypeLocator, i.ChannelData)
+			);
 		}
+
+		IChannel CreateChannel(long id, long connectorId, string typeLocator, string channelData) {
+			var con = this.Connectors[connectorId];
+			var type = Type.GetType(typeLocator);
+
+			foreach (var c in type.GetConstructors()) {
+				var p = c.GetParameters().ToArray();
+				if (p.Length == 2) {
+
+					;
+					//;
+					if (p[0].ParameterType == con.GetType()) {
+						var dataType = p[1].ParameterType;
+						var rtn = (IChannel)Activator.CreateInstance(type, con, JsonConvert.DeserializeObject(channelData, dataType));
+						return rtn;
+					}
+				}
+			}
+			throw new Exception($"Could not create channel {id}");
+		}
+
+		class SQL {
+			public const string GET_CHANNELS =
+			@"
+			SELECT
+				chnl.id channel_id,
+				chnl.id connector_id,
+				chnl.name channel_name,
+				chnl.channel_data channel_data,
+				chnltype.type_locator type_locator
+			FROM sys.hardware_channel chnl
+			JOIN sys.component_type chnltype ON chnl.component_type_id = chnltype.id;
+			";
+		};
 	}
 }

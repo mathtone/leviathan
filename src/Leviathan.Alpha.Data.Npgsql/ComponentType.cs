@@ -28,7 +28,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			.WithInput("@component_category_id", item.CategoryId)
 			.WithInput("@type_name", item.TypeName)
 			.WithInput("@type_locator", item.TypeLocator)
-			.ExecuteReadSingle(r=>r.Field<long>("id"));
+			.ExecuteReadSingle(r=>r.Get<long>("id"));
 
 		public override void Delete(long id) => Connect()
 			.CreateCommand(SQL.DELETE)
@@ -56,13 +56,13 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			.ExecuteNonQuery();
 
 		private static ComponentTypeRecord FromData(IDataRecord record) => new() {
-			Id = record.Field<long>("id"),
-			Name = record.Field<string>("name"),
-			Description = record.Field<string>("description"),
-			AssemblyId = record.Field<long>("component_assembly_id"),
-			CategoryId = record.Field<long>("component_category_id"),
-			TypeName = record.Field<string>("type_name"),
-			TypeLocator = record.Field<string>("type_locator")
+			Id = record.Get<long>("id"),
+			Name = record.Get<string>("name"),
+			Description = record.Get<string>("description"),
+			AssemblyId = record.Get<long>("component_assembly_id"),
+			CategoryId = record.Get<long>("component_category_id"),
+			TypeName = record.Get<string>("type_name"),
+			TypeLocator = record.Get<string>("type_locator")
 		};
 
 		private static readonly IListRepoCommands SQL = new ListRepoCommands {

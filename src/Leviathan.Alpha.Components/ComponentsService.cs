@@ -70,7 +70,7 @@ namespace Leviathan.Alpha.Components {
 			var cmd = Connect().CreateCommand(@"SELECT * FROM sys.component_assembly where assembly_path = @path");
 			var id = cmd.WithInput("@path", type.Assembly.Location)
 				.ExecuteReader()
-				.Consume(r => r.Field<long>("id"))
+				.Consume(r => r.Get<long>("id"))
 				.SingleOrDefault();
 
 			if (id == 0) {

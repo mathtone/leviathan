@@ -47,9 +47,9 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			.ExecuteNonQuery();
 
 		private static ComponentCategoryRecord FromData(IDataRecord record) => new() {
-			Id = record.Field<long>("id"),
-			Name = record.Field<string>("name"),
-			Description = record.Field<string>("description"),
+			Id = record.Get<long>("id"),
+			Name = record.Get<string>("name"),
+			Description = record.Get<string>("description"),
 		};
 
 		private static readonly IListRepoCommands SQL = new ListRepoCommands {

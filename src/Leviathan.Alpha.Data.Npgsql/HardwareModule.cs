@@ -24,7 +24,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			.WithInput("@description", item.Description)
 			.WithInput("@component_type_id", item.ComponentTypeId)
 			.WithInput("@module_data", item.ModuleData??new object(), NpgsqlDbType.Json)
-			.ExecuteReadSingle(r => r.Field<long>("id"));
+			.ExecuteReadSingle(r => r.Get<long>("id"));
 
 		public override void Delete(long id) => Connect()
 			.CreateCommand(SQL.DELETE)
@@ -50,11 +50,11 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			.ExecuteNonQuery();
 
 		private static HardwareModuleRecord FromData(IDataRecord record) => new() {
-			Id = record.Field<long>("id"),
-			Name = record.Field<string>("name"),
-			Description = record.Field<string>("description"),
-			ComponentTypeId = record.Field<long>("component_type_id"),
-			ModuleData = record.Field<object>("module_data"),
+			Id = record.Get<long>("id"),
+			Name = record.Get<string>("name"),
+			Description = record.Get<string>("description"),
+			ComponentTypeId = record.Get<long>("component_type_id"),
+			ModuleData = record.Get<object>("module_data"),
 		};
 
 		private static readonly IListRepoCommands SQL = new ListRepoCommands {

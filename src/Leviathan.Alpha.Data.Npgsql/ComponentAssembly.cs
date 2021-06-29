@@ -27,7 +27,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			.WithInput("@description", item.Description)
 			.WithInput("@assembly_name", item.AssemblyName)
 			.WithInput("@assembly_path", item.AssemblyPath)
-			.ExecuteReadSingle(r=>r.Field<long>("id"));
+			.ExecuteReadSingle(r=>r.Get<long>("id"));
 
 		public override void Delete(long id) => Connect()
 			.CreateCommand(SQL.DELETE)
@@ -54,11 +54,11 @@ namespace Leviathan.Alpha.Data.Npgsql {
 
 
 		private static ComponentAssemblyRecord FromData(IDataRecord record) => new() {
-			Id = record.Field<long>("id"),
-			Name = record.Field<string>("name"),
-			Description = record.Field<string>("description"),
-			AssemblyName = record.Field<string>("assembly_name"),
-			AssemblyPath = record.Field<string>("assembly_path"),
+			Id = record.Get<long>("id"),
+			Name = record.Get<string>("name"),
+			Description = record.Get<string>("description"),
+			AssemblyName = record.Get<string>("assembly_name"),
+			AssemblyPath = record.Get<string>("assembly_path"),
 		};
 
 		private static readonly IListRepoCommands SQL = new ListRepoCommands {

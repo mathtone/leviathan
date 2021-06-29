@@ -13,17 +13,14 @@ namespace Leviathan.Hardware.RPIGPIO {
 
 		//GpioDeviceData _deviceData;
 
-		public LeviathanGpio() {
-			
-		}
+		public LeviathanGpio() { }
 
 		public GpioController CreateDevice(GpioDeviceData data = null) =>
 			new(data?.PinNumberingScheme ?? PinNumberingScheme.Logical);
 
 		public GpioController CreateDevice() => CreateDevice(null);
 
-		object IDeviceDriver.CreateDevice(object data) =>
-			CreateDevice((GpioDeviceData)data);
+		object IDeviceDriver.CreateDevice(object data) => CreateDevice((GpioDeviceData)data);
 	}
 
 	public class GpioConnectorData {
@@ -34,9 +31,9 @@ namespace Leviathan.Hardware.RPIGPIO {
 
 	[LeviathanConnector("GPIO PIN", "Gpio Connector")]
 	public class GpioConnector {
-		
+
 		public GpioConnectorData ConnectorData { get; }
-		protected GpioController Device { get; }
+		public GpioController Device { get; }
 
 		public GpioConnector(GpioController device, GpioConnectorData connectorData) {
 			this.Device = device;
@@ -46,31 +43,56 @@ namespace Leviathan.Hardware.RPIGPIO {
 
 	[LeviathanChannel("GPIO 0/1", "GPIO On/Off")]
 	public class GpioOnOffChannel : IInputChannel<bool>, IOutputChannel<bool> {
+		
+		private readonly GpioConnector _connector;
+		private readonly PinMode _mode;
+
+		public GpioOnOffChannel(GpioConnector connector, GpioChannelData channelData) {
+			_connector = connector;
+			_mode = channelData.Mode;
+			_connector.Device.OpenPin(_connector.ConnectorData.Pin, _mode);
+		}
+
 		public void SetValue(bool value) {
-			throw new System.NotImplementedException();
+			_connector.Device.Write(_connector.ConnectorData.Pin, value?PinValue.High:PinValue.Low);
 		}
 
 		public bool GetValue() {
-			throw new System.NotImplementedException();
+			return _connector.Device.Read(_connector.ConnectorData.Pin) != PinValue.Low;
 		}
 	}
 
 	[LeviathanChannel("GPIO Sensor", "GPIO Input-only")]
 	public class GpioSensorChannel : IInputChannel<double> {
+
+		private readonly GpioConnector _connector;
+		private readonly PinMode _mode;
+
+		public GpioSensorChannel(GpioConnector connector, GpioChannelData channelData) {
+			_connector = connector;
+			_mode = channelData.Mode;
+		}
+
 		public double GetValue() {
 			throw new System.NotImplementedException();
 		}
 	}
 
+	public class GpioChannelData {
+
+		public PinMode Mode { get; init; }
+	}
+
 	[LeviathanChannel("GPIO", "GPIO Input/Output")]
 	public class GpioChannel : IInputChannel<double>, IOutputChannel<double> {
+
 		private readonly GpioConnector _connector;
 		private readonly PinMode _mode;
 
-		public GpioChannel(GpioConnector connector, PinMode mode) {
+		public GpioChannel(GpioConnector connector, GpioChannelData channelData) {
 			_connector = connector;
-			_mode = mode;
-			
+			_mode = channelData.Mode;
+
 		}
 
 		public void SetValue(double value) { }

@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Leviathan.Alpha.Data.Npgsql\Leviathan.Alpha.Data.Npgsql.csproj" />
     <ProjectReference Include="..\Leviathan.Alpha.Database\Leviathan.Alpha.Database.csproj" />
+    <ProjectReference Include="..\Leviathan.hardware\Leviathan.Hardware.csproj" />
   </ItemGroup>
 
 </Project>
