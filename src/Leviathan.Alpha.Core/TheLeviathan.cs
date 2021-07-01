@@ -42,8 +42,8 @@ namespace Leviathan.Alpha.Core {
 
 		private void System_SystemOnline(object sender, EventArgs e) => Task.Run(async () => {
 			await Task.Yield();
-			await Startup.ActivateProfile("Leviathan.SystemProfiles.FactoryReset.FactoryResetProfile"); ;
-			await Startup.ActivateProfile("Leviathan.SystemProfiles.RoboTank.RoboTankProfile");
+			//await Startup.ActivateProfile("Leviathan.SystemProfiles.FactoryReset.FactoryResetProfile"); ;
+			//await Startup.ActivateProfile("Leviathan.SystemProfiles.RoboTank.RoboTankProfile");
 		});
 	}
 }
