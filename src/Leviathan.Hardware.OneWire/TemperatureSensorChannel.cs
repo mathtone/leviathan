@@ -5,7 +5,7 @@ using System;
 using System.Threading.Tasks;
 using UnitsNet;
 
-[assembly: LeviathanPlugin("Raspberry Pi OneWire")]
+[assembly: LeviathanModule("Raspberry Pi OneWire")]
 namespace Leviathan.Hardware.OneWire {
 	public class TemperatureSensorChannelData {
 		public string BusId { get; init; }
@@ -18,7 +18,7 @@ namespace Leviathan.Hardware.OneWire {
 	}
 
 	[LeviathanChannel("Temp", "OnwWire temperature sensor")]
-	public class TemperatureSensorChannel : IInputChannel<Task<TempReading>> {
+	public class TemperatureSensorChannel : IAsyncInputChannel<TempReading> {
 		TemperatureSensorChannelData _channelData;
 		OneWireThermometerDevice _device;
 

@@ -3,12 +3,12 @@
 
 namespace Leviathan.Components {
 	[AttributeUsage(AttributeTargets.Assembly)]
-	public class LeviathanPluginAttribute : Attribute {
+	public class LeviathanModuleAttribute : Attribute {
 
 		public string Name { get; }
 
-		public LeviathanPluginAttribute(string pluginName) {
-			this.Name = pluginName;
+		public LeviathanModuleAttribute(string moduleName) {
+			this.Name = moduleName;
 		}
 	}
 
@@ -25,6 +25,22 @@ namespace Leviathan.Components {
 
 		public LeviathanChannelAttribute(string name, string description) :
 			base(name, description, ComponentCategory.HardwareChannel) {
+		}
+	}
+
+	[AttributeUsage(AttributeTargets.Class)]
+	public class LeviathanApiAttribute : LeviathanComponentAttribute {
+
+		public LeviathanApiAttribute(string name, string description) :
+			base(name, description, ComponentCategory.ApiModule) {
+		}
+	}
+
+	[AttributeUsage(AttributeTargets.Class)]
+	public class LeviathanServiceAttribute : LeviathanComponentAttribute {
+
+		public LeviathanServiceAttribute(string name, string description) :
+			base(name, description, ComponentCategory.Service) {
 		}
 	}
 }

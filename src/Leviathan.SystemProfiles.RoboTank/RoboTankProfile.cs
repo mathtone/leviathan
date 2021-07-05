@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-[assembly: LeviathanPlugin("Robo-Tank Profile")]
+[assembly: LeviathanModule("Robo-Tank Profile")]
 namespace Leviathan.SystemProfiles.RoboTank {
 
 

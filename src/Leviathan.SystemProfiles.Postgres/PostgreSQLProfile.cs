@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-[assembly: LeviathanPlugin("PostgreSQL Database Quick-Start")]
+[assembly: LeviathanModule("PostgreSQL Database Quick-Start")]
 namespace Leviathan.SystemProfiles.Postgres {
 
 	[SystemProfile("PostgreSQL", "Creates a database & data environment for using a PostgreSQL database,")]

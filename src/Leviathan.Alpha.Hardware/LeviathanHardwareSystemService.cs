@@ -228,7 +228,7 @@ namespace Leviathan.Alpha.Hardware {
 		};
 	}
 
-	public class Channels : ServiceComponent, IEnumerable<IChannel> {
+	public class Channels : ServiceComponent, IEnumerable<KeyValuePair<long,IChannel>> {
 
 		IDictionary<long, IChannel> _channels;
 
@@ -308,8 +308,8 @@ namespace Leviathan.Alpha.Hardware {
 			";
 		};
 
-		public IEnumerator<IChannel> GetEnumerator() {
-			foreach (var c in _channels.Values)
+		public IEnumerator<KeyValuePair<long, IChannel>> GetEnumerator() {
+			foreach (var c in _channels)
 				yield return c;
 		}
 

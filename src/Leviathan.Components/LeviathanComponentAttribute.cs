@@ -8,6 +8,7 @@ namespace Leviathan.Components {
 		Connector = 3,
 		HardwareChannel = 4,
 		Service = 4,
+		ApiModule,
 		Custom
 	}
 

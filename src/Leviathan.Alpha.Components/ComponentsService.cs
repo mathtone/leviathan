@@ -74,7 +74,7 @@ namespace Leviathan.Alpha.Components {
 				.SingleOrDefault();
 
 			if (id == 0) {
-				var a1 = type.Assembly.GetCustomAttribute<LeviathanPluginAttribute>();
+				var a1 = type.Assembly.GetCustomAttribute<LeviathanModuleAttribute>();
 				id = Context.ComponentAssembly.Create(new ComponentAssemblyRecord {
 					Name = a1.Name,
 					AssemblyName = type.Assembly.FullName,
@@ -121,7 +121,7 @@ namespace Leviathan.Alpha.Components {
 		}
 
 		static bool IsPluginAssembly(Assembly assembly) =>
-			assembly.GetCustomAttribute<LeviathanPluginAttribute>() != default;
+			assembly.GetCustomAttribute<LeviathanModuleAttribute>() != default;
 
 		static IEnumerable<ComponentInfo> ListComponents(Assembly assembly) {
 			foreach (var t in assembly.DefinedTypes.Where(t => t.IsPublic)) {

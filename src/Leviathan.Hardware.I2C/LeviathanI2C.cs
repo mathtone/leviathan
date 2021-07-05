@@ -2,7 +2,7 @@
 using System;
 using System.Device.I2c;
 
-[assembly: LeviathanPlugin("I2C Drivers")]
+[assembly: LeviathanModule("I2C Drivers")]
 
 namespace Leviathan.Hardware.I2C {
 	public class I2cDeviceSettings {

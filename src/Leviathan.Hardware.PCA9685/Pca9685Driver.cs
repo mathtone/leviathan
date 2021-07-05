@@ -7,7 +7,7 @@ using Leviathan.Hardware;
 using System.Device.Pwm;
 //using Leviathan.Hardware.I2c;
 
-[assembly: LeviathanPlugin("PCA9685 Drivers")]
+[assembly: LeviathanModule("PCA9685 Drivers")]
 namespace Leviathan.Hardware.PCA9685 {
 
 	[Driver("PCA9685", "PCA9685 Pwm Controller")]

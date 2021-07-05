@@ -78,6 +78,7 @@ namespace Leviathan.Alpha.Api {
 		}
 	}
 
+
 	public class ChannelsController<T> : GenericController<T> {
 
 		ILeviathanHardwareSystemService _service;
@@ -86,11 +87,17 @@ namespace Leviathan.Alpha.Api {
 			_service = service;
 		}
 
-		[HttpGet,Route("[action]"]
-		public int[] List()=>_service.Channels.Where(c=>c is IAsyncOutputChannel<T> || c is IOutputChannel<T>).Select(c=>c)
+		[HttpGet, Route("[action]")]
+		public async Task<long[]> List() {
+			await _service.Initialize;
+			return _service.Channels
+			.Where(c =>
+				c.Value is IAsyncOutputChannel<T> || c.Value is IOutputChannel<T> ||
+				c.Value is IAsyncInputChannel<T> || c.Value is IInputChannel<T>)
+			.Select(c => c.Key)
+			.ToArray();
+		}
 
-
-		
 		[HttpGet]
 		public async Task<T> Get(long id) {
 			await _service.Initialize;
@@ -137,10 +144,10 @@ namespace Leviathan.Alpha.Api {
 			var candidates = currentAssembly.GetExportedTypes()
 				.Where(x => x.GetCustomAttributes<GeneratedControllerAttribute>().Any());
 
-			feature.Controllers.Add(typeof(ChannelsController<bool>).GetTypeInfo());
-			feature.Controllers.Add(typeof(ChannelsController<int>).GetTypeInfo());
-			feature.Controllers.Add(typeof(ChannelsController<TempReading>).GetTypeInfo());
-			feature.Controllers.Add(typeof(ChannelsController<double>).GetTypeInfo());
+			//feature.Controllers.Add(typeof(ChannelsController<bool>).GetTypeInfo());
+			//feature.Controllers.Add(typeof(ChannelsController<int>).GetTypeInfo());
+			//feature.Controllers.Add(typeof(ChannelsController<TempReading>).GetTypeInfo());
+			//feature.Controllers.Add(typeof(ChannelsController<double>).GetTypeInfo());
 		}
 	}
 }

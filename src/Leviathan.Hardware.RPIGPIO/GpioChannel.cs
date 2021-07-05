@@ -1,7 +1,7 @@
 ﻿using Leviathan.Components;
 using System.Device.Gpio;
 
-[assembly: LeviathanPlugin("Raspberry Pi GPIO")]
+[assembly: LeviathanModule("Raspberry Pi GPIO")]
 namespace Leviathan.Hardware.RPIGPIO {
 
 	[LeviathanChannel("GPIO", "GPIO Input/Output")]
