@@ -9,6 +9,7 @@ using Leviathan.Services;
 using Newtonsoft.Json;
 using Npgsql;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -227,13 +228,19 @@ namespace Leviathan.Alpha.Hardware {
 		};
 	}
 
-	public class Channels : ServiceComponent {
+	public class Channels : ServiceComponent, IEnumerable<IChannel> {
 
 		IDictionary<long, IChannel> _channels;
 
 		protected ILeviathanAlphaDataContext<NpgsqlConnection> Context { get; }
 		protected Connectors Connectors { get; }
-		public IChannel this[long id] => _channels[id];
+
+		public IChannel this[long id] {
+			get {
+				this.Initialize.Wait();
+				return _channels[id];
+			}
+		}
 
 		public Channels(ILeviathanAlphaDataContext<NpgsqlConnection> context, Connectors connectors) {
 			this.Context = context;
@@ -245,26 +252,34 @@ namespace Leviathan.Alpha.Hardware {
 			await base.InitializeAsync();
 			await Connectors.Initialize;
 
-			_channels = (await Context.Connection.CreateCommand(SQL.GET_CHANNELS).ExecuteReaderAsync().ToArrayAsync(
-				r => new {
-					Id = r.Get<long>("channel_id"),
-					ConnectorId = r.Get<long>("connector_id"),
-					Name = r.Get<string>("channel_name"),
-					ChannelData = r.Get<string>("channel_data"),
-					TypeLocator = r.Get<string>("type_locator"),
-				}
+			_channels = (await
+				Context.Connection.CreateCommand(SQL.GET_CHANNELS).ExecuteReaderAsync().ToArrayAsync(
+					r => new {
+						Id = r.Get<long>("channel_id"),
+						ConnectorId = r.Get<long?>("connector_id"),
+						Name = r.Get<string>("channel_name"),
+						ChannelData = r.Get<string>("channel_data"),
+						TypeLocator = r.Get<string>("type_locator"),
+					}
 			)).ToDictionary(
 				i => i.Id,
 				i => CreateChannel(i.Id, i.ConnectorId, i.TypeLocator, i.ChannelData)
 			);
+			;
 		}
 
-		IChannel CreateChannel(long id, long connectorId, string typeLocator, string channelData) {
-			var con = this.Connectors[connectorId];
+		IChannel CreateChannel(long id, long? connectorId, string typeLocator, string channelData) {
+
+			var con = connectorId.HasValue ? this.Connectors[connectorId.Value] : null;
 			var type = Type.GetType(typeLocator);
 
 			foreach (var c in type.GetConstructors()) {
 				var p = c.GetParameters().ToArray();
+				if (p.Length == 1) {
+					var dataType = p[0].ParameterType;
+					var rtn = (IChannel)Activator.CreateInstance(type, JsonConvert.DeserializeObject(channelData, dataType));
+					return rtn;
+				}
 				if (p.Length == 2) {
 
 					;
@@ -284,7 +299,7 @@ namespace Leviathan.Alpha.Hardware {
 			@"
 			SELECT
 				chnl.id channel_id,
-				chnl.id connector_id,
+				chnl.connector_id connector_id,
 				chnl.name channel_name,
 				chnl.channel_data channel_data,
 				chnltype.type_locator type_locator
@@ -292,5 +307,12 @@ namespace Leviathan.Alpha.Hardware {
 			JOIN sys.component_type chnltype ON chnl.component_type_id = chnltype.id;
 			";
 		};
+
+		public IEnumerator<IChannel> GetEnumerator() {
+			foreach (var c in _channels.Values)
+				yield return c;
+		}
+
+		IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 	}
 }

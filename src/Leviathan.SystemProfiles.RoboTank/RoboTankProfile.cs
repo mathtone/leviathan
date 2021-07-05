@@ -1,12 +1,15 @@
-﻿using Leviathan.Alpha.Data.Npgsql;
+﻿using Iot.Device.OneWire;
+using Leviathan.Alpha.Data.Npgsql;
 using Leviathan.Components;
 using Leviathan.DbDataAccess;
 using Leviathan.Hardware.I2C;
+using Leviathan.Hardware.OneWire;
 using Leviathan.Hardware.PCA9685;
 using Leviathan.Hardware.RPIGPIO;
 using Leviathan.SystemProfiles.Basic;
 using Leviathan.SystemProfiles.FactoryReset;
 using Npgsql;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -46,7 +49,8 @@ namespace Leviathan.SystemProfiles.RoboTank {
 				GPIO_OO_CH = Register<GpioOnOffChannel>(),
 				PWM_CH = Register<PwmChannel>(),
 				PWM_S_CH = Register<PwmSensorChannel>(),
-				PWM_OO_CH = Register<PwmOnOffChannel>()
+				PWM_OO_CH = Register<PwmOnOffChannel>(),
+				TEMP_SNSR_CH = Register<TemperatureSensorChannel>(),
 			};
 
 			var modules = new {
@@ -56,11 +60,11 @@ namespace Leviathan.SystemProfiles.RoboTank {
 			};
 
 			var connectors = new {
-				GPInOut = GPIOPins.Select(p => CreateConnector($"GPIO{++c1}", $"GPIO Pin {c1}", drivers.GPIO_C, modules.GPIO, new { Pin = p })).ToArray(),
+				GPInOut = GPIOPins.Select(p => CreateConnector($"GPIO{++c1}", $"GPIO Pin {p}", drivers.GPIO_C, modules.GPIO, new { Pin = p })).ToArray(),
 				PWM = PWMPins.Select(p => CreateConnector($"PWM{++c2}", $"PWM I/O {c2}", drivers.PWM_C, modules.PWM, new { PwmChannelId = p })).ToArray()
 			};
 
-			int c3 = 0, c4 = 0, c5 = 0, c6 = 0;
+			int c3 = 0, c4 = 0, c5 = 0, c6 = 0, c7 = 0;
 			var channels = new {
 				AC_PORT = connectors.GPInOut[0..16].Select(i =>
 					CreateChannel(
@@ -85,36 +89,46 @@ namespace Leviathan.SystemProfiles.RoboTank {
 						$"PWM{++c6:00}",
 						$"PWM/Analog Port {c6:00}",
 						drivers.PWM_CH, i)
-					).ToArray()
+					).ToArray(),
+				TEMP_SNSR = OneWireThermometerDevice.EnumerateDeviceIds().Select(i =>
+					CreateChannel(
+						$"TEMP{++c7}",
+						$"Temperature Sensor - {i.DevId}",
+						drivers.TEMP_SNSR_CH,
+						null,
+						new TemperatureSensorChannelData { BusId = i.BusId, DeviceId = i.DevId })
+				).ToArray()
 			};
+
+			long Register<T>() =>
+				Components.RegisterComponent(typeof(T));
+
+			long CreateModule(string name, string description, long typeId, object moduleData) =>
+				Context.HardwareModule.Create(new HardwareModuleRecord {
+					Name = name,
+					ComponentTypeId = typeId,
+					Description = description,
+					ModuleData = moduleData
+				});
+
+			long CreateConnector(string name, string description, long typeId, long moduleId, object connectorData = default) =>
+				Context.HardwareConnector.Create(new HardwareConnectorRecord {
+					Name = name,
+					ComponentTypeId = typeId,
+					Description = description,
+					ModuleId = moduleId,
+					ConnectorData = connectorData ?? new object()
+				});
+
+			long CreateChannel(string name, string description, long typeId, long? connectorId, object channelData = default) =>
+				Context.HardwareChannel.Create(new HardwareChannelRecord {
+					Name = name,
+					ComponentTypeId = typeId,
+					Description = description,
+					ConnectorId = connectorId,
+					ChannelData = channelData ?? new object()
+				});
 		}
-
-		long Register<T>() =>
-			Components.RegisterComponent(typeof(T));
-
-		long CreateModule(string name, string description, long typeId, object moduleData) => Context.HardwareModule.Create(new HardwareModuleRecord {
-			Name = name,
-			ComponentTypeId = typeId,
-			Description = description,
-			ModuleData = moduleData
-		});
-
-		long CreateConnector(string name, string description, long typeId, long moduleId, object connectorData = default) => Context.HardwareConnector.Create(new HardwareConnectorRecord {
-			Name = name,
-			ComponentTypeId = typeId,
-			Description = description,
-			ModuleId = moduleId,
-			ConnectorData = connectorData ?? new object()
-
-		});
-
-		long CreateChannel(string name, string description, long typeId, long connectorId, object channelData = default) => Context.HardwareChannel.Create(new HardwareChannelRecord {
-			Name = name,
-			ComponentTypeId = typeId,
-			Description = description,
-			ConnectorId = connectorId,
-			ChannelData = channelData ?? new object()
-		});
 	}
 }
 

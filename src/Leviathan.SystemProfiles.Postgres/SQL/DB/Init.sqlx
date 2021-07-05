@@ -86,3 +86,13 @@ WITH (
     OIDS = FALSE
 );
 
+CREATE TABLE sys.remote_partner
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+    api_url text,
+    CONSTRAINT remote_partner_pkey PRIMARY KEY (id),
+)
+WITH (
+    OIDS = FALSE
+);
+

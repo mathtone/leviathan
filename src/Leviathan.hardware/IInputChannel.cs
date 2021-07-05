@@ -1,7 +1,11 @@
-﻿namespace Leviathan.Hardware {
+﻿using System.Threading.Tasks;
+
+namespace Leviathan.Hardware {
 	public interface IInputChannel<out T> : IChannel {
 		T GetValue();
 	}
 
-	public interface IChannel { }
+	public interface IAsyncInputChannel<T> : IChannel {
+		Task<T> GetValue();
+	}
 }

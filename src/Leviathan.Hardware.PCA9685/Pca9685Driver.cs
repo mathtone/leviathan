@@ -32,12 +32,12 @@ namespace Leviathan.Hardware.PCA9685 {
 
 		Pca9685 _device;
 		PwmIOConnectorData _connectorData;
-		System.Device.Pwm.PwmChannel _channel;
+		public System.Device.Pwm.PwmChannel Channel { get; }
 
 		public PwmIOConnector(Pca9685 device, PwmIOConnectorData connectorData) {
 			this._device = device;
 			this._connectorData = connectorData;
-			_channel = device.CreatePwmChannel(connectorData.PwmChannelId);
+			Channel = device.CreatePwmChannel(connectorData.PwmChannelId);
 		}
 	}
 
@@ -79,7 +79,7 @@ namespace Leviathan.Hardware.PCA9685 {
 			this._connector = connector;
 		}
 
-		public void SetValue(double value) { }
-		public double GetValue() => 0;
+		public void SetValue(double value) => this._connector.Channel.DutyCycle = value;
+		public double GetValue() => this._connector.Channel.DutyCycle;
 	}
 }

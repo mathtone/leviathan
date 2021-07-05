@@ -8,6 +8,7 @@
     <ProjectReference Include="..\Leviathan.Alpha.Data.Npgsql\Leviathan.Alpha.Data.Npgsql.csproj" />
     <ProjectReference Include="..\Leviathan.Common\Leviathan.Common.csproj" />
     <ProjectReference Include="..\Leviathan.Components\Leviathan.Components.csproj" />
+    <ProjectReference Include="..\Leviathan.Hardware.OneWire\Leviathan.Hardware.OneWire.csproj" />
     <ProjectReference Include="..\Leviathan.Hardware.PCA9685\Leviathan.Hardware.PCA9685.csproj" />
     <ProjectReference Include="..\Leviathan.Hardware.RPIGPIO\Leviathan.Hardware.RPIGPIO.csproj" />
     <ProjectReference Include="..\Leviathan.SystemProfiles.Basic\Leviathan.SystemProfiles.Basic.csproj" />

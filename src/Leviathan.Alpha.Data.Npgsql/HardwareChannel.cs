@@ -13,7 +13,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 
 	public record HardwareChannelRecord : StandardEntity<long> {
 		public long ComponentTypeId { get; init; }
-		public long ConnectorId { get; init; }
+		public long? ConnectorId { get; init; }
 		public object ChannelData { get; init; }
 	}
 
@@ -27,7 +27,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			.WithInput("@name", item.Name)
 			.WithInput("@description", item.Description)
 			.WithInput("@component_type_id", item.ComponentTypeId)
-			.WithInput("@connector_id", item.ConnectorId)
+			.WithInput("@connector_id", (item.ConnectorId as object) ?? DBNull.Value)
 			.WithInput("@channel_data", item.ChannelData, NpgsqlDbType.Json)
 			.ExecuteReadSingle(r => r.GetInt64(0));
 
@@ -60,7 +60,7 @@ namespace Leviathan.Alpha.Data.Npgsql {
 			Name = record.Get<string>("name"),
 			Description = record.Get<string>("description"),
 			ComponentTypeId = record.Get<long>("component_type_id"),
-			ConnectorId = record.Get<long>("connector_id"),
+			ConnectorId = record.Get<long?>("connector_id"),
 			ChannelData = record.Get<object>("channel_data")
 		};
 
