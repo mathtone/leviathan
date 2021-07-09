@@ -8,6 +8,8 @@ namespace Leviathan.Alpha.Core {
 		Task Start();
 		Task Stop();
 	}
+
+	[SingletonService(typeof(ITheLeviathan))]
 	public class TheLeviathan : LeviathanService, ITheLeviathan {
 
 		public override Task Initialize { get; }

@@ -5,6 +5,7 @@ using Leviathan.System.SDK;
 
 namespace Leviathan.Alpha.System {
 
+	[SingletonService(typeof(ILeviathanSystem))]
 	public class SystemService : LeviathanService, ILeviathanSystem {
 
 		public override Task Initialize { get; }

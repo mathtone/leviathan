@@ -1,7 +1,7 @@
 ﻿using System;
 
-namespace Leviathan.Services.SDK {
-	public abstract class ServiceAttribute : LeviathanComponentAttribute {
+namespace CaseStudy.DynamicService.SDK {
+	public abstract class ServiceAttribute : Attribute {
 
 		public Type ServiceType { get; }
 
@@ -39,9 +39,11 @@ namespace Leviathan.Services.SDK {
 		}
 	}
 
-	public sealed class ApiComponentAttribute : Attribute {
-		public ApiComponentAttribute() {
+	public sealed class ApiComponentAttribute:Attribute
+    {
+		public ApiComponentAttribute()
+        {
 			;
-		}
-	}
+        }
+    }
 }

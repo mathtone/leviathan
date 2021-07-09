@@ -4,43 +4,53 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
-namespace Leviathan.Alpha.TestModule {
+namespace Leviathan.Alpha.TestModule
+{
 
-	public interface ITestService {
-		Task<TestServiceCatalog> Catalog();
-	}
+    //public interface ITestService
+    //{
+    //    Task<TestServiceCatalog> Catalog();
+    //}
 
-	public class TestServiceCatalog {
+    //public class TestServiceCatalog
+    //{
 
-	}
+    //}
 
-	[ServiceComponent(typeof(ITestService))]
-	public class TestService : LeviathanService, ITestService {
+    //[ServiceComponent(typeof(ITestService))]
+    //public class TestService : LeviathanService, ITestService
+    //{
 
-		public override Task Initialize { get; }
+    //    public override Task Initialize { get; }
 
-		public TestService() {
-			Initialize = InitializeAsync();
-		}
+    //    public TestService()
+    //    {
+    //        Initialize = InitializeAsync();
+    //    }
 
-		async Task InitializeAsync() {
-			await base.Initialize;
-		}
+    //    async Task InitializeAsync()
+    //    {
+    //        await base.Initialize;
+    //    }
+        
+    //    public async Task<TestServiceCatalog> Catalog()
+    //    {
+    //        await Initialize;
+    //        return new TestServiceCatalog
+    //        {
 
-		public async Task<TestServiceCatalog> Catalog() {
-			await Initialize;
-			return new TestServiceCatalog {
+    //        };
+    //    }
+    //}
 
-			};
-		}
-	}
+    //[ApiComponent, Route("[controller]")]
+    //public class TestServiceController : ServiceController<ITestService>
+    //{
+    //    public TestServiceController(ITestService service) : base(service)
+    //    {
+    //    }
 
-	[ApiComponent, Route("[controller]")]
-	public class TestServiceController : ServiceController<ITestService> {
-		public TestServiceController(ITestService service) : base(service) {
-		}
-
-		[HttpGet]
-		public async Task<TestServiceCatalog> Catalog() => await Service.Catalog();
-	}
+    //    [HttpGet]
+    //    public async Task<TestServiceCatalog> Catalog() => await Service.Catalog();
+    //}
 }

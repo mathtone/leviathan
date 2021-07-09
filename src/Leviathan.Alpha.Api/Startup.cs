@@ -17,6 +17,9 @@ using System.Reflection;
 using Leviathan.WebApi.SDK;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using System.IO;
+using Leviathan.Utilities;
+using Leviathan.Services.SDK;
 
 namespace Leviathan.Alpha.Api {
 	public class Startup {
@@ -32,8 +35,8 @@ namespace Leviathan.Alpha.Api {
 			services.AddTheLeviathan();
 
 			services
-				.AddControllers()
-				//.AddControllers(o => o.Conventions.Add(new ModularControllerRouteConvention()))
+				.AddModularServices()
+				.AddControllers(o => o.Conventions.Add(new ModularControllerRouteConvention()))
 				//.ConfigureApplicationPartManager(m => m.FeatureProviders.Add(new ModularControllerFeatureProvider()))
 				.AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
@@ -64,33 +67,40 @@ namespace Leviathan.Alpha.Api {
 		}
 	}
 
-	//public class ModularControllerRouteConvention : IControllerModelConvention {
-	//	public void Apply(ControllerModel controller) {
-	//		//var attr = controller.ControllerType.GetCustomAttribute<ApiComponentAttribute>();
-	//		//if (attr != null) {
-	//		//	controller.Selectors.Add(new SelectorModel {
-	//		//		AttributeRouteModel = new AttributeRouteModel(
-	//		//			new RouteAttribute($"api/{controller.ControllerName}")),
-	//		//	});
-	//		//}
-	//	}
-	//}
+	public class ModularControllerRouteConvention : IControllerModelConvention {
+		public void Apply(ControllerModel controller) {
+			var attr = controller.ControllerType.GetCustomAttribute<ApiComponentAttribute>();
+			if (attr != null) {
+				controller.Selectors.Add(new SelectorModel {
+					AttributeRouteModel = new AttributeRouteModel(new RouteAttribute($"api/{controller.ControllerName}")),
+				});
+			}
+		}
+	}
 
-	//public class ModularControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature> {
 
-	//	public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature) {
+	public static class ModularServiceExtensions {
 
-	//		var currentAssembly = typeof(ModularControllerFeatureProvider).Assembly;
-	//		var candidates = currentAssembly.GetExportedTypes()
-	//			.Where(x => x.GetCustomAttributes<ApiComponentAttribute>().Any());
+		public static IServiceCollection AddModularServices(this IServiceCollection services) {
+			var localPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+			var dlls = Directory.GetFiles(localPath, "*.dll");
+			var loaded = AssemblyLoader.GetLoadedAssemblies();
+			var assemblies = AppDomain.CurrentDomain.GetAssemblies()
+				.Where(a => Path.GetDirectoryName(a.Location) == localPath)
+				.ToDictionary(a => a.Location);
 
-	//		foreach(var c in candidates) {
-	//			feature.Controllers.Add(c.GetTypeInfo());
-	//		}
+			foreach (var a in assemblies.Values) {
+				foreach (var t in a.GetExportedTypes()) {
+					var attr = t.GetCustomAttribute<ServiceAttribute>();
+					if (attr != null) {
+						if (attr is SingletonServiceAttribute) services.AddSingleton(attr.ServiceType, t);
+						if (attr is TransientServiceAttribute) services.AddTransient(attr.ServiceType, t);
+						if (attr is ScopedServiceAttribute) services.AddScoped(attr.ServiceType, t);
+					}
+				}
+			}
 
-	//		//feature.Controllers.Add(typeof(ChannelsController<bool>).GetTypeInfo());
-	//		//feature.Controllers.Add(typeof(ChannelsController<int>).GetTypeInfo());
-	//		//feature.Controllers.Add(typeof(ChannelsController<TempReading>).GetTypeInfo());
-	//		//feature.Controllers.Add(typeof(ChannelsController<double>).GetTypeInfo());
-	//	}
+			return services;
+		}
+	}
 }
