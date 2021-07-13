@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Leviathan.Channels.SDK {
+namespace Leviathan.GPIO {
 	public class Class1 {
 	}
 }

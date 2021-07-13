@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -13,9 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Leviathan.Alpha.Components\Leviathan.Alpha.Components.csproj" />
     <ProjectReference Include="..\Leviathan.Alpha.Core\Leviathan.Alpha.Core.csproj" />
     <ProjectReference Include="..\Leviathan.Alpha.System\Leviathan.Alpha.System.csproj" />
-    <ProjectReference Include="..\Leviathan.Alpha.TestModule\Leviathan.Alpha.TestModule.csproj" />
     <ProjectReference Include="..\Leviathan.Services.SDK\Leviathan.Services.SDK.csproj" />
     <ProjectReference Include="..\Leviathan.System.SDK\Leviathan.System.SDK.csproj" />
     <ProjectReference Include="..\Leviathan.Utilities\Leviathan.Utilities.csproj" />

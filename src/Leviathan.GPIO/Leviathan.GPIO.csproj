@@ -4,8 +4,4 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Leviathan.Components.SDK\Leviathan.Components.SDK.csproj" />
-  </ItemGroup>
-
 </Project>

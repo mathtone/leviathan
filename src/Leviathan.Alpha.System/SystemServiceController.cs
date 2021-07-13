@@ -1,16 +1,10 @@
-﻿using Leviathan.System.SDK;
+﻿using System.Threading.Tasks;
+using Leviathan.System.SDK;
 using Leviathan.WebApi.SDK;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Leviathan.Alpha.Api.Controllers {
-
-	[Route("api/[controller]")]
-	[ApiController]
+namespace Leviathan.Alpha.System {
+	[ApiComponent]
 	public class SystemServiceController : ServiceController<ILeviathanSystem> {
 
 		public SystemServiceController(ILeviathanSystem service) :

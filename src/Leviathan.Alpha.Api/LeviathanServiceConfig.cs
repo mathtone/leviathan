@@ -15,13 +15,11 @@ using System.Reflection;
 namespace Leviathan.Alpha.Api {
 	public static class LeviathanServiceConfig {
 
-		public static IServiceCollection AddTheLeviathan(this IServiceCollection services) => services;
-			//.AddSingleton<ILeviathanSystem, SystemService>()
-			//.AddSingleton<ITheLeviathan, TheLeviathan>();
+		public static IServiceCollection AddTheLeviathan(this IServiceCollection services) => services
+			.AddModularServices();
 
 		public static IApplicationBuilder AwakenTheLeviathan(this IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime) {
 
-			//var svc = app.ApplicationServices.GetRequiredService<ITestService>();
 			var leviathan = app.ApplicationServices.GetService<ITheLeviathan>();
 			lifetime.ApplicationStarted.Register(async () => await leviathan.Start());
 			lifetime.ApplicationStopping.Register(async () => await leviathan.Stop());
