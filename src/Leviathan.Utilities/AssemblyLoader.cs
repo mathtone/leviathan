@@ -26,6 +26,7 @@ namespace Leviathan.Utilities {
 
 			if (scanAssembliesStartsWith?.Any() == true) {
 				if (scanAssembliesStartsWith.Length == 1) {
+					//var searchPattern = $"{scanAssembliesStartsWith.First()}*.dll";
 					var searchPattern = $"{scanAssembliesStartsWith.First()}*.dll";
 					var assemblyPaths = Directory.GetFiles(appDllsDirectory, searchPattern, SearchOption.AllDirectories);
 					toBeLoaded.AddRange(assemblyPaths);

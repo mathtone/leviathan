@@ -3,23 +3,12 @@ using Leviathan.Alpha.Logging;
 using Leviathan.Services.SDK;
 using Leviathan.SystemConfiguration.SDK;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Leviathan.Alpha.SystemConfiguration {
 	public interface ISystemConfigurationService : ILeviathanService {
 		Task<SystemConfigurationServiceCatalog> Catalog();
-	}
-
-	public class SystemConfigurationServiceCatalog {
-		public IEnumerable<ProfileListing> Profiles { get; init; }
-	}
-
-	public class ProfileListing {
-		public int Id { get; init; }
-		public string Name { get; init; }
-		public string Description { get; init; }
 	}
 
 	[SingletonService(typeof(ISystemConfigurationService))]
@@ -51,7 +40,6 @@ namespace Leviathan.Alpha.SystemConfiguration {
 			//		Description = $"Profile: {p.Name}"
 			//	})
 			//	.ToArray()[1];
-
 			//var pars = rt.Component.GetConstructors()[0].GetParameters().Select(p => _services.GetService(p.ParameterType)).ToArray();
 			//var profile = (ISystemProfile)Activator.CreateInstance(rt.Component, pars);
 			//profile.Apply();
@@ -70,5 +58,9 @@ namespace Leviathan.Alpha.SystemConfiguration {
 					})
 			};
 		}
+	}
+
+	public class SystemConfiguration {
+
 	}
 }

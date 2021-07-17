@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net5.0</TargetFramework>
+		<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\Leviathan.Alpha.Logging\bin\Debug\net5.0\Leviathan.Alpha.Logging.dll" Link="Modules\Leviathan.Alpha.Logging.dll">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="..\Leviathan.Components.SDK\bin\Debug\net5.0\Leviathan.Components.SDK.dll" Link="Core\Leviathan.Components.SDK.dll">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="..\Leviathan.Services.SDK\bin\Debug\net5.0\Leviathan.Services.SDK.dll" Link="Core\Leviathan.Services.SDK.dll">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Core\" />
+	</ItemGroup>
+
+</Project>

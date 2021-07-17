@@ -45,17 +45,27 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Components.SDK", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "C. Hardware", "C. Hardware", "{9A4104BD-C92A-489A-A378-EAA70F4ED95A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Alpha.SystemConfiguration", "Leviathan.Alpha.SystemConfiguration\Leviathan.Alpha.SystemConfiguration.csproj", "{6279094A-7E24-43AA-AD94-CF72EE4BA644}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Alpha.SystemConfiguration", "Leviathan.Alpha.SystemConfiguration\Leviathan.Alpha.SystemConfiguration.csproj", "{6279094A-7E24-43AA-AD94-CF72EE4BA644}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Profiles", "Profiles", "{15FB3E57-4752-438A-A2F6-576BFCBFB4C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.SystemConfiguration.SDK", "Leviathan.SystemConfiguration.SDK\Leviathan.SystemConfiguration.SDK.csproj", "{2BFE2473-BF43-42FB-A8E6-7D404AC4597D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.SystemConfiguration.SDK", "Leviathan.SystemConfiguration.SDK\Leviathan.SystemConfiguration.SDK.csproj", "{2BFE2473-BF43-42FB-A8E6-7D404AC4597D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.SystemProfiles.PostgreSQL", "Leviathan.SystemProfiles.PostgreSQL\Leviathan.SystemProfiles.PostgreSQL.csproj", "{3183C1E5-2569-48D0-98B9-52EE84E79598}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.SystemProfiles.PostgreSQL", "Leviathan.SystemProfiles.PostgreSQL\Leviathan.SystemProfiles.PostgreSQL.csproj", "{3183C1E5-2569-48D0-98B9-52EE84E79598}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.SystemProfiles.RoboTank", "Leviathan.SystemProfiles.RoboTank\Leviathan.SystemProfiles.RoboTank.csproj", "{DE478557-34C8-4FE8-9633-15319967B4DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.SystemProfiles.RoboTank", "Leviathan.SystemProfiles.RoboTank\Leviathan.SystemProfiles.RoboTank.csproj", "{DE478557-34C8-4FE8-9633-15319967B4DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Alpha.Logging", "Leviathan.Alpha.Logging\Leviathan.Alpha.Logging.csproj", "{4298CA06-6C2B-4186-AF5F-EBDBCDF84743}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Alpha.Logging", "Leviathan.Alpha.Logging\Leviathan.Alpha.Logging.csproj", "{4298CA06-6C2B-4186-AF5F-EBDBCDF84743}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.Tests", "Sandbox.Tests\Sandbox.Tests.csproj", "{690F982C-33BA-4B8A-90CD-08DB899567F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.Api", "Sandbox.Api\Sandbox.Api.csproj", "{E8661717-75C6-42B0-A084-279515CC763B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "E. Sandbox", "E. Sandbox", "{5836DB50-36F6-4BE4-91BF-B0770B23DE07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.TestConsole", "Sandbox.TestConsole\Sandbox.TestConsole.csproj", "{3C222F90-3255-46BB-9438-31D7EFB65FCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Core.SDK", "Leviathan.Core.SDK\Leviathan.Core.SDK.csproj", "{0AF3A12C-2786-46FF-99F7-3768147D423C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -147,6 +157,22 @@ Global
 		{4298CA06-6C2B-4186-AF5F-EBDBCDF84743}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4298CA06-6C2B-4186-AF5F-EBDBCDF84743}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4298CA06-6C2B-4186-AF5F-EBDBCDF84743}.Release|Any CPU.Build.0 = Release|Any CPU
+		{690F982C-33BA-4B8A-90CD-08DB899567F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{690F982C-33BA-4B8A-90CD-08DB899567F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{690F982C-33BA-4B8A-90CD-08DB899567F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{690F982C-33BA-4B8A-90CD-08DB899567F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8661717-75C6-42B0-A084-279515CC763B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8661717-75C6-42B0-A084-279515CC763B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8661717-75C6-42B0-A084-279515CC763B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8661717-75C6-42B0-A084-279515CC763B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C222F90-3255-46BB-9438-31D7EFB65FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C222F90-3255-46BB-9438-31D7EFB65FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C222F90-3255-46BB-9438-31D7EFB65FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C222F90-3255-46BB-9438-31D7EFB65FCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AF3A12C-2786-46FF-99F7-3768147D423C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AF3A12C-2786-46FF-99F7-3768147D423C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AF3A12C-2786-46FF-99F7-3768147D423C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AF3A12C-2786-46FF-99F7-3768147D423C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -175,6 +201,10 @@ Global
 		{3183C1E5-2569-48D0-98B9-52EE84E79598} = {15FB3E57-4752-438A-A2F6-576BFCBFB4C3}
 		{DE478557-34C8-4FE8-9633-15319967B4DF} = {15FB3E57-4752-438A-A2F6-576BFCBFB4C3}
 		{4298CA06-6C2B-4186-AF5F-EBDBCDF84743} = {45EEC2F0-1312-4D7F-ABDD-76FC41478977}
+		{690F982C-33BA-4B8A-90CD-08DB899567F7} = {5836DB50-36F6-4BE4-91BF-B0770B23DE07}
+		{E8661717-75C6-42B0-A084-279515CC763B} = {5836DB50-36F6-4BE4-91BF-B0770B23DE07}
+		{3C222F90-3255-46BB-9438-31D7EFB65FCF} = {5836DB50-36F6-4BE4-91BF-B0770B23DE07}
+		{0AF3A12C-2786-46FF-99F7-3768147D423C} = {9F5AF2CA-76FC-4F41-A1E3-047427A4BC5E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C39CA66-6C4B-42EB-8797-4ADCFED239DD}
