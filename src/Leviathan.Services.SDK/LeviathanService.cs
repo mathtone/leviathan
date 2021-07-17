@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Leviathan.Services.SDK {
 
@@ -15,5 +16,10 @@ namespace Leviathan.Services.SDK {
 		}
 
 		Task InitializeAsync() => Task.CompletedTask;
+
+		protected virtual async Task<T> WhenInitialized<T>(Func<T> selector) {
+			await Initialize;
+			return selector();
+		}
 	}
 }

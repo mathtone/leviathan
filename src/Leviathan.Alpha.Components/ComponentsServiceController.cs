@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace Leviathan.Alpha.Components {
+
 	[ApiComponent]
 	public class ComponentsServiceController : ServiceController<IComponentsService> {
 
@@ -11,7 +12,6 @@ namespace Leviathan.Alpha.Components {
 		}
 
 		[HttpGet, Route("[action]")]
-		public async Task<ComponentsServiceCatalog> Catalog() =>
-			await Service.Catalog();
+		public Task<ComponentsServiceCatalog> Catalog() => Service.Catalog();
 	}
 }

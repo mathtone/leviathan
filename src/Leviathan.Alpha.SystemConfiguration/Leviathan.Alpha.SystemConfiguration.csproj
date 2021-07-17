@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Leviathan.Alpha.Logging\Leviathan.Alpha.Logging.csproj" />
+    <ProjectReference Include="..\Leviathan.Alpha.Components\Leviathan.Alpha.Components.csproj" />
     <ProjectReference Include="..\Leviathan.Services.SDK\Leviathan.Services.SDK.csproj" />
-    <ProjectReference Include="..\Leviathan.Utilities\Leviathan.Utilities.csproj" />
+    <ProjectReference Include="..\Leviathan.SystemConfiguration.SDK\Leviathan.SystemConfiguration.SDK.csproj" />
     <ProjectReference Include="..\Leviathan.WebApi.SDK\Leviathan.WebApi.SDK.csproj" />
   </ItemGroup>
 

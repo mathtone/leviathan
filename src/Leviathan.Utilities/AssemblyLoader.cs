@@ -6,6 +6,7 @@ using System.Reflection;
 
 namespace Leviathan.Utilities {
 	public class AssemblyLoader {
+
 		private static List<Assembly> _loadedAssemblies = new();
 
 		public static List<Assembly> GetLoadedAssemblies(params string[] scanAssembliesStartsWith) {
@@ -18,40 +19,41 @@ namespace Leviathan.Utilities {
 		}
 
 		private static void LoadAssemblies(params string[] scanAssembliesStartsWith) {
-			HashSet<Assembly> loadedAssemblies = new();
-			List<string> assembliesToBeLoaded = new();
-			string appDllsDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+			var loaded = new HashSet<Assembly>();
+			var toBeLoaded = new List<string>();
+			var appDllsDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
 			if (scanAssembliesStartsWith?.Any() == true) {
 				if (scanAssembliesStartsWith.Length == 1) {
 					var searchPattern = $"{scanAssembliesStartsWith.First()}*.dll";
 					var assemblyPaths = Directory.GetFiles(appDllsDirectory, searchPattern, SearchOption.AllDirectories);
-					assembliesToBeLoaded.AddRange(assemblyPaths);
+					toBeLoaded.AddRange(assemblyPaths);
 				}
 
 				if (scanAssembliesStartsWith.Length > 1) {
 					foreach (string starsWith in scanAssembliesStartsWith) {
 						var searchPattern = $"{starsWith}*.dll";
 						var assemblyPaths = Directory.GetFiles(appDllsDirectory, searchPattern, SearchOption.AllDirectories);
-						assembliesToBeLoaded.AddRange(assemblyPaths);
+						toBeLoaded.AddRange(assemblyPaths);
 					}
 				}
 			}
 			else {
 				var assemblyPaths = Directory.GetFiles(appDllsDirectory, "*.dll");
-				assembliesToBeLoaded.AddRange(assemblyPaths);
+				toBeLoaded.AddRange(assemblyPaths);
 			}
 
-			foreach (var path in assembliesToBeLoaded) {
+			foreach (var path in toBeLoaded) {
 				try {
-					loadedAssemblies.Add(Assembly.LoadFrom(path));
+					loaded.Add(Assembly.LoadFrom(path));
 				}
 				catch (Exception) {
 					continue;
 				}
 			}
 
-			_loadedAssemblies = loadedAssemblies.ToList();
+			_loadedAssemblies = loaded.ToList();
 		}
 	}
 }

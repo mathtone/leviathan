@@ -20,7 +20,7 @@ namespace Leviathan.Alpha.Api {
 
 			foreach (var a in assemblies.Values) {
 				foreach (var t in a.GetExportedTypes()) {
-					var attr = t.GetCustomAttribute<ServiceAttribute>();
+					var attr = t.GetCustomAttribute<ServiceComponentAttribute>();
 					if (attr != null) {
 						if (attr is SingletonServiceAttribute) {
 							var primary = attr.ServiceTypes.First();

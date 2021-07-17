@@ -33,17 +33,29 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.WebApi.SDK", "Lev
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Utilities", "Leviathan.Utilities\Leviathan.Utilities.csproj", "{68D15393-F3D9-4B59-8337-3B4E369A56FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.OneWire", "Leviathan.OneWire\Leviathan.OneWire.csproj", "{C7EF40E0-2223-43F3-AEC5-A8A17B74BF35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.OneWire", "Leviathan.OneWire\Leviathan.OneWire.csproj", "{C7EF40E0-2223-43F3-AEC5-A8A17B74BF35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.PCA9685", "Leviathan.PCA9685\Leviathan.PCA9685.csproj", "{90EE46DF-B5E0-46CE-9C4E-1A759E8C5BD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.PCA9685", "Leviathan.PCA9685\Leviathan.PCA9685.csproj", "{90EE46DF-B5E0-46CE-9C4E-1A759E8C5BD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.GPIO", "Leviathan.GPIO\Leviathan.GPIO.csproj", "{0D499C4E-77D6-4183-85C7-2A0BDC25A527}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.GPIO", "Leviathan.GPIO\Leviathan.GPIO.csproj", "{0D499C4E-77D6-4183-85C7-2A0BDC25A527}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Alpha.Components", "Leviathan.Alpha.Components\Leviathan.Alpha.Components.csproj", "{E1A4ADB4-93F2-4F1F-9116-8B034DC587A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Alpha.Components", "Leviathan.Alpha.Components\Leviathan.Alpha.Components.csproj", "{E1A4ADB4-93F2-4F1F-9116-8B034DC587A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Components.SDK", "Leviathan.Components.SDK\Leviathan.Components.SDK.csproj", "{3934ACD8-9B80-4A11-ADDF-72758ABAC2F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Components.SDK", "Leviathan.Components.SDK\Leviathan.Components.SDK.csproj", "{3934ACD8-9B80-4A11-ADDF-72758ABAC2F4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "C. Hardware", "C. Hardware", "{9A4104BD-C92A-489A-A378-EAA70F4ED95A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Alpha.SystemConfiguration", "Leviathan.Alpha.SystemConfiguration\Leviathan.Alpha.SystemConfiguration.csproj", "{6279094A-7E24-43AA-AD94-CF72EE4BA644}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Profiles", "Profiles", "{15FB3E57-4752-438A-A2F6-576BFCBFB4C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.SystemConfiguration.SDK", "Leviathan.SystemConfiguration.SDK\Leviathan.SystemConfiguration.SDK.csproj", "{2BFE2473-BF43-42FB-A8E6-7D404AC4597D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.SystemProfiles.PostgreSQL", "Leviathan.SystemProfiles.PostgreSQL\Leviathan.SystemProfiles.PostgreSQL.csproj", "{3183C1E5-2569-48D0-98B9-52EE84E79598}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.SystemProfiles.RoboTank", "Leviathan.SystemProfiles.RoboTank\Leviathan.SystemProfiles.RoboTank.csproj", "{DE478557-34C8-4FE8-9633-15319967B4DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Alpha.Logging", "Leviathan.Alpha.Logging\Leviathan.Alpha.Logging.csproj", "{4298CA06-6C2B-4186-AF5F-EBDBCDF84743}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +127,26 @@ Global
 		{3934ACD8-9B80-4A11-ADDF-72758ABAC2F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3934ACD8-9B80-4A11-ADDF-72758ABAC2F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3934ACD8-9B80-4A11-ADDF-72758ABAC2F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6279094A-7E24-43AA-AD94-CF72EE4BA644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6279094A-7E24-43AA-AD94-CF72EE4BA644}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6279094A-7E24-43AA-AD94-CF72EE4BA644}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6279094A-7E24-43AA-AD94-CF72EE4BA644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BFE2473-BF43-42FB-A8E6-7D404AC4597D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BFE2473-BF43-42FB-A8E6-7D404AC4597D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BFE2473-BF43-42FB-A8E6-7D404AC4597D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BFE2473-BF43-42FB-A8E6-7D404AC4597D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3183C1E5-2569-48D0-98B9-52EE84E79598}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3183C1E5-2569-48D0-98B9-52EE84E79598}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3183C1E5-2569-48D0-98B9-52EE84E79598}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3183C1E5-2569-48D0-98B9-52EE84E79598}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE478557-34C8-4FE8-9633-15319967B4DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE478557-34C8-4FE8-9633-15319967B4DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE478557-34C8-4FE8-9633-15319967B4DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE478557-34C8-4FE8-9633-15319967B4DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4298CA06-6C2B-4186-AF5F-EBDBCDF84743}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4298CA06-6C2B-4186-AF5F-EBDBCDF84743}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4298CA06-6C2B-4186-AF5F-EBDBCDF84743}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4298CA06-6C2B-4186-AF5F-EBDBCDF84743}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -137,6 +169,12 @@ Global
 		{0D499C4E-77D6-4183-85C7-2A0BDC25A527} = {9A4104BD-C92A-489A-A378-EAA70F4ED95A}
 		{E1A4ADB4-93F2-4F1F-9116-8B034DC587A9} = {45EEC2F0-1312-4D7F-ABDD-76FC41478977}
 		{3934ACD8-9B80-4A11-ADDF-72758ABAC2F4} = {9F5AF2CA-76FC-4F41-A1E3-047427A4BC5E}
+		{6279094A-7E24-43AA-AD94-CF72EE4BA644} = {45EEC2F0-1312-4D7F-ABDD-76FC41478977}
+		{15FB3E57-4752-438A-A2F6-576BFCBFB4C3} = {EC20E229-61BC-42DD-B8AD-51BD4B7F886F}
+		{2BFE2473-BF43-42FB-A8E6-7D404AC4597D} = {9F5AF2CA-76FC-4F41-A1E3-047427A4BC5E}
+		{3183C1E5-2569-48D0-98B9-52EE84E79598} = {15FB3E57-4752-438A-A2F6-576BFCBFB4C3}
+		{DE478557-34C8-4FE8-9633-15319967B4DF} = {15FB3E57-4752-438A-A2F6-576BFCBFB4C3}
+		{4298CA06-6C2B-4186-AF5F-EBDBCDF84743} = {45EEC2F0-1312-4D7F-ABDD-76FC41478977}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C39CA66-6C4B-42EB-8797-4ADCFED239DD}
