@@ -1,5 +1,6 @@
 ﻿using Leviathan.Components.SDK;
 using System;
+using System.Threading.Tasks;
 
 namespace Leviathan.SystemConfiguration.SDK {
 	public class SystemProfileAttribute : LeviathanComponentAttribute {
@@ -7,10 +8,10 @@ namespace Leviathan.SystemConfiguration.SDK {
 	}
 
 	public interface ISystemProfile {
-		void Apply();
+		Task Apply();
 	}
 
 	public abstract class SystemProfileComponent : ISystemProfile {
-		public abstract void Apply();
+		public abstract Task Apply();
 	}
 }

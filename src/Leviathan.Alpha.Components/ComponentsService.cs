@@ -44,11 +44,11 @@ namespace Leviathan.Alpha.Components {
 
 		protected static IEnumerable<ComponentInfo> GetAllAvailableComponents() {
 
-			var localPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-			var dlls = Directory.GetFiles(localPath, "*.dll");
+			var localPath = AppDomain.CurrentDomain.BaseDirectory;
+			//var dlls = Directory.GetFiles(localPath, "*.dll",SearchOption.AllDirectories);
 			var types = AppDomain.CurrentDomain
 				.GetAssemblies()
-				.Where(a => !a.IsDynamic && Path.GetDirectoryName(a.Location) == localPath)
+				.Where(a => !a.IsDynamic && Path.GetDirectoryName(a.Location).StartsWith(localPath))
 				.SelectMany(a => a.GetExportedTypes());
 
 			foreach (var t in types) {

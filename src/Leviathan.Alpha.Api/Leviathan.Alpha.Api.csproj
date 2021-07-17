@@ -20,22 +20,90 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Core\" />
-		<Folder Include="Modules\" />
+		<Folder Include="Modules\Drivers\" />
+		<Folder Include="Modules\Services\" />
+		<Folder Include="Modules\Profiles\" />
 	</ItemGroup>
 
 	<ItemGroup>
 
-		<None Include="..\Leviathan.Alpha.Components\bin\Debug\net5.0\Leviathan.Alpha.Components.dll" Link="Modules\Leviathan.Alpha.Components.dll">
+		<None Include="..\Leviathan.Alpha.Components\bin\Debug\net5.0\Leviathan.Alpha.Components.dll" Link="Modules\Services\Leviathan.Alpha.Components.dll">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="..\Leviathan.Alpha.Components\bin\Debug\net5.0\Leviathan.Alpha.Components.pdb" Link="Modules\Services\Leviathan.Alpha.Components.pdb">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 
-		<None Include="..\Leviathan.Alpha.Core\bin\Debug\net5.0\Leviathan.Alpha.Core.dll" Link="Modules\Leviathan.Alpha.Core.dll">
+		<None Include="..\Leviathan.Alpha.Core\bin\Debug\net5.0\Leviathan.Alpha.Core.dll" Link="Modules\Services\Leviathan.Alpha.Core.dll">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Include="..\Leviathan.Alpha.Logging\bin\Debug\net5.0\Leviathan.Alpha.Logging.dll" Link="Modules\Leviathan.Alpha.Logging.dll">
+		<None Include="..\Leviathan.Alpha.Core\bin\Debug\net5.0\Leviathan.Alpha.Core.pdb" Link="Modules\Services\Leviathan.Alpha.Core.pdb">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		
+		<None Include="..\Leviathan.Alpha.Logging\bin\Debug\net5.0\Leviathan.Alpha.Logging.dll" Link="Modules\Services\Leviathan.Alpha.Logging.dll">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<None Include="..\Leviathan.Alpha.Logging\bin\Debug\net5.0\Leviathan.Alpha.Logging.pdb" Link="Modules\Services\Leviathan.Alpha.Logging.pdb">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		
+		<None Include="..\Leviathan.Alpha.SystemConfiguration\bin\Debug\net5.0\Leviathan.Alpha.SystemConfiguration.dll" Link="Modules\Services\Leviathan.Alpha.SystemConfiguration.dll">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="..\Leviathan.Alpha.SystemConfiguration\bin\Debug\net5.0\Leviathan.Alpha.SystemConfiguration.pdb" Link="Modules\Services\Leviathan.Alpha.SystemConfiguration.pdb">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		
+		<None Include="..\Leviathan.Channels.SDK\bin\Debug\net5.0\Leviathan.Channels.SDK.dll" Link="Sdk\Leviathan.Channels.SDK.dll">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="..\Leviathan.Channels.SDK\bin\Debug\net5.0\Leviathan.Channels.SDK.pdb" Link="Sdk\Leviathan.Channels.SDK.pdb">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		
+		<None Include="..\Leviathan.SystemConfiguration.SDK\bin\Debug\net5.0\Leviathan.SystemConfiguration.SDK.dll" Link="Sdk\Leviathan.SystemConfiguration.SDK.dll">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="..\Leviathan.SystemConfiguration.SDK\bin\Debug\net5.0\Leviathan.SystemConfiguration.SDK.pdb" Link="Sdk\Leviathan.SystemConfiguration.SDK.pdb">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+			
+		<None Include="..\Leviathan.SystemProfiles.Basic\bin\Debug\net5.0\Leviathan.SystemProfiles.Basic.dll" Link="Modules\Profiles\Leviathan.SystemProfiles.Basic.dll">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="..\Leviathan.SystemProfiles.Basic\bin\Debug\net5.0\Leviathan.SystemProfiles.Basic.pdb" Link="Modules\Profiles\Leviathan.SystemProfiles.Basic.pdb">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		
+		<None Include="..\Leviathan.SystemProfiles.Hardcore\bin\Debug\net5.0\Leviathan.SystemProfiles.Hardcore.dll" Link="Modules\Profiles\Leviathan.SystemProfiles.Hardcore.dll">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="..\Leviathan.SystemProfiles.Hardcore\bin\Debug\net5.0\Leviathan.SystemProfiles.Hardcore.pdb" Link="Modules\Profiles\Leviathan.SystemProfiles.Hardcore.pdb">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		
+		<None Include="..\Leviathan.SystemProfiles.PostgreSQL\bin\Debug\net5.0\Leviathan.SystemProfiles.PostgreSQL.dll" Link="Modules\Profiles\Leviathan.SystemProfiles.PostgreSQL.dll">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="..\Leviathan.SystemProfiles.PostgreSQL\bin\Debug\net5.0\Leviathan.SystemProfiles.PostgreSQL.pdb" Link="Modules\Profiles\Leviathan.SystemProfiles.PostgreSQL.pdb">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		
+		<None Include="..\Leviathan.SystemProfiles.RoboTank\bin\Debug\net5.0\Leviathan.SystemProfiles.RoboTank.dll" Link="Modules\Profiles\Leviathan.SystemProfiles.RoboTank.dll">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="..\Leviathan.SystemProfiles.RoboTank\bin\Debug\net5.0\Leviathan.SystemProfiles.RoboTank.pdb" Link="Modules\Profiles\Leviathan.SystemProfiles.RoboTank.pdb">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+
+		<None Include="..\Leviathan.OneWire\bin\Debug\net5.0\Leviathan.OneWire.dll" Link="Modules\Drivers\Leviathan.OneWire.dll">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="..\Leviathan.OneWire\bin\Debug\net5.0\Leviathan.OneWire.pdb" Link="Modules\Drivers\Leviathan.OneWire.pdb">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		
 	</ItemGroup>
 
 </Project>

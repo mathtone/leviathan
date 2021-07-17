@@ -13,5 +13,9 @@ namespace Leviathan.Alpha.SystemConfiguration {
 		[HttpGet, Route("[action]")]
 		public async Task<SystemConfigurationServiceCatalog> Catalog() =>
 			await Service.Catalog();
+
+		[HttpGet, Route("[action]")]
+		public async Task Apply(string name) =>
+			await Service.ApplyProfile(name);
 	}
 }

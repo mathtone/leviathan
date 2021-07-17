@@ -31,7 +31,7 @@ namespace Leviathan.Alpha.Api {
 		public void ConfigureServices(IServiceCollection services) {
 
 			var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-			var corePath = Path.Combine(basePath, "Core");
+			var sdkPath = Path.Combine(basePath, "Sdk");
 			var modulePath = Path.Combine(basePath, "Modules");
 
 			_loadedAssemblies = AppDomain.CurrentDomain
@@ -40,6 +40,14 @@ namespace Leviathan.Alpha.Api {
 
 			AppDomain.CurrentDomain.AssemblyLoad += CurrentDomain_AssemblyLoad;
 			AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+			foreach (var f in Directory.EnumerateFiles(sdkPath, "*.dll", SearchOption.AllDirectories)) {
+				var name = AssemblyName.GetAssemblyName(f);
+
+				if (!_loadedAssemblies.ContainsKey(name.FullName)) {
+					Assembly.LoadFile(f);
+				}
+			}
+
 			foreach (var f in Directory.EnumerateFiles(modulePath, "*.dll", SearchOption.AllDirectories)) {
 				var name = AssemblyName.GetAssemblyName(f);
 
@@ -48,9 +56,17 @@ namespace Leviathan.Alpha.Api {
 				}
 			}
 
+			//foreach (var f in Directory.EnumerateFiles(modulePath, "*.dll", SearchOption.AllDirectories)) {
+			//	var name = AssemblyName.GetAssemblyName(f);
+
+			//	if (!_loadedAssemblies.ContainsKey(name.FullName)) {
+			//		Assembly.LoadFile(f);
+			//	}
+			//}
+
 			var moduleAssemblies = AppDomain.CurrentDomain
 				.GetAssemblies()
-				.Where(a => Path.GetDirectoryName(a.Location) == modulePath)
+				.Where(a => Path.GetDirectoryName(a.Location).StartsWith(modulePath))
 				.ToDictionary(a => a.Location);
 
 			var apiControllerAssemblies = new List<Assembly>();
@@ -93,17 +109,6 @@ namespace Leviathan.Alpha.Api {
 				}
 			}
 
-			//load modular 
-			//var a = AssemblyLoader.GetLoadedAssemblies();
-			//foreach(var f in Directory.EnumerateFiles(corePath, "*.dll", SearchOption.AllDirectories)) {
-			//	var a = Assembly.LoadFile(f);
-			//}
-
-			//foreach (var f in Directory.EnumerateFiles(modulePath, "*.dll", SearchOption.AllDirectories)) {
-			//	var a = Assembly.LoadFile(f);
-			//}
-
-			//services.AddTheLeviathan()
 			var mvcBuild = services.AddControllers(o => o.Conventions.Add(new ModularControllerRouteConvention()))
 				.AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 

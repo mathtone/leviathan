@@ -3,12 +3,14 @@ using Leviathan.Alpha.Logging;
 using Leviathan.Services.SDK;
 using Leviathan.SystemConfiguration.SDK;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Leviathan.Alpha.SystemConfiguration {
 	public interface ISystemConfigurationService : ILeviathanService {
 		Task<SystemConfigurationServiceCatalog> Catalog();
+		Task ApplyProfile(string name);
 	}
 
 	[SingletonService(typeof(ISystemConfigurationService))]
@@ -17,6 +19,7 @@ namespace Leviathan.Alpha.SystemConfiguration {
 		ILoggingService _log;
 		IServiceProvider _services;
 		IComponentsService _components;
+		IDictionary<string, Type> _profiles;
 
 		public override Task Initialize { get; }
 
@@ -29,38 +32,45 @@ namespace Leviathan.Alpha.SystemConfiguration {
 		}
 
 		async Task InitializeAsync() {
-
 			await base.Initialize;
 			await _components.Initialize;
-
-			//var rt = (await _components.AvailableComponents())
-			//	.Where(c => c.AttributeType == typeof(SystemProfileAttribute))
-			//	.Select(p => new {
-			//		Component = p.Type,
-			//		Description = $"Profile: {p.Name}"
-			//	})
-			//	.ToArray()[1];
-			//var pars = rt.Component.GetConstructors()[0].GetParameters().Select(p => _services.GetService(p.ParameterType)).ToArray();
-			//var profile = (ISystemProfile)Activator.CreateInstance(rt.Component, pars);
-			//profile.Apply();
-			//;
+			this._profiles = (await _components.AvailableComponents())
+				.Where(c => c.AttributeType == typeof(SystemProfileAttribute))
+				.Select(p => p.Type)
+				.ToDictionary(t => t.Name);
 		}
 
 		public async Task<SystemConfigurationServiceCatalog> Catalog() {
 			await Initialize;
-			var components = await _components.AvailableComponents();
 			return new SystemConfigurationServiceCatalog {
-				Profiles = components
-					.Where(c => c.AttributeType == typeof(SystemProfileAttribute))
+				Profiles = _profiles.Values
 					.Select(p => new ProfileListing {
 						Name = p.Name,
 						Description = $"Profile: {p.Name}"
 					})
 			};
 		}
+
+		public async Task ApplyProfile(string name) {
+			await Initialize;
+			await _services.CreateInstance<ISystemProfile>(_profiles[name]).Apply();
+		}
 	}
 
 	public class SystemConfiguration {
 
+	}
+
+	public static class IServiceProviderExtensions {
+		public static T CreateInstance<T>(this IServiceProvider services, Type type) {
+
+			var constructors = type.GetConstructors(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+			foreach (var c in constructors.OrderByDescending(c => c.GetParameters().Length)) {
+				var paramTypes = c.GetParameters().Select(p => p.ParameterType);
+				var svcParams = paramTypes.Select(t => services.GetService(t));
+				return (T)Activator.CreateInstance(type, svcParams.ToArray());
+			}
+			throw new Exception("Could not construct target");
+		}
 	}
 }

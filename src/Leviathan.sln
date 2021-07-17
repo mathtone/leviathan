@@ -67,6 +67,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.TestConsole", "Sand
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Core.SDK", "Leviathan.Core.SDK\Leviathan.Core.SDK.csproj", "{0AF3A12C-2786-46FF-99F7-3768147D423C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.SystemProfiles.Basic", "Leviathan.SystemProfiles.Basic\Leviathan.SystemProfiles.Basic.csproj", "{B7039BC7-5CE8-42A6-9158-C1CC66ABBD5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.SystemProfiles.Hardcore", "Leviathan.SystemProfiles.Hardcore\Leviathan.SystemProfiles.Hardcore.csproj", "{26FCAF72-F757-47BA-914E-DD763756488C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -173,6 +177,14 @@ Global
 		{0AF3A12C-2786-46FF-99F7-3768147D423C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AF3A12C-2786-46FF-99F7-3768147D423C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AF3A12C-2786-46FF-99F7-3768147D423C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7039BC7-5CE8-42A6-9158-C1CC66ABBD5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7039BC7-5CE8-42A6-9158-C1CC66ABBD5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7039BC7-5CE8-42A6-9158-C1CC66ABBD5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7039BC7-5CE8-42A6-9158-C1CC66ABBD5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26FCAF72-F757-47BA-914E-DD763756488C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26FCAF72-F757-47BA-914E-DD763756488C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26FCAF72-F757-47BA-914E-DD763756488C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26FCAF72-F757-47BA-914E-DD763756488C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -205,6 +217,8 @@ Global
 		{E8661717-75C6-42B0-A084-279515CC763B} = {5836DB50-36F6-4BE4-91BF-B0770B23DE07}
 		{3C222F90-3255-46BB-9438-31D7EFB65FCF} = {5836DB50-36F6-4BE4-91BF-B0770B23DE07}
 		{0AF3A12C-2786-46FF-99F7-3768147D423C} = {9F5AF2CA-76FC-4F41-A1E3-047427A4BC5E}
+		{B7039BC7-5CE8-42A6-9158-C1CC66ABBD5B} = {15FB3E57-4752-438A-A2F6-576BFCBFB4C3}
+		{26FCAF72-F757-47BA-914E-DD763756488C} = {15FB3E57-4752-438A-A2F6-576BFCBFB4C3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C39CA66-6C4B-42EB-8797-4ADCFED239DD}
