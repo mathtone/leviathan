@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Leviathan.Alpha.Components\Leviathan.Alpha.Components.csproj" />
+    <ProjectReference Include="..\Leviathan.Services.SDK\Leviathan.Services.SDK.csproj" />
+    <ProjectReference Include="..\Leviathan.SystemConfiguration.SDK\Leviathan.SystemConfiguration.SDK.csproj" />
+    <ProjectReference Include="..\Leviathan.WebApi.SDK\Leviathan.WebApi.SDK.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,49 +1,37 @@
-﻿using Leviathan.Alpha.Components;
-using Leviathan.Alpha.Startup;
-using Leviathan.SDK;
-using Leviathan.Services;
+﻿using Leviathan.Services.SDK;
+using Leviathan.System.SDK;
 using System;
 using System.Threading.Tasks;
 
 namespace Leviathan.Alpha.Core {
-	public interface IAmLeviathan : IAsyncInitialize {
-		Task Start(ILeviathanHostEnvironment environment);
+	public interface ITheLeviathan {
+		Task Start();
 		Task Stop();
 	}
 
-	public class TheLeviathan : ServiceComponent, IAmLeviathan {
+	[SingletonService(typeof(ITheLeviathan))]
+	public class TheLeviathan : LeviathanService, ITheLeviathan {
 
-		protected ILeviathanSystem System { get; }
-		protected ILeviathanHostEnvironment Environment { get; set; }
-		protected IStartupService Startup { get; set; }
-		//protected IComponentsService Components { get; set; }
+		public override Task Initialize { get; }
+		ILeviathanSystem System { get; }
 
-		public TheLeviathan(ILeviathanSystem system, IStartupService startup) : base() {
-			this.System = system;
-			this.Startup = startup;
-			this.System.SystemOnline += System_SystemOnline;
-			this.Initialize = InitializeAsync();
+		public TheLeviathan(ILeviathanSystem system) {
+			System = system;
+			Initialize = InitializeAsync();
 		}
 
-		protected override async Task InitializeAsync() {
-			await base.InitializeAsync();
+		async Task InitializeAsync() {
+			await base.Initialize;
+			await System.Initialize;
 		}
 
-		public async Task Start(ILeviathanHostEnvironment environment) {
-			await Initialize;
-			this.Environment = environment;
-			this.System.ConfigureHost(environment);
-		}
-
-		public async Task Stop() {
+		public async Task Start() {
 			await Initialize;
 			;
 		}
 
-		private void System_SystemOnline(object sender, EventArgs e) => Task.Run(async () => {
-			await Task.Yield();
-			await Startup.ActivateProfile("Leviathan.SystemProfiles.FactoryReset.FactoryResetProfile"); ;
-			await Startup.ActivateProfile("Leviathan.SystemProfiles.RoboTank.RoboTankProfile");
-		});
+		public async Task Stop() {
+			await Task.CompletedTask;
+		}
 	}
 }

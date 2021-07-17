@@ -1,7 +1,0 @@
-﻿
-CREATE DATABASE "@:db_name"
-    WITH 
-    OWNER = @:owner
-    ENCODING = 'UTF8'
-    CONNECTION LIMIT = -1;
-
