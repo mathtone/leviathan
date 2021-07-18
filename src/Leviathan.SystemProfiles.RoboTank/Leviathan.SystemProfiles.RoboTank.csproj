@@ -5,9 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Leviathan.Alpha.FileDataSystem\Leviathan.Alpha.FileDataSystem.csproj" />
     <ProjectReference Include="..\Leviathan.Alpha.Logging\Leviathan.Alpha.Logging.csproj" />
+    <ProjectReference Include="..\Leviathan.Alpha.NpgsqlDataSystem\Leviathan.Alpha.NpgsqlDataSystem.csproj" />
+    <ProjectReference Include="..\Leviathan.GPIO\Leviathan.GPIO.csproj" />
+    <ProjectReference Include="..\Leviathan.OneWire\Leviathan.OneWire.csproj" />
+    <ProjectReference Include="..\Leviathan.PCA9685\Leviathan.PCA9685.csproj" />
     <ProjectReference Include="..\Leviathan.SystemConfiguration.SDK\Leviathan.SystemConfiguration.SDK.csproj" />
     <ProjectReference Include="..\Leviathan.SystemProfiles.Basic\Leviathan.SystemProfiles.Basic.csproj" />
+    <ProjectReference Include="..\Leviathan.SystemProfiles.PostgreSQL\Leviathan.SystemProfiles.PostgreSQL.csproj" />
   </ItemGroup>
 
 </Project>

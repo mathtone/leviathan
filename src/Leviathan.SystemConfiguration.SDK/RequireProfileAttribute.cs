@@ -3,7 +3,7 @@ using System;
 
 namespace Leviathan.SystemConfiguration.SDK {
 
-	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+	[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 	public class RequireProfileAttribute : Attribute {
 
 		public Type Type { get; }

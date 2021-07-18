@@ -1,11 +1,11 @@
 ﻿using Leviathan.Services.SDK;
-using System;
 
 namespace Leviathan.Alpha.FileDataSystem {
-	public interface IFileDataSystemService {
+	public interface IFileDataSystemService : ILeviathanService {
 
 	}
 
+	[SingletonService(typeof(IFileDataSystemService))]
 	public class FileDataSystemService : LeviathanService, IFileDataSystemService {
 
 	}

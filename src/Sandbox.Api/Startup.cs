@@ -1,3 +1,4 @@
+using Leviathan.Alpha.SystemConfiguration;
 using Leviathan.Services.SDK;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -86,6 +87,86 @@ namespace Sandbox.Api {
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
+
+			var cfg = app.ApplicationServices.GetRequiredService<ISystemConfigurationService>();
+			cfg.ApplyProfile("RoboTankProfile", new ProfileApplication[] {
+				new(){
+					ProfileName = "BasicProfile",
+					ApplicationFields = new ApplicationField[] {
+						new() {
+							Name = "Instance Name",
+							Value = "Leviathan"
+						}
+					}
+				},
+				new(){
+					ProfileName = "PostgreSQLProfile",
+					ApplicationFields = new ApplicationField[] {
+						new() {
+							Name = "Host Name",
+							Value = "leviathan-alpha"
+						},
+						new() {
+							Name = "Instance DB Name",
+							Value = "leviathan-alpha-db"
+						},
+						new() {
+							Name = "DB Login",
+							Value = "pi"
+						},
+						new() {
+							Name = "DB Password",
+							Value = "Digital!2021"
+						}
+					}
+				},
+				new(){
+					ProfileName = "RoboTankProfile",
+					ApplicationFields = Array.Empty<ApplicationField>()
+				}
+			});
+
+			/*
+			{
+				"profileName": "BasicProfile",
+				"applicationFields": [
+				  {
+					"name": "Instance Name",
+					"description": "The name of this instance of THE LEVIATHAN.",
+					"value": "TheLeviathan"
+				  }
+				]
+			  },
+			  {
+				"profileName": "PostgreSQLProfile",
+				"applicationFields": [
+				  {
+					"name": "Host Name",
+					"description": "Database server host name.",
+					"value": null
+				  },
+				  {
+					"name": "Instance DB Name",
+					"description": "Database name.",
+					"value": null
+				  },
+				  {
+					"name": "DB Login",
+					"description": "Database login.",
+					"value": null
+				  },
+				  {
+					"name": "DB Password",
+					"description": "Database password.",
+					"value": null
+				  }
+				]
+			  },
+			  {
+				"profileName": "RoboTankProfile",
+				"applicationFields": []
+			  }
+			*/
 
 			if (env.IsDevelopment()) {
 				app.UseDeveloperExceptionPage();

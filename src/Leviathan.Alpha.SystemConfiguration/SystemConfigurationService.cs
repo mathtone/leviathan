@@ -11,7 +11,8 @@ using System.Reflection;
 namespace Leviathan.Alpha.SystemConfiguration {
 	public interface ISystemConfigurationService : ILeviathanService {
 		Task<SystemConfigurationServiceCatalog> Catalog();
-		Task ApplyProfile(string name);
+		Task ApplyProfile(string name, IEnumerable<ProfileApplication> applications);
+		Task<IEnumerable<ProfileApplication>> GetApplication(string name);
 	}
 
 	[SingletonService(typeof(ISystemConfigurationService))]
@@ -25,6 +26,7 @@ namespace Leviathan.Alpha.SystemConfiguration {
 		public override Task Initialize { get; }
 
 		public SystemConfigurationService(ILoggingService log, IComponentsService components, IServiceProvider services) {
+
 			this._log = log;
 			this._components = components;
 			this._services = services;
@@ -52,10 +54,48 @@ namespace Leviathan.Alpha.SystemConfiguration {
 			};
 		}
 
-		public async Task ApplyProfile(string name) {
+		public async Task ApplyProfile(string name, IEnumerable<ProfileApplication> applications) {
 			await Initialize;
 			foreach (var profile in GetRequiredProfiles(_profiles[name])) {
-				await _services.CreateInstance<ISystemProfile>(profile).Apply();
+
+				var instance = _services.CreateInstance<ISystemProfile>(profile);
+				var t = instance.GetType();
+				var application = applications.Single(a => a.ProfileName == profile.Name);
+
+				foreach(var p in t.GetProperties()) {
+					var attr = p.GetCustomAttribute<ProfilePropertyAttribute>();
+					if(attr != null) {
+						p.SetValue(instance, application.ApplicationFields.Single(f => f.Name == attr.Name).Value);
+						;
+					}
+				}
+				await instance.Apply();
+			}
+		}
+
+		public Task<IEnumerable<ProfileApplication>> GetApplication(string name) =>
+			WhenInitialized(() =>
+				GetRequiredProfiles(_profiles[name]).Select(GetApplication)
+			);
+
+
+		protected static ProfileApplication GetApplication(Type type) {
+			return new ProfileApplication {
+				ProfileName = type.Name,
+				ApplicationFields = GetApplicationFields(type)
+			};
+		}
+
+		protected static IEnumerable<ApplicationField> GetApplicationFields(Type type) {
+			foreach (var t in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static)) {
+				var attr = t.GetCustomAttribute<ProfilePropertyAttribute>();
+				if (attr != null) {
+					yield return new() {
+						Name = attr.Name,
+						Description = attr.Description,
+						Value = attr.DefaultValue
+					};
+				}
 			}
 		}
 
@@ -74,10 +114,6 @@ namespace Leviathan.Alpha.SystemConfiguration {
 				yield return profileType;
 			}
 		}
-	}
-
-	public class SystemConfiguration {
-
 	}
 
 	public static class IServiceProviderExtensions {

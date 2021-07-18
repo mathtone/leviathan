@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Leviathan.Alpha.Channels\Leviathan.Alpha.Channels.csproj" />
     <ProjectReference Include="..\Leviathan.Alpha.Core\Leviathan.Alpha.Core.csproj" />
     <ProjectReference Include="..\Leviathan.Alpha.FileDataSystem\Leviathan.Alpha.FileDataSystem.csproj" />
     <ProjectReference Include="..\Leviathan.Alpha.Logging\Leviathan.Alpha.Logging.csproj" />

@@ -12,10 +12,12 @@ namespace Leviathan.SystemConfiguration.SDK {
 	public class ProfilePropertyAttribute : Attribute {
 		public string Name { get; init; }
 		public string Description { get; init; }
+		public object DefaultValue{ get; init; }
 
-		public ProfilePropertyAttribute(string name, string description) {
+		public ProfilePropertyAttribute(string name, string description, object defaultValue=default) {
 			this.Name = name;
 			this.Description = description;
+			this.DefaultValue = defaultValue;
 		}
 	}
 	public interface ISystemProfile {

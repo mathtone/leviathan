@@ -71,11 +71,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.SystemProfiles.Ba
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.SystemProfiles.Hardcore", "Leviathan.SystemProfiles.Hardcore\Leviathan.SystemProfiles.Hardcore.csproj", "{26FCAF72-F757-47BA-914E-DD763756488C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.SystemProfiles.FactoryReset", "Leviathan.SystemProfiles.FactoryReset\Leviathan.SystemProfiles.FactoryReset.csproj", "{BC552B33-D61A-437B-9FF1-C0F8697BEC11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.SystemProfiles.FactoryReset", "Leviathan.SystemProfiles.FactoryReset\Leviathan.SystemProfiles.FactoryReset.csproj", "{BC552B33-D61A-437B-9FF1-C0F8697BEC11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Alpha.FileDataSystem", "Leviathan.Alpha.FileDataSystem\Leviathan.Alpha.FileDataSystem.csproj", "{4C9BAD2B-DD5A-4006-B878-6A8E810C4DC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Alpha.FileDataSystem", "Leviathan.Alpha.FileDataSystem\Leviathan.Alpha.FileDataSystem.csproj", "{4C9BAD2B-DD5A-4006-B878-6A8E810C4DC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Alpha.NpgsqlDataSystem", "Leviathan.Alpha.NpgsqlDataSystem\Leviathan.Alpha.NpgsqlDataSystem.csproj", "{8B49CC2D-52C8-4C79-9ACD-3E8B46CDE49A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Alpha.NpgsqlDataSystem", "Leviathan.Alpha.NpgsqlDataSystem\Leviathan.Alpha.NpgsqlDataSystem.csproj", "{8B49CC2D-52C8-4C79-9ACD-3E8B46CDE49A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Alpha.Channels", "Leviathan.Alpha.Channels\Leviathan.Alpha.Channels.csproj", "{A95A0941-2737-4D92-A9AF-68F2B0273C31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -203,6 +205,10 @@ Global
 		{8B49CC2D-52C8-4C79-9ACD-3E8B46CDE49A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B49CC2D-52C8-4C79-9ACD-3E8B46CDE49A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B49CC2D-52C8-4C79-9ACD-3E8B46CDE49A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A95A0941-2737-4D92-A9AF-68F2B0273C31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A95A0941-2737-4D92-A9AF-68F2B0273C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A95A0941-2737-4D92-A9AF-68F2B0273C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A95A0941-2737-4D92-A9AF-68F2B0273C31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -240,6 +246,7 @@ Global
 		{BC552B33-D61A-437B-9FF1-C0F8697BEC11} = {15FB3E57-4752-438A-A2F6-576BFCBFB4C3}
 		{4C9BAD2B-DD5A-4006-B878-6A8E810C4DC2} = {45EEC2F0-1312-4D7F-ABDD-76FC41478977}
 		{8B49CC2D-52C8-4C79-9ACD-3E8B46CDE49A} = {45EEC2F0-1312-4D7F-ABDD-76FC41478977}
+		{A95A0941-2737-4D92-A9AF-68F2B0273C31} = {45EEC2F0-1312-4D7F-ABDD-76FC41478977}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C39CA66-6C4B-42EB-8797-4ADCFED239DD}

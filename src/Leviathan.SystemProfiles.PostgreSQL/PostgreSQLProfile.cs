@@ -1,11 +1,15 @@
-﻿using Leviathan.SystemConfiguration.SDK;
+﻿using Leviathan.Alpha.NpgsqlDataSystem;
+using Leviathan.SystemConfiguration.SDK;
+using Leviathan.SystemProfiles.Basic;
 using System;
 using System.Threading.Tasks;
 
 namespace Leviathan.SystemProfiles.PostgreSQL {
 
-	[SystemProfile]
+	[SystemProfile, RequireProfile(typeof(BasicProfile))]
 	public class PostgreSQLProfile : SystemProfileComponent {
+
+		INpgsqlDataSystem _data;
 
 		[ProfileProperty("Host Name", "Database server host name.")]
 		public string HostName { get; set; }
@@ -18,6 +22,10 @@ namespace Leviathan.SystemProfiles.PostgreSQL {
 
 		[ProfileProperty("DB Password", "Database password.")]
 		public string Password { get; set; }
+
+		public PostgreSQLProfile(INpgsqlDataSystem data) {
+			this._data = data;
+		}
 
 		public async override Task Apply() {
 			await Task.CompletedTask;

@@ -1,5 +1,6 @@
 ﻿using Leviathan.WebApi.SDK;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Leviathan.Alpha.SystemConfiguration {
@@ -14,8 +15,12 @@ namespace Leviathan.Alpha.SystemConfiguration {
 		public async Task<SystemConfigurationServiceCatalog> Catalog() =>
 			await Service.Catalog();
 
+		[HttpGet, Route("[action]")]
+		public async Task<IEnumerable<ProfileApplication>> Apply(string profileName) =>
+			await Service.GetApplication(profileName);
+
 		[HttpPost, Route("[action]")]
-		public async Task Apply(string name) =>
-			await Service.ApplyProfile(name);
+		public async Task Apply(string name, IEnumerable<ProfileApplication> applications) =>
+			await Service.ApplyProfile(name, applications);
 	}
 }
