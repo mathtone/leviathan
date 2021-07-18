@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace Leviathan.Alpha.SystemConfiguration {
-	[ApiComponent]
+	[ApiComponent, Route("api/[controller]")]
 	public class SystemConfigurationServiceController : ServiceController<ISystemConfigurationService> {
 
 		public SystemConfigurationServiceController(ISystemConfigurationService service) :
@@ -14,7 +14,7 @@ namespace Leviathan.Alpha.SystemConfiguration {
 		public async Task<SystemConfigurationServiceCatalog> Catalog() =>
 			await Service.Catalog();
 
-		[HttpGet, Route("[action]")]
+		[HttpPost, Route("[action]")]
 		public async Task Apply(string name) =>
 			await Service.ApplyProfile(name);
 	}

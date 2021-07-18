@@ -4,16 +4,6 @@ using System;
 using System.Threading.Tasks;
 
 namespace Leviathan.OneWire {
-	public class TempSensorChannelData {
-		public string BusId { get; init; }
-		public string DeviceId { get; init; }
-	}
-
-	public class TempReading {
-		public double Celsius { get; init; }
-		public double Farenheit { get; init; }
-		public double Kelvin { get; init; }
-	}
 
 	public class TempSensorChannel : IAsyncInputChannel<TempReading> {
 

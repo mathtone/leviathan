@@ -45,20 +45,20 @@ namespace Leviathan.Alpha.Components {
 		protected static IEnumerable<ComponentInfo> GetAllAvailableComponents() {
 
 			var localPath = AppDomain.CurrentDomain.BaseDirectory;
-			//var dlls = Directory.GetFiles(localPath, "*.dll",SearchOption.AllDirectories);
-			var types = AppDomain.CurrentDomain
-				.GetAssemblies()
-				.Where(a => !a.IsDynamic && Path.GetDirectoryName(a.Location).StartsWith(localPath))
-				.SelectMany(a => a.GetExportedTypes());
 
-			foreach (var t in types) {
-				var attr = t.GetCustomAttribute<LeviathanComponentAttribute>();
-				if (attr != null) {
-					yield return new ComponentInfo {
-						Name = t.Name,
-						Type = t,
-						AttributeType = attr.GetType()
-					};
+			foreach (var a in AppDomain.CurrentDomain.GetAssemblies()) {
+				if (!a.IsDynamic && a.Location.StartsWith(localPath)) {
+					var types = a.GetExportedTypes();
+					foreach (var t in types) {
+						var attr = t.GetCustomAttribute<LeviathanComponentAttribute>();
+						if (attr != null) {
+							yield return new ComponentInfo {
+								Name = t.Name,
+								Type = t,
+								AttributeType = attr.GetType()
+							};
+						}
+					}
 				}
 			}
 		}

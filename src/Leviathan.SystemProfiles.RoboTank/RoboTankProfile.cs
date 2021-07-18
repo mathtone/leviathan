@@ -1,11 +1,12 @@
 ﻿using Leviathan.Alpha.Logging;
 using Leviathan.SystemConfiguration.SDK;
+using Leviathan.SystemProfiles.Basic;
 using System;
 using System.Threading.Tasks;
 
 namespace Leviathan.SystemProfiles.RoboTank {
 
-	[SystemProfile]
+	[SystemProfile, RequireProfile(typeof(BasicProfile))]
 	public class RoboTankProfile : SystemProfileComponent {
 
 		ILoggingService _log;
@@ -15,8 +16,7 @@ namespace Leviathan.SystemProfiles.RoboTank {
 		}
 
 		public override async Task Apply() {
-			//await _log
-
+			await Task.CompletedTask;
 		}
 	}
 }

@@ -4,7 +4,7 @@ using Leviathan.WebApi.SDK;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Leviathan.Alpha.System {
-	[ApiComponent]
+	[ApiComponent, Route("api/[controller]")]
 	public class SystemServiceController : ServiceController<ILeviathanSystem> {
 
 		public SystemServiceController(ILeviathanSystem service) :

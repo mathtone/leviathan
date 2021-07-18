@@ -13,9 +13,6 @@ using System.Reflection;
 namespace Leviathan.Alpha.Api {
 	public static class LeviathanServiceConfig {
 
-		//public static IServiceCollection AddTheLeviathan(this IServiceCollection services) => services
-		//	.AddModularServices();
-
 		public static IApplicationBuilder AwakenTheLeviathan(this IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime) {
 
 			var leviathan = app.ApplicationServices.GetService<ITheLeviathan>();

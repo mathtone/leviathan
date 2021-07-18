@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Leviathan.Alpha.Components {
 
-	[ApiComponent]
+	[ApiComponent,Route("api/[controller]")]
 	public class ComponentsServiceController : ServiceController<IComponentsService> {
 
 		public ComponentsServiceController(IComponentsService service) :

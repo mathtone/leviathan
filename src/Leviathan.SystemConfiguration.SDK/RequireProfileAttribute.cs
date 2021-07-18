@@ -1,7 +1,15 @@
 ﻿using Leviathan.Components.SDK;
+using System;
 
 namespace Leviathan.SystemConfiguration.SDK {
-	public class RequireProfileAttribute : LeviathanComponentAttribute {
 
+	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+	public class RequireProfileAttribute : Attribute {
+
+		public Type Type { get; }
+
+		public RequireProfileAttribute(Type profileType) {
+			this.Type = profileType;
+		}
 	}
 }

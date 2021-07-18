@@ -5,9 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Leviathan.Alpha.Logging\Leviathan.Alpha.Logging.csproj" />
     <ProjectReference Include="..\Leviathan.SystemConfiguration.SDK\Leviathan.SystemConfiguration.SDK.csproj" />
-    <ProjectReference Include="..\Leviathan.SystemProfiles.PostgreSQL\Leviathan.SystemProfiles.PostgreSQL.csproj" />
   </ItemGroup>
 
 </Project>

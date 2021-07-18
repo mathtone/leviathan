@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Leviathan.Alpha.SystemConfiguration {
 	public interface ISystemConfigurationService : ILeviathanService {
@@ -53,7 +54,25 @@ namespace Leviathan.Alpha.SystemConfiguration {
 
 		public async Task ApplyProfile(string name) {
 			await Initialize;
-			await _services.CreateInstance<ISystemProfile>(_profiles[name]).Apply();
+			foreach (var profile in GetRequiredProfiles(_profiles[name])) {
+				await _services.CreateInstance<ISystemProfile>(profile).Apply();
+			}
+		}
+
+		protected static IEnumerable<Type> GetRequiredProfiles(Type profileType) {
+			var rtn = new HashSet<Type>();
+			foreach (var attr in profileType.GetCustomAttributes<RequireProfileAttribute>(true)) {
+				foreach (var t in GetRequiredProfiles(attr.Type)) {
+					if (!rtn.Contains(t)) {
+						rtn.Add(t);
+						yield return t;
+					}
+				}
+			}
+			if (!rtn.Contains(profileType)) {
+				rtn.Add(profileType);
+				yield return profileType;
+			}
 		}
 	}
 

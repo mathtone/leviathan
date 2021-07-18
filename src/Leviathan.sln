@@ -57,19 +57,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.SystemProfiles.Ro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Alpha.Logging", "Leviathan.Alpha.Logging\Leviathan.Alpha.Logging.csproj", "{4298CA06-6C2B-4186-AF5F-EBDBCDF84743}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.Tests", "Sandbox.Tests\Sandbox.Tests.csproj", "{690F982C-33BA-4B8A-90CD-08DB899567F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Tests", "Sandbox.Tests\Sandbox.Tests.csproj", "{690F982C-33BA-4B8A-90CD-08DB899567F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.Api", "Sandbox.Api\Sandbox.Api.csproj", "{E8661717-75C6-42B0-A084-279515CC763B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Api", "Sandbox.Api\Sandbox.Api.csproj", "{E8661717-75C6-42B0-A084-279515CC763B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "E. Sandbox", "E. Sandbox", "{5836DB50-36F6-4BE4-91BF-B0770B23DE07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.TestConsole", "Sandbox.TestConsole\Sandbox.TestConsole.csproj", "{3C222F90-3255-46BB-9438-31D7EFB65FCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.TestConsole", "Sandbox.TestConsole\Sandbox.TestConsole.csproj", "{3C222F90-3255-46BB-9438-31D7EFB65FCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Core.SDK", "Leviathan.Core.SDK\Leviathan.Core.SDK.csproj", "{0AF3A12C-2786-46FF-99F7-3768147D423C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Core.SDK", "Leviathan.Core.SDK\Leviathan.Core.SDK.csproj", "{0AF3A12C-2786-46FF-99F7-3768147D423C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.SystemProfiles.Basic", "Leviathan.SystemProfiles.Basic\Leviathan.SystemProfiles.Basic.csproj", "{B7039BC7-5CE8-42A6-9158-C1CC66ABBD5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.SystemProfiles.Basic", "Leviathan.SystemProfiles.Basic\Leviathan.SystemProfiles.Basic.csproj", "{B7039BC7-5CE8-42A6-9158-C1CC66ABBD5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.SystemProfiles.Hardcore", "Leviathan.SystemProfiles.Hardcore\Leviathan.SystemProfiles.Hardcore.csproj", "{26FCAF72-F757-47BA-914E-DD763756488C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.SystemProfiles.Hardcore", "Leviathan.SystemProfiles.Hardcore\Leviathan.SystemProfiles.Hardcore.csproj", "{26FCAF72-F757-47BA-914E-DD763756488C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.SystemProfiles.FactoryReset", "Leviathan.SystemProfiles.FactoryReset\Leviathan.SystemProfiles.FactoryReset.csproj", "{BC552B33-D61A-437B-9FF1-C0F8697BEC11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Alpha.FileDataSystem", "Leviathan.Alpha.FileDataSystem\Leviathan.Alpha.FileDataSystem.csproj", "{4C9BAD2B-DD5A-4006-B878-6A8E810C4DC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Alpha.NpgsqlDataSystem", "Leviathan.Alpha.NpgsqlDataSystem\Leviathan.Alpha.NpgsqlDataSystem.csproj", "{8B49CC2D-52C8-4C79-9ACD-3E8B46CDE49A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -185,6 +191,18 @@ Global
 		{26FCAF72-F757-47BA-914E-DD763756488C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26FCAF72-F757-47BA-914E-DD763756488C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26FCAF72-F757-47BA-914E-DD763756488C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC552B33-D61A-437B-9FF1-C0F8697BEC11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC552B33-D61A-437B-9FF1-C0F8697BEC11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC552B33-D61A-437B-9FF1-C0F8697BEC11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC552B33-D61A-437B-9FF1-C0F8697BEC11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C9BAD2B-DD5A-4006-B878-6A8E810C4DC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C9BAD2B-DD5A-4006-B878-6A8E810C4DC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C9BAD2B-DD5A-4006-B878-6A8E810C4DC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C9BAD2B-DD5A-4006-B878-6A8E810C4DC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B49CC2D-52C8-4C79-9ACD-3E8B46CDE49A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B49CC2D-52C8-4C79-9ACD-3E8B46CDE49A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B49CC2D-52C8-4C79-9ACD-3E8B46CDE49A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B49CC2D-52C8-4C79-9ACD-3E8B46CDE49A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -219,6 +237,9 @@ Global
 		{0AF3A12C-2786-46FF-99F7-3768147D423C} = {9F5AF2CA-76FC-4F41-A1E3-047427A4BC5E}
 		{B7039BC7-5CE8-42A6-9158-C1CC66ABBD5B} = {15FB3E57-4752-438A-A2F6-576BFCBFB4C3}
 		{26FCAF72-F757-47BA-914E-DD763756488C} = {15FB3E57-4752-438A-A2F6-576BFCBFB4C3}
+		{BC552B33-D61A-437B-9FF1-C0F8697BEC11} = {15FB3E57-4752-438A-A2F6-576BFCBFB4C3}
+		{4C9BAD2B-DD5A-4006-B878-6A8E810C4DC2} = {45EEC2F0-1312-4D7F-ABDD-76FC41478977}
+		{8B49CC2D-52C8-4C79-9ACD-3E8B46CDE49A} = {45EEC2F0-1312-4D7F-ABDD-76FC41478977}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C39CA66-6C4B-42EB-8797-4ADCFED239DD}
