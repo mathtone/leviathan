@@ -1,5 +1,4 @@
 ﻿using Leviathan.Alpha.Components;
-using Leviathan.Alpha.Logging;
 using Leviathan.Services.SDK;
 using Leviathan.SystemConfiguration.SDK;
 using System;
@@ -7,8 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 
 namespace Leviathan.Alpha.SystemConfiguration {
+
 	public interface ISystemConfigurationService : ILeviathanService {
 		Task<SystemConfigurationServiceCatalog> Catalog();
 		Task ApplyProfile(string name, IEnumerable<ProfileApplication> applications);
@@ -18,19 +19,16 @@ namespace Leviathan.Alpha.SystemConfiguration {
 	[SingletonService(typeof(ISystemConfigurationService))]
 	public class SystemConfigurationService : LeviathanService, ISystemConfigurationService {
 
-		ILoggingService _log;
+		ILogger<SystemConfigurationService> _log;
 		IServiceProvider _services;
 		IComponentsService _components;
 		IDictionary<string, Type> _profiles;
 
 		public override Task Initialize { get; }
 
-		public SystemConfigurationService(ILoggingService log, IComponentsService components, IServiceProvider services) {
+		public SystemConfigurationService(ILogger<SystemConfigurationService> log, IComponentsService components, IServiceProvider services) {
 
-			this._log = log;
-			this._components = components;
-			this._services = services;
-
+			(_log, _components, _services) = (log, components, services);
 			Initialize = InitializeAsync();
 		}
 
@@ -38,9 +36,11 @@ namespace Leviathan.Alpha.SystemConfiguration {
 			await base.Initialize;
 			await _components.Initialize;
 			this._profiles = (await _components.AvailableComponents())
-				.Where(c => c.AttributeType == typeof(SystemProfileAttribute))
+				.Where(c => c.AttributeTypes.Contains(typeof(SystemProfileAttribute)))
 				.Select(p => p.Type)
 				.ToDictionary(t => t.Name);
+
+			_log.Log(LogLevel.Information, $"{typeof(SystemConfigurationService)} Initialized");
 		}
 
 		public async Task<SystemConfigurationServiceCatalog> Catalog() {
@@ -59,16 +59,16 @@ namespace Leviathan.Alpha.SystemConfiguration {
 			foreach (var profile in GetRequiredProfiles(_profiles[name])) {
 
 				var instance = _services.CreateInstance<ISystemProfile>(profile);
-				var t = instance.GetType();
+				var type = instance.GetType();
 				var application = applications.Single(a => a.ProfileName == profile.Name);
 
-				foreach(var p in t.GetProperties()) {
+				foreach (var p in type.GetProperties()) {
 					var attr = p.GetCustomAttribute<ProfilePropertyAttribute>();
-					if(attr != null) {
+					if (attr != null) {
 						p.SetValue(instance, application.ApplicationFields.Single(f => f.Name == attr.Name).Value);
-						;
 					}
 				}
+
 				await instance.Apply();
 			}
 		}
@@ -77,7 +77,6 @@ namespace Leviathan.Alpha.SystemConfiguration {
 			WhenInitialized(() =>
 				GetRequiredProfiles(_profiles[name]).Select(GetApplication)
 			);
-
 
 		protected static ProfileApplication GetApplication(Type type) {
 			return new ProfileApplication {
@@ -119,12 +118,14 @@ namespace Leviathan.Alpha.SystemConfiguration {
 	public static class IServiceProviderExtensions {
 		public static T CreateInstance<T>(this IServiceProvider services, Type type) {
 
-			var constructors = type.GetConstructors(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+			var constructors = type.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
+
 			foreach (var c in constructors.OrderByDescending(c => c.GetParameters().Length)) {
 				var paramTypes = c.GetParameters().Select(p => p.ParameterType);
 				var svcParams = paramTypes.Select(t => services.GetService(t));
 				return (T)Activator.CreateInstance(type, svcParams.ToArray());
 			}
+
 			throw new Exception("Could not construct target");
 		}
 	}

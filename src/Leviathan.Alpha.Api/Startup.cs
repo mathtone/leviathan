@@ -19,60 +19,32 @@ using System;
 using System.Linq;
 using Leviathan.Services.SDK;
 using Microsoft.AspNetCore.Mvc;
+using Leviathan.Alpha.SystemConfiguration;
 
 namespace Leviathan.Alpha.Api {
 	public class Startup {
-		public IConfiguration Configuration { get; }
-		Dictionary<string, Assembly> _loadedAssemblies;
 		public Startup(IConfiguration configuration) {
 			Configuration = configuration;
 		}
 
+		public IConfiguration Configuration { get; }
+
+		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services) {
 
-			var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-			var sdkPath = Path.Combine(basePath, "Sdk");
-			var modulePath = Path.Combine(basePath, "Modules");
-
-			_loadedAssemblies = AppDomain.CurrentDomain
-				.GetAssemblies()
-				.ToDictionary(a => a.FullName);
-
+			var path = AppDomain.CurrentDomain.BaseDirectory;
+			//var loaded = AppDomain.CurrentDomain.GetAssemblies().ToDictionary(a => a.FullName);
 			AppDomain.CurrentDomain.AssemblyLoad += CurrentDomain_AssemblyLoad;
-			AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
-			foreach (var f in Directory.EnumerateFiles(sdkPath, "*.dll", SearchOption.AllDirectories)) {
-				var name = AssemblyName.GetAssemblyName(f);
 
-				if (!_loadedAssemblies.ContainsKey(name.FullName)) {
-					Assembly.LoadFile(f);
-				}
-			}
-
-			foreach (var f in Directory.EnumerateFiles(modulePath, "*.dll", SearchOption.AllDirectories)) {
-				var name = AssemblyName.GetAssemblyName(f);
-
-				if (!_loadedAssemblies.ContainsKey(name.FullName)) {
-					Assembly.LoadFile(f);
-				}
-			}
-
-			//foreach (var f in Directory.EnumerateFiles(modulePath, "*.dll", SearchOption.AllDirectories)) {
-			//	var name = AssemblyName.GetAssemblyName(f);
-
-			//	if (!_loadedAssemblies.ContainsKey(name.FullName)) {
-			//		Assembly.LoadFile(f);
-			//	}
-			//}
-
-			var moduleAssemblies = AppDomain.CurrentDomain
-				.GetAssemblies()
-				.Where(a => Path.GetDirectoryName(a.Location).StartsWith(modulePath))
-				.ToDictionary(a => a.Location);
-
+			var files = Directory.GetFiles(path, "*.dll", SearchOption.AllDirectories);
 			var apiControllerAssemblies = new List<Assembly>();
-			foreach (var a in moduleAssemblies.Values) {
+			foreach (var f in files) {
+
+				var name = AssemblyName.GetAssemblyName(f);
+				var assembly = Assembly.Load(name);
 				var containsApiControllers = false;
-				foreach (var t in a.GetExportedTypes()) {
+
+				foreach (var t in assembly.GetExportedTypes()) {
 
 					if (t.IsAssignableTo(typeof(ControllerBase))) {
 						containsApiControllers = true;
@@ -105,39 +77,120 @@ namespace Leviathan.Alpha.Api {
 					}
 				}
 				if (containsApiControllers) {
-					apiControllerAssemblies.Add(a);
+					apiControllerAssemblies.Add(assembly);
 				}
 			}
 
-			var mvcBuild = services.AddControllers(o => o.Conventions.Add(new ModularControllerRouteConvention()))
-				.AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+			//var loaded = AppDomain.CurrentDomain.GetAssemblies().ToDictionary(a => a.FullName);
+			services.AddControllers();
 
-			foreach(var a in apiControllerAssemblies) {
-				mvcBuild.AddApplicationPart(a);
-			}
 			services.AddSwaggerGen(c => {
-				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Leviathan.Alpha.Api", Version = "v1" });
+				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Leviathan.API", Version = "v1" });
 			});
 		}
 
-		private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args) =>
-			_loadedAssemblies[args.Name];
+		private void CurrentDomain_AssemblyLoad(object sender, AssemblyLoadEventArgs args) {
+			;
+		}
 
-		private void CurrentDomain_AssemblyLoad(object sender, AssemblyLoadEventArgs args) =>
-			_loadedAssemblies.Add(args.LoadedAssembly.FullName, args.LoadedAssembly);
+		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
 
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime) {
+			//var cfg = app.ApplicationServices.GetRequiredService<ISystemConfigurationService>();
+			//cfg.ApplyProfile("RoboTankProfile", new ProfileApplication[] {
+			//	new(){
+			//		ProfileName = "BasicProfile",
+			//		ApplicationFields = new ApplicationField[] {
+			//			new() {
+			//				Name = "Instance Name",
+			//				Value = "Leviathan"
+			//			}
+			//		}
+			//	},
+			//	new(){
+			//		ProfileName = "PostgreSQLProfile",
+			//		ApplicationFields = new ApplicationField[] {
+			//			new() {
+			//				Name = "Host Name",
+			//				Value = "leviathan-alpha"
+			//			},
+			//			new() {
+			//				Name = "Instance DB Name",
+			//				Value = "leviathan-alpha-db"
+			//			},
+			//			new() {
+			//				Name = "DB Login",
+			//				Value = "pi"
+			//			},
+			//			new() {
+			//				Name = "DB Password",
+			//				Value = "Digital!2021"
+			//			}
+			//		}
+			//	},
+			//	new(){
+			//		ProfileName = "RoboTankProfile",
+			//		ApplicationFields = Array.Empty<ApplicationField>()
+			//	}
+			//});
+
+			/*
+			{
+				"profileName": "BasicProfile",
+				"applicationFields": [
+				  {
+					"name": "Instance Name",
+					"description": "The name of this instance of THE LEVIATHAN.",
+					"value": "TheLeviathan"
+				  }
+				]
+			  },
+			  {
+				"profileName": "PostgreSQLProfile",
+				"applicationFields": [
+				  {
+					"name": "Host Name",
+					"description": "Database server host name.",
+					"value": null
+				  },
+				  {
+					"name": "Instance DB Name",
+					"description": "Database name.",
+					"value": null
+				  },
+				  {
+					"name": "DB Login",
+					"description": "Database login.",
+					"value": null
+				  },
+				  {
+					"name": "DB Password",
+					"description": "Database password.",
+					"value": null
+				  }
+				]
+			  },
+			  {
+				"profileName": "RoboTankProfile",
+				"applicationFields": []
+			  }
+			*/
+
 			if (env.IsDevelopment()) {
 				app.UseDeveloperExceptionPage();
-				app.UseSwagger();
-				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Leviathan.Alpha.Api v1"));
+				
 			}
+			app.UseSwagger();
+			app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sandbox.Api v1"));
+			app.UseHttpsRedirection();
 
-			app.AwakenTheLeviathan(env, lifetime)
-				.UseHttpsRedirection()
-				.UseRouting()
-				.UseAuthorization()
-				.UseEndpoints(endpoints => endpoints.MapControllers());
+			app.UseRouting();
+
+			app.UseAuthorization();
+
+			app.UseEndpoints(endpoints => {
+				endpoints.MapControllers();
+			});
 		}
 	}
 }

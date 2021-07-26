@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Iot.DEvice.bindings" Version="1.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Leviathan.Channels.SDK\Leviathan.Channels.SDK.csproj" />
+    <ProjectReference Include="..\Leviathan.Logging.SDK\Leviathan.Logging.SDK.csproj" />
   </ItemGroup>
 
 </Project>

@@ -21,10 +21,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Leviathan.Alpha.Core\Leviathan.Alpha.Core.csproj" />
-		<ProjectReference Include="..\Leviathan.Core.SDK\Leviathan.Core.SDK.csproj" />
-		<ProjectReference Include="..\Leviathan.Utilities\Leviathan.Utilities.csproj" />
-		<ProjectReference Include="..\Leviathan.WebApi.SDK\Leviathan.WebApi.SDK.csproj" />
+	  <ProjectReference Include="..\Leviathan.Alpha.Channels\Leviathan.Alpha.Channels.csproj" />
+	  <ProjectReference Include="..\Leviathan.Alpha.Core\Leviathan.Alpha.Core.csproj" />
+	  <ProjectReference Include="..\Leviathan.Alpha.Logging\Leviathan.Alpha.Logging.csproj" />
+	  <ProjectReference Include="..\Leviathan.Alpha.SystemConfiguration\Leviathan.Alpha.SystemConfiguration.csproj" />
+	  <ProjectReference Include="..\Leviathan.OneWire\Leviathan.OneWire.csproj" />
+	  <ProjectReference Include="..\Leviathan.SystemProfiles.Basic\Leviathan.SystemProfiles.Basic.csproj" />
+	  <ProjectReference Include="..\Leviathan.SystemProfiles.FactoryReset\Leviathan.SystemProfiles.FactoryReset.csproj" />
+	  <ProjectReference Include="..\Leviathan.SystemProfiles.Hardcore\Leviathan.SystemProfiles.Hardcore.csproj" />
+	  <ProjectReference Include="..\Leviathan.SystemProfiles.PostgreSQL\Leviathan.SystemProfiles.PostgreSQL.csproj" />
+	  <ProjectReference Include="..\Leviathan.SystemProfiles.RoboTank\Leviathan.SystemProfiles.RoboTank.csproj" />
+	  <ProjectReference Include="..\Leviathan.WebApi.SDK\Leviathan.WebApi.SDK.csproj" />
 	</ItemGroup>
 
 </Project>

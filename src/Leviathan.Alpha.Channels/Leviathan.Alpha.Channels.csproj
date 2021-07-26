@@ -1,11 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Leviathan.Alpha.Logging\Leviathan.Alpha.Logging.csproj" />
+    <PackageReference Include="System.Linq.Async" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Leviathan.Alpha.Components\Leviathan.Alpha.Components.csproj" />
+    <ProjectReference Include="..\Leviathan.Channels.SDK\Leviathan.Channels.SDK.csproj" />
     <ProjectReference Include="..\Leviathan.Services.SDK\Leviathan.Services.SDK.csproj" />
     <ProjectReference Include="..\Leviathan.WebApi.SDK\Leviathan.WebApi.SDK.csproj" />
   </ItemGroup>

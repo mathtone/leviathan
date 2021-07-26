@@ -1,5 +1,5 @@
-﻿using Leviathan.Alpha.Logging;
-using Leviathan.Services.SDK;
+﻿using Leviathan.Services.SDK;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace Leviathan.Alpha.NpgsqlDataSystem {
@@ -13,9 +13,9 @@ namespace Leviathan.Alpha.NpgsqlDataSystem {
 	[SingletonService(typeof(INpgsqlDataSystem), typeof(IDbDataSystem))]
 	public class NpgsqlDataSystem : INpgsqlDataSystem {
 
-		ILoggingService _log;
+		ILogger<NpgsqlDataSystem> _log;
 
-		public NpgsqlDataSystem(ILoggingService log) {
+		public NpgsqlDataSystem(ILogger<NpgsqlDataSystem> log) {
 			this._log = log;
 		}
 	}

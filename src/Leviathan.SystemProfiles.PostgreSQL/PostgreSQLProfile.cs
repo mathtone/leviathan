@@ -1,12 +1,11 @@
 ﻿using Leviathan.Alpha.NpgsqlDataSystem;
 using Leviathan.SystemConfiguration.SDK;
-using Leviathan.SystemProfiles.Basic;
 using System;
 using System.Threading.Tasks;
 
 namespace Leviathan.SystemProfiles.PostgreSQL {
 
-	[SystemProfile, RequireProfile(typeof(BasicProfile))]
+	[SystemProfile]
 	public class PostgreSQLProfile : SystemProfileComponent {
 
 		INpgsqlDataSystem _data;

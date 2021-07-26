@@ -12,15 +12,12 @@ namespace Leviathan.Alpha.SystemConfiguration {
 		}
 
 		[HttpGet, Route("[action]")]
-		public async Task<SystemConfigurationServiceCatalog> Catalog() =>
-			await Service.Catalog();
+		public async Task<SystemConfigurationServiceCatalog> Catalog() => await Service.Catalog();
 
 		[HttpGet, Route("[action]")]
-		public async Task<IEnumerable<ProfileApplication>> Apply(string profileName) =>
-			await Service.GetApplication(profileName);
+		public async Task<IEnumerable<ProfileApplication>> Apply(string profileName) => await Service.GetApplication(profileName);
 
 		[HttpPost, Route("[action]")]
-		public async Task Apply(string name, IEnumerable<ProfileApplication> applications) =>
-			await Service.ApplyProfile(name, applications);
+		public async Task Apply(string name, IEnumerable<ProfileApplication> applications) => await Service.ApplyProfile(name, applications);
 	}
 }

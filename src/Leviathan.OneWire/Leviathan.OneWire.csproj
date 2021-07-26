@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Leviathan.Channels.SDK\Leviathan.Channels.SDK.csproj" />
+    <ProjectReference Include="..\Leviathan.Logging.SDK\Leviathan.Logging.SDK.csproj" />
+    <ProjectReference Include="..\Leviathan.Services.SDK\Leviathan.Services.SDK.csproj" />
   </ItemGroup>
 
 </Project>

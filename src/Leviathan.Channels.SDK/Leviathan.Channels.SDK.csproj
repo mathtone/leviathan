@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Leviathan.Components.SDK\Leviathan.Components.SDK.csproj" />
+    <ProjectReference Include="..\Leviathan.Services.SDK\Leviathan.Services.SDK.csproj" />
   </ItemGroup>
 
 </Project>

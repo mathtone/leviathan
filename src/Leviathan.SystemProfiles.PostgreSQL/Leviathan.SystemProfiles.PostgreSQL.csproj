@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Leviathan.Alpha.NpgsqlDataSystem\Leviathan.Alpha.NpgsqlDataSystem.csproj" />
     <ProjectReference Include="..\Leviathan.SystemConfiguration.SDK\Leviathan.SystemConfiguration.SDK.csproj" />
-    <ProjectReference Include="..\Leviathan.SystemProfiles.Basic\Leviathan.SystemProfiles.Basic.csproj" />
   </ItemGroup>
 
 </Project>

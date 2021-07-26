@@ -12,13 +12,13 @@ namespace Leviathan.Alpha.Components {
 		public long Id { get; init; }
 		public string Name { get; init; }
 		public string TypeName { get; init; }
-		public string AttributeTypeName { get; set; }
+		public string[] AttributeTypeNames { get; set; }
 	}
 
 	public class ComponentInfo {
 		public long Id { get; init; }
 		public string Name { get; init; }
 		public Type Type { get; init; }
-		public Type AttributeType { get; set; }
+		public Type[] AttributeTypes { get; set; }
 	}
 }

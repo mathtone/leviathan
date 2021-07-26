@@ -1,5 +1,11 @@
-﻿namespace Leviathan.Channels.SDK {
+﻿using System.Collections.Generic;
+
+namespace Leviathan.Channels.SDK {
 	public interface IChannel {
-		//long Id { get; }
+		string Id { get; }
+	}
+
+	public interface IChannelProvider {
+		IEnumerable<IChannel> Channels { get; }
 	}
 }

@@ -2,35 +2,47 @@
 using Leviathan.Channels.SDK;
 using Leviathan.Services.SDK;
 using Microsoft.Extensions.Logging;
-using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Leviathan.OneWire {
+	[SingletonService(typeof(ITempSensorService)), ChannelProvider]
+	public class TempSensorChannelService : LeviathanService, ITempSensorService, IChannelProvider {
 
-	public interface ITempSensorService : ILeviathanService { }
+		IEnumerable<IChannel> _channels;
+		readonly ILogger<TempSensorChannelService> _log;
+		readonly ILogger<TempSensorChannel> _channelLog;
+		public override Task Initialize { get; }
 
-	[Channel]
-	public class TempSensorChannel : IAsyncInputChannel<TempReading> {
+		public IEnumerable<IChannel> Channels => _channels ??= WhenInitialized(() => _channels).Result;
 
-		OneWireThermometerDevice _device;
-		ILogger<TempSensorChannel> _log;
-
-		public string Id => _device.DeviceId;
-
-		public TempSensorChannel(ILogger<TempSensorChannel> log, OneWireThermometerDevice device) =>
-			(_log, _device) = (log, device);
-
-		public async Task<TempReading> GetValueAsync() {
-			var temp = await _device.ReadTemperatureAsync();
-			return new TempReading {
-				Celsius = temp.DegreesCelsius,
-				Farenheit = temp.DegreesFahrenheit,
-				Kelvin = temp.Kelvins
-			};
+		public TempSensorChannelService(ILogger<TempSensorChannelService> log, ILogger<TempSensorChannel> channelLog) {
+			(_log, _channelLog) = (log, channelLog);
+			Initialize = InitializeAsync();
 		}
 
-		async Task<object> IAsyncInputChannel.GetValueAsync() =>
-			await this.GetValueAsync();
+		async Task InitializeAsync() {
+			await base.Initialize;
+			_channels = GetOneWireThermometerDevices()
+				.Select(d => new TempSensorChannel(_channelLog, d))
+				.ToArray();
+
+			_log.LogInformation($"{typeof(TempSensorChannelService)} Initialized");
+		}
+
+		static IEnumerable<OneWireThermometerDevice> GetOneWireThermometerDevices() {
+			foreach (var busId in OneWireBus.EnumerateBusIds()) {
+
+				var bus = new OneWireBus(busId);
+
+				foreach (string devId in bus.EnumerateDeviceIds()) {
+					if (OneWireThermometerDevice.IsCompatible(busId, devId)) {
+						yield return new OneWireThermometerDevice(busId, devId);
+					}
+				}
+			}
+		}
 	}
 
 	//public class TempSensorChannel : IAsyncInputChannel<TempReading> {
