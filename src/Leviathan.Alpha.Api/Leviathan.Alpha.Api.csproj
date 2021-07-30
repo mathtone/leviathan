@@ -8,12 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.14" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Leviathan.Alpha.Components\Leviathan.Alpha.Components.csproj" />
-    <ProjectReference Include="..\Leviathan.Alpha\Leviathan.Alpha.csproj" />
+    <ProjectReference Include="..\Leviathan.Services.Sdk\Leviathan.Services.Sdk.csproj" />
+    <ProjectReference Include="..\Leviathan.WebApi.Sdk\Leviathan.WebApi.Sdk.csproj" />
   </ItemGroup>
 
 </Project>

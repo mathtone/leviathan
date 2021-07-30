@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Leviathan.Services.Sdk\Leviathan.Services.Sdk.csproj" />
+    <ProjectReference Include="..\Leviathan.TestService1\Leviathan.TestService1.csproj" />
   </ItemGroup>
 
 </Project>
