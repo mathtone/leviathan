@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>0f206180-8dc4-49c8-b10a-b575b4c20f4c</UserSecretsId>
+    <UserSecretsId>f8f54377-398c-450c-9609-1f0813b166ea</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
@@ -14,6 +14,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Leviathan.Services.Sdk\Leviathan.Services.Sdk.csproj" />
     <ProjectReference Include="..\Leviathan.WebApi.Sdk\Leviathan.WebApi.Sdk.csproj" />
+    <ProjectReference Include="..\TheLeviathan.Channels\TheLeviathan.Channels.csproj" />
+    <ProjectReference Include="..\TheLeviathan.Components\TheLeviathan.Components.csproj" />
+    <ProjectReference Include="..\TheLeviathan.OneWire\TheLeviathan.OneWire.csproj" />
+    <ProjectReference Include="..\TheLeviathan.System\TheLeviathan.System.csproj" />
   </ItemGroup>
 
 </Project>

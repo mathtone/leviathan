@@ -9,4 +9,12 @@ namespace Sandbox.Tests {
 
 		}
 	}
+
+	public interface IComponentLoader {
+
+	}
+
+	public class ComponentLoader {
+
+	}
 }

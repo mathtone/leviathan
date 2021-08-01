@@ -15,4 +15,10 @@ namespace Leviathan.WebApi.Sdk {
 			this.Service = service;
 		}
 	}
+	public static class ApiModules {
+		public const string Core = "core";
+		public const string Hardware = "hardware";
+	}
+
+
 }

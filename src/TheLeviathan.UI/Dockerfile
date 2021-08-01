@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["Leviathan.Api.Alpha/Leviathan.Api.Alpha.csproj", "Leviathan.Api.Alpha/"]
-RUN dotnet restore "Leviathan.Api.Alpha/Leviathan.Api.Alpha.csproj"
+COPY ["TheLeviathan.UI/TheLeviathan.UI.csproj", "TheLeviathan.UI/"]
+RUN dotnet restore "TheLeviathan.UI/TheLeviathan.UI.csproj"
 COPY . .
-WORKDIR "/src/Leviathan.Api.Alpha"
-RUN dotnet build "Leviathan.Api.Alpha.csproj" -c Release -o /app/build
+WORKDIR "/src/TheLeviathan.UI"
+RUN dotnet build "TheLeviathan.UI.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Leviathan.Api.Alpha.csproj" -c Release -o /app/publish
+RUN dotnet publish "TheLeviathan.UI.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Leviathan.Api.Alpha.dll"]
+ENTRYPOINT ["dotnet", "TheLeviathan.UI.dll"]
