@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TheLeviathan.OneWire {
 
-	[ApiComponent(ApiModules.Hardware)]
+	[ApiComponent(ApiModules.Channels)]
 	public class OneWireController : ServiceController<IOneWireService> {
 		public OneWireController(IOneWireService service) : base(service) {
 
@@ -13,5 +13,8 @@ namespace TheLeviathan.OneWire {
 
 		[HttpGet("[action]")]
 		public Task<IEnumerable<string>> BusIds() => Service.BusIdsAsync();
+
+		[HttpGet("[action]")]
+		public async Task<IEnumerable<OneWireDeviceListing>> Devices() => await Task.FromResult(Service.ListDevices());
 	}
 }

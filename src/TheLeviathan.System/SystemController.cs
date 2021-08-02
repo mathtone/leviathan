@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace TheLeviathan.System {
-	[ApiComponent("core")]
+	[ApiComponent(ApiModules.System)]
 	public class SystemController : ServiceController<ISystemService> {
 
 		public SystemController(ISystemService service) :

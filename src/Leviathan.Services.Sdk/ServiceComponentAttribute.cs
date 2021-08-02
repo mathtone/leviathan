@@ -71,4 +71,5 @@ namespace Leviathan.Services.Sdk {
 
 		//[ServiceConfiguration
 	}
+
 }

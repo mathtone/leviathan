@@ -10,20 +10,9 @@ namespace TheLeviathan.System {
 	}
 
 	[HostedSingletonService(typeof(ISystemService))]
-	public class SystemService : ISystemService {
+	public class SystemService : HostedServiceBase, ISystemService {
 
-		ILogger _log;
+		public SystemService(ILogger<SystemService> log):base(log) {		}
 
-		public SystemService(ILogger<SystemService> log) {
-			_log = log;
-		}
-
-		public Task StartAsync(CancellationToken cancellationToken) {
-			return Task.CompletedTask;
-		}
-
-		public Task StopAsync(CancellationToken cancellationToken) {
-			return Task.CompletedTask;
-		}
 	}
 }

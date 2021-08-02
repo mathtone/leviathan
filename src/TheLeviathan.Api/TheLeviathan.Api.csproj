@@ -14,7 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Leviathan.Services.Sdk\Leviathan.Services.Sdk.csproj" />
     <ProjectReference Include="..\Leviathan.WebApi.Sdk\Leviathan.WebApi.Sdk.csproj" />
-    <ProjectReference Include="..\TheLeviathan.Channels\TheLeviathan.Channels.csproj" />
+    <ProjectReference Include="..\TheLeviathan.ChannelSystem\TheLeviathan.ChannelSystem.csproj" />
     <ProjectReference Include="..\TheLeviathan.Components\TheLeviathan.Components.csproj" />
     <ProjectReference Include="..\TheLeviathan.OneWire\TheLeviathan.OneWire.csproj" />
     <ProjectReference Include="..\TheLeviathan.System\TheLeviathan.System.csproj" />

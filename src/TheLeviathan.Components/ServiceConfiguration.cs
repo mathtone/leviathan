@@ -1,11 +1,10 @@
 ﻿using Leviathan.Services.Sdk;
 using Leviathan.WebApi.Sdk;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace TheLeviathan.Components {
 
@@ -21,24 +20,24 @@ namespace TheLeviathan.Components {
 				var name = AssemblyName.GetAssemblyName(f);
 				var assembly = Assembly.Load(name);
 
-				foreach (var t in assembly.GetExportedTypes()) {
+				foreach (var type in assembly.GetExportedTypes()) {
 
-					var attr = t.GetCustomAttribute<ServiceComponentAttribute>();
+					var attr = type.GetCustomAttribute<ServiceComponentAttribute>();
 
 					if (attr != null) {
 
 						var primary = attr.PrimaryServiceType;
 						if (attr is SingletonServiceAttribute)
-							RegisterService(primary, attr.SecondaryServiceTypes, t, services.AddSingleton, services.AddSingleton);
+							RegisterService(primary, attr.SecondaryServiceTypes, type, services.AddSingleton, services.AddSingleton);
 
 						if (attr is TransientServiceAttribute)
-							RegisterService(primary, attr.SecondaryServiceTypes, t, services.AddTransient, services.AddTransient);
+							RegisterService(primary, attr.SecondaryServiceTypes, type, services.AddTransient, services.AddTransient);
 
 						if (attr is ScopedServiceAttribute)
-							RegisterService(primary, attr.SecondaryServiceTypes, t, services.AddScoped, services.AddScoped);
+							RegisterService(primary, attr.SecondaryServiceTypes, type, services.AddScoped, services.AddScoped);
 
 						if (attr is HostedSingletonServiceAttribute)
-							RegisterService(primary, attr.SecondaryServiceTypes, t, services.AddHostedSingleton, services.AddSingleton);
+							RegisterService(primary, attr.SecondaryServiceTypes, type, services.AddHostedSingleton, services.AddSingleton);
 					}
 				}
 
@@ -52,20 +51,11 @@ namespace TheLeviathan.Components {
 				}
 			}
 
-			services.AddControllers(o => o.Conventions.Add(new ModularControllerRouteConvention()));
-			return services;
-		}
-	}
+			services
+				.AddControllers(o =>o.Conventions.Add(new ModularControllerRouteConvention()))
+				.AddJsonOptions(opt => opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
-	public class ModularControllerRouteConvention : IControllerModelConvention {
-		public void Apply(ControllerModel controller) {
-			var type = controller.ControllerType;
-			var attr = type.GetCustomAttribute<ApiComponentAttribute>();
-			if (attr != null) {
-				controller.Selectors.Add(new SelectorModel {
-					AttributeRouteModel = new AttributeRouteModel(new RouteAttribute($"api/{attr.ModuleName}/{controller.ControllerName}")),
-				});
-			}
+			return services;
 		}
 	}
 }

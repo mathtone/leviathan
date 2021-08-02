@@ -20,4 +20,13 @@ namespace Sandbox.Api.Controllers {
 
 		}
 	}
+
+	[ApiController, Route("api/[controller]")]
+	public class ComponentsSystemController<T> {
+
+		[HttpGet]
+		public T Test() {
+			return default;
+		}
+	}
 }
