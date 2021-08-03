@@ -42,7 +42,7 @@ namespace Sandbox.Api {
 			services.AddHostedSingleton(typeof(ITestService), typeof(TestService))
 				.AddControllers(o => o.Conventions.Add(new GenericControllerRouteConvention()))
 				.ConfigureApplicationPartManager(mgr =>
-					mgr.FeatureProviders.Add(new GenericTypeControllerFeatureProvider())
+					mgr.FeatureProviders.Add(new GenericTypeControllerFeatureProvider(services))
 				);
 			services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sandbox.Api", Version = "v1" }));
 		}
@@ -56,6 +56,7 @@ namespace Sandbox.Api {
 				.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sandbox.Api v1"))
 				.UseHttpsRedirection()
 				.UseRouting()
+
 				.UseAuthorization()
 				.UseEndpoints(endpoints => {
 					endpoints.MapControllers();
@@ -98,8 +99,17 @@ namespace Sandbox.Api {
 	}
 
 	public class GenericTypeControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature> {
+		
+		IServiceCollection _services;
+
+		public GenericTypeControllerFeatureProvider(IServiceCollection services) {
+			_services = services;
+		}
+
 		public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature) {
-			var currentAssembly = typeof(GenericTypeControllerFeatureProvider).Assembly;
+			
+			;
+			//var currentAssembly = typeof(GenericTypeControllerFeatureProvider).Assembly;
 			//var candidates = currentAssembly.GetExportedTypes().Where(x => x.GetCustomAttributes<GeneratedControllerAttribute>().Any());
 
 			//foreach (var candidate in candidates) {

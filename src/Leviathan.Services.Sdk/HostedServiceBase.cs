@@ -5,13 +5,6 @@ using System.Threading.Tasks;
 
 namespace Leviathan.Services.Sdk {
 
-	public abstract class ServiceBase {
-		
-		protected ILogger Log { get; }
-
-		public ServiceBase(ILogger log) => Log = log;
-	}
-
 	public abstract class HostedServiceBase : ServiceBase,IHostedService {
 
 		protected HostedServiceBase(ILogger<HostedServiceBase> log) :

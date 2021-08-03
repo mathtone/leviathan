@@ -22,7 +22,7 @@ namespace Sandbox.Api.Controllers {
 	}
 
 	[ApiController, Route("api/[controller]")]
-	public class ComponentsSystemController<T> {
+	public class TestGenericController<T> {
 
 		[HttpGet]
 		public T Test() {
