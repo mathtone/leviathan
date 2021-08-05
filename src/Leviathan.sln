@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.31129.286
+VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Alpha.UI", "Leviathan.Alpha.UI\Leviathan.Alpha.UI.csproj", "{B3B81B6F-6466-4C68-804B-086CC27AAFF0}"
 EndProject
@@ -45,13 +45,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Channels.Sdk", "L
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Channels", "Channels", "{5F5B3C5F-D0CB-40EC-9D2D-DB410D7BB2AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheLeviathan.Gpio", "TheLeviathan.Gpio\TheLeviathan.Gpio.csproj", "{3EC70131-B372-425A-8346-0850565875CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheLeviathan.Gpio", "TheLeviathan.Gpio\TheLeviathan.Gpio.csproj", "{3EC70131-B372-425A-8346-0850565875CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheLeviathan.Pca9685", "TheLeviathan.Pca9685\TheLeviathan.Pca9685.csproj", "{6F77CBE7-B159-4257-AF41-640942CE7E99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheLeviathan.Pca9685", "TheLeviathan.Pca9685\TheLeviathan.Pca9685.csproj", "{6F77CBE7-B159-4257-AF41-640942CE7E99}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheLeviathan.ChannelSystem", "TheLeviathan.ChannelSystem\TheLeviathan.ChannelSystem.csproj", "{4326A62B-7357-41BE-9D9B-2BEF99CAA874}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheLeviathan.RNG", "TheLeviathan.RNG\TheLeviathan.RNG.csproj", "{E1B02A44-9C25-42DC-964B-6F0135FB5E40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheLeviathan.RNG", "TheLeviathan.RNG\TheLeviathan.RNG.csproj", "{E1B02A44-9C25-42DC-964B-6F0135FB5E40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -136,7 +136,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B3B81B6F-6466-4C68-804B-086CC27AAFF0} = {7D6DBFB4-2762-405F-ABB4-0976732994F1}
+		{B3B81B6F-6466-4C68-804B-086CC27AAFF0} = {30995399-0F1B-4519-BB7F-1D74973C238F}
 		{7B802FBA-9CA0-4791-96F7-930ECCAE6B65} = {7D6DBFB4-2762-405F-ABB4-0976732994F1}
 		{9B5D272F-901C-49B9-8B75-94BAFAE4E6C0} = {30995399-0F1B-4519-BB7F-1D74973C238F}
 		{B6616A85-B035-4435-AEE2-210783722926} = {30995399-0F1B-4519-BB7F-1D74973C238F}
