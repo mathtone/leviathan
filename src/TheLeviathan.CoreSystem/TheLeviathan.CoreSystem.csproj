@@ -5,9 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Leviathan.Services.Sdk\Leviathan.Services.Sdk.csproj" />
     <ProjectReference Include="..\Leviathan.WebApi.Sdk\Leviathan.WebApi.Sdk.csproj" />
-    <ProjectReference Include="..\TheLeviathan.ComponentsSystem\TheLeviathan.ComponentsSystem.csproj" />
   </ItemGroup>
 
 </Project>

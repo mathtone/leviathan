@@ -15,6 +15,10 @@
     <ProjectReference Include="..\Leviathan.Services.Sdk\Leviathan.Services.Sdk.csproj" />
     <ProjectReference Include="..\Leviathan.WebApi.Sdk\Leviathan.WebApi.Sdk.csproj" />
     <ProjectReference Include="..\TheLeviathan.ApiSystem\TheLeviathan.ApiSystem.csproj" />
+    <ProjectReference Include="..\TheLeviathan.ChannelSystem\TheLeviathan.ChannelSystem.csproj" />
+    <ProjectReference Include="..\TheLeviathan.ComponentsSystem\TheLeviathan.ComponentsSystem.csproj" />
+    <ProjectReference Include="..\TheLeviathan.CoreSystem\TheLeviathan.CoreSystem.csproj" />
+    <ProjectReference Include="..\TheLeviathan.SetupSystem\TheLeviathan.SetupSystem.csproj" />
   </ItemGroup>
 
 </Project>

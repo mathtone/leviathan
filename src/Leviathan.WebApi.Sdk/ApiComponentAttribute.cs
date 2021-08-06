@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Leviathan.Components.Sdk;
+using System;
 
 namespace Leviathan.WebApi.Sdk {
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-	public sealed class ApiComponentAttribute : Attribute {
+	public sealed class ApiComponentAttribute : LeviathanComponentAttribute {
 		
 		public string ModuleName { get; }
 

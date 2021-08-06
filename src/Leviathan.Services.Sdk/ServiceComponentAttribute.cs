@@ -1,20 +1,17 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Leviathan.Components.Sdk;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 
 namespace Leviathan.Services.Sdk {
 
-	//[AttributeUsage(AttributeTargets.Method, AllowMultiple =false)]
-	//public class ServiceConfigurationAttribute : Attribute {
 
-	//}
-
-	public abstract class ServiceComponentAttribute : Attribute {
+	public abstract class ServiceComponentAttribute : LeviathanComponentAttribute {
 
 		public Type PrimaryServiceType { get; }
 		public Type[] SecondaryServiceTypes { get; }
 
-		public ServiceComponentAttribute(Type primaryServiceType,params Type[] secondaryServiceTypes) {
+		public ServiceComponentAttribute(Type primaryServiceType, params Type[] secondaryServiceTypes) {
 			this.PrimaryServiceType = primaryServiceType;
 			this.SecondaryServiceTypes = secondaryServiceTypes;
 		}
@@ -23,28 +20,28 @@ namespace Leviathan.Services.Sdk {
 	[AttributeUsage(AttributeTargets.Interface | AttributeTargets.Class, AllowMultiple = false)]
 	public sealed class SingletonServiceAttribute : ServiceComponentAttribute {
 
-		public SingletonServiceAttribute(Type primaryServiceType,params Type[] secondaryServiceTypes) :
-			base(primaryServiceType,secondaryServiceTypes) {
+		public SingletonServiceAttribute(Type primaryServiceType, params Type[] secondaryServiceTypes) :
+			base(primaryServiceType, secondaryServiceTypes) {
 		}
 	}
 
 	[AttributeUsage(AttributeTargets.Interface | AttributeTargets.Class, AllowMultiple = false)]
 	public sealed class TransientServiceAttribute : ServiceComponentAttribute {
-		public TransientServiceAttribute(Type primaryServiceType,params Type[] secondaryServiceTypes) :
+		public TransientServiceAttribute(Type primaryServiceType, params Type[] secondaryServiceTypes) :
 			base(primaryServiceType, secondaryServiceTypes) {
 		}
 	}
 
 	[AttributeUsage(AttributeTargets.Interface | AttributeTargets.Class, AllowMultiple = false)]
 	public sealed class ScopedServiceAttribute : ServiceComponentAttribute {
-		public ScopedServiceAttribute(Type primaryServiceType,params Type[] secondaryServiceTypes) :
+		public ScopedServiceAttribute(Type primaryServiceType, params Type[] secondaryServiceTypes) :
 			base(primaryServiceType, secondaryServiceTypes) {
 		}
 	}
 
 	[AttributeUsage(AttributeTargets.Interface | AttributeTargets.Class, AllowMultiple = false)]
 	public sealed class HostedSingletonServiceAttribute : ServiceComponentAttribute {
-		public HostedSingletonServiceAttribute(Type primaryServiceType,params Type[] secondaryServiceTypes) :
+		public HostedSingletonServiceAttribute(Type primaryServiceType, params Type[] secondaryServiceTypes) :
 			base(primaryServiceType, secondaryServiceTypes) {
 		}
 	}
