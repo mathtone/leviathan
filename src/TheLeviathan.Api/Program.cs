@@ -7,13 +7,9 @@ using System.Threading.Tasks;
 
 namespace TheLeviathan.Api {
 	public class Program {
-		public static void Main(string[] args) =>
-			CreateHostBuilder(args).Build().Run();
-
-		public static IHostBuilder CreateHostBuilder(string[] args) => Host
-			.CreateDefaultBuilder(args)
-			.ConfigureWebHostDefaults(webBuilder => {
-				webBuilder.UseStartup<LeviathanHostStartup>();
-			});
+		public static async Task Main(string[] args) => await Host.CreateDefaultBuilder(args)
+			.ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<LeviathanHostStartup>())
+			.Build()
+			.RunAsync();
 	}
 }

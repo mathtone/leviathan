@@ -1,5 +1,7 @@
 ﻿namespace TheLeviathan.Api {
+
 	public class ProgramConfigurationOptions {
+		public const string SectionName = "ProgramConfiguration";
 		public ConfigurationMethodInfo[] ServiceConfigurationMethods { get; set; }
 	}
 

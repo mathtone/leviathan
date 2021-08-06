@@ -53,9 +53,9 @@ namespace Leviathan.Services.Sdk {
 
 		public static IServiceCollection AddHostedSingleton(this IServiceCollection services, Type serviceType, Type implementationType) {
 			var meth = typeof(ServiceCollectionExtensions)
-				.GetMethod(nameof(AddHostedSingleton), 2, new[] { typeof(IServiceCollection) })
+				.GetMethod(nameof(AddHostedSingleton), new[] { typeof(IServiceCollection) })
 				.MakeGenericMethod(serviceType, implementationType);
-
+			//ServiceCollectionExtensions.AddHostedSingleton<IApiControllersService>(services,)
 			meth.Invoke(null, new[] { services });
 			return services;
 		}
