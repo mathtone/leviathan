@@ -13,132 +13,94 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using System.Reflection;
-using CaseStudy.DynamicService.SDK;
-using System.IO;
-using CaseStudy.DynamicServices.Utility;
 
 namespace CaseStudy.DynamicApi
 {
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
 
-        public IConfiguration Configuration { get; }
+	public class Startup
+	{
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
+		public Startup(IConfiguration configuration)
+		{
+			Configuration = configuration;
+		}
 
-            services
-                .LoadModularServices()
-                .AddControllers(o => o.Conventions.Add(new ModularControllerRouteConvention()))
-                //.ConfigureApplicationPartManager(m => m.FeatureProviders.Add(new ModularControllerFeatureProvider()))
-                .AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+		public IConfiguration Configuration { get; }
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CaseStudy.DynamicApi", Version = "v1" });
-            });
-        }
+		// This method gets called by the runtime. Use this method to add services to the container.
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services
+				.AddControllers(options => options.Conventions.Add(new ControllerRouteConvention()))
+				.ConfigureApplicationPartManager(mgr => mgr.FeatureProviders.Add(new ControllerFeatureProvider()));
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CaseStudy.DynamicApi v1"));
-            }
+			services.AddSwaggerGen(c =>
+				c.SwaggerDoc("v1", new OpenApiInfo { Title = "CaseStudy.DynamicApi", Version = "v1" })
+			);
+		}
 
-            app.UseHttpsRedirection();
+		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		{
+			if (env.IsDevelopment())
+			{
+				app.UseDeveloperExceptionPage();
+			}
 
-            app.UseRouting();
+			app.UseSwagger()
+				.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CaseStudy.DynamicApi v1"))
+				.UseHttpsRedirection()
+				.UseRouting()
+				.UseAuthorization()
+				.UseEndpoints(endpoints => endpoints.MapControllers());
+		}
+	}
 
-            app.UseAuthorization();
+	public class ControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
+	{
+		public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature)
+		{
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-        }
-    }
+			//var currentAssembly = typeof(GenericTypeControllerFeatureProvider).Assembly;
+			//var candidates = currentAssembly.GetExportedTypes().Where(x => x.GetCustomAttributes<GeneratedControllerAttribute>().Any());
 
-    public class ModularControllerRouteConvention : IControllerModelConvention
-    {
-        public void Apply(ControllerModel controller)
-        {
-            var attr = controller.ControllerType.GetCustomAttribute<ApiComponentAttribute>();
-            if (attr != null)
-            {
-                controller.Selectors.Add(new SelectorModel
-                {
-                    AttributeRouteModel = new AttributeRouteModel(new RouteAttribute($"api/{controller.ControllerName}")),
-                });
-            }
-        }
-    }
+			//foreach (var candidate in candidates)
+			//{
+			//	feature.Controllers.Add(
+			//		typeof(BaseController<>).MakeGenericType(candidate).GetTypeInfo()
+			//	);
+			//}
+		}
+	}
 
-    //public class ModularControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
-    //{
+	public class ControllerRouteConvention : IControllerModelConvention
+	{
+		public void Apply(ControllerModel controller)
+		{
+			//controller.Selectors.Clear();
+			//controller.Selectors.Add(new SelectorModel
+			//{
+			//	AttributeRouteModel = new AttributeRouteModel(new RouteAttribute("BEEXNEEK")),
+			//});
 
-    //    public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature)
-    //    {
+			//if (controller.ControllerType.IsGenericType)
+			//{
+			//	var genericType = controller.ControllerType.GenericTypeArguments[0];
+			//	var customNameAttribute = genericType.GetCustomAttribute<GeneratedControllerAttribute>();
 
-    //        var localPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-    //        var dlls = Directory.GetFiles(localPath, "*.dll");
-    //        var loaded = AssemblyLoader.GetLoadedAssemblies();
-    //        var assemblies = AppDomain.CurrentDomain.GetAssemblies()
-    //            .Where(a => Path.GetDirectoryName(a.Location) == localPath)
-    //            .ToDictionary(a => a.Location);
-
-    //        foreach (var a in assemblies.Values)
-    //        {
-    //            foreach (var t in a.GetExportedTypes())
-    //            {
-    //                var attr = t.GetCustomAttribute<ApiComponentAttribute>();
-    //                if (attr != null)
-    //                {
-    //                    feature.Controllers.Add(t.GetTypeInfo());
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
-
-    public static class ModularApiExtensions
-    {
-
-        public static IServiceCollection LoadModularServices(this IServiceCollection services)
-        {
-            var localPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var dlls = Directory.GetFiles(localPath, "*.dll");
-            var loaded = AssemblyLoader.GetLoadedAssemblies();
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies()
-                .Where(a => Path.GetDirectoryName(a.Location) == localPath)
-                .ToDictionary(a => a.Location);
-
-            foreach (var a in assemblies.Values)
-            {
-                foreach (var t in a.GetExportedTypes())
-                {
-                    var attr = t.GetCustomAttribute<ServiceAttribute>();
-                    if (attr != null)
-                    {
-                        if (attr is SingletonServiceAttribute) services.AddSingleton(attr.ServiceType, t);
-                        if (attr is TransientServiceAttribute) services.AddTransient(attr.ServiceType, t);
-                        if (attr is ScopedServiceAttribute) services.AddScoped(attr.ServiceType, t);
-                    }
-                }
-            }
-
-            return services;
-        }
-    }
+			//	if (customNameAttribute?.Route != null)
+			//	{
+			//		controller.Selectors.Add(new SelectorModel
+			//		{
+			//			AttributeRouteModel = new AttributeRouteModel(new RouteAttribute(customNameAttribute.Route)),
+			//		});
+			//	}
+			//	else
+			//	{
+			//		controller.ControllerName = genericType.Name;
+			//	}
+			//}
+		}
+	}
 }

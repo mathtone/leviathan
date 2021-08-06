@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:15440",
-      "sslPort": 44322
+      "applicationUrl": "http://localhost:62406",
+      "sslPort": 44394
     }
   },
   "$schema": "http://json.schemastore.org/launchsettings.json",
@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "CaseStudy.DynamicApi": {
+    "TheLeviathan.CaseStudy1": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
