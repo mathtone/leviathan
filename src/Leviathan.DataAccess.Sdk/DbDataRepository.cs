@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Leviathan.Common;
+using System.Data;
 
 namespace Leviathan.DataAccess {
 	public abstract class DbDataRepository<CN, ID, T> : AsyncRepository<ID, T>
