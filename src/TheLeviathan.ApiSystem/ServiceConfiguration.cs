@@ -1,64 +1,18 @@
-﻿using Leviathan.Services.Sdk;
-using Leviathan.WebApi.Sdk;
+﻿using Leviathan.WebApi;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
 namespace TheLeviathan.ApiSystem {
-	public static class ServiceConfiguration {
-
-		public static IServiceCollection AddComponentServices(this IServiceCollection services) {
-
-			var path = AppDomain.CurrentDomain.BaseDirectory;
-			var files = Directory.GetFiles(path, "*.dll", SearchOption.AllDirectories);
-
-			foreach (var f in files) {
-
-				var name = AssemblyName.GetAssemblyName(f);
-				var assembly = Assembly.Load(name);
-
-				foreach (var type in assembly.GetExportedTypes()) {
-
-					var attr = type.GetCustomAttribute<ServiceComponentAttribute>();
-
-					if (attr != null) {
-
-						var primary = attr.PrimaryServiceType;
-						if (attr is SingletonServiceAttribute)
-							RegisterService(primary, attr.SecondaryServiceTypes, type, services.AddSingleton, services.AddSingleton);
-
-						if (attr is TransientServiceAttribute)
-							RegisterService(primary, attr.SecondaryServiceTypes, type, services.AddTransient, services.AddTransient);
-
-						if (attr is ScopedServiceAttribute)
-							RegisterService(primary, attr.SecondaryServiceTypes, type, services.AddScoped, services.AddScoped);
-
-						if (attr is HostedSingletonServiceAttribute)
-							RegisterService(primary, attr.SecondaryServiceTypes, type, services.AddHostedSingleton, services.AddSingleton);
-					}
-				}
-			}
-
-			services.ConfigureMvc();
-			return services;
-		}
-
-		static void RegisterService(Type primary, Type[] secondary, Type implementation, Func<Type, Type, IServiceCollection> registerAction, Func<Type, object> secondaryRegisterAction) {
-			registerAction(primary, implementation);
-			if (secondary != null) {
-				foreach (var i in secondary) {
-					secondaryRegisterAction(i);
-				}
-			}
-		}
-
+	public static partial class ServiceConfiguration {
 		public static IMvcBuilder ConfigureMvc(this IServiceCollection svcCollection) {
 
 			svcCollection.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Leviathan.Api", Version = "v1" }));
@@ -78,7 +32,6 @@ namespace TheLeviathan.ApiSystem {
 			});
 		}
 
-
 		public class ApiControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature> {
 
 			IApiControllersService _controllers;
@@ -90,6 +43,17 @@ namespace TheLeviathan.ApiSystem {
 			public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature) {
 				foreach (var type in _controllers.ControllerTypes()) {
 					feature.Controllers.Add(type.GetTypeInfo());
+				}
+			}
+		}
+
+		public class ModularControllerRouteConvention : IControllerModelConvention {
+			public void Apply(ControllerModel controller) {
+				var attr = controller.ControllerType.GetCustomAttribute<ApiComponentAttribute>();
+				if (attr != null) {
+					controller.Selectors.Add(new SelectorModel {
+						AttributeRouteModel = new AttributeRouteModel(new RouteAttribute($"api/{attr.ModuleName}/{controller.ControllerName}")),
+					});
 				}
 			}
 		}
