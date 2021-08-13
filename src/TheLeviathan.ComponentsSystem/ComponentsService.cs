@@ -49,4 +49,6 @@ namespace TheLeviathan.ComponentsSystem {
 		public IEnumerable<Type> GetComponents<T>() where T : LeviathanComponentAttribute =>
 			GetTypes().Where(t => t.CustomAttributes.Any(a => a.AttributeType.IsAssignableTo(typeof(T))));
 	}
+
+	
 }

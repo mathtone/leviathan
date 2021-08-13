@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace TheLeviathan.Api {
 	public class LeviathanHostStartup {
@@ -22,7 +23,6 @@ namespace TheLeviathan.Api {
 		}
 
 		public void ConfigureServices(IServiceCollection services) {
-
 			foreach (var m in ProgramConfig.ServiceConfigurationMethods) {
 				Type.GetType($"{m.TypeName}, {m.AssemblyName}")
 					.GetMethod(m.MethodName)
@@ -44,5 +44,10 @@ namespace TheLeviathan.Api {
 					endpoints.MapControllers();
 				});
 		}
+
+		public static async Task Main(string[] args) => await Host.CreateDefaultBuilder(args)
+			.ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<LeviathanHostStartup>())
+			.Build()
+			.RunAsync();
 	}
 }
