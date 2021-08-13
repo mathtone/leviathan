@@ -7,7 +7,7 @@ namespace Leviathan.Services {
 		public Type PrimaryServiceType { get; }
 		public Type[] SecondaryServiceTypes { get; }
 
-		public ServiceComponentAttribute(Type primaryServiceType, params Type[] secondaryServiceTypes) {
+		public ServiceComponentAttribute(string description, Type primaryServiceType, params Type[] secondaryServiceTypes):base(description) {
 			this.PrimaryServiceType = primaryServiceType;
 			this.SecondaryServiceTypes = secondaryServiceTypes;
 		}

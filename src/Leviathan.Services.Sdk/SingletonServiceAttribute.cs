@@ -5,7 +5,7 @@ namespace Leviathan.Services {
 	public sealed class SingletonServiceAttribute : ServiceComponentAttribute {
 
 		public SingletonServiceAttribute(Type primaryServiceType, params Type[] secondaryServiceTypes) :
-			base(primaryServiceType, secondaryServiceTypes) {
+			base("Singleton Service",primaryServiceType, secondaryServiceTypes) {
 		}
 	}
 }

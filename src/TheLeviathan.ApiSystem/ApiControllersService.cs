@@ -2,16 +2,17 @@
 using Leviathan.WebApi;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TheLeviathan.ComponentSystem;
 
 namespace TheLeviathan.ApiSystem {
-	
+
 	public interface IApiControllersService {
 		IEnumerable<Type> ControllerTypes();
 	}
 
 	public static partial class ServiceConfiguration {
-		
+
 		[SingletonService(typeof(IApiControllersService))]
 		public class ApiControllersService : IApiControllersService {
 
@@ -22,7 +23,7 @@ namespace TheLeviathan.ApiSystem {
 			}
 
 			public IEnumerable<Type> ControllerTypes() =>
-				_components.GetComponents<ApiComponentAttribute>();
+				_components.GetLeviathanComponents<ApiComponentAttribute>().Select(c => c.Type);
 		}
 	}
 }

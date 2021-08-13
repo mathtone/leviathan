@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TheLeviathan.ApiSystem\TheLeviathan.ApiSystem.csproj" />
+    <ProjectReference Include="..\TheLeviathan.FileDataSystem\TheLeviathan.FileDataSystem.csproj" />
     <ProjectReference Include="..\TheLeviathan.ServiceSystem\TheLeviathan.ServiceSystem.csproj" />
   </ItemGroup>
 

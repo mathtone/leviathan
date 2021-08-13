@@ -12,7 +12,7 @@ namespace Leviathan.WebApi {
 
 		public string ModuleName { get; }
 
-		public ApiComponentAttribute(string moduleName) {
+		public ApiComponentAttribute(string moduleName) : base("Api Component") {
 			this.ModuleName = moduleName;
 		}
 	}
