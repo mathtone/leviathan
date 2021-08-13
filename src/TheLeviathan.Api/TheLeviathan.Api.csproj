@@ -12,6 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Leviathan.Drivers.Gpio\Leviathan.Drivers.Gpio.csproj" />
+    <ProjectReference Include="..\Leviathan.Drivers.OneWire\Leviathan.Drivers.OneWire.csproj" />
+    <ProjectReference Include="..\Leviathan.Drivers.Pca9685\Leviathan.Drivers.Pca9685.csproj" />
     <ProjectReference Include="..\Leviathan.Services.Sdk\Leviathan.Services.Sdk.csproj" />
     <ProjectReference Include="..\Leviathan.WebApi.Sdk\Leviathan.WebApi.Sdk.csproj" />
     <ProjectReference Include="..\TheLeviathan.ApiSystem\TheLeviathan.ApiSystem.csproj" />

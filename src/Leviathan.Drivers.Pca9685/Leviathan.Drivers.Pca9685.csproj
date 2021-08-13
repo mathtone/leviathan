@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Leviathan.Channels.Sdk\Leviathan.Channels.Sdk.csproj" />
     <ProjectReference Include="..\Leviathan.Components.Sdk\Leviathan.Components.Sdk.csproj" />
+    <ProjectReference Include="..\Leviathan.Services.Sdk\Leviathan.Services.Sdk.csproj" />
   </ItemGroup>
 
 </Project>

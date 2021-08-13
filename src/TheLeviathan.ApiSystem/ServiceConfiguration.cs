@@ -22,7 +22,14 @@ namespace TheLeviathan.ApiSystem {
 			foreach (var f in files) {
 
 				var name = AssemblyName.GetAssemblyName(f);
-				var assembly = Assembly.Load(name);
+				var assembly = default(Assembly);
+				try {
+					assembly = Assembly.Load(name);
+				}
+				catch (Exception ex) {
+					assembly = Assembly.LoadFile(f);
+				}
+
 
 				foreach (var type in assembly.GetExportedTypes()) {
 
@@ -32,7 +39,7 @@ namespace TheLeviathan.ApiSystem {
 
 						var primary = attr.PrimaryServiceType;
 						if (attr is SingletonServiceAttribute)
-							RegisterService(primary, attr.SecondaryServiceTypes, type, services.AddSingleton, services.AddSingleton);
+							RegisterService(primary, attr.SecondaryServiceTypes, type, services.AddSingleton, s => services.AddSingleton(s, svc => svc.GetRequiredService(primary)));
 
 						if (attr is TransientServiceAttribute)
 							RegisterService(primary, attr.SecondaryServiceTypes, type, services.AddTransient, services.AddTransient);

@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace TheLeviathan.ComponentsSystem {
+
 	public interface IComponentsService {
 		IEnumerable<Assembly> GetAssemblies();
 		IEnumerable<Type> GetTypes();
@@ -26,7 +27,16 @@ namespace TheLeviathan.ComponentsSystem {
 		public IEnumerable<Assembly> GetAssemblies() {
 			var location = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 			foreach (var f in Directory.GetFiles(location, "*.dll")) {
-				yield return Assembly.Load(AssemblyName.GetAssemblyName(f));
+				yield return GetAssembly(f);
+			}
+		}
+
+		static Assembly GetAssembly(string fileName) {
+			try {
+				return Assembly.Load(AssemblyName.GetAssemblyName(fileName));
+			}
+			catch (FileNotFoundException ex) {
+				return Assembly.LoadFile(fileName);
 			}
 		}
 
