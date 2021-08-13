@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Leviathan.Components.Sdk\Leviathan.Components.Sdk.csproj" />
+    <ProjectReference Include="..\Leviathan.DataAccess.Sdk\Leviathan.DataAccess.Sdk.csproj" />
+    <ProjectReference Include="..\Leviathan.Npgsql.Sdk\Leviathan.Npgsql.Sdk.csproj" />
     <ProjectReference Include="..\Leviathan.Services.Sdk\Leviathan.Services.Sdk.csproj" />
     <ProjectReference Include="..\TheLeviathan.FileDataSystem\TheLeviathan.FileDataSystem.csproj" />
   </ItemGroup>

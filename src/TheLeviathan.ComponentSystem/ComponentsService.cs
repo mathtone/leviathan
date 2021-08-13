@@ -1,7 +1,5 @@
 ﻿using Leviathan.Components.Sdk;
 using Leviathan.Services;
-using Leviathan.WebApi;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,8 +19,6 @@ namespace TheLeviathan.ComponentSystem {
 	public class ComponentsService : IComponentsService {
 
 		IFileSystemService _fileSystem;
-		//IEnumerable<Type> _types;
-		//IEnumerable<ComponentInfo> _components;
 
 		public ComponentsService(IFileSystemService fileSystem) => _fileSystem = fileSystem;
 
@@ -60,29 +56,5 @@ namespace TheLeviathan.ComponentSystem {
 		public int Id { get; init; }
 		public Type Type { get; set; }
 		public LeviathanComponentAttribute[] ComponentAttributes { get; set; }
-	}
-
-	public class ComponentListing {
-		public int Id { get; init; }
-		public string TypeName { get; init; }
-		public string AssemblyName { get; init; }
-		public string[] ComponentTypes { get; init; }
-	}
-
-	[ApiComponent("system")]
-	public class ComponentsController : ControllerBase {
-
-		IComponentsService _service;
-		public ComponentsController(IComponentsService service) {
-			_service = service;
-		}
-		[HttpGet]
-		public IEnumerable<ComponentListing> List() => _service.GetLeviathanComponents<LeviathanComponentAttribute>()
-			.Select(c => new ComponentListing {
-				Id = c.Id,
-				AssemblyName = c.Type.Assembly.FullName,
-				TypeName = c.Type.Name,
-				ComponentTypes = c.ComponentAttributes.Select(a => a.ComponentTypeDescription).ToArray()
-			});
 	}
 }
