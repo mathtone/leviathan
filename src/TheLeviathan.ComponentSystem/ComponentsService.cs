@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using TheLeviathan.ComponentSystem.Data;
 using TheLeviathan.FileDataSystem;
 
 namespace TheLeviathan.ComponentSystem {
@@ -15,12 +16,16 @@ namespace TheLeviathan.ComponentSystem {
 		IEnumerable<ComponentInfo> GetLeviathanComponents<T>() where T : LeviathanComponentAttribute;
 	}
 
+
+
 	[SingletonService(typeof(IComponentsService))]
 	public class ComponentsService : IComponentsService {
 
 		IFileSystemService _fileSystem;
+		IAssemblyData _data;
 
-		public ComponentsService(IFileSystemService fileSystem) => _fileSystem = fileSystem;
+		public ComponentsService(IFileSystemService fileSystem, IAssemblyData data) =>
+			(_fileSystem, _data) = (fileSystem, data);
 
 		public IEnumerable<Assembly> GetAssemblies() =>
 			_fileSystem.LocalFiles("*.dll").Select(GetAssembly);

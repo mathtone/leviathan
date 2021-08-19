@@ -15,7 +15,10 @@ namespace TheLeviathan.ApiSystem {
 	public static partial class ServiceConfiguration {
 		public static IMvcBuilder ConfigureMvc(this IServiceCollection svcCollection) {
 
-			svcCollection.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Leviathan.Api", Version = "v1" }));
+			svcCollection.AddSwaggerGen(c => {
+				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Leviathan.Api", Version = "v1" });
+				c.EnableAnnotations();
+			});
 			var builder = svcCollection.AddAuthorization()
 				.AddControllers(o => o.Conventions.Add(new ModularControllerRouteConvention()))
 				.AddJsonOptions(opt => opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));

@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Leviathan.Common.Sdk\Leviathan.Common.Sdk.csproj" />
     <ProjectReference Include="..\TheLeviathan.ComponentSystem.Data\TheLeviathan.ComponentSystem.Data.csproj" />
+    <ProjectReference Include="..\TheLeviathan.FileDataSystem\TheLeviathan.FileDataSystem.csproj" />
   </ItemGroup>
 
 </Project>
