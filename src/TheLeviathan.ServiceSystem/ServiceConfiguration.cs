@@ -22,7 +22,6 @@ namespace TheLeviathan.ServiceSystem {
 					assembly = Assembly.LoadFile(f);
 				}
 
-
 				foreach (var type in assembly.GetExportedTypes()) {
 
 					var attr = type.GetCustomAttribute<ServiceComponentAttribute>();
@@ -58,7 +57,5 @@ namespace TheLeviathan.ServiceSystem {
 				}
 			}
 		}
-
-		
 	}
 }

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using TheLeviathan.ComponentSystem.Data;
 using TheLeviathan.FileDataSystem;
 
 namespace TheLeviathan.ComponentSystem {
@@ -15,8 +14,6 @@ namespace TheLeviathan.ComponentSystem {
 		IEnumerable<Type> GetTypes();
 		IEnumerable<ComponentInfo> GetLeviathanComponents<T>() where T : LeviathanComponentAttribute;
 	}
-
-
 
 	[SingletonService(typeof(IComponentsService))]
 	public class ComponentsService : IComponentsService {

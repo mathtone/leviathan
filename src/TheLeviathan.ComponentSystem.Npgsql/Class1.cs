@@ -1,8 +1,8 @@
-﻿using Leviathan.Npgsql.Sdk;
+﻿using Leviathan.Components.Sdk;
+using Leviathan.Npgsql.Sdk;
 using Npgsql;
 using System;
 using System.Threading.Tasks;
-using TheLeviathan.ComponentSystem.Data;
 
 namespace TheLeviathan.ComponentSystem.Npgsql {
 	public class AssemblyRepo : NpgsqlRepository<int, AssemblyRecord> {

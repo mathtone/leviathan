@@ -1,13 +1,13 @@
-﻿using Leviathan.Common;
-using Leviathan.Components.Sdk;
-using Leviathan.DataAccess;
+﻿using Leviathan.Components.Sdk;
 using Leviathan.WebApi;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace TheLeviathan.ComponentSystem.Data {
+namespace TheLeviathan.ComponentSystem {
 	[ApiComponent("data")]
 	public class AssemblyDataController : ControllerBase, IAssemblyData {
 
