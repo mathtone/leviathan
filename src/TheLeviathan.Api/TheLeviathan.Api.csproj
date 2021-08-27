@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>44355be5-be61-4a3b-b7bb-af2c90d624e4</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Startup.cs~RF1300326.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TheLeviathan.ApiSystem\TheLeviathan.ApiSystem.csproj" />
+    <ProjectReference Include="..\TheLeviathan.ChannelSystem\TheLeviathan.ChannelSystem.csproj" />
+    <ProjectReference Include="..\TheLeviathan.ComponentSystem\TheLeviathan.ComponentSystem.csproj" />
+    <ProjectReference Include="..\TheLeviathan.Core\TheLeviathan.Core.csproj" />
+    <ProjectReference Include="..\TheLeviathan.FileSystem\TheLeviathan.FileSystem.csproj" />
+    <ProjectReference Include="..\TheLeviathan.ServiceSystem\TheLeviathan.ServiceSystem.csproj" />
+  </ItemGroup>
+
+</Project>

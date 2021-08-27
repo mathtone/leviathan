@@ -1,28 +1,22 @@
-﻿using Leviathan.Components.Sdk;
+﻿using Leviathan.Components;
 using Leviathan.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using TheLeviathan.FileDataSystem;
+using TheLeviathan.FileSystem;
 
 namespace TheLeviathan.ComponentSystem {
+	
 
-	public interface IComponentsService {
-		IEnumerable<Assembly> GetAssemblies();
-		IEnumerable<Type> GetTypes();
-		IEnumerable<ComponentInfo> GetLeviathanComponents<T>() where T : LeviathanComponentAttribute;
-	}
-
-	[SingletonService(typeof(IComponentsService))]
+	[TransientService(typeof(IComponentsService))]
 	public class ComponentsService : IComponentsService {
 
 		IFileSystemService _fileSystem;
-		IAssemblyData _data;
-
-		public ComponentsService(IFileSystemService fileSystem, IAssemblyData data) =>
-			(_fileSystem, _data) = (fileSystem, data);
+		
+		public ComponentsService(IFileSystemService fileSystem) =>
+			(_fileSystem) = (fileSystem);
 
 		public IEnumerable<Assembly> GetAssemblies() =>
 			_fileSystem.LocalFiles("*.dll").Select(GetAssembly);
@@ -54,9 +48,6 @@ namespace TheLeviathan.ComponentSystem {
 		}
 	}
 
-	public class ComponentInfo {
-		public int Id { get; init; }
-		public Type Type { get; set; }
-		public LeviathanComponentAttribute[] ComponentAttributes { get; set; }
-	}
+
+	
 }

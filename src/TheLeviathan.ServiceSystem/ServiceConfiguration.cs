@@ -1,10 +1,30 @@
 ﻿using Leviathan.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 using System.Reflection;
+using TheLeviathan.ComponentSystem;
 
 namespace TheLeviathan.ServiceSystem {
+
+	public interface IServiceSystem {
+
+	}
+
+	[SingletonService(typeof(IServiceSystem))]
+	public class ServiceSystem : IServiceSystem {
+		
+		IServiceProvider _services;
+
+
+		public ServiceSystem(IServiceProvider services) {
+			_services = services;
+		}
+
+		 
+	}
+
 	public static class ServiceConfiguration {
 		public static IServiceCollection AddComponentServices(this IServiceCollection services) {
 
@@ -15,6 +35,7 @@ namespace TheLeviathan.ServiceSystem {
 
 				var name = AssemblyName.GetAssemblyName(f);
 				var assembly = default(Assembly);
+
 				try {
 					assembly = Assembly.Load(name);
 				}
@@ -24,30 +45,57 @@ namespace TheLeviathan.ServiceSystem {
 
 				foreach (var type in assembly.GetExportedTypes()) {
 
-					var attr = type.GetCustomAttribute<ServiceComponentAttribute>();
+					foreach (var attr in type.GetCustomAttributes()) {
 
-					if (attr != null) {
+						if (attr is ServiceComponentAttribute sc) {
+							var primary = sc.PrimaryServiceType;
 
-						var primary = attr.PrimaryServiceType;
-						if (attr is SingletonServiceAttribute)
-							RegisterService(primary, attr.SecondaryServiceTypes, type, services.AddSingleton, s => services.AddSingleton(s, svc => svc.GetRequiredService(primary)));
+							if (attr is SingletonServiceAttribute)
+								RegisterService(primary, sc.SecondaryServiceTypes, type, services.AddSingleton, s => services.AddSingleton(s, svc => svc.GetRequiredService(primary)));
 
-						if (attr is TransientServiceAttribute)
-							RegisterService(primary, attr.SecondaryServiceTypes, type, services.AddTransient, services.AddTransient);
+							if (attr is TransientServiceAttribute)
+								RegisterService(primary, sc.SecondaryServiceTypes, type, services.AddTransient, services.AddTransient);
 
-						if (attr is ScopedServiceAttribute)
-							RegisterService(primary, attr.SecondaryServiceTypes, type, services.AddScoped, services.AddScoped);
-
-						if (attr is HostedSingletonServiceAttribute)
-							RegisterService(primary, attr.SecondaryServiceTypes, type, services.AddHostedSingleton, services.AddSingleton);
+							if (attr is ScopedServiceAttribute)
+								RegisterService(primary, sc.SecondaryServiceTypes, type, services.AddScoped, services.AddScoped);
+						}
+						if (attr is HostedAttribute ha) {
+							if (ha.PrimaryServiceType == null) {
+								services.AddHosting(type);
+							}
+							else {
+								services.AddHosting(ha.PrimaryServiceType, type);
+							}
+						}
 					}
 				}
 			}
 
-			//services.ConfigureMvc();
 			return services;
 		}
 
+		public static IServiceCollection AddHosting(this IServiceCollection services, Type hostedServiceType) {
+			typeof(ServiceCollectionHostedServiceExtensions)
+				.GetMethod(nameof(ServiceCollectionHostedServiceExtensions.AddHostedService), 1, new[] { typeof(IServiceCollection) })
+				.MakeGenericMethod(new[] { hostedServiceType })
+				.Invoke(null, new[] { services });
+			return services;
+		}
+
+		public static IServiceCollection AddHosting(this IServiceCollection services, Type hostedServiceType, Type implementationType) {
+			typeof(ServiceConfiguration)
+				.GetMethod(nameof(AddHosting), new[] { typeof(IServiceCollection) })
+				.MakeGenericMethod(new[] { hostedServiceType })
+				.Invoke(null, new[] { services });
+
+			return services;
+		}
+
+		public static IServiceCollection AddHosting<TService>(this IServiceCollection services) where TService : class, IHostedService {
+
+			services.AddHostedService(svc => svc.GetRequiredService<TService>());
+			return services;
+		}
 
 		static void RegisterService(Type primary, Type[] secondary, Type implementation, Func<Type, Type, IServiceCollection> registerAction, Func<Type, object> secondaryRegisterAction) {
 			registerAction(primary, implementation);

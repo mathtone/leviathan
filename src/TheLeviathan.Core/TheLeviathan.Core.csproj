@@ -5,9 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Leviathan.Components\Leviathan.Components.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Leviathan.Services\Leviathan.Services.csproj" />
-    <ProjectReference Include="..\TheLeviathan.FileSystem\TheLeviathan.FileSystem.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,29 +1,28 @@
-﻿using Leviathan.Services;
+﻿using Leviathan.Components;
+using Leviathan.Services;
 using Leviathan.WebApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using TheLeviathan.ComponentSystem;
 
 namespace TheLeviathan.ApiSystem {
-
 	public interface IApiControllersService {
-		IEnumerable<Type> ControllerTypes();
+		IEnumerable<ComponentInfo> ControllerTypes();
 	}
 
-	public static partial class ServiceConfiguration {
+	[SingletonService(typeof(IApiControllersService))]
+	public class ApiControllersService : IApiControllersService {
 
-		[SingletonService(typeof(IApiControllersService))]
-		public class ApiControllersService : IApiControllersService {
+		IComponentsService _components;
 
-			IComponentsService _components;
-
-			public ApiControllersService(IComponentsService components) {
-				_components = components;
-			}
-
-			public IEnumerable<Type> ControllerTypes() =>
-				_components.GetLeviathanComponents<ApiComponentAttribute>().Select(c => c.Type);
+		public ApiControllersService(IComponentsService components) {
+			_components = components;
 		}
+
+		public IEnumerable<ComponentInfo> ControllerTypes() =>
+			_components.GetLeviathanComponents<ApiComponentAttribute>();
 	}
 }

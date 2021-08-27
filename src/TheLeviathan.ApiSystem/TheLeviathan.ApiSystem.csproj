@@ -7,12 +7,12 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="swashbuckle.aspnetcore" Version="6.1.5" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.1.5" />
+    <PackageReference Include="swashbuckle.aspnetcore.annotations" Version="6.1.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Leviathan.Services.Sdk\Leviathan.Services.Sdk.csproj" />
-    <ProjectReference Include="..\Leviathan.WebApi.Sdk\Leviathan.WebApi.Sdk.csproj" />
+    <ProjectReference Include="..\Leviathan.Services\Leviathan.Services.csproj" />
+    <ProjectReference Include="..\Leviathan.WebApi\Leviathan.WebApi.csproj" />
     <ProjectReference Include="..\TheLeviathan.ComponentSystem\TheLeviathan.ComponentSystem.csproj" />
   </ItemGroup>
 
