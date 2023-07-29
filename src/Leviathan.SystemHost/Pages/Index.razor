@@ -1,0 +1,23 @@
+﻿@page "/"
+@using Leviathan.SystemHost.Data
+@inject ISystemDataService systemData
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+@if (!IsInitialized) {
+	<p><em>Leviathan System Setup</em></p>
+}
+else {
+	<p>System is initialized</p>
+}
+
+@code {
+	private bool IsInitialized { get; set; }
+
+	protected override async Task OnInitializedAsync() {
+		var config = await systemData.GetSystemConfig();
+		IsInitialized = config.IsInitialized;
+	}
+}

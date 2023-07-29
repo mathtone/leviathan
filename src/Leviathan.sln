@@ -3,9 +3,47 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.33808.371
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution Items", "_Solution Items", "{52A10C84-4467-4D50-9A3D-F24A7F15CAD7}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.SystemHost", "Leviathan.SystemHost\Leviathan.SystemHost.csproj", "{503C7FAF-276B-4155-8B5C-5B8A4FB3B759}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "B System", "B System", "{D208D7DB-1CA1-4A8E-A54E-ED2DA955AEEC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "A. Sdk", "A. Sdk", "{C23D476F-BAC1-49CA-A481-94FD82988589}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Services.Sdk", "Leviathan.Services.Sdk\Leviathan.Services.Sdk.csproj", "{629299E5-7B08-47CE-B166-6C7B2CE2330C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Data.Npgsql", "Leviathan.Data.Npgsql\Leviathan.Data.Npgsql.csproj", "{BCB45831-EB2A-4998-A1B1-4B684EF9B8D1}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{503C7FAF-276B-4155-8B5C-5B8A4FB3B759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{503C7FAF-276B-4155-8B5C-5B8A4FB3B759}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{503C7FAF-276B-4155-8B5C-5B8A4FB3B759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{503C7FAF-276B-4155-8B5C-5B8A4FB3B759}.Release|Any CPU.Build.0 = Release|Any CPU
+		{629299E5-7B08-47CE-B166-6C7B2CE2330C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{629299E5-7B08-47CE-B166-6C7B2CE2330C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{629299E5-7B08-47CE-B166-6C7B2CE2330C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{629299E5-7B08-47CE-B166-6C7B2CE2330C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCB45831-EB2A-4998-A1B1-4B684EF9B8D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCB45831-EB2A-4998-A1B1-4B684EF9B8D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCB45831-EB2A-4998-A1B1-4B684EF9B8D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCB45831-EB2A-4998-A1B1-4B684EF9B8D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{503C7FAF-276B-4155-8B5C-5B8A4FB3B759} = {D208D7DB-1CA1-4A8E-A54E-ED2DA955AEEC}
+		{629299E5-7B08-47CE-B166-6C7B2CE2330C} = {C23D476F-BAC1-49CA-A481-94FD82988589}
+		{BCB45831-EB2A-4998-A1B1-4B684EF9B8D1} = {C23D476F-BAC1-49CA-A481-94FD82988589}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C39CA66-6C4B-42EB-8797-4ADCFED239DD}
