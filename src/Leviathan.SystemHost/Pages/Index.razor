@@ -1,23 +1,70 @@
 ﻿@page "/"
 @using Leviathan.SystemHost.Data
+@using Leviathan.SystemHost.Services;
 @inject ISystemDataService systemData
+@inject ISystemHostService systemHost
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
-
 @if (!IsInitialized) {
 	<p><em>Leviathan System Setup</em></p>
+	<table>
+		<tr>
+			<td>Database System User Login:</td>
+			<td>
+				<input @bind="PgLogin" />
+			</td>
+		</tr>
+		<tr>
+			<td>Database System User Password:</td>
+			<td>
+				<input @bind="PgPassword" />
+			</td>
+		</tr>
+		<tr>
+			<td>Admin User Login:</td>
+			<td>
+				<input @bind="AdminLogin" />
+			</td>
+		</tr>
+		<tr>
+			<td>Admin User Password:</td>
+			<td>
+				<input @bind="AdminPassword" />
+			</td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2"><button class="btn btn-primary" @onclick="Save">Apply</button></td>
+		</tr>
+	</table>
 }
 else {
 	<p>System is initialized</p>
 }
 
 @code {
+
 	private bool IsInitialized { get; set; }
+
+	private string PgLogin { get; set; } = "postgres";
+	private string PgPassword { get; set; } = "postgres";
+
+	private string AdminLogin { get; set; } = "admin";
+	private string AdminPassword { get; set; }
 
 	protected override async Task OnInitializedAsync() {
 		var config = await systemData.GetSystemConfig();
 		IsInitialized = config.IsInitialized;
+	}
+
+	protected async Task Save() {
+		var cfg = new SystemConfig {
+			IsInitialized = true,
+			PostgresSystemUserName = PgLogin,
+			PostgresSystemPassword = PgPassword,
+			AdminLogin = AdminLogin,
+			AdminPassword = AdminPassword
+		};
+		await systemHost.ApplyConfig(cfg);
 	}
 }
