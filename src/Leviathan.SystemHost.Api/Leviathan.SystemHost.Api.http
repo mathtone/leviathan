@@ -1,0 +1,6 @@
+@Leviathan.SystemHost.Api_HostAddress = http://localhost:5100
+
+GET {{Leviathan.SystemHost.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

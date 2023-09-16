@@ -1,0 +1,36 @@
+﻿@page "/login"
+@using Leviathan.InstanceHost.Ui.Services;
+@inject IAuthenticationService auth;
+@inject HttpClient Http
+
+<h3>Login</h3>
+
+<EditForm Model="loginModel" OnValidSubmit="HandleLogin">
+	<InputText id="login" @bind-Value="loginModel.Username" placeholder="Username" />
+	<InputText id="password" type="password" @bind-Value="loginModel.Password" placeholder="Password" />
+	<button type="submit">Login</button>
+</EditForm>
+
+<p>@loginResult</p>
+
+@code {
+	private string loginResult = "";
+
+	private LoginModel loginModel = new LoginModel();
+
+	private async Task HandleLogin() {
+		var response = await Http.PostAsJsonAsync("https://localhost:7249/api/Authentication", loginModel);
+		if (response.IsSuccessStatusCode) {
+			var jwt = await response.Content.ReadAsStringAsync();
+			loginResult = "Login successful!";
+		}
+		else {
+			loginResult = "Login failed.";
+		}
+	}
+
+	private class LoginModel {
+		public string? Username { get; set; }
+		public string? Password { get; set; }
+	}
+}

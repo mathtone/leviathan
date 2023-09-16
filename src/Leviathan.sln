@@ -3,9 +3,50 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.33808.371
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.SystemHost", "Leviathan.SystemHost\Leviathan.SystemHost.csproj", "{A1C41A21-EE9A-4E83-8FB6-E4952B8C4E77}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Services", "Leviathan.Services\Leviathan.Services.csproj", "{9C198B32-14F7-4A3A-9D6A-9EE3180A833D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7669502A-A403-4C5E-AB07-218BD624DF0C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.SystemHost.Api", "Leviathan.SystemHost.Api\Leviathan.SystemHost.Api.csproj", "{04FA18FE-18B1-47B2-9B5A-424BB8C65FDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.InstanceHost.Ui", "Leviathan.InstanceHost.Ui\Leviathan.InstanceHost.Ui.csproj", "{20CC15A3-F2F5-4A46-B5FC-8B571F36BC6D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Keys", "Keys", "{60C74EF0-E7C6-4057-9E5F-85FA2611129C}"
+	ProjectSection(SolutionItems) = preProject
+		..\leviathan_private_key.pem = ..\leviathan_private_key.pem
+		..\leviathan_public_key.pem = ..\leviathan_public_key.pem
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1C41A21-EE9A-4E83-8FB6-E4952B8C4E77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1C41A21-EE9A-4E83-8FB6-E4952B8C4E77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1C41A21-EE9A-4E83-8FB6-E4952B8C4E77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1C41A21-EE9A-4E83-8FB6-E4952B8C4E77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C198B32-14F7-4A3A-9D6A-9EE3180A833D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C198B32-14F7-4A3A-9D6A-9EE3180A833D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C198B32-14F7-4A3A-9D6A-9EE3180A833D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C198B32-14F7-4A3A-9D6A-9EE3180A833D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04FA18FE-18B1-47B2-9B5A-424BB8C65FDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04FA18FE-18B1-47B2-9B5A-424BB8C65FDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04FA18FE-18B1-47B2-9B5A-424BB8C65FDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04FA18FE-18B1-47B2-9B5A-424BB8C65FDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20CC15A3-F2F5-4A46-B5FC-8B571F36BC6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20CC15A3-F2F5-4A46-B5FC-8B571F36BC6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20CC15A3-F2F5-4A46-B5FC-8B571F36BC6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20CC15A3-F2F5-4A46-B5FC-8B571F36BC6D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{60C74EF0-E7C6-4057-9E5F-85FA2611129C} = {7669502A-A403-4C5E-AB07-218BD624DF0C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C39CA66-6C4B-42EB-8797-4ADCFED239DD}
