@@ -348,3 +348,7 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/leviathan_private_key.pem
+/leviathan_public_key.pem
+/src/leviathan_private_key.pem
+/src/leviathan_public_key.pem
