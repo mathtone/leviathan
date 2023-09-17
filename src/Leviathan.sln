@@ -3,9 +3,53 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.33808.371
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "A. System", "A. System", "{F864475E-140A-4D0C-A101-60ED76F5D6BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.SystemHost", "Leviathan.SystemHost\Leviathan.SystemHost.csproj", "{2FAA58DB-792B-4291-9D9E-6E01B62B007B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.SystemHost.Api", "Leviathan.SystemHost.Api\Leviathan.SystemHost.Api.csproj", "{4CB2191A-B18E-467C-9F6D-06732E5AD69C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.SystemHost.Sdk", "Leviathan.SystemHost.Sdk\Leviathan.SystemHost.Sdk.csproj", "{53C3D09D-F6A3-4312-B1AD-8771DF9C013D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.SystemHost.Ui", "Leviathan.SystemHost.Ui\Leviathan.SystemHost.Ui.csproj", "{46CB6694-8F1D-427C-8B1D-26AA02B14849}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{98885939-2247-414F-A834-A99B961A4DCA}"
+	ProjectSection(SolutionItems) = preProject
+		..\leviathan_private_key.pem = ..\leviathan_private_key.pem
+		..\leviathan_public_key.pem = ..\leviathan_public_key.pem
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2FAA58DB-792B-4291-9D9E-6E01B62B007B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FAA58DB-792B-4291-9D9E-6E01B62B007B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FAA58DB-792B-4291-9D9E-6E01B62B007B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FAA58DB-792B-4291-9D9E-6E01B62B007B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CB2191A-B18E-467C-9F6D-06732E5AD69C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CB2191A-B18E-467C-9F6D-06732E5AD69C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CB2191A-B18E-467C-9F6D-06732E5AD69C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CB2191A-B18E-467C-9F6D-06732E5AD69C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53C3D09D-F6A3-4312-B1AD-8771DF9C013D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53C3D09D-F6A3-4312-B1AD-8771DF9C013D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53C3D09D-F6A3-4312-B1AD-8771DF9C013D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53C3D09D-F6A3-4312-B1AD-8771DF9C013D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46CB6694-8F1D-427C-8B1D-26AA02B14849}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46CB6694-8F1D-427C-8B1D-26AA02B14849}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46CB6694-8F1D-427C-8B1D-26AA02B14849}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46CB6694-8F1D-427C-8B1D-26AA02B14849}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2FAA58DB-792B-4291-9D9E-6E01B62B007B} = {F864475E-140A-4D0C-A101-60ED76F5D6BA}
+		{4CB2191A-B18E-467C-9F6D-06732E5AD69C} = {F864475E-140A-4D0C-A101-60ED76F5D6BA}
+		{53C3D09D-F6A3-4312-B1AD-8771DF9C013D} = {F864475E-140A-4D0C-A101-60ED76F5D6BA}
+		{46CB6694-8F1D-427C-8B1D-26AA02B14849} = {F864475E-140A-4D0C-A101-60ED76F5D6BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C39CA66-6C4B-42EB-8797-4ADCFED239DD}
