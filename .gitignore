@@ -350,3 +350,6 @@ MigrationBackup/
 .ionide/
 /leviathan_private_key.pem
 /leviathan_public_key.pem
+/src/Leviathan.SystemHost.Launcher/wwwroot/js/CookieManager.js
+/src/Leviathan.SystemHost.Launcher/wwwroot/js/CookieManager.js
+/src/Leviathan.SystemHost.Launcher/wwwroot/js/cookieManager.js
