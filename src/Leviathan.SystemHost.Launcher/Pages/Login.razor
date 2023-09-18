@@ -5,8 +5,10 @@
 @inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
 
+@* <script src="/js/CookieManager.js"></script> *@
+
 <h3>Login</h3>
-<script src="js/cookieManager.js"></script>
+
 
 <EditForm Model="loginModel" OnValidSubmit="HandleLogin">
 	<DataAnnotationsValidator />
