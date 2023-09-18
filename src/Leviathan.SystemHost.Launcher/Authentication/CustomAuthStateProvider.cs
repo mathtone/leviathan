@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
 using System.Security.Claims;
 
-namespace Leviathan.SystemHost.Launcher {
+namespace Leviathan.SystemHost.Launcher.Authentication {
 	public class CustomAuthStateProvider(IHttpContextAccessor httpContextAccessor) : AuthenticationStateProvider {
 
 		public override Task<AuthenticationState> GetAuthenticationStateAsync() {
 			var cookieValue = httpContextAccessor.HttpContext?.Request.Cookies["AuthToken"];
-
+			//TODO: verify cookie.
 			if (string.IsNullOrEmpty(cookieValue)) {
 				return Task.FromResult(new AuthenticationState(new ClaimsPrincipal()));
 			}

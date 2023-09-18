@@ -1,14 +1,16 @@
-﻿@inject NavigationManager NavigationManager;
+﻿@using System.Reflection;
+@using Leviathan.Authentication.BlazorUi.Areas.User.Pages;
+@inject NavigationManager NavigationManager;
 
 <CascadingAuthenticationState>
-	<Router AppAssembly="@typeof(App).Assembly">
+	<Router AppAssembly="@typeof(App).Assembly" AdditionalAssemblies="@GetAssemblies()">
 		<Found Context="routeData">
 			<AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" >
 				<NotAuthorized>
 					@{
 						Task.Run(async () => {
 							await Task.Delay(1);
-							NavigationManager.NavigateTo("/login");
+							NavigationManager.NavigateTo("/user/login");
 						});
 					}
 				</NotAuthorized>
@@ -24,3 +26,9 @@
 		</NotFound>
 	</Router>
 </CascadingAuthenticationState>
+
+@code {
+	IEnumerable<Assembly> GetAssemblies() {
+		yield return typeof(LoginPage).Assembly;
+	}
+}

@@ -10,7 +10,16 @@ using Leviathan.Data;
 using Microsoft.AspNetCore.Components.Authorization;
 using Leviathan.SystemHostLauncher;
 using Leviathan.SystemHost.Launcher.Services;
+using Leviathan.SystemHost.Launcher.Authentication;
+using Leviathan.InstanceHost;
+using System.Runtime.InteropServices;
 
+//First Time Run
+//Create Keys
+//Create Startup Config
+//Check Config State
+
+;
 var app = LeviathanSystemHostBuilder
 	.CreateDefault(args)
 	.ConfigureServices(svc => svc
@@ -27,6 +36,8 @@ var app = LeviathanSystemHostBuilder
 		.AddSingleton<ICryptoService, SystemCryptoService>()
 
 		.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>()
+
+		.AddHostedService<InstanceHostService>()
 
 	)
 	.Build();

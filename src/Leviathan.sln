@@ -59,19 +59,29 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Crypto", "Leviath
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Crypto.Sdk", "Leviathan.Crypto.Sdk\Leviathan.Crypto.Sdk.csproj", "{BCA15BC8-521A-415A-9CAD-BFB84AC190F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Users", "Leviathan.Users\Leviathan.Users.csproj", "{F4C68795-D1CE-4368-A40C-9C4487E57191}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Users", "Leviathan.Users\Leviathan.Users.csproj", "{F4C68795-D1CE-4368-A40C-9C4487E57191}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Users.Sdk", "Leviathan.Users.Sdk\Leviathan.Users.Sdk.csproj", "{7E390C9A-15D6-4AA6-91D1-07C817F2CE2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Users.Sdk", "Leviathan.Users.Sdk\Leviathan.Users.Sdk.csproj", "{7E390C9A-15D6-4AA6-91D1-07C817F2CE2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Users.Npgsql", "Leviathan.Users.Npgsql\Leviathan.Users.Npgsql.csproj", "{6958554E-C323-44F8-9C15-53219F477342}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Users.Npgsql", "Leviathan.Users.Npgsql\Leviathan.Users.Npgsql.csproj", "{6958554E-C323-44F8-9C15-53219F477342}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Data", "Leviathan.Data\Leviathan.Data.csproj", "{A188538B-EF46-4FF3-BB40-C160AF027D31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Data", "Leviathan.Data\Leviathan.Data.csproj", "{A188538B-EF46-4FF3-BB40-C160AF027D31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leviathan.Data.Npgsql", "Leviathan.Data.Npgsql\Leviathan.Data.Npgsql.csproj", "{7F369650-EA3B-4A5F-8C80-2256B6FAAE88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Data.Npgsql", "Leviathan.Data.Npgsql\Leviathan.Data.Npgsql.csproj", "{7F369650-EA3B-4A5F-8C80-2256B6FAAE88}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{134ECD30-BF4F-4B79-9B25-E80197A43332}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{0DE3C1E2-351E-4C7F-8B15-F30D3BA8786B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InstanceHost", "InstanceHost", "{640D036A-A265-4460-8634-5C7892E007A4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.InstanceHost", "Leviathan.InstanceHost\Leviathan.InstanceHost.csproj", "{787247B7-D555-4108-8A57-DA4B7763DE43}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.InstanceHost.Npgsql", "Leviathan.InstanceHost.Npgsql\Leviathan.InstanceHost.Npgsql.csproj", "{51516CC5-8A65-48FF-8150-A56BCB320FEB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.InstanceHost.Sdk", "Leviathan.InstanceHost.Sdk\Leviathan.InstanceHost.Sdk.csproj", "{25D83B20-873F-467B-BBFE-ABA7DD30E9B2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leviathan.Authentication.BlazorUi", "Leviathan.Authentication.BlazorUi\Leviathan.Authentication.BlazorUi.csproj", "{B192FEF4-81B7-4903-A5BC-1625BEA3CFFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -187,6 +197,22 @@ Global
 		{7F369650-EA3B-4A5F-8C80-2256B6FAAE88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F369650-EA3B-4A5F-8C80-2256B6FAAE88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F369650-EA3B-4A5F-8C80-2256B6FAAE88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{787247B7-D555-4108-8A57-DA4B7763DE43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{787247B7-D555-4108-8A57-DA4B7763DE43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{787247B7-D555-4108-8A57-DA4B7763DE43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{787247B7-D555-4108-8A57-DA4B7763DE43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51516CC5-8A65-48FF-8150-A56BCB320FEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51516CC5-8A65-48FF-8150-A56BCB320FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51516CC5-8A65-48FF-8150-A56BCB320FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51516CC5-8A65-48FF-8150-A56BCB320FEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25D83B20-873F-467B-BBFE-ABA7DD30E9B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25D83B20-873F-467B-BBFE-ABA7DD30E9B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25D83B20-873F-467B-BBFE-ABA7DD30E9B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25D83B20-873F-467B-BBFE-ABA7DD30E9B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B192FEF4-81B7-4903-A5BC-1625BEA3CFFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B192FEF4-81B7-4903-A5BC-1625BEA3CFFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B192FEF4-81B7-4903-A5BC-1625BEA3CFFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B192FEF4-81B7-4903-A5BC-1625BEA3CFFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -220,6 +246,11 @@ Global
 		{7F369650-EA3B-4A5F-8C80-2256B6FAAE88} = {8D17450B-65FA-4580-A414-FBE0C9F429A0}
 		{134ECD30-BF4F-4B79-9B25-E80197A43332} = {162CDFEC-BC47-40BF-86A0-90C7BA494A69}
 		{0DE3C1E2-351E-4C7F-8B15-F30D3BA8786B} = {162CDFEC-BC47-40BF-86A0-90C7BA494A69}
+		{640D036A-A265-4460-8634-5C7892E007A4} = {162CDFEC-BC47-40BF-86A0-90C7BA494A69}
+		{787247B7-D555-4108-8A57-DA4B7763DE43} = {640D036A-A265-4460-8634-5C7892E007A4}
+		{51516CC5-8A65-48FF-8150-A56BCB320FEB} = {640D036A-A265-4460-8634-5C7892E007A4}
+		{25D83B20-873F-467B-BBFE-ABA7DD30E9B2} = {640D036A-A265-4460-8634-5C7892E007A4}
+		{B192FEF4-81B7-4903-A5BC-1625BEA3CFFC} = {134ECD30-BF4F-4B79-9B25-E80197A43332}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C39CA66-6C4B-42EB-8797-4ADCFED239DD}
