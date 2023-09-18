@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Linq.Async" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\mathtone-magic\src\sdk\Mathtone.Sdk.Data.Npgsql\Mathtone.Sdk.Data.Npgsql.csproj" />
+    <ProjectReference Include="..\Leviathan.Data.Npgsql\Leviathan.Data.Npgsql.csproj" />
+    <ProjectReference Include="..\Leviathan.Users\Leviathan.Users.csproj" />
+  </ItemGroup>
+
+</Project>

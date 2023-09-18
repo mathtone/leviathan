@@ -1,0 +1,40 @@
+﻿@page "/login"
+@using Leviathan.Authentication;
+@attribute [AllowAnonymous]
+@inject IAuthenticationService AuthenticationService
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+
+<h3>Login</h3>
+<script src="js/cookieManager.js"></script>
+
+<EditForm Model="loginModel" OnValidSubmit="HandleLogin">
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+	<InputText id="username" @bind-Value="loginModel.UserName" placeholder="Username" required />
+	<InputText type="password" id="password" @bind-Value="loginModel.Password" placeholder="Password" required />
+	
+	<button type="submit">Login</button>
+
+	
+</EditForm>
+<button @onclick="HandleLogout">Logout</button>
+@code {
+	private LoginModel loginModel = new LoginModel();
+
+	private async Task HandleLogin() {
+		var rslt = await AuthenticationService.Login(loginModel);
+		if (!string.IsNullOrEmpty(rslt.Token)) {
+			// Set the token in a secure HTTP-only cookie using JSInterop
+			await JSRuntime.InvokeVoidAsync("CookieManager.setCookie", "AuthToken", rslt.Token, 3);
+			await JSRuntime.InvokeVoidAsync("navigateTo", "/");
+			;
+		}
+	}
+
+
+	private async Task HandleLogout() {
+		await JSRuntime.InvokeVoidAsync("CookieManager.eraseCookie", "AuthToken");
+		await JSRuntime.InvokeVoidAsync("navigateTo", "/");
+	}
+}
