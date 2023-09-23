@@ -14,12 +14,7 @@ using Leviathan.SystemHost.Launcher.Authentication;
 using Leviathan.InstanceHost;
 using System.Runtime.InteropServices;
 
-//First Time Run
-//Create Keys
-//Create Startup Config
-//Check Config State
 
-;
 var app = LeviathanSystemHostBuilder
 	.CreateDefault(args)
 	.ConfigureServices(svc => svc
@@ -61,3 +56,7 @@ static string GetKeyFromFile(string name) => File
 	.Replace("-----BEGIN PRIVATE KEY-----", "")
 	.Replace("-----END PRIVATE KEY-----", "")
 	.Trim();
+
+public class SystemConfiguration {
+	public bool IsInitialized { get; set; }
+}

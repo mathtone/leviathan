@@ -8,6 +8,4 @@ namespace Leviathan.InstanceHost {
 	public interface IInstanceHost {
 
 	}
-
-
 }

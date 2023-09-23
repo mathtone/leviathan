@@ -30,6 +30,7 @@
     <ProjectReference Include="..\Leviathan.Authentication.BlazorUi\Leviathan.Authentication.BlazorUi.csproj" />
     <ProjectReference Include="..\Leviathan.Authentication\Leviathan.Authentication.csproj" />
     <ProjectReference Include="..\Leviathan.Crypto\Leviathan.Crypto.csproj" />
+    <ProjectReference Include="..\Leviathan.Initialization.BlazorUi\Leviathan.Initialization.BlazorUi.csproj" />
     <ProjectReference Include="..\Leviathan.InstanceHost\Leviathan.InstanceHost.csproj" />
     <ProjectReference Include="..\Leviathan.Users.Npgsql\Leviathan.Users.Npgsql.csproj" />
   </ItemGroup>

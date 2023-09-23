@@ -1,5 +1,4 @@
-﻿// Extending the Window interface
-declare global {
+﻿declare global {
    interface Window {
       CookieManager: CookieManagerClass;
       navigateTo: (url: string) => void;
@@ -20,8 +19,8 @@ class CookieManagerClass {
    getCookie(name: string): string | null {
       const nameEQ = name + "=";
       const ca = document.cookie.split(';');
-      for (let i = 0; i < ca.length; i++) {
-         let c = ca[i];
+      for (const element of ca) {
+         let c = element;
          while (c.charAt(0) === ' ') c = c.substring(1, c.length);
          if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
       }
@@ -33,15 +32,10 @@ class CookieManagerClass {
    }
 }
 
-// Assign the new CookieManagerClass instance to window
 window.CookieManager = new CookieManagerClass();
 
-// Exported function
 export function navigateTo(url: string): void {
    window.location.href = url;
 }
 
-// Bind the navigateTo function to window
 window.navigateTo = navigateTo;
-
-// The rest of your TypeScript code (if any) goes here.
