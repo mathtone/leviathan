@@ -1,0 +1,8 @@
+﻿@page "/"
+@namespace Leviathan.BlazorSystemHost.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
+<script src="/js/CookieManager.js" type="module"></script>
+<component type="typeof(App)" render-mode="Server" />

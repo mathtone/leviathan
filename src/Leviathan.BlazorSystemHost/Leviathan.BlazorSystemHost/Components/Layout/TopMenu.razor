@@ -1,0 +1,40 @@
+﻿@using Blazorise
+@using Blazorise.Icons.FontAwesome
+@using Leviathan.SystemHost.Support
+@inject ICurrentUser CurrentUser
+@inject NavigationManager NavigationManager
+
+<Bar>
+	<BarBrand>
+
+	</BarBrand>
+	<BarMenu>
+		<BarEnd>
+			<BarItem>
+				<Blazorise.Icon Name="IconName.UserCircle" />
+				@if (CurrentUser.LoggedIn) {
+					<span>@CurrentUser.Username</span>
+					<NavLink Color="Color.Primary" @onclick="HandleLogout">Logout</NavLink>
+				}
+				else {
+					<span>Guest</span>
+					<NavLink Color="Color.Primary" @onclick="NavigateToLogin">Login</NavLink>
+				}
+			</BarItem>
+		</BarEnd>
+	</BarMenu>
+</Bar>
+
+@code {
+	[Parameter] public string? LayoutType { get; set; }
+	[Parameter] public EventCallback<string> LayoutTypeChanged { get; set; }
+
+	private void NavigateToLogin() {
+		NavigationManager.NavigateTo("/login");
+	}
+
+	private async Task HandleLogout() {
+		await CurrentUser.Logout();
+		NavigationManager.NavigateTo("/");
+	}
+}

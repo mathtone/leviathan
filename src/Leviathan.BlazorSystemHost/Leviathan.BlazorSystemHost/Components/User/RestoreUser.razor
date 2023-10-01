@@ -1,0 +1,18 @@
+﻿@using Leviathan.Security;
+@using Leviathan.SystemHost.Support;
+@inject ICurrentUser CurrentUser
+@inject IJSRuntime JSRuntime
+@inject ICryptoService Crypto;
+
+@code {
+   protected override async Task OnInitializedAsync() {
+      if (CurrentUser.LoggedIn) {
+         return;
+      }
+      var token = await JSRuntime.InvokeAsync<string>("CookieManager.getCookie", "AuthToken");
+      if (!string.IsNullOrEmpty(token)) {
+         //var jtok = Crypto.Decode(token); 
+         await CurrentUser.Restore(token);
+      }
+   }
+}

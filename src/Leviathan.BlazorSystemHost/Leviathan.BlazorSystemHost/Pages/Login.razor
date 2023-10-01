@@ -1,0 +1,68 @@
+﻿@page "/login"
+@using Leviathan.Security;
+@using Blazorise
+@using Leviathan.SystemHost.Support;
+
+@attribute [AllowAnonymous]
+@inject ICurrentUser CurrentUser
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+
+
+
+<Card>
+	<CardHeader>
+		<Heading Size="HeadingSize.Is3">Login</Heading>
+	</CardHeader>
+	<CardBody>
+		<EditForm Model="loginModel" OnValidSubmit="HandleLogin">
+			<Validations />
+			<Blazorise.ValidationSummary />
+
+			<Field>
+				<FieldLabel>
+					<Label>Username</Label>
+				</FieldLabel>
+				<FieldBody>
+					<InputText @bind-Value="loginModel.UserName" placeholder="Username" required />
+				</FieldBody>
+			</Field>
+
+			<Field>
+				<FieldLabel>
+					<Label>Password</Label>
+				</FieldLabel>
+				<FieldBody>
+					<InputText InputType="InputType.Password" @bind-Value="loginModel.Password" placeholder="Password" required />
+				</FieldBody>
+			</Field>
+
+			<Field>
+				<FieldBody>
+					<Button Color="Color.Primary" Type="ButtonType.Submit">Login</Button>
+				</FieldBody>
+			</Field>
+		</EditForm>
+	</CardBody>
+</Card>
+
+@code {
+
+	private LoginModel loginModel = new();
+
+	private async Task HandleLogin(EditContext editContext) {
+		var rslt = await CurrentUser.Login(loginModel.UserName,loginModel.Password);
+		if (!string.IsNullOrEmpty(rslt.Token)) {
+			await JSRuntime.InvokeVoidAsync("CookieManager.setCookie", "AuthToken", rslt.Token, 3);
+			//StateHasChanged();
+			NavigationManager.NavigateTo("/");
+			//await JSRuntime.InvokeVoidAsync("navigateTo", "/");
+		}
+	}
+
+	private async Task HandleLogout() {
+		await CurrentUser.Logout();
+		await JSRuntime.InvokeVoidAsync("CookieManager.eraseCookie", "AuthToken");
+		await JSRuntime.InvokeVoidAsync("navigateTo", "/");
+	}
+}
