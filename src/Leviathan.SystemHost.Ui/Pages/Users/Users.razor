@@ -1,0 +1,36 @@
+﻿@page "/users"
+@inject IUserData UserData;
+@using Blazorise;
+@using Leviathan.Users;
+@using Blazorise.DataGrid;
+<h3>Users</h3>
+
+<DataGrid Data="data"
+				 Sortable
+					 SortMode="DataGridSortMode.Single"
+				 ShowPager
+				 ShowPageSizes
+				 Resizable
+				 Responsive
+				 Bordered
+				 Hoverable
+				 Narrow
+				 Groupable
+				 ShowGrouping
+					 ResizeMode="TableResizeMode.Columns"
+					 NewItemCreator="() => new UserRecord(0,string.Empty)">
+			<DataGridColumns>
+				<DataGridColumn Field="@nameof(UserRecord.Id)" Caption="Id" />
+				<DataGridColumn Field="@nameof(UserRecord.Login)" Caption="Login" />
+			</DataGridColumns>
+		</DataGrid>
+
+		@code {
+	private List<UserRecord> data = new();
+
+	protected override async Task OnInitializedAsync() {
+
+		data = await UserData.ReadAll().ToListAsync();
+		//StateHasChanged();
+	}
+}

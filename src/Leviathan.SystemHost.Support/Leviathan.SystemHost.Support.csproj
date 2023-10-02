@@ -7,14 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
     <PackageReference Include="Npgsql" Version="7.0.0" />
     <PackageReference Include="System.Linq.Async" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\mathtone-magic\src\sdk\Mathtone.Sdk.Data.Npgsql\Mathtone.Sdk.Data.Npgsql.csproj" />
+    <ProjectReference Include="..\Leviathan.Data.Npgsql\Leviathan.Data.Npgsql.csproj" />
     <ProjectReference Include="..\Leviathan.Data\Leviathan.Data.csproj" />
+    <ProjectReference Include="..\Leviathan.Instances\Leviathan.Instances.csproj" />
     <ProjectReference Include="..\Leviathan.Security\Leviathan.Security.csproj" />
+    <ProjectReference Include="..\Leviathan.SystemHost\Leviathan.SystemHost.csproj" />
     <ProjectReference Include="..\Leviathan.Users\Leviathan.Users.csproj" />
   </ItemGroup>
 

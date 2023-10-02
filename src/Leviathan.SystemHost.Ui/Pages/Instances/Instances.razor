@@ -1,0 +1,40 @@
+﻿@using Blazorise;
+@using Leviathan.Instances;
+@using Leviathan.Users;
+@using Blazorise.DataGrid;
+
+@page "/instances"
+
+@inject IInstanceHostData InstanceData;
+
+<h3>Instances</h3>
+
+<DataGrid
+	Data="data"
+	Sortable
+	SortMode="DataGridSortMode.Single"
+	ShowPager
+	ShowPageSizes
+	Resizable
+	Responsive
+	Bordered
+	Hoverable
+	Narrow
+	Groupable
+	ShowGrouping
+	ResizeMode="TableResizeMode.Columns"
+	NewItemCreator="() => new InstanceRecord(0,string.Empty,new())"
+>
+	<DataGridColumns>
+		<DataGridColumn Field="@nameof(InstanceRecord.Id)" Caption="Id" />
+		<DataGridColumn Field="@nameof(InstanceRecord.Name)" Caption="Name" />
+	</DataGridColumns>
+</DataGrid>
+
+@code {
+	private List<InstanceRecord> data = new();
+
+	protected override async Task OnInitializedAsync() {
+		data = await InstanceData.ReadAll().ToListAsync();
+	}
+}

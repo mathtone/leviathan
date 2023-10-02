@@ -1,0 +1,57 @@
+﻿@page "/"
+@using Leviathan.Security;
+@using Leviathan.Users;
+@using Blazorise;
+@inject IUserData UserData
+@inject ICryptoService Crypto
+
+<h3>Initialize System</h3>
+<Card>
+	<CardBody>
+		<Validations @ref="validations" Mode="ValidationMode.Auto" ValidateOnLoad="false">
+			<Validation Validator="@ValidateLogin">
+				<Field Horizontal>
+					<FieldLabel ColumnSize="ColumnSize.IsFull.OnTablet.Is3.OnDesktop">System Admin Login</FieldLabel>
+					<FieldBody ColumnSize="ColumnSize.IsFull.OnTablet.Is9.OnDesktop">
+						<TextEdit Role="TextRole.Text" Placeholder="Login" @bind-Text="@login" />
+					</FieldBody>
+				</Field>
+			</Validation>
+			<Validation Validator="@ValidatePassword">
+				<Field Horizontal>
+					<FieldLabel ColumnSize="ColumnSize.IsFull.OnTablet.Is3.OnDesktop">Password</FieldLabel>
+					<FieldBody ColumnSize="ColumnSize.IsFull.OnTablet.Is9.OnDesktop">
+						<TextEdit Role="TextRole.Password" Placeholder="Password" @bind-Text="@password" />
+					</FieldBody>
+				</Field>
+
+			</Validation>
+			<Button Color="Color.Primary" Clicked="SubmitForm">Submit</Button>
+		</Validations>
+	</CardBody>
+</Card>
+
+@code {
+	private string login = "admin";
+	private string password = string.Empty;
+	private string confirmPassword = string.Empty;
+	private string message = string.Empty;
+	Validations? validations;
+
+	async Task SubmitForm() {
+		if (await validations!.ValidateAll()) {
+			await validations.ClearAll();
+			var id = await UserData.Create(new UserRecord(0, login) {
+					PasswordHash = Crypto.Hash(password)
+				});
+		}
+	}
+
+	void ValidatePassword(ValidatorEventArgs e) {
+		e.Status = Convert.ToString(e.Value)?.Length >= 6 ? ValidationStatus.Success : ValidationStatus.Error;
+	}
+
+	void ValidateLogin(ValidatorEventArgs e) {
+		e.Status = Convert.ToString(e.Value)?.Length >= 4 ? ValidationStatus.Success : ValidationStatus.Error;
+	}
+}

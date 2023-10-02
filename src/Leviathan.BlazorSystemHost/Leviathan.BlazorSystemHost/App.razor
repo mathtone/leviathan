@@ -1,50 +1,61 @@
 ﻿@using Leviathan.BlazorSystemHost.Components.User;
+@using Leviathan.SystemHost.Initialization.Ui.Pages
+@using Leviathan.SystemHost.Support;
+@using System.Reflection;
+@using Leviathan.SystemHost;
+@using Leviathan.SystemHost.Ui.Pages;
+
+@inject ISystemHostService SystemHost
 
 <Blazorise.ThemeProvider Theme="@theme">
-   <RestoreUser/>
-    <Router AppAssembly="typeof(App).Assembly">
-        <Found Context="routeData">
-            <RouteView RouteData="routeData" DefaultLayout="typeof(Leviathan.BlazorSystemHost.Layouts.MainLayout)" />
-        </Found>
-        <NotFound>
-            <p>Sorry, there's nothing at this address.</p>
-        </NotFound>
-    </Router>
-    <MessageProvider />
-    <PageProgressProvider />
+	<RestoreUser />
+	<Router AppAssembly="typeof(App).Assembly" AdditionalAssemblies="GetAssemblies()">
+		<Found Context="routeData">
+			<RouteView RouteData="routeData" DefaultLayout="typeof(Leviathan.BlazorSystemHost.Layouts.MainLayout)" />
+		</Found>
+		<NotFound>
+			<p>Sorry, there's nothing at this address.</p>
+		</NotFound>
+	</Router>
+	<MessageProvider />
+	<PageProgressProvider />
 </Blazorise.ThemeProvider>
 @code {
-    private Theme theme = new()
-        {
-            BarOptions = new()
-            {
-                HorizontalHeight = "72px"
-            },
-            ColorOptions = new()
-            {
-                Primary = "#0288D1",
-                Secondary = "#A65529",
-                Success = "#23C02E",
-                Info = "#9BD8FE",
-                Warning = "#F8B86C",
-                Danger = "#F95741",
-                Light = "#F0F0F0",
-                Dark = "#535353",
-            },
-            BackgroundOptions = new()
-            {
-                Primary = "#0288D1",
-                Secondary = "#A65529",
-                Success = "#23C02E",
-                Info = "#9BD8FE",
-                Warning = "#F8B86C",
-                Danger = "#F95741",
-                Light = "#F0F0F0",
-                Dark = "#535353",
-            },
-            InputOptions = new()
-            {
-                CheckColor = "#0288D1",
-            }
-        };
+
+	IEnumerable<Assembly> GetAssemblies() {
+		if (SystemHost.IsInitialized) {
+			yield return typeof(Dashboard).Assembly;
+		}
+		else {
+			yield return typeof(Initialize).Assembly;
+		}
+	}
+	private Theme theme = new() {
+			BarOptions = new() {
+				HorizontalHeight = "72px"
+			},
+			ColorOptions = new() {
+				Primary = "#0288D1",
+				Secondary = "#A65529",
+				Success = "#23C02E",
+				Info = "#9BD8FE",
+				Warning = "#F8B86C",
+				Danger = "#F95741",
+				Light = "#F0F0F0",
+				Dark = "#535353",
+			},
+			BackgroundOptions = new() {
+				Primary = "#0288D1",
+				Secondary = "#A65529",
+				Success = "#23C02E",
+				Info = "#9BD8FE",
+				Warning = "#F8B86C",
+				Danger = "#F95741",
+				Light = "#F0F0F0",
+				Dark = "#535353",
+			},
+			InputOptions = new() {
+				CheckColor = "#0288D1",
+			}
+		};
 }

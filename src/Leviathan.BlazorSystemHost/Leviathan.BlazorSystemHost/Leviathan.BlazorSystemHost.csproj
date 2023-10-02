@@ -30,8 +30,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\Leviathan.Data.Npgsql\Leviathan.Data.Npgsql.csproj" />
 	  <ProjectReference Include="..\..\Leviathan.Services\Leviathan.Services.csproj" />
+	  <ProjectReference Include="..\..\Leviathan.SystemHost.Initialization.Ui\Leviathan.SystemHost.Initialization.Ui.csproj" />
 	  <ProjectReference Include="..\..\Leviathan.SystemHost.Support\Leviathan.SystemHost.Support.csproj" />
+	  <ProjectReference Include="..\..\Leviathan.SystemHost.Ui\Leviathan.SystemHost.Ui.csproj" />
+	  <ProjectReference Include="..\..\Leviathan.SystemHost.Updater\Leviathan.SystemHost.Updater.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

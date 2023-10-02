@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Db\Schemas\core.sql" />
+    <None Remove="Db\Tables\core.config\_.sql" />
+    <None Remove="Db\Tables\core.login\_.sql" />
+    <None Remove="Db\Tables\core.instance\_.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Db\Schemas\core.sql" />
+    <EmbeddedResource Include="Db\Tables\core.config\_.sql" />
+    <EmbeddedResource Include="Db\Tables\core.login\_.sql" />
+    <EmbeddedResource Include="Db\Tables\core.instance\_.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dbup-postgresql" Version="5.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Leviathan.SystemHost.Support\Leviathan.SystemHost.Support.csproj" />
+  </ItemGroup>
+
+</Project>

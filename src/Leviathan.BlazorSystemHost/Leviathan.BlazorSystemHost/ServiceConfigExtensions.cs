@@ -7,15 +7,16 @@ using Leviathan.Services;
 using Leviathan.Data;
 using Leviathan.Users;
 using Npgsql;
+using Leviathan.Instances;
+using Leviathan.SystemHost;
 namespace Leviathan.BlazorSystemHost {
+
 	public static class ServiceConfigExtensions {
 
 		public static IServiceCollection ConfigureAll(this IServiceCollection services) => services
 			.AddConfiguration()
 			.AddBlazoriseServices()
 			.AddSystemServices();
-
-
 
 		public static IServiceCollection AddBlazoriseServices(this IServiceCollection services) => services
 			.AddBlazorise()
@@ -34,8 +35,10 @@ namespace Leviathan.BlazorSystemHost {
 			.AddSingleton<IConnectionProvider<NpgsqlConnection>, NpgsqlConnectionProvider>()
 			.AddSingleton<IAuthenticationService, AuthenticationService>()
 			.AddSingleton<IUserData, NpgsqlUserData>()
-
-			.AddScoped<ICurrentUser, CurrentUserService>();
+			.AddSingleton<IInstanceHostData, NpgsqlInstanceData>()
+			.AddSingleton<ISystemHostService, SystemHostService>()
+			.AddScoped<ICurrentUser, CurrentUserService>()
+			.AddHostingTo<ISystemHostService>();
 
 
 		static string GetKeyFromFile(string name) => File

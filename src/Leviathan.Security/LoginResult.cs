@@ -38,6 +38,9 @@ namespace Leviathan.Security {
 			);
 		}
 
+		public string Hash(string password) =>
+			BCrypt.Net.BCrypt.HashPassword(password);
+
 		public virtual bool VerifyHash(string password, string hash) =>
 			BCrypt.Net.BCrypt.Verify(password, hash);
 
